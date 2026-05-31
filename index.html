@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>丝绸之路 · 交互知识图谱</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<style>
+  :root {
+    --bg: #1a1a1f;
+    --panel-bg: #222228;
+    --text: #e0ddd5;
+    --text-dim: #9a9790;
+    --accent: #d4a853;
+    --accent2: #c75b3a;
+    --border: #333338;
+    --city: #d4a853;
+    --figure: #5b9bd5;
+    --goods: #6aad6a;
+    --event: #c75b3a;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    height: 100vh; display: flex; flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* ── Header ── */
+  header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 20px; background: var(--panel-bg); border-bottom: 1px solid var(--border);
+    z-index: 1000; flex-shrink: 0;
+  }
+  header h1 { font-size: 1.1rem; font-weight: 600; letter-spacing: 0.04em; }
+  header h1 .sub { font-weight: 400; color: var(--text-dim); margin-left: 6px; font-size: 0.85rem; }
+  .lang-toggle {
+    background: var(--border); color: var(--text); border: none; padding: 6px 14px;
+    border-radius: 16px; cursor: pointer; font-size: 0.82rem; transition: background 0.2s;
+  }
+  .lang-toggle:hover { background: var(--accent); color: #111; }
+
+  /* ── Main layout ── */
+  main { display: flex; flex: 1; min-height: 0; }
+  #map { flex: 1; z-index: 1; }
+
+  /* ── Sidebar ── */
+  aside {
+    width: 380px; flex-shrink: 0; background: var(--panel-bg);
+    border-left: 1px solid var(--border); display: flex; flex-direction: column;
+    overflow: hidden; z-index: 1000;
+  }
+  .filters {
+    display: flex; gap: 6px; padding: 12px 16px; border-bottom: 1px solid var(--border);
+    flex-wrap: wrap;
+  }
+  .filters button {
+    background: transparent; border: 1px solid var(--border); color: var(--text-dim);
+    padding: 4px 12px; border-radius: 14px; cursor: pointer; font-size: 0.78rem;
+    transition: all 0.2s;
+  }
+  .filters button.active { border-color: var(--accent); color: var(--accent); }
+  .filters button.city.active  { border-color: var(--city); color: var(--city); }
+  .filters button.figure.active { border-color: var(--figure); color: var(--figure); }
+  .filters button.goods.active  { border-color: var(--goods); color: var(--goods); }
+  .filters button.event.active  { border-color: var(--event); color: var(--event); }
+  .filters button:hover { background: rgba(255,255,255,0.05); }
+  .filters .count { font-size: 0.7rem; color: var(--text-dim); }
+
+  .list-panel { flex: 1; overflow-y: auto; padding: 8px 0; }
+  .list-panel .card {
+    padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.04);
+    cursor: pointer; transition: background 0.15s;
+    border-left: 3px solid transparent;
+  }
+  .list-panel .card:hover { background: rgba(255,255,255,0.04); }
+  .list-panel .card.active { background: rgba(255,255,255,0.06); border-left-color: var(--accent); }
+  .card .card-type {
+    font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.08em;
+    margin-bottom: 2px;
+  }
+  .card-type.city   { color: var(--city); }
+  .card-type.figure { color: var(--figure); }
+  .card-type.goods  { color: var(--goods); }
+  .card-type.event  { color: var(--event); }
+  .card .card-name { font-size: 0.95rem; font-weight: 600; }
+  .card .card-sub  { font-size: 0.75rem; color: var(--text-dim); margin-top: 1px; }
+
+  .detail-panel {
+    padding: 20px 16px; border-top: 1px solid var(--border);
+    max-height: 280px; overflow-y: auto; flex-shrink: 0;
+  }
+  .detail-panel h3 { font-size: 1.05rem; margin-bottom: 4px; }
+  .detail-panel .meta { font-size: 0.78rem; color: var(--text-dim); margin-bottom: 10px; }
+  .detail-panel .desc { font-size: 0.85rem; line-height: 1.7; color: var(--text); }
+  .detail-panel .relations { margin-top: 12px; }
+  .detail-panel .relations h4 { font-size: 0.75rem; color: var(--text-dim); margin-bottom: 6px; }
+  .detail-panel .tag {
+    display: inline-block; background: rgba(255,255,255,0.06); padding: 3px 10px;
+    border-radius: 10px; margin: 2px; font-size: 0.72rem; cursor: pointer;
+  }
+  .detail-panel .tag:hover { background: var(--accent); color: #111; }
+
+  /* ── Timeline ── */
+  #timeline-bar {
+    height: 52px; flex-shrink: 0; background: var(--panel-bg);
+    border-top: 1px solid var(--border); display: flex; align-items: center;
+    padding: 0 20px; overflow-x: auto; gap: 2px; z-index: 1000;
+  }
+  #timeline-bar .tick {
+    flex-shrink: 0; padding: 6px 12px; font-size: 0.7rem; cursor: pointer;
+    border-radius: 4px; color: var(--text-dim); transition: all 0.15s;
+    text-align: center; min-width: 60px;
+  }
+  #timeline-bar .tick:hover { background: rgba(255,255,255,0.06); }
+  #timeline-bar .tick.active { background: var(--accent); color: #111; font-weight: 600; }
+
+  /* ── Leaflet overrides ── */
+  .leaflet-container { background: #1a1a1f; font-family: inherit; }
+  .leaflet-popup-content-wrapper {
+    background: var(--panel-bg); color: var(--text); border-radius: 8px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.5);
+  }
+  .leaflet-popup-tip { background: var(--panel-bg); }
+  .leaflet-popup-content { margin: 10px 14px; font-size: 0.85rem; line-height: 1.5; }
+  .leaflet-popup-content b { color: var(--accent); }
+
+  /* ── Responsive ── */
+  @media (max-width: 768px) {
+    main { flex-direction: column; }
+    aside { width: 100%; height: 40%; border-left: none; border-top: 1px solid var(--border); }
+    #map { height: 60%; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>🐫 丝绸之路 <span class="sub">Silk Road · 交互知识图谱</span></h1>
+  <button class="lang-toggle" onclick="toggleLang()" id="langBtn">English</button>
+</header>
+
+<main>
+  <div id="map"></div>
+  <aside>
+    <div class="filters" id="filters">
+      <button class="active" data-type="all">全部 <span class="count"></span></button>
+      <button class="city"   data-type="city">🏙 城市</button>
+      <button class="figure" data-type="figure">👤 人物</button>
+      <button class="goods"  data-type="goods">📦 物产</button>
+      <button class="event"  data-type="event">⚡ 事件</button>
+    </div>
+    <div class="list-panel" id="listPanel"></div>
+    <div class="detail-panel" id="detailPanel"></div>
+  </aside>
+</main>
+<div id="timeline-bar"></div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+// ── State ──
+let lang = 'zh';
+let activeFilter = 'all';
+let activeEra = null;
+let selectedItem = null;
+let map, markers = [];
+const DATA = {}; // will be loaded
+
+// ── Load data ──
+fetch('data/silk-road.json')
+  .then(r => r.json())
+  .then(d => { Object.assign(DATA, d); init(); })
+  .catch(e => {
+    // fallback: inline data for GitHub Pages
+    console.warn('Fetch failed, trying inline load', e);
+    document.getElementById('listPanel').innerHTML = '<div style="padding:40px;text-align:center;color:var(--text-dim)">加载数据中...<br><small>Loading data...</small></div>';
+  });
+
+function init() {
+  initMap();
+  initTimeline();
+  renderList();
+  updateFilterCounts();
+}
+
+// ── i18n helper ──
+function t(key) { return lang === 'zh' ? key : key+'_en'; }
+function get(obj, key) {
+  if (!obj) return '';
+  const val = obj[lang === 'zh' ? key : key+'_en'] || obj[key] || '';
+  return val;
+}
+
+// ── Map ──
+function initMap() {
+  map = L.map('map', { zoomControl: true, attributionControl: false }).setView([39, 80], 3.8);
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+    maxZoom: 13
+  }).addTo(map);
+
+  // City markers
+  const colors = { city: '#d4a853', figure: '#5b9bd5', goods: '#6aad6a', event: '#c75b3a' };
+
+  // Cities
+  DATA.nodes.cities.forEach(c => {
+    const m = L.circleMarker([c.lat, c.lng], {
+      radius: 7, fillColor: colors.city, color: '#222', weight: 1.5, fillOpacity: 0.9
+    }).addTo(map);
+    m.bindPopup(`<b>${get(c,'name')}</b><br><small>${get(c,'role')}</small><br>${get(c,'description').slice(0,100)}…`);
+    m._node = { type: 'city', id: c.id, data: c };
+    m.on('click', () => selectNode(c.id, 'city'));
+    markers.push(m);
+  });
+
+  // Edges as polylines between cities
+  DATA.edges.forEach(e => {
+    const srcCity = DATA.nodes.cities.find(c => c.id === e.source);
+    const tgtCity = DATA.nodes.cities.find(c => c.id === e.target);
+    if (srcCity && tgtCity) {
+      L.polyline([[srcCity.lat, srcCity.lng], [tgtCity.lat, tgtCity.lng]], {
+        color: 'rgba(212,168,83,0.25)', weight: 1.2, dashArray: '4 6'
+      }).addTo(map);
+    }
+  });
+}
+
+// ── Timeline ──
+function initTimeline() {
+  const eras = [
+    { key: null, label: '全部', label_en: 'All', range: [-200, 1500] },
+    { key: '西汉', label: '西汉', label_en: 'W.Han', range: [-202, 9] },
+    { key: '东汉', label: '东汉', label_en: 'E.Han', range: [25, 220] },
+    { key: '唐', label: '唐', label_en: 'Tang', range: [618, 907] },
+    { key: '宋', label: '宋', label_en: 'Song', range: [960, 1279] },
+    { key: '元', label: '元', label_en: 'Yuan', range: [1271, 1368] },
+    { key: '明', label: '明', label_en: 'Ming', range: [1368, 1644] },
+  ];
+  const bar = document.getElementById('timeline-bar');
+  bar.innerHTML = eras.map(e => {
+    const label = lang === 'zh' ? e.label : e.label_en;
+    const cls = activeEra === e.key ? 'tick active' : 'tick';
+    return `<span class="${cls}" data-era="${e.key || ''}">${label}</span>`;
+  }).join('');
+  bar.querySelectorAll('.tick').forEach(el => {
+    el.addEventListener('click', () => {
+      activeEra = el.dataset.era || null;
+      initTimeline();
+      renderList();
+    });
+  });
+}
+
+// ── All entities flattened ──
+function allEntities() {
+  const items = [];
+  ['cities','figures','goods','events'].forEach(type => {
+    DATA.nodes[type].forEach(d => items.push({ type: type.slice(0,-1), data: d }));
+  });
+  return items;
+}
+
+function entityMatchesFilter(item) {
+  if (activeFilter !== 'all' && item.type !== activeFilter) return false;
+  if (activeEra && item.data.dynasties && !item.data.dynasties.includes(activeEra)) return false;
+  // Also check single dynasty field
+  if (activeEra && item.data.dynasty && item.data.dynasty !== activeEra) return false;
+  // Events: check if event year falls within era range
+  if (activeEra && item.data.year) {
+    // approximate
+  }
+  return true;
+}
+
+// ── Render ──
+function renderList() {
+  const panel = document.getElementById('listPanel');
+  const entities = allEntities().filter(entityMatchesFilter);
+  if (!entities.length) {
+    panel.innerHTML = '<div style="padding:40px;text-align:center;color:var(--text-dim)">无匹配结果<br><small>No matching results</small></div>';
+    return;
+  }
+  panel.innerHTML = entities.map(e => {
+    const d = e.data;
+    const name = get(d, 'name');
+    const sub = e.type === 'city' ? get(d, 'role') :
+                e.type === 'figure' ? get(d, 'type') :
+                e.type === 'goods' ? get(d, 'category') :
+                get(d, 'display_year') || d.year || '';
+    const cls = selectedItem && selectedItem.id === d.id ? 'card active' : 'card';
+    return `<div class="${cls}" data-id="${d.id}" data-type="${e.type}">
+      <div class="card-type ${e.type}">${lang==='zh'?typeLabels[e.type]:typeLabelsEn[e.type]}</div>
+      <div class="card-name">${name}</div>
+      <div class="card-sub">${sub}</div>
+    </div>`;
+  }).join('');
+
+  panel.querySelectorAll('.card').forEach(card => {
+    card.addEventListener('click', () => selectNode(card.dataset.id, card.dataset.type));
+  });
+}
+
+const typeLabels = { city: '城市', figure: '人物', goods: '物产', event: '事件' };
+const typeLabelsEn = { city: 'City', figure: 'Figure', goods: 'Goods', event: 'Event' };
+
+function selectNode(id, type) {
+  const t = type.endsWith('s') ? type : type + 's';
+  const data = DATA.nodes[t]?.find(d => d.id === id);
+  if (!data) return;
+  selectedItem = { id, type: type.endsWith('s') ? type.slice(0,-1) : type, data };
+
+  // Highlight on map
+  markers.forEach(m => {
+    if (m._node && m._node.id === id) {
+      m.setStyle({ radius: 11, fillColor: '#fff', fillOpacity: 1 });
+    } else if (m._node) {
+      const colors = { city: '#d4a853', figure: '#5b9bd5', goods: '#6aad6a', event: '#c75b3a' };
+      m.setStyle({ radius: 7, fillColor: colors[m._node.type] || '#888', fillOpacity: 0.8 });
+    }
+  });
+
+  // Fly to if city
+  if (data.lat && data.lng) {
+    map.flyTo([data.lat, data.lng], 5, { duration: 1 });
+  }
+
+  renderList();
+  renderDetail();
+}
+
+function renderDetail() {
+  const panel = document.getElementById('detailPanel');
+  if (!selectedItem) {
+    panel.innerHTML = '<div style="padding:20px;text-align:center;color:var(--text-dim)">点击卡片或地图标记查看详情<br><small>Click a card or map marker</small></div>';
+    return;
+  }
+  const d = selectedItem.data;
+  const name = get(d, 'name');
+  const desc = get(d, 'description');
+  const metaParts = [];
+  if (d.country) metaParts.push(get(d, 'country'));
+  if (d.era) metaParts.push(d.era);
+  if (d.direction) metaParts.push(get(d, 'direction'));
+  const meta = metaParts.join(' · ');
+
+  // Find related edges
+  const relEdges = DATA.edges.filter(e => e.source === d.id || e.target === d.id);
+  const relTags = relEdges.map(e => {
+    const otherId = e.source === d.id ? e.target : e.source;
+    const relName = get(e, 'relation');
+    // Find the target node name
+    let otherName = otherId;
+    ['cities','figures','goods','events'].forEach(t => {
+      const found = DATA.nodes[t].find(n => n.id === otherId);
+      if (found) otherName = get(found, 'name');
+    });
+    return { id: otherId, name: otherName, relation: relName };
+  });
+
+  panel.innerHTML = `
+    <h3>${name}</h3>
+    <div class="meta">${meta}</div>
+    <div class="desc">${desc}</div>
+    ${relTags.length ? `<div class="relations"><h4>${lang==='zh'?'关联':'Related'}</h4>
+      ${relTags.map(r => `<span class="tag" data-id="${r.id}">${r.name} · ${r.relation}</span>`).join('')}
+    </div>` : ''}
+  `;
+
+  // Clickable relation tags
+  panel.querySelectorAll('.tag').forEach(tag => {
+    tag.addEventListener('click', () => {
+      // Find the type of related node
+      const rid = tag.dataset.id;
+      let rtype = null;
+      ['cities','figures','goods','events'].forEach(t => {
+        if (DATA.nodes[t].find(n => n.id === rid)) rtype = t.slice(0,-1);
+      });
+      if (rtype) selectNode(rid, rtype);
+    });
+  });
+}
+
+function updateFilterCounts() {
+  const entities = allEntities();
+  document.querySelectorAll('.filters button').forEach(btn => {
+    const type = btn.dataset.type;
+    const count = type === 'all' ? entities.length : entities.filter(e => e.type === type).length;
+    btn.querySelector('.count').textContent = `(${count})`;
+  });
+}
+
+// ── Filter buttons ──
+document.getElementById('filters').addEventListener('click', e => {
+  const btn = e.target.closest('button');
+  if (!btn) return;
+  activeFilter = btn.dataset.type;
+  document.querySelectorAll('.filters button').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderList();
+});
+
+// ── Language toggle ──
+function toggleLang() {
+  lang = lang === 'zh' ? 'en' : 'zh';
+  document.getElementById('langBtn').textContent = lang === 'zh' ? 'English' : '中文';
+  document.querySelector('header h1 .sub').textContent =
+    lang === 'zh' ? 'Silk Road · 交互知识图谱' : 'Silk Road · Interactive Knowledge Graph';
+  renderList();
+  renderDetail();
+  initTimeline();
+}
+</script>
+</body>
+</html>
