@@ -2,7 +2,7 @@
   "meta": {
     "title": "丝绸之路知识图谱",
     "title_en": "Silk Road Knowledge Graph",
-    "version": "0.2.0",
+    "version": "0.3.0",
     "last_updated": "2026-05-31",
     "description": "一个关于丝绸之路的结构化开放数据集，涵盖城市、人物、物产、事件四大类实体及其关联关系。",
     "description_en": "An open structured dataset about the Silk Road, covering cities, figures, goods, and events and their interconnections."
