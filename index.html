@@ -127,6 +127,31 @@
   .leaflet-popup-content { margin: 10px 14px; font-size: 0.85rem; line-height: 1.5; }
   .leaflet-popup-content b { color: var(--accent); }
 
+  /* ── Graph View ── */
+  #graph-view {
+    flex: 1; background: var(--bg); position: relative; overflow: hidden;
+    display: none;
+  }
+  #graph-view.active { display: flex; }
+  #graph-view svg { width: 100%; height: 100%; }
+  #graph-view .node circle { transition: r 0.2s, stroke-width 0.2s; }
+  #graph-view .node text { font-size: 9px; fill: var(--text-dim); pointer-events: none; transition: opacity 0.2s; }
+  #graph-view .link { stroke-opacity: 0.15; }
+  #graph-view .tooltip {
+    position: absolute; background: var(--panel-bg); color: var(--text);
+    padding: 8px 12px; border-radius: 6px; font-size: 0.78rem;
+    pointer-events: none; box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+    z-index: 10; max-width: 240px; line-height: 1.4;
+    opacity: 0; transition: opacity 0.15s;
+  }
+  #graph-view .legend {
+    position: absolute; bottom: 16px; left: 16px; display: flex; gap: 14px;
+    background: rgba(34,34,40,0.85); padding: 8px 14px; border-radius: 8px;
+    font-size: 0.72rem; z-index: 5;
+  }
+  #graph-view .legend span { display: flex; align-items: center; gap: 5px; }
+  #graph-view .legend .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+
   /* ── Responsive ── */
   @media (max-width: 768px) {
     main { flex-direction: column; }
@@ -138,11 +163,15 @@
 <body>
 <header>
   <h1>🐫 丝绸之路 <span class="sub">Silk Road · 交互知识图谱</span></h1>
-  <button class="lang-toggle" onclick="toggleLang()" id="langBtn">English</button>
+  <div style="display:flex;gap:8px;align-items:center">
+    <button class="lang-toggle" onclick="toggleView()" id="viewBtn">🕸 关系图</button>
+    <button class="lang-toggle" onclick="toggleLang()" id="langBtn">English</button>
+  </div>
 </header>
 
 <main>
   <div id="map"></div>
+  <div id="graph-view"><div class="tooltip" id="gTooltip"></div></div>
   <aside>
     <div class="filters" id="filters">
       <button class="active" data-type="all">全部 <span class="count"></span></button>
@@ -158,6 +187,7 @@
 <div id="timeline-bar"></div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://d3js.org/d3.v7.min.js"></script>
 <script>
 // ── State ──
 let lang = 'zh';
@@ -399,15 +429,131 @@ document.getElementById('filters').addEventListener('click', e => {
   renderList();
 });
 
-// ── Language toggle ──
-function toggleLang() {
-  lang = lang === 'zh' ? 'en' : 'zh';
-  document.getElementById('langBtn').textContent = lang === 'zh' ? 'English' : '中文';
-  document.querySelector('header h1 .sub').textContent =
-    lang === 'zh' ? 'Silk Road · 交互知识图谱' : 'Silk Road · Interactive Knowledge Graph';
-  renderList();
-  renderDetail();
-  initTimeline();
+// ── View toggle ──
+let currentView = 'map';
+
+function toggleView() {
+  currentView = currentView === 'map' ? 'graph' : 'map';
+  const btn = document.getElementById('viewBtn');
+  const mapEl = document.getElementById('map');
+  const graphEl = document.getElementById('graph-view');
+  if (currentView === 'graph') {
+    mapEl.style.display = 'none';
+    graphEl.classList.add('active');
+    btn.textContent = '🗺 地图';
+    if (!window._graphBuilt) buildGraph();
+    window.addEventListener('resize', () => { if (window._resizeTimer) clearTimeout(window._resizeTimer); window._resizeTimer = setTimeout(buildGraph, 300); });
+  } else {
+    mapEl.style.display = '';
+    graphEl.classList.remove('active');
+    btn.textContent = '🕸 关系图';
+    map.invalidateSize();
+  }
+}
+
+function buildGraph() {
+  window._graphBuilt = true;
+  const container = document.getElementById('graph-view');
+  const W = container.clientWidth;
+  const H = container.clientHeight;
+  container.querySelector('svg')?.remove();
+
+  const svg = d3.select('#graph-view').append('svg')
+    .attr('viewBox', [0, 0, W, H]);
+  const g = svg.append('g');
+
+  // Legend
+  const legend = d3.select('#graph-view').append('div').attr('class', 'legend')
+    .html(`<span><span class="dot" style="background:var(--city)"></span> ${lang==='zh'?'城市':'City'}</span>
+           <span><span class="dot" style="background:var(--figure)"></span> ${lang==='zh'?'人物':'Figure'}</span>
+           <span><span class="dot" style="background:var(--goods)"></span> ${lang==='zh'?'物产':'Goods'}</span>
+           <span><span class="dot" style="background:var(--event)"></span> ${lang==='zh'?'事件':'Event'}</span>`);
+
+  // Build nodes
+  const colors = { city: '#d4a853', figure: '#5b9bd5', goods: '#6aad6a', event: '#c75b3a' };
+  const radius = { city: 7, figure: 6, goods: 5, event: 5 };
+  const typeOrder = { city: 0, figure: 1, goods: 2, event: 3 };
+  const typeLabels = { city: '城市', figure: '人物', goods: '物产', event: '事件' };
+  const typeLabelsEn = { city: 'City', figure: 'Figure', goods: 'Goods', event: 'Event' };
+
+  const nodes = [];
+  const nodeMap = {};
+  ['cities','figures','goods','events'].forEach(type => {
+    const singular = type.slice(0,-1);
+    DATA.nodes[type].forEach(d => {
+      const n = {
+        id: d.id, type: singular, name: get(d,'name'),
+        desc: (get(d,'description')||'').slice(0,60)+'…',
+        extra: singular==='city'?get(d,'role'):singular==='figure'?get(d,'type'):singular==='goods'?get(d,'category'):get(d,'display_year')||'',
+        significance: d.significance||3, color: colors[singular]
+      };
+      nodes.push(n);
+      nodeMap[d.id] = n;
+    });
+  });
+
+  // Build links
+  const links = DATA.edges.map(e => {
+    const s = nodeMap[e.source], t = nodeMap[e.target];
+    if (!s || !t) return null;
+    return { source: e.source, target: e.target, relation: get(e,'relation') };
+  }).filter(Boolean);
+
+  // Force simulation
+  const simulation = d3.forceSimulation(nodes)
+    .force('link', d3.forceLink(links).id(d => d.id).distance(60))
+    .force('charge', d3.forceManyBody().strength(-200))
+    .force('center', d3.forceCenter(W/2, H/2))
+    .force('collision', d3.forceCollide().radius(d => radius[d.type]+4));
+
+  const zoom = d3.zoom().scaleExtent([0.3, 4]).on('zoom', ev => g.attr('transform', ev.transform));
+  svg.call(zoom);
+
+  // Draw links
+  const link = g.append('g').selectAll('line').data(links).join('line')
+    .attr('class', 'link')
+    .attr('stroke', 'var(--text-dim)')
+    .attr('stroke-width', d => { const s=nodes.find(n=>n.id===d.source.id), t=nodes.find(n=>n.id===d.target.id); return Math.min((s?.significance||3)+(t?.significance||3),10)*0.15; });
+
+  // Draw nodes
+  const node = g.append('g').selectAll('g').data(nodes).join('g')
+    .attr('class', 'node')
+    .call(d3.drag().on('start', (ev,d) => { if(!ev.active) simulation.alphaTarget(0.3).restart(); d.fx=d.x; d.fy=d.y; })
+      .on('drag', (ev,d) => { d.fx=ev.x; d.fy=ev.y; })
+      .on('end', (ev,d) => { if(!ev.active) simulation.alphaTarget(0); d.fx=null; d.fy=null; }));
+
+  node.append('circle')
+    .attr('r', d => radius[d.type])
+    .attr('fill', d => d.color)
+    .attr('stroke', '#222')
+    .attr('stroke-width', 1.2);
+
+  node.append('text').text(d => d.name.length>4?d.name.slice(0,4)+'…':d.name)
+    .attr('x', d => radius[d.type]+4).attr('y', 3);
+
+  // Tooltip
+  const tooltip = document.getElementById('gTooltip');
+  node.on('mouseover', (ev, d) => {
+    tooltip.style.opacity = 1;
+    tooltip.innerHTML = `<b style="color:${d.color}">${d.name}</b> <small>${lang==='zh'?typeLabels[d.type]:typeLabelsEn[d.type]}</small><br><small>${d.extra}</small><br>${d.desc}`;
+  }).on('mousemove', ev => {
+    tooltip.style.left = (ev.offsetX+14)+'px';
+    tooltip.style.top = (ev.offsetY-10)+'px';
+  }).on('mouseout', () => { tooltip.style.opacity = 0; });
+
+  // Click selects
+  node.on('click', (ev, d) => {
+    selectNode(d.id, d.type);
+    if (document.getElementById('graph-view').classList.contains('active')) {
+      toggleView();
+    }
+  });
+
+  simulation.on('tick', () => {
+    link.attr('x1', d => d.source.x).attr('y1', d => d.source.y)
+        .attr('x2', d => d.target.x).attr('y2', d => d.target.y);
+    node.attr('transform', d => `translate(${d.x},${d.y})`);
+  });
 }
 </script>
 </body>
