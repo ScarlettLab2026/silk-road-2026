@@ -2,7 +2,7 @@
 
 > 一个开放、结构化、双语（中/英）的丝绸之路知识图谱项目。从数据出发，渲染出多种内容形态。
 
-**[🌐 在线预览](https://scarlettxi.github.io/silk-road2026)** · **[📂 浏览数据](./data/silk-road.json)** · **[🤝 贡献指南](./CONTRIBUTING.md)**
+**[🌐 在线预览](https://ScarlettLab2026.github.io/silk-road2026)** · **[📂 浏览数据](./data/silk-road.json)** · **[🤝 贡献指南](./CONTRIBUTING.md)**
 
 ---
 
@@ -43,7 +43,7 @@
 
 ```bash
 # 克隆仓库
-git clone https://github.com/scarlettxi/silk-road2026.git
+git clone https://github.com/ScarlettLab2026/silk-road2026.git
 cd silk-road2026
 
 # 启动本地服务器（任选一种）
