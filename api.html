@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>丝路知识图谱 · 数据 API</title>
+<style>
+  :root {
+    --bg: #1a1a1f; --panel-bg: #222228; --text: #e0ddd5;
+    --text-dim: #9a9790; --accent: #d4a853; --border: #333338;
+    --city: #d4a853; --figure: #5b9bd5; --goods: #6aad6a; --event: #c75b3a;
+    --code-bg: #1a1a22;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", "Fira Code", monospace, sans-serif;
+    background: var(--bg); color: var(--text); line-height: 1.6;
+    max-width: 900px; margin: 0 auto; padding: 40px 24px;
+  }
+
+  h1 { font-size: 1.4rem; margin-bottom: 8px; letter-spacing: 0.03em; }
+  h1 .sub { font-weight: 400; color: var(--text-dim); font-size: 0.85rem; margin-left: 10px; }
+  h2 {
+    font-size: 1.05rem; margin: 40px 0 14px; padding-bottom: 8px;
+    border-bottom: 1px solid var(--border); letter-spacing: 0.03em;
+  }
+  h3 { font-size: 0.9rem; margin: 24px 0 10px; color: var(--accent); }
+
+  p { margin-bottom: 12px; font-size: 0.9rem; }
+
+  .endpoint {
+    background: var(--code-bg); border: 1px solid var(--border); border-radius: 10px;
+    padding: 18px 20px; margin: 16px 0;
+    display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+  }
+  .endpoint .method {
+    background: var(--goods); color: #111; font-weight: 700; font-size: 0.72rem;
+    padding: 4px 10px; border-radius: 4px; letter-spacing: 0.06em;
+  }
+  .endpoint .url {
+    font-family: "Fira Code", "SF Mono", monospace; font-size: 0.82rem;
+    color: var(--text); word-break: break-all; flex: 1;
+  }
+  .endpoint .copy-btn {
+    background: var(--border); color: var(--text); border: none;
+    padding: 6px 14px; border-radius: 6px; cursor: pointer; font-size: 0.72rem;
+    transition: background 0.2s;
+  }
+  .endpoint .copy-btn:hover { background: var(--accent); color: #111; }
+
+  pre {
+    background: var(--code-bg); border: 1px solid var(--border); border-radius: 10px;
+    padding: 18px 20px; overflow-x: auto; font-size: 0.78rem;
+    line-height: 1.7; margin: 12px 0; position: relative;
+  }
+  pre code { font-family: "Fira Code", "SF Mono", monospace; }
+  pre .lang-tag {
+    position: absolute; top: 8px; right: 14px; font-size: 0.62rem;
+    color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.08em;
+  }
+  .hljs-keyword { color: #c586c0; }
+  .hljs-string { color: #ce9178; }
+  .hljs-comment { color: #6a9955; }
+  .hljs-function { color: #dcdcaa; }
+  .hljs-property { color: #9cdcfe; }
+  .hljs-punctuation { color: var(--text-dim); }
+
+  table {
+    width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 0.82rem;
+  }
+  th, td {
+    text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--border);
+  }
+  th { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-dim); }
+  td .type-tag {
+    display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.68rem;
+    font-family: "Fira Code", "SF Mono", monospace;
+  }
+  .type-string  { background: rgba(206,145,120,0.15); color: #ce9178; }
+  .type-number  { background: rgba(181,206,168,0.15); color: #b5cea8; }
+  .type-array   { background: rgba(220,220,170,0.15); color: #dcdcaa; }
+  .type-integer { background: rgba(156,220,254,0.15); color: #9cdcfe; }
+
+  .stat-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px; margin: 16px 0;
+  }
+  .stat-card {
+    background: var(--panel-bg); border-radius: 10px; padding: 16px;
+    text-align: center; border: 1px solid var(--border);
+  }
+  .stat-card .num { font-size: 1.8rem; font-weight: 700; }
+  .stat-card .label { font-size: 0.72rem; color: var(--text-dim); margin-top: 4px; }
+  .stat-card.city  .num { color: var(--city); }
+  .stat-card.figure .num { color: var(--figure); }
+  .stat-card.goods .num { color: var(--goods); }
+  .stat-card.event .num { color: var(--event); }
+
+  /* Playground */
+  .playground {
+    background: var(--panel-bg); border: 1px solid var(--border); border-radius: 12px;
+    overflow: hidden; margin: 16px 0;
+  }
+  .playground .pg-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 18px; border-bottom: 1px solid var(--border);
+    background: rgba(0,0,0,0.15);
+  }
+  .playground .pg-header h3 { margin: 0; color: var(--text); font-size: 0.85rem; }
+  .pg-body { padding: 18px; }
+  .pg-body input {
+    width: 100%; background: var(--code-bg); border: 1px solid var(--border);
+    color: var(--text); padding: 10px 14px; border-radius: 8px;
+    font-family: "Fira Code", "SF Mono", monospace; font-size: 0.8rem;
+    margin-bottom: 10px;
+  }
+  .pg-body input:focus { outline: none; border-color: var(--accent); }
+  .pg-body .filters {
+    display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px;
+  }
+  .pg-body .filters button {
+    background: transparent; border: 1px solid var(--border); color: var(--text-dim);
+    padding: 5px 14px; border-radius: 16px; cursor: pointer; font-size: 0.75rem;
+    transition: all 0.15s;
+  }
+  .pg-body .filters button:hover { border-color: var(--accent); color: var(--accent); }
+  .pg-body .filters button.active { background: var(--accent); color: #111; border-color: var(--accent); }
+  .pg-result {
+    background: var(--code-bg); border: 1px solid var(--border); border-radius: 8px;
+    padding: 14px 16px; font-family: "Fira Code", "SF Mono", monospace;
+    font-size: 0.75rem; max-height: 400px; overflow-y: auto; white-space: pre-wrap;
+    word-break: break-all; line-height: 1.6;
+  }
+  .pg-result .count { color: var(--text-dim); font-size: 0.7rem; margin-bottom: 8px; }
+
+  .tabs { display: flex; gap: 2px; margin-bottom: 0; }
+  .tabs button {
+    background: transparent; border: none; color: var(--text-dim);
+    padding: 8px 16px; cursor: pointer; font-size: 0.78rem;
+    border-bottom: 2px solid transparent; transition: all 0.15s;
+  }
+  .tabs button.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  .note {
+    background: rgba(212,168,83,0.08); border-left: 3px solid var(--accent);
+    border-radius: 0 8px 8px 0; padding: 12px 16px; margin: 16px 0;
+    font-size: 0.8rem; color: var(--text-dim);
+  }
+  .note strong { color: var(--accent); }
+
+  footer {
+    margin-top: 60px; padding-top: 24px; border-top: 1px solid var(--border);
+    text-align: center; font-size: 0.75rem; color: var(--text-dim);
+  }
+  footer a { color: var(--accent); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<h1>🐫 丝路知识图谱 <span class="sub">Data API v0.3.0</span></h1>
+<p style="color:var(--text-dim);font-size:0.85rem">
+  开放、结构化的丝绸之路数据集。单一 JSON 端点，零认证，自由使用。
+</p>
+
+<!-- ── Stats ── -->
+<div class="stat-grid" id="stats"></div>
+
+<!-- ── Endpoint ── -->
+<h2>📍 API 端点</h2>
+<div class="endpoint">
+  <span class="method">GET</span>
+  <span class="url">https://scarlettlab2026.github.io/silk-road-2026/data/silk-road.json</span>
+  <button class="copy-btn" onclick="copyEndpoint()">📋 复制</button>
+</div>
+
+<div class="note">
+  <strong>免费 · 无认证 · 开放 CORS</strong><br>
+  GitHub Pages 原生支持跨域请求，浏览器和服务器端都可直接 fetch。数据遵循 CC BY-SA 4.0 协议。
+</div>
+
+<!-- ── Quick Start ── -->
+<h2>🚀 快速开始</h2>
+
+<div class="tabs">
+  <button class="active" onclick="switchTab('js')">JavaScript</button>
+  <button onclick="switchTab('py')">Python</button>
+  <button onclick="switchTab('curl')">curl</button>
+</div>
+
+<div class="tab-content active" id="tab-js">
+<pre><code><span class="hljs-keyword">const</span> <span class="hljs-property">API</span> = <span class="hljs-string">'https://scarlettlab2026.github.io/silk-road-2026/data/silk-road.json'</span>;
+
+<span class="hljs-keyword">const</span> <span class="hljs-property">res</span> = <span class="hljs-keyword">await</span> <span class="hljs-function">fetch</span>(<span class="hljs-property">API</span>);
+<span class="hljs-keyword">const</span> <span class="hljs-property">data</span> = <span class="hljs-keyword">await</span> <span class="hljs-property">res</span>.<span class="hljs-function">json</span>();
+
+<span class="hljs-comment">// 获取所有城市</span>
+<span class="hljs-keyword">const</span> <span class="hljs-property">cities</span> = <span class="hljs-property">data</span>.<span class="hljs-property">nodes</span>.<span class="hljs-property">cities</span>;
+<span class="hljs-property">console</span>.<span class="hljs-function">log</span>(<span class="hljs-property">cities</span>.<span class="hljs-function">filter</span>(<span class="hljs-property">c</span> => <span class="hljs-property">c</span>.<span class="hljs-property">significance</span> >= <span class="hljs-property">4</span>));
+
+<span class="hljs-comment">// 查张骞的所有关系</span>
+<span class="hljs-keyword">const</span> <span class="hljs-property">edges</span> = <span class="hljs-property">data</span>.<span class="hljs-property">edges</span>.<span class="hljs-function">filter</span>(<span class="hljs-property">e</span> =>
+  <span class="hljs-property">e</span>.<span class="hljs-property">source</span> === <span class="hljs-string">'zhang-qian'</span> || <span class="hljs-property">e</span>.<span class="hljs-property">target</span> === <span class="hljs-string">'zhang-qian'</span>
+);</code></pre>
+</div>
+
+<div class="tab-content" id="tab-py">
+<pre><code><span class="hljs-keyword">import</span> requests
+
+<span class="hljs-property">API</span> = <span class="hljs-string">"https://scarlettlab2026.github.io/silk-road-2026/data/silk-road.json"</span>
+<span class="hljs-property">data</span> = requests.<span class="hljs-function">get</span>(<span class="hljs-property">API</span>).<span class="hljs-function">json</span>()
+
+<span class="hljs-comment"># 获取所有城市</span>
+<span class="hljs-property">cities</span> = <span class="hljs-property">data</span>[<span class="hljs-string">"nodes"</span>][<span class="hljs-string">"cities"</span>]
+<span class="hljs-function">print</span>(<span class="hljs-function">len</span>(<span class="hljs-property">cities</span>))  <span class="hljs-comment"># 19</span>
+
+<span class="hljs-comment"># 按朝代筛选</span>
+<span class="hljs-property">tang_cities</span> = [<span class="hljs-property">c</span> <span class="hljs-keyword">for</span> <span class="hljs-property">c</span> <span class="hljs-keyword">in</span> <span class="hljs-property">cities</span> <span class="hljs-keyword">if</span> <span class="hljs-string">"唐"</span> <span class="hljs-keyword">in</span> <span class="hljs-property">c</span>.<span class="hljs-function">get</span>(<span class="hljs-string">"dynasties"</span>, [])]
+<span class="hljs-function">print</span>(<span class="hljs-property">tang_cities</span>)</code></pre>
+</div>
+
+<div class="tab-content" id="tab-curl">
+<pre><code>curl -s https://scarlettlab2026.github.io/silk-road-2026/data/silk-road.json | python3 -m json.tool | head -60</code></pre>
+</div>
+
+<!-- ── Schema ── -->
+<h2>📐 数据结构</h2>
+
+<h3>顶层</h3>
+<table>
+  <tr><th>字段</th><th>类型</th><th>说明</th></tr>
+  <tr><td>meta</td><td><span class="type-tag type-string">object</span></td><td>数据集元信息（标题、版本、更新时间）</td></tr>
+  <tr><td>nodes</td><td><span class="type-tag type-string">object</span></td><td>四类实体节点</td></tr>
+  <tr><td>edges</td><td><span class="type-tag type-array">array</span></td><td>104 条关系边</td></tr>
+</table>
+
+<h3>🏙️ 城市节点</h3>
+<table>
+  <tr><th>字段</th><th>类型</th><th>示例</th></tr>
+  <tr><td>id</td><td><span class="type-tag type-string">string</span></td><td>"changan"</td></tr>
+  <tr><td>name / name_en</td><td><span class="type-tag type-string">string</span></td><td>"长安" / "Chang'an"</td></tr>
+  <tr><td>modern_name</td><td><span class="type-tag type-string">string</span></td><td>"西安"</td></tr>
+  <tr><td>country / country_en</td><td><span class="type-tag type-string">string</span></td><td>"中国" / "China"</td></tr>
+  <tr><td>lat / lng</td><td><span class="type-tag type-number">number</span></td><td>34.2608 / 108.9398</td></tr>
+  <tr><td>era</td><td><span class="type-tag type-string">string</span></td><td>"西汉 — 唐"</td></tr>
+  <tr><td>dynasties</td><td><span class="type-tag type-array">array</span></td><td>["西汉", "隋", "唐"]</td></tr>
+  <tr><td>role</td><td><span class="type-tag type-string">string</span></td><td>"东方起点"</td></tr>
+  <tr><td>description / description_en</td><td><span class="type-tag type-string">string</span></td><td>详细描述（中/英）</td></tr>
+  <tr><td>significance</td><td><span class="type-tag type-integer">integer</span></td><td>1-5 重要程度</td></tr>
+</table>
+
+<h3>👤 人物节点</h3>
+<table>
+  <tr><th>字段</th><th>类型</th><th>示例</th></tr>
+  <tr><td>id / name / name_en</td><td><span class="type-tag type-string">string</span></td><td>"xuanzang" / "玄奘" / "Xuanzang"</td></tr>
+  <tr><td>type / type_en</td><td><span class="type-tag type-string">string</span></td><td>"僧侣 / 翻译家"</td></tr>
+  <tr><td>era / era_range</td><td><span class="type-tag type-string">string</span></td><td>"唐" / "公元602-664年"</td></tr>
+  <tr><td>description / description_en</td><td><span class="type-tag type-string">string</span></td><td>详细描述</td></tr>
+  <tr><td>significance</td><td><span class="type-tag type-integer">integer</span></td><td>1-5</td></tr>
+</table>
+
+<h3>📦 物产节点</h3>
+<table>
+  <tr><th>字段</th><th>类型</th><th>示例</th></tr>
+  <tr><td>id / name / name_en</td><td><span class="type-tag type-string">string</span></td><td>"paper" / "造纸术" / "Papermaking"</td></tr>
+  <tr><td>category / category_en</td><td><span class="type-tag type-string">string</span></td><td>"技术" / "Technology"</td></tr>
+  <tr><td>origin / origin_en</td><td><span class="type-tag type-string">string</span></td><td>"中国" / "China"</td></tr>
+  <tr><td>direction / direction_en</td><td><span class="type-tag type-string">string</span></td><td>"西传" / "Westward"</td></tr>
+  <tr><td>description / description_en</td><td><span class="type-tag type-string">string</span></td><td>详细描述</td></tr>
+  <tr><td>significance</td><td><span class="type-tag type-integer">integer</span></td><td>1-5</td></tr>
+</table>
+
+<h3>⚡ 事件节点</h3>
+<table>
+  <tr><th>字段</th><th>类型</th><th>示例</th></tr>
+  <tr><td>id / name / name_en</td><td><span class="type-tag type-string">string</span></td><td>"battle-of-talas" / "怛罗斯之战"</td></tr>
+  <tr><td>year / display_year</td><td><span class="type-tag type-string">string</span></td><td>751 / "公元751年"</td></tr>
+  <tr><td>dynasty</td><td><span class="type-tag type-string">string</span></td><td>"唐"</td></tr>
+  <tr><td>description / description_en</td><td><span class="type-tag type-string">string</span></td><td>详细描述</td></tr>
+  <tr><td>significance</td><td><span class="type-tag type-integer">integer</span></td><td>1-5</td></tr>
+</table>
+
+<h3>🔗 关系边</h3>
+<table>
+  <tr><th>字段</th><th>类型</th><th>示例</th></tr>
+  <tr><td>source</td><td><span class="type-tag type-string">string</span></td><td>"paper"（实体 ID）</td></tr>
+  <tr><td>target</td><td><span class="type-tag type-string">string</span></td><td>"samarkand"（实体 ID）</td></tr>
+  <tr><td>relation</td><td><span class="type-tag type-string">string</span></td><td>"技术传入地"</td></tr>
+  <tr><td>relation_en</td><td><span class="type-tag type-string">string</span></td><td>"Technology transfer destination"</td></tr>
+</table>
+
+<!-- ── Playground ── -->
+<h2>🛝 在线 Playground</h2>
+<div class="playground">
+  <div class="pg-header">
+    <h3>试试看</h3>
+    <span style="font-size:0.7rem;color:var(--text-dim)" id="pg-status">加载数据中…</span>
+  </div>
+  <div class="pg-body">
+    <div class="filters">
+      <button class="active" data-type="all">全部</button>
+      <button data-type="cities">🏙 城市</button>
+      <button data-type="figures">👤 人物</button>
+      <button data-type="goods">📦 物产</button>
+      <button data-type="events">⚡ 事件</button>
+      <button data-type="edges">🔗 关系</button>
+      <button data-type="search">🔍 搜索</button>
+    </div>
+    <input type="text" id="pg-search" placeholder="输入关键词搜索…如：玄奘、造纸术、唐、巴格达" style="display:none">
+    <div class="pg-result" id="pg-result">加载中…</div>
+  </div>
+</div>
+
+<!-- ── License ── -->
+<h2>📜 许可</h2>
+<p>
+  数据：<a href="https://creativecommons.org/licenses/by-sa/4.0/" style="color:var(--accent)">CC BY-SA 4.0</a> —
+  自由使用、修改、分享，需署名并相同方式共享。<br>
+  代码：<a href="https://github.com/ScarlettLab2026/silk-road-2026/blob/main/LICENSE" style="color:var(--accent)">MIT</a>
+</p>
+
+<footer>
+  <p>
+    🐫 <a href="https://scarlettlab2026.github.io/silk-road-2026">丝绸之路交互知识图谱</a>
+    · <a href="https://github.com/ScarlettLab2026/silk-road-2026">GitHub</a>
+    · 欢迎 star ⭐
+  </p>
+</footer>
+
+<script>
+const API = 'data/silk-road.json';
+let DATA = null;
+
+// ── Stats & Init ──
+fetch(API).then(r => r.json()).then(data => {
+  DATA = data;
+  const n = data.nodes;
+  document.getElementById('stats').innerHTML = `
+    <div class="stat-card city"><div class="num">${n.cities.length}</div><div class="label">🏙 城市</div></div>
+    <div class="stat-card figure"><div class="num">${n.figures.length}</div><div class="label">👤 人物</div></div>
+    <div class="stat-card goods"><div class="num">${n.goods.length}</div><div class="label">📦 物产</div></div>
+    <div class="stat-card event"><div class="num">${n.events.length}</div><div class="label">⚡ 事件</div></div>
+  `;
+  document.getElementById('pg-status').textContent = '✅ 数据就绪';
+  showResult('all');
+});
+
+// ── Copy ──
+function copyEndpoint() {
+  const url = 'https://scarlettlab2026.github.io/silk-road-2026/data/silk-road.json';
+  navigator.clipboard.writeText(url).then(() => {
+    const btn = document.querySelector('.copy-btn');
+    btn.textContent = '✅ 已复制'; setTimeout(() => btn.textContent = '📋 复制', 1500);
+  });
+}
+
+// ── Tabs ──
+function switchTab(name) {
+  document.querySelectorAll('.tabs button').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+  document.querySelector(`.tabs button:nth-child(${{js:1,py:2,curl:3}[name]})`).classList.add('active');
+  document.getElementById('tab-' + name).classList.add('active');
+}
+
+// ── Playground ──
+document.querySelectorAll('.pg-body .filters button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.pg-body .filters button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const type = btn.dataset.type;
+    document.getElementById('pg-search').style.display = type === 'search' ? 'block' : 'none';
+    showResult(type);
+  });
+});
+
+document.getElementById('pg-search').addEventListener('input', function() {
+  showResult('search');
+});
+
+function showResult(type) {
+  if (!DATA) return;
+  const el = document.getElementById('pg-result');
+  let items;
+
+  switch(type) {
+    case 'all':
+      items = {
+        cities: DATA.nodes.cities.length,
+        figures: DATA.nodes.figures.length,
+        goods: DATA.nodes.goods.length,
+        events: DATA.nodes.events.length,
+        edges: DATA.edges.length
+      };
+      el.innerHTML = `<span class="count">数据概览</span>\n${JSON.stringify(items, null, 2)}`;
+      break;
+    case 'cities':
+      items = DATA.nodes.cities.map(c => ({id:c.id, name:c.name, country:c.country, era:c.era, role:c.role, significance:c.significance}));
+      el.innerHTML = `<span class="count">🏙 ${items.length} 个城市</span>\n${JSON.stringify(items, null, 2)}`;
+      break;
+    case 'figures':
+      items = DATA.nodes.figures.map(f => ({id:f.id, name:f.name, type:f.type, era:f.era||f.era_range, significance:f.significance}));
+      el.innerHTML = `<span class="count">👤 ${items.length} 个人物</span>\n${JSON.stringify(items, null, 2)}`;
+      break;
+    case 'goods':
+      items = DATA.nodes.goods.map(g => ({id:g.id, name:g.name, category:g.category, origin:g.origin, direction:g.direction, significance:g.significance}));
+      el.innerHTML = `<span class="count">📦 ${items.length} 种物产</span>\n${JSON.stringify(items, null, 2)}`;
+      break;
+    case 'events':
+      items = DATA.nodes.events.map(e => ({id:e.id, name:e.name, year:e.display_year||e.year, dynasty:e.dynasty, significance:e.significance}));
+      el.innerHTML = `<span class="count">⚡ ${items.length} 个事件</span>\n${JSON.stringify(items, null, 2)}`;
+      break;
+    case 'edges':
+      items = DATA.edges.slice(0, 30);
+      el.innerHTML = `<span class="count">🔗 ${DATA.edges.length} 条关系边（显示前30条）</span>\n${JSON.stringify(items, null, 2)}`;
+      break;
+    case 'search':
+      const q = document.getElementById('pg-search').value.toLowerCase().trim();
+      if (!q) { el.innerHTML = `<span class="count">🔍 输入关键词搜索</span>`; break; }
+      const results = [];
+      ['cities','figures','goods','events'].forEach(t => {
+        DATA.nodes[t].forEach(n => {
+          if (JSON.stringify(n).toLowerCase().includes(q)) {
+            results.push({type: t.slice(0,-1), id:n.id, name:n.name, name_en:n.name_en||'', desc:(n.description||'').slice(0,80)+'…'});
+          }
+        });
+      });
+      DATA.edges.forEach(e => {
+        if (e.source.includes(q) || e.target.includes(q) || e.relation.includes(q)) {
+          results.push({type:'edge', source:e.source, target:e.target, relation:e.relation});
+        }
+      });
+      el.innerHTML = `<span class="count">🔍 找到 ${results.length} 条结果</span>\n${JSON.stringify(results.slice(0, 20), null, 2)}`;
+      break;
+  }
+}
+
+// ── Keyboard shortcut for search ──
+document.addEventListener('keydown', e => {
+  if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+    e.preventDefault();
+    document.querySelector('[data-type="search"]').click();
+    document.getElementById('pg-search').focus();
+  }
+});
+</script>
+</body>
+</html>
