@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>丝路知识问答卡片 · 社交媒体用</title>
+<style>
+  :root {
+    --bg: #1a1a1f; --card-bg: #1e1e24; --text: #e0ddd5;
+    --text-dim: #9a9790; --accent: #d4a853; --border: #333338;
+    --city: #d4a853; --figure: #5b9bd5; --goods: #6aad6a; --event: #c75b3a; --chain: #c08a50;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background: #111; font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; padding: 32px 24px; }
+
+  h2 { text-align: center; font-size: 1rem; color: var(--accent); margin: 40px 0 16px; letter-spacing: 0.1em; }
+  h2:first-child { margin-top: 0; }
+
+  .card-grid { display: flex; flex-wrap: wrap; gap: 32px; justify-content: center; }
+
+  /* ── Card Frame ── */
+  .card {
+    width: 400px; background: var(--card-bg); border-radius: 16px;
+    overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+    display: flex; flex-direction: column;
+    border: 1px solid var(--border);
+  }
+  .card.city  { border-top: 4px solid var(--city); }
+  .card.figure{ border-top: 4px solid var(--figure); }
+  .card.goods { border-top: 4px solid var(--goods); }
+  .card.event { border-top: 4px solid var(--event); }
+  .card.chain { border-top: 4px solid var(--chain); }
+
+  /* ── Card Header ── */
+  .card-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 18px; background: rgba(0,0,0,0.2);
+    border-bottom: 1px solid var(--border);
+  }
+  .card-header .type-badge {
+    font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .card.city   .type-badge { color: var(--city); }
+  .card.figure .type-badge { color: var(--figure); }
+  .card.goods  .type-badge { color: var(--goods); }
+  .card.event  .type-badge { color: var(--event); }
+  .card.chain  .type-badge { color: var(--chain); }
+  .card-header .significance { display: flex; gap: 2px; }
+  .card-header .significance .star { color: var(--accent); font-size: 0.75rem; }
+  .card-header .significance .star.dim { color: var(--border); }
+
+  /* ── Card Body ── */
+  .card-body { padding: 24px 20px; flex: 1; display: flex; flex-direction: column; gap: 14px; }
+
+  .card-body .icon { font-size: 2.5rem; line-height: 1; }
+  .card-body .name { font-size: 1.6rem; font-weight: 700; letter-spacing: 0.04em; }
+  .card-body .name-en { font-size: 0.8rem; color: var(--text-dim); margin-top: -10px; }
+  .card-body .subtitle { font-size: 0.82rem; color: var(--text-dim); }
+  .card-body .subtitle .label { font-weight: 600; color: var(--text); }
+  .card-body .desc {
+    font-size: 0.85rem; line-height: 1.8; color: var(--text);
+    background: rgba(255,255,255,0.03); padding: 14px 16px; border-radius: 10px;
+  }
+  .card-body .desc .highlight {
+    background: linear-gradient(180deg, transparent 60%, rgba(212,168,83,0.2) 60%);
+    padding: 0 2px;
+  }
+
+  /* ── Relations ── */
+  .card-body .relations { display: flex; flex-wrap: wrap; gap: 6px; }
+  .card-body .relations .tag {
+    font-size: 0.7rem; padding: 4px 10px; border-radius: 10px;
+    background: rgba(255,255,255,0.05); color: var(--text-dim);
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  .card-body .relations .tag.city-t   { border-color: var(--city); color: var(--city); }
+  .card-body .relations .tag.figure-t { border-color: var(--figure); color: var(--figure); }
+  .card-body .relations .tag.goods-t  { border-color: var(--goods); color: var(--goods); }
+  .card-body .relations .tag.event-t  { border-color: var(--event); color: var(--event); }
+
+  /* ── Chain special ── */
+  .card.chain .chain-path {
+    display: flex; align-items: center; flex-wrap: wrap; gap: 6px;
+    font-size: 0.9rem; font-weight: 600; padding: 12px 0;
+  }
+  .card.chain .chain-path .node { padding: 6px 12px; border-radius: 20px; font-size: 0.82rem; }
+  .card.chain .chain-path .node.c { background: rgba(212,168,83,0.15); color: var(--city); }
+  .card.chain .chain-path .node.f { background: rgba(91,155,213,0.15); color: var(--figure); }
+  .card.chain .chain-path .node.g { background: rgba(106,173,106,0.15); color: var(--goods); }
+  .card.chain .chain-path .node.e { background: rgba(199,91,58,0.15); color: var(--event); }
+  .card.chain .chain-path .arrow { color: var(--text-dim); font-size: 0.9rem; }
+
+  /* ── Card Footer ── */
+  .card-footer {
+    padding: 10px 18px; border-top: 1px solid var(--border);
+    font-size: 0.65rem; color: var(--text-dim);
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(0,0,0,0.15);
+  }
+  .card-footer .url { letter-spacing: 0.02em; }
+
+  /* ── Label row ── */
+  .label-row { display: flex; gap: 12px; justify-content: center; margin: 48px 0 16px; }
+  .label-row .lbl { display: flex; align-items: center; gap: 6px; font-size: 0.8rem; color: var(--text-dim); }
+  .label-row .lbl .dot { width: 10px; height: 10px; border-radius: 50%; }
+</style>
+</head>
+<body>
+
+<h1 style="text-align:center;color:var(--accent);font-size:1.1rem;margin-bottom:8px">🐫 丝路知识问答卡片</h1>
+<p style="text-align:center;color:var(--text-dim);font-size:0.78rem;margin-bottom:32px">
+  每张卡片独立可用 · 右键保存或截图 · 每天发一张到社交媒体
+</p>
+
+<div class="label-row">
+  <span class="lbl"><span class="dot" style="background:var(--city)"></span> 城市</span>
+  <span class="lbl"><span class="dot" style="background:var(--figure)"></span> 人物</span>
+  <span class="lbl"><span class="dot" style="background:var(--goods)"></span> 物产</span>
+  <span class="lbl"><span class="dot" style="background:var(--event)"></span> 事件</span>
+  <span class="lbl"><span class="dot" style="background:var(--chain)"></span> 关系链</span>
+</div>
+
+<div id="app"></div>
+
+<script>
+const DATA_URL = 'data/silk-road.json';
+
+const ICONS = {
+  city: '🏙️', figure: '👤', goods: '📦', event: '⚡', chain: '🔗'
+};
+const TYPE_LABEL = {
+  city: '丝路之城', figure: '丝路人物', goods: '丝路物产', event: '历史时刻', chain: '关系链'
+};
+const TYPE_LABEL_EN = {
+  city: 'Silk Road City', figure: 'Silk Road Figure', goods: 'Silk Road Goods', event: 'Historical Event', chain: 'Connection Chain'
+};
+
+function starRow(n) {
+  let html = '<div class="significance">';
+  for (let i = 0; i < 5; i++) html += `<span class="star${i >= n ? ' dim' : ''}">★</span>`;
+  return html + '</div>';
+}
+
+function getRelated(nodeId, allNodes, edges) {
+  const related = [];
+  const seen = new Set();
+  edges.filter(e => e.source === nodeId || e.target === nodeId).forEach(e => {
+    const oid = e.source === nodeId ? e.target : e.source;
+    if (seen.has(oid)) return; seen.add(oid);
+    for (const [type, items] of Object.entries(allNodes)) {
+      const n = items.find(i => i.id === oid);
+      if (n) { related.push({ name: n.name, type: type.slice(0, -1), rel: e.relation }); break; }
+    }
+  });
+  return related.slice(0, 6);
+}
+
+function buildCityCard(d, related) {
+  return `
+    <div class="card city">
+      <div class="card-header">
+        <span class="type-badge">🏙️ 丝路之城 · Silk Road City</span>
+        ${starRow(d.significance)}
+      </div>
+      <div class="card-body">
+        <div class="icon">🏙️</div>
+        <div class="name">${d.name}</div>
+        <div class="name-en">${d.name_en} · 今 ${d.modern_name}</div>
+        <div class="subtitle">
+          <span>📍 ${d.country}</span>
+          <span style="margin-left:12px">📅 ${d.era}</span>
+          <span style="margin-left:12px">🎯 <span class="label">${d.role}</span></span>
+        </div>
+        <div class="desc">${d.description}</div>
+        ${related.length ? `
+        <div class="relations">
+          ${related.map(r => `<span class="tag ${r.type}-t">${r.name} · ${r.rel}</span>`).join('')}
+        </div>` : ''}
+      </div>
+      <div class="card-footer">
+        <span>🐫 丝绸之路交互知识图谱</span>
+        <span class="url">scarlettlab2026.github.io/silk-road-2026</span>
+      </div>
+    </div>`;
+}
+
+function buildFigureCard(d, related) {
+  return `
+    <div class="card figure">
+      <div class="card-header">
+        <span class="type-badge">👤 丝路人物 · Silk Road Figure</span>
+        ${starRow(d.significance)}
+      </div>
+      <div class="card-body">
+        <div class="icon">👤</div>
+        <div class="name">${d.name}</div>
+        <div class="name-en">${d.name_en}</div>
+        <div class="subtitle">
+          <span>📋 <span class="label">${d.type}</span></span>
+          <span style="margin-left:12px">📅 ${d.era_range || d.era || ''}</span>
+        </div>
+        <div class="desc">${d.description}</div>
+        ${related.length ? `
+        <div class="relations">
+          ${related.map(r => `<span class="tag ${r.type}-t">${r.name} · ${r.rel}</span>`).join('')}
+        </div>` : ''}
+      </div>
+      <div class="card-footer">
+        <span>🐫 丝绸之路交互知识图谱</span>
+        <span class="url">scarlettlab2026.github.io/silk-road-2026</span>
+      </div>
+    </div>`;
+}
+
+function buildGoodsCard(d, related) {
+  return `
+    <div class="card goods">
+      <div class="card-header">
+        <span class="type-badge">📦 丝路物产 · Silk Road Goods</span>
+        ${starRow(d.significance)}
+      </div>
+      <div class="card-body">
+        <div class="icon">📦</div>
+        <div class="name">${d.name}</div>
+        <div class="name-en">${d.name_en}</div>
+        <div class="subtitle">
+          <span>📂 ${d.category}</span>
+          <span style="margin-left:12px">🏠 起源: ${d.origin}</span>
+          <span style="margin-left:12px">🧭 ${d.direction}</span>
+        </div>
+        <div class="desc">${d.description}</div>
+        ${related.length ? `
+        <div class="relations">
+          ${related.map(r => `<span class="tag ${r.type}-t">${r.name} · ${r.rel}</span>`).join('')}
+        </div>` : ''}
+      </div>
+      <div class="card-footer">
+        <span>🐫 丝绸之路交互知识图谱</span>
+        <span class="url">scarlettlab2026.github.io/silk-road-2026</span>
+      </div>
+    </div>`;
+}
+
+function buildEventCard(d, related) {
+  return `
+    <div class="card event">
+      <div class="card-header">
+        <span class="type-badge">⚡ 历史时刻 · Historical Event</span>
+        ${starRow(d.significance)}
+      </div>
+      <div class="card-body">
+        <div class="icon">⚡</div>
+        <div class="name">${d.name}</div>
+        <div class="name-en">${d.name_en}</div>
+        <div class="subtitle">
+          <span>📅 ${d.display_year || d.year || ''}</span>
+          <span style="margin-left:12px">🏛 ${d.dynasty || ''}</span>
+        </div>
+        <div class="desc">${d.description}</div>
+        ${related.length ? `
+        <div class="relations">
+          ${related.map(r => `<span class="tag ${r.type}-t">${r.name} · ${r.rel}</span>`).join('')}
+        </div>` : ''}
+      </div>
+      <div class="card-footer">
+        <span>🐫 丝绸之路交互知识图谱</span>
+        <span class="url">scarlettlab2026.github.io/silk-road-2026</span>
+      </div>
+    </div>`;
+}
+
+function buildChainCard(title, titleEn, desc, chainNodes, chainEdges) {
+  const nodeMap = {};
+  chainNodes.forEach(n => { nodeMap[n.id] = n; });
+  const pathHtml = chainNodes.map((n, i) => {
+    let cls = 'c';
+    if (n.type === 'figure') cls = 'f';
+    else if (n.type === 'goods') cls = 'g';
+    else if (n.type === 'event') cls = 'e';
+    return (i > 0 ? `<span class="arrow">→</span>` : '') + `<span class="node ${cls}">${n.icon || ''} ${n.name}</span>`;
+  }).join('');
+
+  const tagHtml = chainNodes.map(n => {
+    let cls = 'c';
+    if (n.type === 'figure') cls = 'f';
+    else if (n.type === 'goods') cls = 'g';
+    else if (n.type === 'event') cls = 'e';
+    return `<span class="tag ${cls}-t">${n.name}</span>`;
+  }).join('');
+
+  return `
+    <div class="card chain">
+      <div class="card-header">
+        <span class="type-badge">🔗 关系链 · Connection Chain</span>
+        ${starRow(4)}
+      </div>
+      <div class="card-body">
+        <div class="icon">🔗</div>
+        <div class="name">${title}</div>
+        <div class="name-en">${titleEn}</div>
+        <div class="chain-path">${pathHtml}</div>
+        <div class="desc">${desc}</div>
+        <div class="relations">${tagHtml}</div>
+      </div>
+      <div class="card-footer">
+        <span>🐫 丝绸之路交互知识图谱</span>
+        <span class="url">scarlettlab2026.github.io/silk-road-2026</span>
+      </div>
+    </div>`;
+}
+
+function buildAllCards(DATA) {
+  const allNodes = {
+    cities: DATA.nodes.cities,
+    figures: DATA.nodes.figures,
+    goods: DATA.nodes.goods,
+    events: DATA.nodes.events
+  };
+  const edges = DATA.edges;
+  let html = '';
+
+  // ── 城市卡片: significance >= 4 ──
+  html += '<h2>🏙️ 城市卡片</h2><div class="card-grid">';
+  DATA.nodes.cities.filter(c => c.significance >= 4).forEach(c => {
+    const rel = getRelated(c.id, allNodes, edges);
+    html += buildCityCard(c, rel);
+  });
+  html += '</div>';
+
+  // ── 人物卡片: significance >= 4 ──
+  html += '<h2>👤 人物卡片</h2><div class="card-grid">';
+  DATA.nodes.figures.filter(f => f.significance >= 4).forEach(f => {
+    const rel = getRelated(f.id, allNodes, edges);
+    html += buildFigureCard(f, rel);
+  });
+  html += '</div>';
+
+  // ── 物产卡片: significance >= 4 ──
+  html += '<h2>📦 物产卡片</h2><div class="card-grid">';
+  DATA.nodes.goods.filter(g => g.significance >= 4).forEach(g => {
+    const rel = getRelated(g.id, allNodes, edges);
+    html += buildGoodsCard(g, rel);
+  });
+  html += '</div>';
+
+  // ── 事件卡片: significance >= 4 ──
+  html += '<h2>⚡ 事件卡片</h2><div class="card-grid">';
+  DATA.nodes.events.filter(e => e.significance >= 4).forEach(e => {
+    const rel = getRelated(e.id, allNodes, edges);
+    html += buildEventCard(e, rel);
+  });
+  html += '</div>';
+
+  // ── 关系链卡片 ──
+  html += '<h2>🔗 关系链卡片</h2><div class="card-grid">';
+
+  // 链1: 张骞凿空西域
+  html += buildChainCard(
+    '张骞凿空西域',
+    'Zhang Qian Opens the Western Regions',
+    '公元前138年，汉武帝派张骞出使西域。被匈奴扣留十年后逃脱，最终抵达大宛、大月氏，带回葡萄、苜蓿、大宛马。司马迁称之为"凿空"——打通了中国通往西域的大门。',
+    [
+      {id:'zhang-qian', name:'张骞', type:'figure', icon:'👤'},
+      {id:'han-wudi', name:'汉武帝', type:'figure', icon:'👤'},
+      {id:'dayuan', name:'大宛', type:'city', icon:'🏙️'},
+      {id:'alfalfa', name:'苜蓿', type:'goods', icon:'📦'},
+    ]
+  );
+
+  // 链2: 造纸术西传
+  html += buildChainCard(
+    '造纸术的西传之路',
+    'Paper Travels West',
+    '公元751年怛罗斯之战，唐军战败，被俘的造纸工匠将技术传入撒马尔罕。此后造纸术经巴格达传入阿拉伯世界，最终在12世纪抵达欧洲——改变了人类文明的进程。',
+    [
+      {id:'paper', name:'造纸术', type:'goods', icon:'📦'},
+      {id:'battle-of-talas', name:'怛罗斯之战', type:'event', icon:'⚡'},
+      {id:'samarkand', name:'撒马尔罕', type:'city', icon:'🏙️'},
+      {id:'baghdad', name:'巴格达', type:'city', icon:'🏙️'},
+    ]
+  );
+
+  // 链3: 玄奘西行
+  html += buildChainCard(
+    '玄奘西行取经之路',
+    'Xuanzang\'s Journey to India',
+    '公元629年，玄奘从长安出发，经敦煌、高昌、翻越葱岭，历时17年行程5万里，抵达印度那烂陀寺取经。归来后著《大唐西域记》，成为研究丝路历史的第一手资料。',
+    [
+      {id:'xuanzang', name:'玄奘', type:'figure', icon:'👤'},
+      {id:'dunhuang', name:'敦煌', type:'city', icon:'🏙️'},
+      {id:'kashgar', name:'喀什', type:'city', icon:'🏙️'},
+      {id:'samarkand', name:'撒马尔罕', type:'city', icon:'🏙️'},
+      {id:'xuanzang-journey', name:'玄奘西行', type:'event', icon:'⚡'},
+    ]
+  );
+
+  // 链4: 丝绸 → 罗马
+  html += buildChainCard(
+    '从长安到罗马：一条丝线的旅程',
+    'From Chang\'an to Rome: Journey of Silk',
+    '丝绸从长安出发，穿越河西走廊、塔里木盆地、翻越帕米尔高原，经波斯到达罗马帝国。罗马贵族疯狂追捧，凯撒曾披丝绸出现在剧场引起轰动。罗马元老院因黄金大量外流多次下令禁止穿丝绸——但从未奏效。',
+    [
+      {id:'silk', name:'丝绸', type:'goods', icon:'📦'},
+      {id:'changan', name:'长安', type:'city', icon:'🏙️'},
+      {id:'samarkand', name:'撒马尔罕', type:'city', icon:'🏙️'},
+      {id:'baghdad', name:'巴格达', type:'city', icon:'🏙️'},
+    ]
+  );
+
+  // 链5: 佛教东传
+  html += buildChainCard(
+    '佛教东传路线',
+    'Buddhism Travels East',
+    '佛教从印度经犍陀罗传入西域，沿丝路东渐。鸠摩罗什在长安翻译佛经，玄奘西行取经归来，法显写下《佛国记》。佛教的传入深刻改变了中国的哲学、艺术和日常生活。今天看到的莫高窟壁画，正是这场千年传播的结晶。',
+    [
+      {id:'buddhism', name:'佛教', type:'goods', icon:'📦'},
+      {id:'dunhuang', name:'敦煌', type:'city', icon:'🏙️'},
+      {id:'changan', name:'长安', type:'city', icon:'🏙️'},
+      {id:'kumarajiva', name:'鸠摩罗什', type:'figure', icon:'👤'},
+    ]
+  );
+
+  // 链6: 马可波罗东游
+  html += buildChainCard(
+    '马可·波罗的东方之旅',
+    'Marco Polo\'s Journey to the East',
+    '1271年，17岁的马可·波罗随父亲从威尼斯出发，经君士坦丁堡、巴格达、喀什抵达元大都，在中国生活17年后返回。他的游记《马可·波罗行纪》让欧洲第一次真切地了解了东方——哥伦布航海时随身携带的就是这本书。',
+    [
+      {id:'marco-polo', name:'马可·波罗', type:'figure', icon:'👤'},
+      {id:'kashgar', name:'喀什', type:'city', icon:'🏙️'},
+      {id:'dunhuang', name:'敦煌', type:'city', icon:'🏙️'},
+      {id:'constantinople', name:'君士坦丁堡', type:'city', icon:'🏙️'},
+    ]
+  );
+
+  html += '</div>';
+
+  // ── Total count ──
+  const cityCount = DATA.nodes.cities.filter(c => c.significance >= 4).length;
+  const figCount = DATA.nodes.figures.filter(f => f.significance >= 4).length;
+  const goodsCount = DATA.nodes.goods.filter(g => g.significance >= 4).length;
+  const eventCount = DATA.nodes.events.filter(e => e.significance >= 4).length;
+  const total = cityCount + figCount + goodsCount + eventCount + 6;
+
+  html += `<div style="text-align:center;padding:32px;color:var(--accent);font-size:0.95rem">
+    ✅ ${total} 张知识卡片准备完毕<br>
+    <small style="color:var(--text-dim)">
+      🏙️ ${cityCount} 城市 · 👤 ${figCount} 人物 · 📦 ${goodsCount} 物产 · ⚡ ${eventCount} 事件 · 🔗 6 关系链
+    </small><br>
+    <small style="color:var(--text-dim);margin-top:8px;display:block">
+      💡 右键每张卡片 → 复制图片/截图 → 每天发一张到小红书/知乎
+    </small>
+  </div>`;
+
+  document.getElementById('app').innerHTML = html;
+}
+
+fetch(DATA_URL).then(r => r.json()).then(buildAllCards);
+</script>
+</body>
+</html>
