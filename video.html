@@ -67,6 +67,51 @@ const cv = document.getElementById('cv');
 cv.width = W; cv.height = H;
 const ctx = cv.getContext('2d');
 
+// ── Audio setup ──
+const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+const audioDest = audioCtx.createMediaStreamDestination();
+const audioBuffers = {};
+const AUDIO_FILES = {
+  'title': 'audio/title.aiff',
+  'silk-westward': 'audio/silk-westward.aiff',
+  'paper-westward': 'audio/paper-westward.aiff',
+  'buddhism-eastward': 'audio/buddhism-eastward.aiff',
+  'compass-maritime': 'audio/compass-maritime.aiff',
+  'spice-eastward': 'audio/spice-eastward.aiff',
+  'porcelain-maritime': 'audio/porcelain-maritime.aiff',
+  'gunpowder-westward': 'audio/gunpowder-westward.aiff',
+  'tea-route': 'audio/tea-route.aiff',
+  'closing': 'audio/closing.aiff'
+};
+let audioLoaded = false;
+
+async function preloadAudio() {
+  const entries = Object.entries(AUDIO_FILES);
+  for (const [id, url] of entries) {
+    try {
+      const resp = await fetch(url);
+      const buf = await resp.arrayBuffer();
+      audioBuffers[id] = await audioCtx.decodeAudioData(buf);
+    } catch (e) {
+      console.warn('Audio load failed:', id, e.message);
+    }
+  }
+  audioLoaded = true;
+  document.getElementById('status').textContent = '✅ 数据+配音就绪 · 1920×1080 · 30fps';
+}
+
+function playAudio(id) {
+  if (!audioBuffers[id]) return;
+  const source = audioCtx.createBufferSource();
+  source.buffer = audioBuffers[id];
+  source.connect(audioCtx.destination); // monitoring
+  source.connect(audioDest);            // recording
+  source.start();
+}
+
+// Kick off audio preload immediately
+preloadAudio();
+
 // ── Projection ──
 const MAP_PAD = { top: 140, bottom: 140, left: 100, right: 100 };
 const MAP_W = W - MAP_PAD.left - MAP_PAD.right;
@@ -451,8 +496,8 @@ function drawClosingCard() {
 // ── Animation loop (full auto-play sequence) ──
 const PHASE_TITLE = 0, PHASE_ROUTE = 1, PHASE_CLOSING = 2, PHASE_DONE = 3;
 let phase = PHASE_TITLE;
-let phaseStart = 0;
 let fullStartTime = 0;
+let audioPlayedForPhase = false;
 const TITLE_DURATION = 4000;
 const CLOSING_DURATION = 5000;
 
@@ -464,28 +509,37 @@ function animLoop(timestamp) {
 
   if (phase === PHASE_TITLE) {
     drawTitleCard('丝路上的八条生命线');
+    if (!audioPlayedForPhase) { playAudio('title'); audioPlayedForPhase = true; }
     if (elapsed >= TITLE_DURATION) {
       phase = PHASE_ROUTE;
       currentRouteIdx = 0;
       fullStartTime = timestamp;
+      audioPlayedForPhase = false;
     }
   } else if (phase === PHASE_ROUTE) {
     const routeElapsed = timestamp - fullStartTime;
     routeProgress = Math.min(routeElapsed / ROUTE_DURATION, 1);
     drawFrame(currentRouteIdx, routeProgress);
 
+    if (!audioPlayedForPhase && routeDataCache[currentRouteIdx]) {
+      playAudio(routeDataCache[currentRouteIdx].route.id);
+      audioPlayedForPhase = true;
+    }
+
     if (routeProgress >= 1) {
-      // Move to next route or closing
       currentRouteIdx++;
       if (currentRouteIdx >= routeDataCache.length) {
         phase = PHASE_CLOSING;
         fullStartTime = timestamp;
+        audioPlayedForPhase = false;
       } else {
         fullStartTime = timestamp;
+        audioPlayedForPhase = false;
       }
     }
   } else if (phase === PHASE_CLOSING) {
     drawClosingCard();
+    if (!audioPlayedForPhase) { playAudio('closing'); audioPlayedForPhase = true; }
     if (elapsed >= CLOSING_DURATION) {
       phase = PHASE_DONE;
       playing = false;
@@ -557,12 +611,19 @@ async function startRecording() {
   if (!routeDataCache.length) prepareRouteData();
   if (!routeDataCache.length) return;
 
-  const stream = cv.captureStream(30);
-  const mimeType = MediaRecorder.isTypeSupported('video/webm;codecs=vp9')
-    ? 'video/webm;codecs=vp9' : 'video/webm';
+  // Resume audio context (must be after user gesture)
+  if (audioCtx.state === 'suspended') await audioCtx.resume();
+
+  const canvasStream = cv.captureStream(30);
+  const combinedStream = new MediaStream([
+    ...canvasStream.getVideoTracks(),
+    ...audioDest.stream.getAudioTracks()
+  ]);
+  const mimeType = MediaRecorder.isTypeSupported('video/webm;codecs=vp9,opus')
+    ? 'video/webm;codecs=vp9,opus' : 'video/webm';
 
   recordedChunks = [];
-  mediaRecorder = new MediaRecorder(stream, { mimeType, videoBitsPerSecond: 5000000 });
+  mediaRecorder = new MediaRecorder(combinedStream, { mimeType, videoBitsPerSecond: 5000000, audioBitsPerSecond: 128000 });
   mediaRecorder.ondataavailable = e => { if (e.data.size > 0) recordedChunks.push(e.data); };
   mediaRecorder.onstop = () => {
     const blob = new Blob(recordedChunks, { type: 'video/webm' });
@@ -589,6 +650,7 @@ async function startRecording() {
   currentRouteIdx = 0;
   routeProgress = 0;
   fullStartTime = 0;
+  audioPlayedForPhase = false;
   updateButtons();
   animLoop(performance.now());
 }
@@ -600,16 +662,26 @@ function stopRecording() {
 }
 
 // ── Init ──
-fetch('data/silk-road.json').then(r => r.json()).then(d => {
+fetch('data/silk-road.json').then(r => r.json()).then(async d => {
   DATA = d;
   buildRouteSelect();
   prepareRouteData();
-  // Draw first route as preview
   if (routeDataCache.length > 0) {
     currentRouteIdx = 0;
     drawFrame(0, 0);
   }
-  document.getElementById('status').textContent = '✅ 数据就绪 · 1920×1080 · 30fps';
+  if (!audioLoaded) {
+    document.getElementById('status').textContent = '加载配音中...';
+    // wait for preload
+    let waited = 0;
+    while (!audioLoaded && waited < 10000) {
+      await new Promise(r => setTimeout(r, 200));
+      waited += 200;
+    }
+  }
+  document.getElementById('status').textContent = audioLoaded
+    ? '✅ 数据+配音就绪 · 1920×1080 · 30fps'
+    : '⚠️ 配音加载失败 · 将录制无声视频';
 });
 
 // Keyboard shortcuts
