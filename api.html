@@ -160,7 +160,7 @@
 </head>
 <body>
 
-<h1>🐫 丝路知识图谱 <span class="sub">Data API v0.3.0</span></h1>
+<h1>🐫 丝路知识图谱 <span class="sub">Data API v0.4.0</span></h1>
 <p style="color:var(--text-dim);font-size:0.85rem">
   开放、结构化的丝绸之路数据集。单一 JSON 端点，零认证，自由使用。
 </p>
@@ -214,7 +214,7 @@
 
 <span class="hljs-comment"># 获取所有城市</span>
 <span class="hljs-property">cities</span> = <span class="hljs-property">data</span>[<span class="hljs-string">"nodes"</span>][<span class="hljs-string">"cities"</span>]
-<span class="hljs-function">print</span>(<span class="hljs-function">len</span>(<span class="hljs-property">cities</span>))  <span class="hljs-comment"># 19</span>
+<span class="hljs-function">print</span>(<span class="hljs-function">len</span>(<span class="hljs-property">cities</span>))  <span class="hljs-comment"># 28</span>
 
 <span class="hljs-comment"># 按朝代筛选</span>
 <span class="hljs-property">tang_cities</span> = [<span class="hljs-property">c</span> <span class="hljs-keyword">for</span> <span class="hljs-property">c</span> <span class="hljs-keyword">in</span> <span class="hljs-property">cities</span> <span class="hljs-keyword">if</span> <span class="hljs-string">"唐"</span> <span class="hljs-keyword">in</span> <span class="hljs-property">c</span>.<span class="hljs-function">get</span>(<span class="hljs-string">"dynasties"</span>, [])]
@@ -233,7 +233,7 @@
   <tr><th>字段</th><th>类型</th><th>说明</th></tr>
   <tr><td>meta</td><td><span class="type-tag type-string">object</span></td><td>数据集元信息（标题、版本、更新时间）</td></tr>
   <tr><td>nodes</td><td><span class="type-tag type-string">object</span></td><td>四类实体节点</td></tr>
-  <tr><td>edges</td><td><span class="type-tag type-array">array</span></td><td>104 条关系边</td></tr>
+  <tr><td>edges</td><td><span class="type-tag type-array">array</span></td><td>159 条关系边</td></tr>
 </table>
 
 <h3>🏙️ 城市节点</h3>
