@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>丝路知识图谱 · 截图用</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<style>
+  :root {
+    --bg: #1a1a1f; --panel-bg: #222228; --text: #e0ddd5;
+    --text-dim: #9a9790; --accent: #d4a853; --border: #333338;
+    --city: #d4a853; --figure: #5b9bd5; --goods: #6aad6a; --event: #c75b3a;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background: #111; color: var(--text); font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; padding: 24px; }
+  h2 { text-align: center; font-size: 1rem; color: var(--accent); margin-bottom: 12px; letter-spacing: 0.1em; }
+  .frame {
+    background: var(--panel-bg); border-radius: 12px; overflow: hidden;
+    margin-bottom: 32px; box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+  }
+  .frame-label {
+    background: rgba(0,0,0,0.3); padding: 8px 16px; font-size: 0.75rem;
+    color: var(--text-dim); display: flex; align-items: center; gap: 8px;
+  }
+  .frame-label .num { background: var(--accent); color: #111; width: 20px; height: 20px; border-radius: 50%; text-align: center; font-weight: 700; font-size: 0.7rem; line-height: 20px; }
+
+  /* Map */
+  #map1, #map3, #map5 { height: 500px; }
+  #map1 .leaflet-container, #map3 .leaflet-container, #map5 .leaflet-container { background: #1a1a1f; }
+
+  /* Timeline */
+  .mini-timeline {
+    display: flex; gap: 4px; padding: 10px 16px;
+    border-top: 1px solid var(--border); overflow-x: auto;
+    background: var(--panel-bg);
+  }
+  .mini-timeline .tick {
+    padding: 4px 10px; border-radius: 4px; font-size: 0.7rem;
+    cursor: default; color: var(--text-dim); flex-shrink: 0;
+  }
+  .mini-timeline .tick.hl { background: var(--accent); color: #111; font-weight: 700; }
+
+  /* Sidebar */
+  .sidebar-mini {
+    display: flex; gap: 8px; padding: 10px 16px;
+    border-top: 1px solid var(--border); flex-wrap: wrap;
+  }
+  .sidebar-mini .card {
+    padding: 6px 12px; border-radius: 6px; font-size: 0.73rem;
+    border-left: 3px solid transparent; background: rgba(255,255,255,0.03);
+  }
+  .sidebar-mini .card.c { border-left-color: var(--city); }
+  .sidebar-mini .card.f { border-left-color: var(--figure); }
+  .sidebar-mini .card.g { border-left-color: var(--goods); }
+  .sidebar-mini .card.e { border-left-color: var(--event); }
+
+  /* Graph */
+  #graph2 { height: 500px; background: var(--bg); position: relative; }
+  #graph2 svg { width: 100%; height: 100%; }
+
+  /* Legend */
+  .legend-row {
+    display: flex; gap: 16px; padding: 8px 16px; font-size: 0.72rem;
+    border-top: 1px solid var(--border); background: var(--panel-bg);
+  }
+  .legend-row span { display: flex; align-items: center; gap: 5px; }
+  .legend-row .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+
+  /* Detail card */
+  .detail-card {
+    padding: 16px; border-top: 1px solid var(--border);
+    background: var(--panel-bg);
+  }
+  .detail-card h3 { font-size: 1rem; margin-bottom: 4px; }
+  .detail-card .meta { font-size: 0.75rem; color: var(--text-dim); margin-bottom: 8px; }
+  .detail-card p { font-size: 0.82rem; line-height: 1.7; }
+
+  /* English labels */
+  .en-labels .leaflet-tooltip { font-family: inherit; }
+</style>
+</head>
+<body>
+
+<h2>🐫 丝绸之路 · 小红书截图套件（5张）</h2>
+
+<!-- ====== 图1: 地图全景 ====== -->
+<div class="frame">
+  <div class="frame-label"><span class="num">1</span> 🗺️ 地图全景 —— 丝路从长安到罗马</div>
+  <div id="map1"></div>
+</div>
+
+<!-- ====== 图2: 关系网络图 ====== -->
+<div class="frame">
+  <div class="frame-label"><span class="num">2</span> 🕸️ 关系网络图 —— 所有人、地、物、事关联</div>
+  <div id="graph2"></div>
+  <div class="legend-row" id="legend2"></div>
+</div>
+
+<!-- ====== 图3: 敦煌详情 ====== -->
+<div class="frame">
+  <div class="frame-label"><span class="num">3</span> 🏯 点击敦煌 —— 城市详情 + 关联关系</div>
+  <div id="map3"></div>
+  <div class="detail-card" id="detail3"></div>
+</div>
+
+<!-- ====== 图4: 唐代时间轴 ====== -->
+<div class="frame">
+  <div class="frame-label"><span class="num">4</span> ⏳ 点击「唐」—— 唐代丝路：玄奘西行、怛罗斯之战、安史之乱</div>
+  <div id="map4" style="height:420px"></div>
+  <div class="mini-timeline">
+    <span class="tick">汉</span><span class="tick hl">唐</span><span class="tick">宋</span><span class="tick">元</span><span class="tick">明</span>
+  </div>
+  <div class="sidebar-mini" id="tangCards"></div>
+</div>
+
+<!-- ====== 图5: 英文切换 ====== -->
+<div class="frame">
+  <div class="frame-label"><span class="num">5</span> 🔤 英文模式 —— 双语支持，让世界看到中国故事</div>
+  <div id="map5"></div>
+  <div class="mini-timeline" style="border-bottom: 1px solid var(--border)">
+    <span class="tick">Han</span><span class="tick hl">Tang</span><span class="tick">Yuan</span><span class="tick">Ming</span>
+  </div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script>
+const DATA_URL = 'data/silk-road.json';
+
+fetch(DATA_URL).then(r => r.json()).then(DATA => {
+  const colors = { city: '#d4a853', figure: '#5b9bd5', goods: '#6aad6a', event: '#c75b3a' };
+  const radius = { city: 7, figure: 6, goods: 5, event: 5 };
+
+  function get(d, key) { return d[key] || ''; }
+
+  // ─── 图1: 地图全景 ───
+  const map1 = L.map('map1', { zoomControl: false, attributionControl: false }).setView([39, 72], 3.6);
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', { maxZoom: 13 }).addTo(map1);
+  DATA.nodes.cities.forEach(c => {
+    L.circleMarker([c.lat, c.lng], { radius: 7, fillColor: colors.city, color: '#222', weight: 1.5, fillOpacity: 0.9 })
+      .bindTooltip(c.name, { direction: 'top', offset: [0, -6] }).addTo(map1);
+  });
+  DATA.edges.forEach(e => {
+    const s = DATA.nodes.cities.find(c => c.id === e.source);
+    const t = DATA.nodes.cities.find(c => c.id === e.target);
+    if (s && t) L.polyline([[s.lat,s.lng],[t.lat,t.lng]], { color: 'rgba(212,168,83,0.25)', weight: 1.2, dashArray: '4 6' }).addTo(map1);
+  });
+
+  // ─── 图2: 关系网络图 ───
+  const W2 = 1200, H2 = 500;
+  const svg2 = d3.select('#graph2').append('svg').attr('viewBox', [0, 0, W2, H2]);
+  const g2 = svg2.append('g');
+  const nodes2 = [], nodeMap2 = {};
+  ['cities','figures','goods','events'].forEach(type => {
+    const s = type.slice(0,-1);
+    DATA.nodes[type].forEach(d => {
+      const n = { id: d.id, type: s, name: d.name, significance: d.significance||3, color: colors[s], r: radius[s] };
+      nodes2.push(n); nodeMap2[d.id] = n;
+    });
+  });
+  const links2 = DATA.edges.map(e => {
+    const s = nodeMap2[e.source], t = nodeMap2[e.target];
+    return s && t ? { source: e.source, target: e.target } : null;
+  }).filter(Boolean);
+
+  d3.forceSimulation(nodes2)
+    .force('link', d3.forceLink(links2).id(d => d.id).distance(55))
+    .force('charge', d3.forceManyBody().strength(-180))
+    .force('center', d3.forceCenter(W2/2, H2/2))
+    .force('collision', d3.forceCollide().radius(d => d.r+3))
+    .on('tick', () => {
+      g2.selectAll('line').data(links2).join('line')
+        .attr('x1', d => d.source.x).attr('y1', d => d.source.y)
+        .attr('x2', d => d.target.x).attr('y2', d => d.target.y)
+        .attr('stroke', 'var(--text-dim)').attr('stroke-opacity', 0.12).attr('stroke-width', 0.8);
+      g2.selectAll('circle.node2').data(nodes2).join('circle').attr('class', 'node2')
+        .attr('cx', d => d.x).attr('cy', d => d.y).attr('r', d => d.r)
+        .attr('fill', d => d.color).attr('stroke', '#1a1a1f').attr('stroke-width', 1.2);
+      g2.selectAll('text.nl').data(nodes2.filter(n => n.significance >= 3)).join('text').attr('class', 'nl')
+        .attr('x', d => d.x + d.r + 3).attr('y', d => d.y + 3)
+        .text(d => d.name.length > 5 ? d.name.slice(0,5)+'…' : d.name)
+        .attr('fill', '#9a9790').attr('font-size', '8px');
+    });
+  document.getElementById('legend2').innerHTML = `
+    <span><span class="dot" style="background:var(--city)"></span> 城市 City</span>
+    <span><span class="dot" style="background:var(--figure)"></span> 人物 Figure</span>
+    <span><span class="dot" style="background:var(--goods)"></span> 物产 Goods</span>
+    <span><span class="dot" style="background:var(--event)"></span> 事件 Event</span>
+  `;
+
+  // ─── 图3: 敦煌详情 ───
+  const map3 = L.map('map3', { zoomControl: false, attributionControl: false }).setView([40.5, 94], 4.5);
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', { maxZoom: 13 }).addTo(map3);
+  DATA.nodes.cities.forEach(c => {
+    const r = c.id === 'dunhuang' ? 11 : 6;
+    const o = c.id === 'dunhuang' ? 1 : 0.5;
+    L.circleMarker([c.lat, c.lng], { radius: r, fillColor: c.id === 'dunhuang' ? '#fff' : colors.city, color: '#222', weight: 1.5, fillOpacity: o })
+      .addTo(map3);
+  });
+  DATA.edges.forEach(e => {
+    const s = DATA.nodes.cities.find(c => c.id === e.source);
+    const t = DATA.nodes.cities.find(c => c.id === e.target);
+    if (s && t) L.polyline([[s.lat,s.lng],[t.lat,t.lng]], { color: 'rgba(212,168,83,0.25)', weight: 1.2, dashArray: '4 6' }).addTo(map3);
+  });
+  const dh = DATA.nodes.cities.find(c => c.id === 'dunhuang');
+  const dhEdges = DATA.edges.filter(e => e.source === 'dunhuang' || e.target === 'dunhuang');
+  const relatedNames = [];
+  dhEdges.forEach(e => {
+    const oid = e.source === 'dunhuang' ? e.target : e.source;
+    ['cities','figures','goods','events'].forEach(t => {
+      const n = DATA.nodes[t].find(n => n.id === oid);
+      if (n && !relatedNames.includes(n.name)) relatedNames.push(n.name + ' · ' + e.relation);
+    });
+  });
+  document.getElementById('detail3').innerHTML = `
+    <h3>🏯 ${dh.name} <span style="font-size:0.8em;color:var(--text-dim)">${dh.name_en}</span></h3>
+    <div class="meta">${dh.country} · ${dh.role} · ${dh.era}</div>
+    <p>${dh.description}</p>
+    <div style="margin-top:10px;display:flex;flex-wrap:wrap;gap:4px">
+      ${relatedNames.slice(0,8).map(r => `<span style="background:rgba(255,255,255,0.05);padding:3px 10px;border-radius:10px;font-size:0.72rem">${r}</span>`).join('')}
+    </div>
+  `;
+
+  // ─── 图4: 唐代时间轴 ───
+  const map4 = L.map('map4', { zoomControl: false, attributionControl: false }).setView([37, 85], 4);
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', { maxZoom: 13 }).addTo(map4);
+  const tangFilter = n => n.dynasties && (n.dynasties.includes('唐') || n.dynasty === '唐');
+  DATA.nodes.cities.filter(c => c.dynasties && c.dynasties.includes('唐')).forEach(c => {
+    L.circleMarker([c.lat, c.lng], { radius: 8, fillColor: colors.city, color: '#222', weight: 1.5, fillOpacity: 0.9 })
+      .bindTooltip(c.name, { direction: 'top' }).addTo(map4);
+  });
+  const tangItems = [];
+  ['figures','events'].forEach(type => {
+    DATA.nodes[type].forEach(n => {
+      if ((n.dynasties && n.dynasties.includes('唐')) || n.dynasty === '唐' || n.era?.includes('唐')) tangItems.push(n);
+    });
+  });
+  document.getElementById('tangCards').innerHTML = tangItems.slice(0,8).map(n => {
+    const t = n.type ? 'f' : 'e';
+    const label = n.type || (n.dynasty || '事件');
+    const yr = n.display_year || n.era_range || n.era || '';
+    return `<div class="card ${t}"><strong>${n.name}</strong> <small style="color:var(--text-dim)">${label}</small><br><small style="color:var(--text-dim)">${yr}</small></div>`;
+  }).join('');
+
+  // ─── 图5: 英文切换 ───
+  const map5 = L.map('map5', { zoomControl: false, attributionControl: false }).setView([39, 72], 3.6);
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', { maxZoom: 13 }).addTo(map5);
+  DATA.nodes.cities.forEach(c => {
+    L.circleMarker([c.lat, c.lng], { radius: 7, fillColor: colors.city, color: '#222', weight: 1.5, fillOpacity: 0.9 })
+      .bindTooltip(c.name_en || c.name, { direction: 'top', offset: [0, -6] }).addTo(map5);
+  });
+  DATA.edges.forEach(e => {
+    const s = DATA.nodes.cities.find(c => c.id === e.source);
+    const t = DATA.nodes.cities.find(c => c.id === e.target);
+    if (s && t) L.polyline([[s.lat,s.lng],[t.lat,t.lng]], { color: 'rgba(212,168,83,0.25)', weight: 1.2, dashArray: '4 6' }).addTo(map5);
+  });
+
+  // Signal done
+  document.body.insertAdjacentHTML('beforeend', '<div style="text-align:center;padding:20px;color:var(--accent)">✅ 5张截图准备完毕 · 右键保存或用截图工具截取每张</div>');
+
+  // Fix map sizes after load
+  setTimeout(() => { map1.invalidateSize(); map3.invalidateSize(); map4.invalidateSize(); map5.invalidateSize(); }, 500);
+});
+</script>
+</body>
+</html>

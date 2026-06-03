@@ -2,8 +2,8 @@
   "meta": {
     "title": "丝绸之路知识图谱",
     "title_en": "Silk Road Knowledge Graph",
-    "version": "0.3.0",
-    "last_updated": "2026-05-31",
+    "version": "0.4.0",
+    "last_updated": "2026-06-03",
     "description": "一个关于丝绸之路的结构化开放数据集，涵盖城市、人物、物产、事件四大类实体及其关联关系。",
     "description_en": "An open structured dataset about the Silk Road, covering cities, figures, goods, and events and their interconnections."
   },
@@ -20,7 +20,11 @@
         "lat": 34.2608,
         "lng": 108.9398,
         "era": "西汉 — 唐",
-        "dynasties": ["西汉", "隋", "唐"],
+        "dynasties": [
+          "西汉",
+          "隋",
+          "唐"
+        ],
         "role": "东方起点",
         "role_en": "Eastern Terminus",
         "description": "丝绸之路的东方起点，汉唐帝国的都城。从这里出发的商队穿越河西走廊，将丝绸、瓷器、漆器运往西域。",
@@ -38,7 +42,11 @@
         "lat": 34.6197,
         "lng": 112.4539,
         "era": "东汉 — 唐",
-        "dynasties": ["东汉", "北魏", "唐"],
+        "dynasties": [
+          "东汉",
+          "北魏",
+          "唐"
+        ],
         "role": "东方副起点",
         "role_en": "Eastern Secondary Terminus",
         "description": "东汉时期的丝路起点，也是佛教传入中国的重要节点。白马寺是中国第一座佛教寺院。",
@@ -56,7 +64,12 @@
         "lat": 40.1377,
         "lng": 94.6583,
         "era": "汉 — 元",
-        "dynasties": ["汉", "唐", "宋", "元"],
+        "dynasties": [
+          "汉",
+          "唐",
+          "宋",
+          "元"
+        ],
         "role": "咽喉要冲",
         "role_en": "Strategic Gateway",
         "description": "丝路上的璀璨明珠，莫高窟所在地。出敦煌便进入西域，是东西方文明交汇的十字路口。",
@@ -74,7 +87,11 @@
         "lat": 39.4697,
         "lng": 75.9908,
         "era": "汉 — 今",
-        "dynasties": ["汉", "唐", "清"],
+        "dynasties": [
+          "汉",
+          "唐",
+          "清"
+        ],
         "role": "南北道交汇",
         "role_en": "Northern & Southern Route Junction",
         "description": "塔里木盆地西缘的贸易枢纽，天山南路和天山北路的交汇点。至今保留着浓郁的西域风情。",
@@ -92,7 +109,10 @@
         "lat": 39.6542,
         "lng": 66.9597,
         "era": "公元前 — 今",
-        "dynasties": ["粟特", "帖木儿"],
+        "dynasties": [
+          "粟特",
+          "帖木儿"
+        ],
         "role": "中亚心脏",
         "role_en": "Heart of Central Asia",
         "description": "中亚最古老的城市之一，粟特人的商业中心。帖木儿帝国时期达到鼎盛，雷吉斯坦广场见证了丝路最后的辉煌。",
@@ -110,7 +130,9 @@
         "lat": 33.3152,
         "lng": 44.3661,
         "era": "公元8世纪 — 今",
-        "dynasties": ["阿拔斯"],
+        "dynasties": [
+          "阿拔斯"
+        ],
         "role": "西方枢纽",
         "role_en": "Western Hub",
         "description": "阿拔斯王朝首都，智慧宫所在地。中国的造纸术通过丝路传到这里，再由阿拉伯人传往欧洲。",
@@ -128,7 +150,10 @@
         "lat": 41.0082,
         "lng": 28.9784,
         "era": "公元4世纪 — 今",
-        "dynasties": ["拜占庭", "奥斯曼"],
+        "dynasties": [
+          "拜占庭",
+          "奥斯曼"
+        ],
         "role": "欧亚桥梁",
         "role_en": "Eurasian Bridge",
         "description": "丝路西端的终点，连接亚洲与欧洲的黄金之城。中国的丝绸由此进入欧洲贵族的生活。",
@@ -146,7 +171,10 @@
         "lat": 42.8787,
         "lng": 89.6497,
         "era": "汉 — 唐",
-        "dynasties": ["汉", "唐"],
+        "dynasties": [
+          "汉",
+          "唐"
+        ],
         "role": "丝路绿洲",
         "role_en": "Silk Road Oasis",
         "description": "火焰山下的绿洲城市，高昌故城所在地。是佛教从印度经西域传入中原的中转站。",
@@ -164,7 +192,10 @@
         "lat": 40.5167,
         "lng": 89.8333,
         "era": "公元前2世纪 — 公元4世纪",
-        "dynasties": ["汉", "魏晋"],
+        "dynasties": [
+          "汉",
+          "魏晋"
+        ],
         "role": "西域南道门户",
         "role_en": "Gateway to the Southern Route",
         "description": "罗布泊畔的神秘古城，曾是西域三十六国之一。楼兰是丝路南道的必经之地，却在公元4世纪突然消失，成为千古之谜。1900年斯文·赫定重新发现了楼兰遗址。",
@@ -182,7 +213,11 @@
         "lat": 37.1168,
         "lng": 79.9222,
         "era": "公元前 — 今",
-        "dynasties": ["汉", "唐", "宋"],
+        "dynasties": [
+          "汉",
+          "唐",
+          "宋"
+        ],
         "role": "玉石之都",
         "role_en": "City of Jade",
         "description": "塔克拉玛干沙漠南缘的古老王国，以和田玉闻名世界。丝路南道的佛教中心之一，玄奘归途曾在此停留，赞叹当地佛教之盛。",
@@ -200,7 +235,11 @@
         "lat": 37.6627,
         "lng": 62.1764,
         "era": "公元前6世纪 — 公元13世纪",
-        "dynasties": ["波斯", "阿拉伯", "塞尔柱"],
+        "dynasties": [
+          "波斯",
+          "阿拉伯",
+          "塞尔柱"
+        ],
         "role": "中亚绿洲大城",
         "role_en": "Great Oasis City of Central Asia",
         "description": "曾被称为'世界之母'的中亚大城，位于呼罗珊大道上。一度是伊斯兰世界最大的城市之一，拥有宏伟的图书馆和天文台。1221年毁于蒙古西征。",
@@ -218,7 +257,11 @@
         "lat": 39.7747,
         "lng": 64.4286,
         "era": "公元前 — 今",
-        "dynasties": ["粟特", "萨曼", "帖木儿"],
+        "dynasties": [
+          "粟特",
+          "萨曼",
+          "帖木儿"
+        ],
         "role": "粟特商业中心",
         "role_en": "Sogdian Commercial Center",
         "description": "与撒马尔罕齐名的粟特重镇，中亚伊斯兰学术中心。布哈拉的商人网络遍布丝路，是东西方贸易的关键节点。古城至今保存完好。",
@@ -236,7 +279,10 @@
         "lat": 34.3419,
         "lng": 62.2031,
         "era": "公元前 — 今",
-        "dynasties": ["波斯", "帖木儿"],
+        "dynasties": [
+          "波斯",
+          "帖木儿"
+        ],
         "role": "呼罗珊明珠",
         "role_en": "Pearl of Khorasan",
         "description": "呼罗珊地区的文化名城，帖木儿帝国时期的艺术中心。连接伊朗高原与中亚的咽喉，丝路南北两条支线的交汇点。",
@@ -254,7 +300,11 @@
         "lat": 24.8741,
         "lng": 118.6759,
         "era": "唐 — 元",
-        "dynasties": ["唐", "宋", "元"],
+        "dynasties": [
+          "唐",
+          "宋",
+          "元"
+        ],
         "role": "海上丝路起点",
         "role_en": "Maritime Silk Road Hub",
         "description": "宋元时期世界最大的港口之一，海上丝绸之路的起点。马可·波罗和伊本·白图泰都曾到访，称其为'刺桐城'。汇聚了来自波斯、阿拉伯、印度的商人。",
@@ -272,7 +322,11 @@
         "lat": 39.9042,
         "lng": 116.4074,
         "era": "元 — 今",
-        "dynasties": ["元", "明", "清"],
+        "dynasties": [
+          "元",
+          "明",
+          "清"
+        ],
         "role": "东方帝国首都",
         "role_en": "Eastern Imperial Capital",
         "description": "元代称为大都（汗八里），是马可·波罗的目的地。蒙古帝国的东方中心，汇聚了来自丝路各地的使节、商人、工匠和传教士，是当时世界上最繁华的都会。",
@@ -290,7 +344,9 @@
         "lat": 37.9677,
         "lng": 58.1949,
         "era": "公元前3世纪 — 公元3世纪",
-        "dynasties": ["安息（帕提亚）"],
+        "dynasties": [
+          "安息（帕提亚）"
+        ],
         "role": "波斯与东方之间的桥梁",
         "role_en": "Bridge between Persia and the East",
         "description": "帕提亚帝国（安息）的首都之一。安息几乎垄断了丝路中段的贸易，也是唯一阻挡了罗马帝国东扩的东方大国。汉武帝遣使安息，双方建立了最早的丝路外交关系。",
@@ -305,10 +361,13 @@
         "modern_name_en": "Taxila Ruins",
         "country": "巴基斯坦",
         "country_en": "Pakistan",
-        "lat": 33.7460,
+        "lat": 33.746,
         "lng": 72.8396,
         "era": "公元前6世纪 — 公元5世纪",
-        "dynasties": ["孔雀", "贵霜"],
+        "dynasties": [
+          "孔雀",
+          "贵霜"
+        ],
         "role": "犍陀罗文化中心",
         "role_en": "Center of Gandharan Culture",
         "description": "印度次大陆的学问之城，犍陀罗文明的荣光所在。希腊化艺术与佛教信仰在此融合，产生了举世闻名的犍陀罗佛像艺术。玄奘和法显都曾到此求学瞻仰。",
@@ -326,7 +385,9 @@
         "lat": 42.8063,
         "lng": 75.2575,
         "era": "唐",
-        "dynasties": ["唐"],
+        "dynasties": [
+          "唐"
+        ],
         "role": "安西四镇之一",
         "role_en": "One of Four Garrisons of Anxi",
         "description": "唐代安西四镇中最西端的一个，是李白的出生地。碎叶城的设立标志着唐朝势力深入中亚草原，此地也是突厥文化和汉文化交汇的前哨。",
@@ -344,12 +405,221 @@
         "lat": 35.5892,
         "lng": 51.4383,
         "era": "公元前 — 公元13世纪",
-        "dynasties": ["波斯", "阿拉伯", "塞尔柱"],
+        "dynasties": [
+          "波斯",
+          "阿拉伯",
+          "塞尔柱"
+        ],
         "role": "伊朗高原中转站",
         "role_en": "Iranian Plateau Waypoint",
         "description": "位于伊朗高原的古老城市，丝路上连接中亚与美索不达米亚的重要驿站。赖伊的巴扎汇集了来自东西方的商品，也是知识传播的中转地。蒙古西征期间遭到严重破坏。",
         "description_en": "An ancient city on the Iranian plateau, a vital staging post connecting Central Asia with Mesopotamia. Rayy's bazaars gathered goods from East and West alike, and the city also served as a relay for knowledge transmission. It was severely damaged during the Mongol conquests.",
         "significance": 3
+      },
+      {
+        "id": "guangzhou",
+        "name": "广州",
+        "name_en": "Guangzhou (Canton)",
+        "modern_name": "广州",
+        "modern_name_en": "Guangzhou",
+        "country": "中国",
+        "country_en": "China",
+        "lat": 23.1291,
+        "lng": 113.2644,
+        "era": "秦汉 — 今",
+        "dynasties": [
+          "秦",
+          "汉",
+          "唐",
+          "宋",
+          "元",
+          "明",
+          "清"
+        ],
+        "role": "南海门户",
+        "role_en": "Gateway to the South China Sea",
+        "description": "中国最古老的海上贸易港口之一，唐代“广州通海夷道”的起点。阿拉伯、波斯、印度商人云集，市舶司最早在此设立。海上丝路的第一站。",
+        "description_en": "One of China's oldest maritime trading ports and the starting point of the Tang dynasty 'Maritime Passage to Foreign Lands.' Arab, Persian, and Indian merchants gathered here — the first stop on the Maritime Silk Road.",
+        "significance": 5
+      },
+      {
+        "id": "malacca",
+        "name": "马六甲",
+        "name_en": "Malacca",
+        "modern_name": "马六甲",
+        "modern_name_en": "Melaka",
+        "country": "马来西亚",
+        "country_en": "Malaysia",
+        "lat": 2.1896,
+        "lng": 102.2501,
+        "era": "15世纪 — 今",
+        "dynasties": [
+          "明",
+          "清"
+        ],
+        "role": "海峡咽喉",
+        "role_en": "Strait Chokepoint",
+        "description": "马六甲海峡的贸易枢纽，郑和七次下西洋五次在此驻泊。控制着印度洋与太平洋之间的咽喉要道，谁掌握了马六甲，谁就掌握了东西方贸易。",
+        "description_en": "The trading hub of the Malacca Strait — Zheng He anchored here on five of his seven voyages. Controlling the narrow passage between the Indian and Pacific Oceans, whoever held Malacca held the key to East-West trade.",
+        "significance": 5
+      },
+      {
+        "id": "calicut",
+        "name": "卡利卡特",
+        "name_en": "Calicut (Kozhikode)",
+        "modern_name": "科泽科德",
+        "modern_name_en": "Kozhikode",
+        "country": "印度",
+        "country_en": "India",
+        "lat": 11.2588,
+        "lng": 75.7804,
+        "era": "宋 — 明",
+        "dynasties": [
+          "宋",
+          "元",
+          "明"
+        ],
+        "role": "香料海岸",
+        "role_en": "Spice Coast Hub",
+        "description": "印度马拉巴尔海岸的贸易中心，被称为“香料之城”。郑和的船队多次抵达这里，比达·伽马早了近一个世纪。胡椒、豆蔻、肉桂在此集散，运往中国和中东。",
+        "description_en": "The trading center of India's Malabar Coast, known as the 'City of Spices.' Zheng He's fleet arrived here nearly a century before Vasco da Gama. Pepper, cardamom, and cinnamon were collected here and shipped to China and the Middle East.",
+        "significance": 5
+      },
+      {
+        "id": "colombo",
+        "name": "科伦坡",
+        "name_en": "Colombo",
+        "modern_name": "科伦坡",
+        "modern_name_en": "Colombo",
+        "country": "斯里兰卡",
+        "country_en": "Sri Lanka",
+        "lat": 6.9271,
+        "lng": 79.8612,
+        "era": "汉 — 今",
+        "dynasties": [
+          "汉",
+          "唐",
+          "宋",
+          "元",
+          "明"
+        ],
+        "role": "宝石之岛",
+        "role_en": "Isle of Gems",
+        "description": "古称“狮子国”或“锡兰”，以宝石和珍珠闻名。法显归国时在此停留两年，郑和船队在此立碑。印度洋航线的必经补给站。",
+        "description_en": "Known to the ancients as the 'Lion Kingdom' or 'Ceylon,' famed for its gems and pearls. Faxian stayed here for two years on his return journey, and Zheng He erected a stele here. An essential resupply point on the Indian Ocean route.",
+        "significance": 4
+      },
+      {
+        "id": "hormuz",
+        "name": "霍尔木兹",
+        "name_en": "Hormuz",
+        "modern_name": "霍尔木兹",
+        "modern_name_en": "Hormuz",
+        "country": "伊朗",
+        "country_en": "Iran",
+        "lat": 27.0957,
+        "lng": 56.4528,
+        "era": "元 — 明",
+        "dynasties": [
+          "元",
+          "明"
+        ],
+        "role": "波斯湾门户",
+        "role_en": "Persian Gulf Gateway",
+        "description": "波斯湾入口处的贸易岛城，马可·波罗和伊本·白图泰都曾到访。郑和船队第四次至第七次下西洋均在此停泊。中东香料、珍珠、骏马由此运往东方。",
+        "description_en": "An island trading city at the mouth of the Persian Gulf, visited by both Marco Polo and Ibn Battuta. Zheng He's fleet docked here on voyages four through seven. Middle Eastern spices, pearls, and horses were shipped east from here.",
+        "significance": 4
+      },
+      {
+        "id": "aden",
+        "name": "亚丁",
+        "name_en": "Aden",
+        "modern_name": "亚丁",
+        "modern_name_en": "Aden",
+        "country": "也门",
+        "country_en": "Yemen",
+        "lat": 12.8013,
+        "lng": 45.0337,
+        "era": "唐 — 明",
+        "dynasties": [
+          "唐",
+          "宋",
+          "元",
+          "明"
+        ],
+        "role": "红海入口",
+        "role_en": "Red Sea Entrance",
+        "description": "红海与印度洋交汇处的天然良港，乳香和没药的主要出口港。从非洲运来的象牙、黄金、奴隶在此集散，中国瓷器、丝绸由此进入阿拉伯世界。",
+        "description_en": "A natural deep-water harbor where the Red Sea meets the Indian Ocean, and the main export hub for frankincense and myrrh. Ivory, gold, and slaves from Africa were transshipped here, while Chinese porcelain and silk entered the Arab world through this port.",
+        "significance": 4
+      },
+      {
+        "id": "alexandria",
+        "name": "亚历山大",
+        "name_en": "Alexandria",
+        "modern_name": "亚历山大",
+        "modern_name_en": "Alexandria",
+        "country": "埃及",
+        "country_en": "Egypt",
+        "lat": 31.2001,
+        "lng": 29.9187,
+        "era": "公元前 — 今",
+        "dynasties": [
+          "罗马",
+          "拜占庭",
+          "阿拉伯"
+        ],
+        "role": "地中海终点",
+        "role_en": "Mediterranean Terminus",
+        "description": "海上丝绸之路的西端终点。中国货物经印度洋、红海抵达此处，再转运至威尼斯、热那亚和欧洲各地。亚历山大图书馆曾是古代世界最伟大的知识中心。",
+        "description_en": "The western terminus of the Maritime Silk Road. Chinese goods arrived here via the Indian Ocean and Red Sea, then were transshipped to Venice, Genoa, and across Europe. The Library of Alexandria was once the greatest repository of knowledge in the ancient world.",
+        "significance": 5
+      },
+      {
+        "id": "mombasa",
+        "name": "蒙巴萨",
+        "name_en": "Mombasa",
+        "modern_name": "蒙巴萨",
+        "modern_name_en": "Mombasa",
+        "country": "肯尼亚",
+        "country_en": "Kenya",
+        "lat": -4.0435,
+        "lng": 39.6682,
+        "era": "唐 — 明",
+        "dynasties": [
+          "唐",
+          "宋",
+          "元",
+          "明"
+        ],
+        "role": "东非门户",
+        "role_en": "East African Gateway",
+        "description": "海上丝路在非洲的最远到达点之一。郑和船队曾抵达东非海岸，带回长颈鹿（被中国人误认为麒麟）。中国瓷器碎片至今在蒙巴萨海滩上被发现。",
+        "description_en": "One of the farthest points reached by the Maritime Silk Road in Africa. Zheng He's fleet reached the East African coast and brought back a giraffe (mistaken by the Chinese for the mythical qilin). Chinese porcelain shards are still found on Mombasa's beaches to this day.",
+        "significance": 5
+      },
+      {
+        "id": "palembang",
+        "name": "巨港（三佛齐）",
+        "name_en": "Palembang (Srivijaya)",
+        "modern_name": "巨港",
+        "modern_name_en": "Palembang",
+        "country": "印度尼西亚",
+        "country_en": "Indonesia",
+        "lat": -2.9761,
+        "lng": 104.7754,
+        "era": "唐 — 明",
+        "dynasties": [
+          "唐",
+          "宋",
+          "元",
+          "明"
+        ],
+        "role": "南海帝国",
+        "role_en": "South Sea Empire",
+        "description": "三佛齐（室利佛逝）帝国的都城，7至13世纪控制马六甲海峡的超级海上强权。义净在此学习梵文，前往印度取经前在此停留六个月。",
+        "description_en": "Capital of the Srivijaya empire, a maritime superpower that controlled the Malacca Strait from the 7th to 13th centuries. The Chinese monk Yijing studied Sanskrit here, staying for six months before continuing to India.",
+        "significance": 4
       }
     ],
     "figures": [
@@ -532,6 +802,42 @@
         "description": "巴格达智慧宫的波斯学者，'算法'(Algorithm)一词即源自其名。他将印度的十进制计数法和中国的数学知识（通过丝路传入）融会贯通，著《代数学》。没有丝路的知识流动，就没有欧洲近代数学的起点。",
         "description_en": "A Persian scholar at Baghdad's House of Wisdom — the word 'algorithm' derives from his name. He synthesized Indian decimal notation with Chinese mathematical knowledge (transmitted via the Silk Road) and wrote 'Algebra.' Without the Silk Road's flow of knowledge, there would have been no starting point for modern European mathematics.",
         "significance": 4
+      },
+      {
+        "id": "zheng-he-figure",
+        "name": "郑和",
+        "name_en": "Zheng He",
+        "type": "航海家 / 外交使节",
+        "type_en": "Navigator / Diplomat",
+        "era": "明",
+        "era_range": "公元1371-1433年",
+        "description": "明代伟大的航海家，原名马和。七次率领当时世界上最庞大的船队下西洋，航程遍及东南亚、印度、阿拉伯半岛和东非，比哥伦布早了近一个世纪。宝船长约137米，是当时世界上最大的木船。",
+        "description_en": "The great Ming dynasty navigator. He led seven epic voyages across the Indian Ocean, reaching Southeast Asia, India, Arabia, and East Africa — nearly a century before Columbus. His treasure ships were about 137 meters long, the largest wooden vessels of their time.",
+        "significance": 5
+      },
+      {
+        "id": "wang-dayuan",
+        "name": "汪大渊",
+        "name_en": "Wang Dayuan",
+        "type": "旅行家 / 著作家",
+        "type_en": "Traveler / Writer",
+        "era": "元",
+        "era_range": "公元1311-1350年",
+        "description": "元代民间航海家，两次从泉州出发远航，足迹遍布东南亚、印度、阿拉伯和东非。著有《岛夷志略》，记录了220多个国家和地区的地理、物产和风土人情，是中国第一部系统的海外地理著作。",
+        "description_en": "A Yuan dynasty private navigator who sailed twice from Quanzhou, reaching Southeast Asia, India, Arabia, and East Africa. He wrote 'A Brief Account of Island Barbarians,' documenting over 220 countries and regions — China's first systematic work of overseas geography.",
+        "significance": 4
+      },
+      {
+        "id": "zhou-daguan",
+        "name": "周达观",
+        "name_en": "Zhou Daguan",
+        "type": "使节 / 著作家",
+        "type_en": "Envoy / Writer",
+        "era": "元",
+        "era_range": "公元1266-1346年",
+        "description": "元代使节，随使团前往真腊（今柬埔寨），在吴哥居住一年。著有《真腊风土记》，详细记录了吴哥王朝的繁荣景象，是研究吴哥文明的唯一第一手文字史料。",
+        "description_en": "A Yuan dynasty envoy who traveled to Zhenla (modern Cambodia) and lived in Angkor for a year. His book 'The Customs of Cambodia' provides the only first-hand written account of the Angkor civilization at its height.",
+        "significance": 3
       }
     ],
     "goods": [
@@ -730,6 +1036,76 @@
         "description": "粟特工匠制作的精美金银器，融合波斯、希腊和草原艺术风格。通过粟特商人传入唐朝，深受贵族喜爱，影响了唐代金银器的风格。粟特银器是丝路多元文化融合的典型物质见证。",
         "description_en": "Exquisite gold and silver vessels crafted by Sogdian artisans, blending Persian, Greek, and steppe artistic traditions. Brought to Tang China by Sogdian merchants, they were prized by the nobility and profoundly influenced Tang metalwork. Sogdian silver is a tangible testament to the Silk Road's multicultural fusion.",
         "significance": 3
+      },
+      {
+        "id": "frankincense",
+        "name": "乳香",
+        "name_en": "Frankincense",
+        "category": "香料",
+        "category_en": "Spice / Aromatic",
+        "origin": "阿拉伯半岛 / 东非",
+        "origin_en": "Arabian Peninsula / East Africa",
+        "direction": "东传",
+        "direction_en": "Eastward",
+        "description": "从乳香树的树脂中提取的珍贵香料，用于宗教仪式、医药和化妆品。主要产于阿曼、也门和索马里，通过海上丝路大量输入中国。宋代香药贸易中乳香占据最大份额。",
+        "description_en": "A precious aromatic resin from the Boswellia tree, used in religious ceremonies, medicine, and cosmetics. Mainly produced in Oman, Yemen, and Somalia, it was imported in vast quantities to China via the Maritime Silk Road — frankincense dominated Song dynasty incense trade.",
+        "significance": 4
+      },
+      {
+        "id": "myrrh",
+        "name": "没药",
+        "name_en": "Myrrh",
+        "category": "香料 / 药材",
+        "category_en": "Spice / Medicine",
+        "origin": "阿拉伯半岛 / 东非",
+        "origin_en": "Arabian Peninsula / East Africa",
+        "direction": "东传",
+        "direction_en": "Eastward",
+        "description": "与乳香齐名的珍贵树脂，用作防腐、镇痛和宗教仪式。唐代《新修本草》首次记载没药的药用价值，海上贸易使其成为中国药材中的重要一味。",
+        "description_en": "A precious resin alongside frankincense, used for preservation, pain relief, and religious rituals. First recorded in Chinese medicine during the Tang dynasty, maritime trade made it an important ingredient in traditional Chinese pharmacology.",
+        "significance": 3
+      },
+      {
+        "id": "ivory",
+        "name": "象牙",
+        "name_en": "Ivory",
+        "category": "奢侈品",
+        "category_en": "Luxury Good",
+        "origin": "非洲 / 印度",
+        "origin_en": "Africa / India",
+        "direction": "东传",
+        "direction_en": "Eastward",
+        "description": "非洲和印度的大象象牙通过海上丝路大量输入中国，用于制作精美的雕刻品、朝笏和装饰品。宋代广州市舶司的进口清单中象牙是最大宗商品之一。",
+        "description_en": "Elephant tusks from Africa and India were imported in large quantities via the Maritime Silk Road for exquisite carvings, court tablets, and ornaments. Ivory was one of the largest commodities in Guangzhou's customs records during the Song dynasty.",
+        "significance": 3
+      },
+      {
+        "id": "coral",
+        "name": "红珊瑚",
+        "name_en": "Red Coral",
+        "category": "珍宝",
+        "category_en": "Treasure",
+        "origin": "地中海 / 红海",
+        "origin_en": "Mediterranean / Red Sea",
+        "direction": "东传",
+        "direction_en": "Eastward",
+        "description": "地中海和红海出产的珍贵红珊瑚，是佛教七宝之一。通过海上丝路输入，用于制作佛珠、首饰和朝珠。被视为富贵和吉祥的象征。",
+        "description_en": "Precious red coral from the Mediterranean and Red Sea, counted among the Seven Treasures of Buddhism. Imported via the Maritime Silk Road for prayer beads, jewelry, and court ornaments — a symbol of wealth and good fortune.",
+        "significance": 3
+      },
+      {
+        "id": "clove",
+        "name": "丁香",
+        "name_en": "Clove",
+        "category": "香料",
+        "category_en": "Spice",
+        "origin": "马鲁古群岛（香料群岛）",
+        "origin_en": "Maluku Islands (Spice Islands)",
+        "direction": "东传",
+        "direction_en": "Eastward",
+        "description": "原产于印度尼西亚马鲁古群岛的珍贵香料。汉代已有使用丁香的记载，用于口含除臭和调味。欧洲人对香料的渴望最终促成了大航海时代的开启。",
+        "description_en": "A precious spice native to Indonesia's Maluku Islands (the legendary Spice Islands). Already used in Han dynasty China as a breath freshener and seasoning. Europe's craving for cloves and other spices eventually launched the Age of Discovery.",
+        "significance": 4
       }
     ],
     "events": [
@@ -864,113 +1240,985 @@
         "description": "粟特人是丝路上最卓越的商业民族，建立了从撒马尔罕到长安的庞大贸易网络。他们在丝路沿线设立殖民据点（如敦煌、凉州），控制着丝绸、马匹、珍宝的流通。粟特语一度成为丝路的国际通用商业语言。",
         "description_en": "The Sogdians were the Silk Road's greatest merchant people, building a vast trade network from Samarkand to Chang'an. They established colonial settlements along the route (Dunhuang, Liangzhou) and controlled the flow of silk, horses, and luxury goods. The Sogdian language became the Silk Road's international commercial lingua franca.",
         "significance": 4
+      },
+      {
+        "id": "maritime-trade-office",
+        "name": "市舶司设立",
+        "name_en": "Establishment of Maritime Trade Offices",
+        "year": 714,
+        "display_year": "公元714年（唐开元二年）",
+        "dynasty": "唐",
+        "description": "唐玄宗在广州设立中国历史上第一个市舶司，专门管理海上贸易、征收关税和接待外国使节。此后宋元明各朝在广州、泉州、明州（宁波）、杭州等地广设市舶司，海上丝路进入官方管理时代。",
+        "description_en": "Emperor Xuanzong of Tang established China's first maritime trade office in Guangzhou (714 CE) to regulate sea trade, collect customs, and receive foreign envoys. Subsequent dynasties set up similar offices in Quanzhou, Ningbo, and Hangzhou — the Maritime Silk Road entered an era of official administration.",
+        "significance": 4
+      },
+      {
+        "id": "guangzhou-maritime-route",
+        "name": "广州通海夷道",
+        "name_en": "Guangzhou Maritime Route to Foreign Lands",
+        "year": 750,
+        "display_year": "公元8世纪中",
+        "dynasty": "唐",
+        "description": "唐代地理学家贾耽在《皇华四达记》中详细记录的海上航线：从广州出发，经南海、马六甲海峡、印度洋至波斯湾和东非。这是人类历史上最早有精确记录的远洋航线之一，全程约14000公里。",
+        "description_en": "The maritime route meticulously recorded by Tang geographer Jia Dan: departing Guangzhou, crossing the South China Sea, through the Malacca Strait, across the Indian Ocean to the Persian Gulf and East Africa. One of the earliest precisely documented transoceanic routes in human history — approximately 14,000 km.",
+        "significance": 5
       }
     ]
   },
   "edges": [
-    {"source": "changan", "target": "luoyang", "relation": "兄弟城市", "relation_en": "Sister City"},
-    {"source": "changan", "target": "dunhuang", "relation": "河西走廊", "relation_en": "Hexi Corridor Route"},
-    {"source": "luoyang", "target": "dunhuang", "relation": "丝路东段", "relation_en": "Eastern Silk Road Segment"},
-    {"source": "dunhuang", "target": "turpan", "relation": "西域北道", "relation_en": "Northern Western Regions Route"},
-    {"source": "turpan", "target": "kashgar", "relation": "天山南路", "relation_en": "Southern Tianshan Route"},
-    {"source": "dunhuang", "target": "kashgar", "relation": "西域南道", "relation_en": "Southern Western Regions Route"},
-    {"source": "kashgar", "target": "samarkand", "relation": "翻越帕米尔", "relation_en": "Pamir Crossing"},
-    {"source": "samarkand", "target": "baghdad", "relation": "波斯路线", "relation_en": "Persian Route"},
-    {"source": "baghdad", "target": "constantinople", "relation": "西段终点", "relation_en": "Western Segment"},
-    {"source": "zhang-qian", "target": "changan", "relation": "出发地", "relation_en": "Departure Point"},
-    {"source": "zhang-qian", "target": "kashgar", "relation": "途经", "relation_en": "Passed Through"},
-    {"source": "xuanzang", "target": "changan", "relation": "出发地与归来地", "relation_en": "Departure & Return"},
-    {"source": "xuanzang", "target": "dunhuang", "relation": "途经", "relation_en": "Passed Through"},
-    {"source": "xuanzang", "target": "turpan", "relation": "高昌讲经", "relation_en": "Preached at Gaochang"},
-    {"source": "xuanzang", "target": "samarkand", "relation": "途经", "relation_en": "Passed Through"},
-    {"source": "marco-polo", "target": "kashgar", "relation": "途经", "relation_en": "Passed Through"},
-    {"source": "marco-polo", "target": "dunhuang", "relation": "途经", "relation_en": "Passed Through"},
-    {"source": "silk", "target": "changan", "relation": "出产地与集散中心", "relation_en": "Origin & Distribution"},
-    {"source": "paper", "target": "samarkand", "relation": "技术传入地", "relation_en": "Technology Transfer Point"},
-    {"source": "paper", "target": "baghdad", "relation": "技术传播地", "relation_en": "Technology Spread Point"},
-    {"source": "grapes", "target": "zhang-qian", "relation": "引入者", "relation_en": "Introduced By"},
-    {"source": "glass", "target": "constantinople", "relation": "原产地之一", "relation_en": "One Place of Origin"},
-    {"source": "zhang-qian-mission", "target": "zhang-qian", "relation": "主角", "relation_en": "Protagonist"},
-    {"source": "battle-of-talas", "target": "paper", "relation": "技术外传契机", "relation_en": "Catalyst for Technology Transfer"},
-    {"source": "mongol-pax", "target": "marco-polo", "relation": "时代背景", "relation_en": "Historical Context"},
-    {"source": "xuanzang-journey", "target": "xuanzang", "relation": "主角", "relation_en": "Protagonist"},
-    {"source": "dunhuang", "target": "loulan", "relation": "西域南道", "relation_en": "Southern Route"},
-    {"source": "loulan", "target": "khotan", "relation": "塔里木南缘", "relation_en": "Southern Tarim Rim"},
-    {"source": "khotan", "target": "kashgar", "relation": "南道西段", "relation_en": "Western Southern Route"},
-    {"source": "samarkand", "target": "bukhara", "relation": "粟特双城", "relation_en": "Sogdian Twin Cities"},
-    {"source": "bukhara", "target": "merv", "relation": "呼罗珊大道", "relation_en": "Khorasan Highway"},
-    {"source": "merv", "target": "herat", "relation": "南下支线", "relation_en": "Southern Branch"},
-    {"source": "herat", "target": "baghdad", "relation": "波斯路线", "relation_en": "Persian Route"},
-    {"source": "changan", "target": "quanzhou", "relation": "内陆至海港", "relation_en": "Inland to Seaport"},
-    {"source": "quanzhou", "target": "baghdad", "relation": "海上贸易", "relation_en": "Maritime Trade"},
-    {"source": "beijing", "target": "changan", "relation": "驿道相连", "relation_en": "Post Road Connection"},
-    {"source": "ban-chao", "target": "loulan", "relation": "经营西域", "relation_en": "Administered"},
-    {"source": "ban-chao", "target": "kashgar", "relation": "平定疏勒", "relation_en": "Pacified Shule"},
-    {"source": "ban-chao", "target": "gan-ying", "relation": "派遣出使", "relation_en": "Dispatched"},
-    {"source": "faxian", "target": "changan", "relation": "出发地", "relation_en": "Departure Point"},
-    {"source": "faxian", "target": "dunhuang", "relation": "途经", "relation_en": "Passed Through"},
-    {"source": "faxian", "target": "khotan", "relation": "停留参学", "relation_en": "Stayed and Studied"},
-    {"source": "kumarajiva", "target": "changan", "relation": "译经地", "relation_en": "Translation Site"},
-    {"source": "kumarajiva", "target": "dunhuang", "relation": "途经", "relation_en": "Passed Through"},
-    {"source": "ibn-battuta", "target": "quanzhou", "relation": "抵达中国第一站", "relation_en": "First Stop in China"},
-    {"source": "ibn-battuta", "target": "beijing", "relation": "谒见元帝", "relation_en": "Audience with Yuan Emperor"},
-    {"source": "rab-ban-sauma", "target": "beijing", "relation": "出生地", "relation_en": "Birthplace"},
-    {"source": "rab-ban-sauma", "target": "baghdad", "relation": "途经伊儿汗国", "relation_en": "Passed through Ilkhanate"},
-    {"source": "rab-ban-sauma", "target": "constantinople", "relation": "出使拜占庭", "relation_en": "Diplomatic Mission to Byzantium"},
-    {"source": "li-bai", "target": "changan", "relation": "创作地", "relation_en": "Creative Home"},
-    {"source": "tea", "target": "quanzhou", "relation": "海上出口", "relation_en": "Maritime Export"},
-    {"source": "horses", "target": "samarkand", "relation": "产地附近", "relation_en": "Near Place of Origin"},
-    {"source": "buddhism", "target": "dunhuang", "relation": "传播重镇", "relation_en": "Key Transmission Center"},
-    {"source": "buddhism", "target": "khotan", "relation": "西域佛国", "relation_en": "Buddhist Kingdom"},
-    {"source": "buddhism", "target": "luoyang", "relation": "入华第一站", "relation_en": "First Stop in China"},
-    {"source": "jade", "target": "khotan", "relation": "原产地", "relation_en": "Place of Origin"},
-    {"source": "jade", "target": "changan", "relation": "玉石之路终点", "relation_en": "Terminus of Jade Road"},
-    {"source": "ban-chao-campaign", "target": "ban-chao", "relation": "主角", "relation_en": "Protagonist"},
-    {"source": "faxian-journey", "target": "faxian", "relation": "主角", "relation_en": "Protagonist"},
-    {"source": "nestorian-stele", "target": "changan", "relation": "立碑地", "relation_en": "Stele Location"},
-    {"source": "an-shi-rebellion", "target": "changan", "relation": "攻陷地", "relation_en": "Captured City"},
-    {"source": "an-shi-rebellion", "target": "dunhuang", "relation": "影响所及", "relation_en": "Area Affected"},
-    {"source": "marco-polo", "target": "beijing", "relation": "目的地", "relation_en": "Destination"},
-    {"source": "marco-polo", "target": "quanzhou", "relation": "归途启航", "relation_en": "Departure Port for Return"},
-    {"source": "zhang-qian", "target": "khotan", "relation": "途经", "relation_en": "Passed Through"},
-    {"source": "xuanzang", "target": "khotan", "relation": "归途停留", "relation_en": "Stopped on Return"},
-    {"source": "xuanzang", "target": "kashgar", "relation": "途经", "relation_en": "Passed Through"},
-    {"source": "ban-chao", "target": "dunhuang", "relation": "经略基地", "relation_en": "Base of Operations"},
-    {"source": "nisapur", "target": "merv", "relation": "安息帝国东部重镇", "relation_en": "Eastern Parthian Stronghold"},
-    {"source": "nisapur", "target": "baghdad", "relation": "丝路中段", "relation_en": "Middle Silk Road Segment"},
-    {"source": "taxila", "target": "kashgar", "relation": "翻越喀喇昆仑", "relation_en": "Karakoram Crossing"},
-    {"source": "taxila", "target": "buddhism", "relation": "犍陀罗造像起源", "relation_en": "Origin of Gandharan Buddhist Art"},
-    {"source": "suyab", "target": "kashgar", "relation": "天山北麓", "relation_en": "Northern Tianshan Route"},
-    {"source": "suyab", "target": "li-bai", "relation": "出生地", "relation_en": "Birthplace"},
-    {"source": "rayy", "target": "merv", "relation": "呼罗珊大道", "relation_en": "Khorasan Highway"},
-    {"source": "rayy", "target": "baghdad", "relation": "通往两河", "relation_en": "Route to Mesopotamia"},
-    {"source": "emperor-wu", "target": "zhang-qian", "relation": "派遣者", "relation_en": "Dispatched"},
-    {"source": "emperor-wu", "target": "changan", "relation": "都城", "relation_en": "Capital"},
-    {"source": "emperor-wu", "target": "horses", "relation": "求取汗血宝马", "relation_en": "Sought Heavenly Horses"},
-    {"source": "wang-zhaojun", "target": "changan", "relation": "出塞起点", "relation_en": "Departure Point"},
-    {"source": "yijing", "target": "quanzhou", "relation": "出发港口附近", "relation_en": "Near Departure Port"},
-    {"source": "yijing", "target": "buddhism", "relation": "求法取经", "relation_en": "Sought Scriptures"},
-    {"source": "an-lushan", "target": "an-shi-rebellion", "relation": "发动叛乱", "relation_en": "Launched the Rebellion"},
-    {"source": "an-lushan", "target": "changan", "relation": "攻陷长安", "relation_en": "Captured Chang'an"},
-    {"source": "al-khwarizmi", "target": "baghdad", "relation": "智慧宫学者", "relation_en": "Scholar at House of Wisdom"},
-    {"source": "al-khwarizmi", "target": "paper", "relation": "依赖造纸术传播", "relation_en": "Relied on Paper Transmission"},
-    {"source": "gunpowder", "target": "mongol-pax", "relation": "经蒙古西征传播", "relation_en": "Spread via Mongol Conquests"},
-    {"source": "compass", "target": "quanzhou", "relation": "航海应用", "relation_en": "Applied in Navigation"},
-    {"source": "compass", "target": "zheng-he", "relation": "导航工具", "relation_en": "Navigation Tool"},
-    {"source": "alfalfa", "target": "horses", "relation": "汗血马的饲料", "relation_en": "Fodder for Ferghana Horses"},
-    {"source": "alfalfa", "target": "zhang-qian", "relation": "引入者", "relation_en": "Introduced By"},
-    {"source": "sogdian-silver", "target": "samarkand", "relation": "原产地", "relation_en": "Place of Origin"},
-    {"source": "sogdian-silver", "target": "changan", "relation": "传入地", "relation_en": "Destination"},
-    {"source": "zhaojun-marriage", "target": "wang-zhaojun", "relation": "主角", "relation_en": "Protagonist"},
-    {"source": "yijing-journey", "target": "yijing", "relation": "主角", "relation_en": "Protagonist"},
-    {"source": "yijing-journey", "target": "quanzhou", "relation": "海路中线", "relation_en": "Midpoint on Sea Route"},
-    {"source": "sogdian-trade-network", "target": "samarkand", "relation": "贸易中心", "relation_en": "Trade Center"},
-    {"source": "sogdian-trade-network", "target": "sogdian-silver", "relation": "贸易商品", "relation_en": "Trade Commodity"},
-    {"source": "sogdian-trade-network", "target": "dunhuang", "relation": "粟特聚落", "relation_en": "Sogdian Settlement"},
-    {"source": "emperor-wu", "target": "zhang-qian-mission", "relation": "下令者", "relation_en": "Commissioner"},
-    {"source": "faxian", "target": "taxila", "relation": "参学朝拜", "relation_en": "Pilgrimage & Study"},
-    {"source": "xuanzang", "target": "taxila", "relation": "参学", "relation_en": "Studied Here"},
-    {"source": "zhang-qian", "target": "nisapur", "relation": "途经安息", "relation_en": "Passed Through Parthia"},
-    {"source": "kumarajiva", "target": "taxila", "relation": "早年学习", "relation_en": "Studied in Youth"}
+    {
+      "source": "changan",
+      "target": "luoyang",
+      "relation": "兄弟城市",
+      "relation_en": "Sister City"
+    },
+    {
+      "source": "changan",
+      "target": "dunhuang",
+      "relation": "河西走廊",
+      "relation_en": "Hexi Corridor Route"
+    },
+    {
+      "source": "luoyang",
+      "target": "dunhuang",
+      "relation": "丝路东段",
+      "relation_en": "Eastern Silk Road Segment"
+    },
+    {
+      "source": "dunhuang",
+      "target": "turpan",
+      "relation": "西域北道",
+      "relation_en": "Northern Western Regions Route"
+    },
+    {
+      "source": "turpan",
+      "target": "kashgar",
+      "relation": "天山南路",
+      "relation_en": "Southern Tianshan Route"
+    },
+    {
+      "source": "dunhuang",
+      "target": "kashgar",
+      "relation": "西域南道",
+      "relation_en": "Southern Western Regions Route"
+    },
+    {
+      "source": "kashgar",
+      "target": "samarkand",
+      "relation": "翻越帕米尔",
+      "relation_en": "Pamir Crossing"
+    },
+    {
+      "source": "samarkand",
+      "target": "baghdad",
+      "relation": "波斯路线",
+      "relation_en": "Persian Route"
+    },
+    {
+      "source": "baghdad",
+      "target": "constantinople",
+      "relation": "西段终点",
+      "relation_en": "Western Segment"
+    },
+    {
+      "source": "zhang-qian",
+      "target": "changan",
+      "relation": "出发地",
+      "relation_en": "Departure Point"
+    },
+    {
+      "source": "zhang-qian",
+      "target": "kashgar",
+      "relation": "途经",
+      "relation_en": "Passed Through"
+    },
+    {
+      "source": "xuanzang",
+      "target": "changan",
+      "relation": "出发地与归来地",
+      "relation_en": "Departure & Return"
+    },
+    {
+      "source": "xuanzang",
+      "target": "dunhuang",
+      "relation": "途经",
+      "relation_en": "Passed Through"
+    },
+    {
+      "source": "xuanzang",
+      "target": "turpan",
+      "relation": "高昌讲经",
+      "relation_en": "Preached at Gaochang"
+    },
+    {
+      "source": "xuanzang",
+      "target": "samarkand",
+      "relation": "途经",
+      "relation_en": "Passed Through"
+    },
+    {
+      "source": "marco-polo",
+      "target": "kashgar",
+      "relation": "途经",
+      "relation_en": "Passed Through"
+    },
+    {
+      "source": "marco-polo",
+      "target": "dunhuang",
+      "relation": "途经",
+      "relation_en": "Passed Through"
+    },
+    {
+      "source": "silk",
+      "target": "changan",
+      "relation": "出产地与集散中心",
+      "relation_en": "Origin & Distribution"
+    },
+    {
+      "source": "paper",
+      "target": "samarkand",
+      "relation": "技术传入地",
+      "relation_en": "Technology Transfer Point"
+    },
+    {
+      "source": "paper",
+      "target": "baghdad",
+      "relation": "技术传播地",
+      "relation_en": "Technology Spread Point"
+    },
+    {
+      "source": "grapes",
+      "target": "zhang-qian",
+      "relation": "引入者",
+      "relation_en": "Introduced By"
+    },
+    {
+      "source": "glass",
+      "target": "constantinople",
+      "relation": "原产地之一",
+      "relation_en": "One Place of Origin"
+    },
+    {
+      "source": "zhang-qian-mission",
+      "target": "zhang-qian",
+      "relation": "主角",
+      "relation_en": "Protagonist"
+    },
+    {
+      "source": "battle-of-talas",
+      "target": "paper",
+      "relation": "技术外传契机",
+      "relation_en": "Catalyst for Technology Transfer"
+    },
+    {
+      "source": "mongol-pax",
+      "target": "marco-polo",
+      "relation": "时代背景",
+      "relation_en": "Historical Context"
+    },
+    {
+      "source": "xuanzang-journey",
+      "target": "xuanzang",
+      "relation": "主角",
+      "relation_en": "Protagonist"
+    },
+    {
+      "source": "dunhuang",
+      "target": "loulan",
+      "relation": "西域南道",
+      "relation_en": "Southern Route"
+    },
+    {
+      "source": "loulan",
+      "target": "khotan",
+      "relation": "塔里木南缘",
+      "relation_en": "Southern Tarim Rim"
+    },
+    {
+      "source": "khotan",
+      "target": "kashgar",
+      "relation": "南道西段",
+      "relation_en": "Western Southern Route"
+    },
+    {
+      "source": "samarkand",
+      "target": "bukhara",
+      "relation": "粟特双城",
+      "relation_en": "Sogdian Twin Cities"
+    },
+    {
+      "source": "bukhara",
+      "target": "merv",
+      "relation": "呼罗珊大道",
+      "relation_en": "Khorasan Highway"
+    },
+    {
+      "source": "merv",
+      "target": "herat",
+      "relation": "南下支线",
+      "relation_en": "Southern Branch"
+    },
+    {
+      "source": "herat",
+      "target": "baghdad",
+      "relation": "波斯路线",
+      "relation_en": "Persian Route"
+    },
+    {
+      "source": "changan",
+      "target": "quanzhou",
+      "relation": "内陆至海港",
+      "relation_en": "Inland to Seaport"
+    },
+    {
+      "source": "quanzhou",
+      "target": "baghdad",
+      "relation": "海上贸易",
+      "relation_en": "Maritime Trade"
+    },
+    {
+      "source": "beijing",
+      "target": "changan",
+      "relation": "驿道相连",
+      "relation_en": "Post Road Connection"
+    },
+    {
+      "source": "ban-chao",
+      "target": "loulan",
+      "relation": "经营西域",
+      "relation_en": "Administered"
+    },
+    {
+      "source": "ban-chao",
+      "target": "kashgar",
+      "relation": "平定疏勒",
+      "relation_en": "Pacified Shule"
+    },
+    {
+      "source": "ban-chao",
+      "target": "gan-ying",
+      "relation": "派遣出使",
+      "relation_en": "Dispatched"
+    },
+    {
+      "source": "faxian",
+      "target": "changan",
+      "relation": "出发地",
+      "relation_en": "Departure Point"
+    },
+    {
+      "source": "faxian",
+      "target": "dunhuang",
+      "relation": "途经",
+      "relation_en": "Passed Through"
+    },
+    {
+      "source": "faxian",
+      "target": "khotan",
+      "relation": "停留参学",
+      "relation_en": "Stayed and Studied"
+    },
+    {
+      "source": "kumarajiva",
+      "target": "changan",
+      "relation": "译经地",
+      "relation_en": "Translation Site"
+    },
+    {
+      "source": "kumarajiva",
+      "target": "dunhuang",
+      "relation": "途经",
+      "relation_en": "Passed Through"
+    },
+    {
+      "source": "ibn-battuta",
+      "target": "quanzhou",
+      "relation": "抵达中国第一站",
+      "relation_en": "First Stop in China"
+    },
+    {
+      "source": "ibn-battuta",
+      "target": "beijing",
+      "relation": "谒见元帝",
+      "relation_en": "Audience with Yuan Emperor"
+    },
+    {
+      "source": "rab-ban-sauma",
+      "target": "beijing",
+      "relation": "出生地",
+      "relation_en": "Birthplace"
+    },
+    {
+      "source": "rab-ban-sauma",
+      "target": "baghdad",
+      "relation": "途经伊儿汗国",
+      "relation_en": "Passed through Ilkhanate"
+    },
+    {
+      "source": "rab-ban-sauma",
+      "target": "constantinople",
+      "relation": "出使拜占庭",
+      "relation_en": "Diplomatic Mission to Byzantium"
+    },
+    {
+      "source": "li-bai",
+      "target": "changan",
+      "relation": "创作地",
+      "relation_en": "Creative Home"
+    },
+    {
+      "source": "tea",
+      "target": "quanzhou",
+      "relation": "海上出口",
+      "relation_en": "Maritime Export"
+    },
+    {
+      "source": "horses",
+      "target": "samarkand",
+      "relation": "产地附近",
+      "relation_en": "Near Place of Origin"
+    },
+    {
+      "source": "buddhism",
+      "target": "dunhuang",
+      "relation": "传播重镇",
+      "relation_en": "Key Transmission Center"
+    },
+    {
+      "source": "buddhism",
+      "target": "khotan",
+      "relation": "西域佛国",
+      "relation_en": "Buddhist Kingdom"
+    },
+    {
+      "source": "buddhism",
+      "target": "luoyang",
+      "relation": "入华第一站",
+      "relation_en": "First Stop in China"
+    },
+    {
+      "source": "jade",
+      "target": "khotan",
+      "relation": "原产地",
+      "relation_en": "Place of Origin"
+    },
+    {
+      "source": "jade",
+      "target": "changan",
+      "relation": "玉石之路终点",
+      "relation_en": "Terminus of Jade Road"
+    },
+    {
+      "source": "ban-chao-campaign",
+      "target": "ban-chao",
+      "relation": "主角",
+      "relation_en": "Protagonist"
+    },
+    {
+      "source": "faxian-journey",
+      "target": "faxian",
+      "relation": "主角",
+      "relation_en": "Protagonist"
+    },
+    {
+      "source": "nestorian-stele",
+      "target": "changan",
+      "relation": "立碑地",
+      "relation_en": "Stele Location"
+    },
+    {
+      "source": "an-shi-rebellion",
+      "target": "changan",
+      "relation": "攻陷地",
+      "relation_en": "Captured City"
+    },
+    {
+      "source": "an-shi-rebellion",
+      "target": "dunhuang",
+      "relation": "影响所及",
+      "relation_en": "Area Affected"
+    },
+    {
+      "source": "marco-polo",
+      "target": "beijing",
+      "relation": "目的地",
+      "relation_en": "Destination"
+    },
+    {
+      "source": "marco-polo",
+      "target": "quanzhou",
+      "relation": "归途启航",
+      "relation_en": "Departure Port for Return"
+    },
+    {
+      "source": "zhang-qian",
+      "target": "khotan",
+      "relation": "途经",
+      "relation_en": "Passed Through"
+    },
+    {
+      "source": "xuanzang",
+      "target": "khotan",
+      "relation": "归途停留",
+      "relation_en": "Stopped on Return"
+    },
+    {
+      "source": "xuanzang",
+      "target": "kashgar",
+      "relation": "途经",
+      "relation_en": "Passed Through"
+    },
+    {
+      "source": "ban-chao",
+      "target": "dunhuang",
+      "relation": "经略基地",
+      "relation_en": "Base of Operations"
+    },
+    {
+      "source": "nisapur",
+      "target": "merv",
+      "relation": "安息帝国东部重镇",
+      "relation_en": "Eastern Parthian Stronghold"
+    },
+    {
+      "source": "nisapur",
+      "target": "baghdad",
+      "relation": "丝路中段",
+      "relation_en": "Middle Silk Road Segment"
+    },
+    {
+      "source": "taxila",
+      "target": "kashgar",
+      "relation": "翻越喀喇昆仑",
+      "relation_en": "Karakoram Crossing"
+    },
+    {
+      "source": "taxila",
+      "target": "buddhism",
+      "relation": "犍陀罗造像起源",
+      "relation_en": "Origin of Gandharan Buddhist Art"
+    },
+    {
+      "source": "suyab",
+      "target": "kashgar",
+      "relation": "天山北麓",
+      "relation_en": "Northern Tianshan Route"
+    },
+    {
+      "source": "suyab",
+      "target": "li-bai",
+      "relation": "出生地",
+      "relation_en": "Birthplace"
+    },
+    {
+      "source": "rayy",
+      "target": "merv",
+      "relation": "呼罗珊大道",
+      "relation_en": "Khorasan Highway"
+    },
+    {
+      "source": "rayy",
+      "target": "baghdad",
+      "relation": "通往两河",
+      "relation_en": "Route to Mesopotamia"
+    },
+    {
+      "source": "emperor-wu",
+      "target": "zhang-qian",
+      "relation": "派遣者",
+      "relation_en": "Dispatched"
+    },
+    {
+      "source": "emperor-wu",
+      "target": "changan",
+      "relation": "都城",
+      "relation_en": "Capital"
+    },
+    {
+      "source": "emperor-wu",
+      "target": "horses",
+      "relation": "求取汗血宝马",
+      "relation_en": "Sought Heavenly Horses"
+    },
+    {
+      "source": "wang-zhaojun",
+      "target": "changan",
+      "relation": "出塞起点",
+      "relation_en": "Departure Point"
+    },
+    {
+      "source": "yijing",
+      "target": "quanzhou",
+      "relation": "出发港口附近",
+      "relation_en": "Near Departure Port"
+    },
+    {
+      "source": "yijing",
+      "target": "buddhism",
+      "relation": "求法取经",
+      "relation_en": "Sought Scriptures"
+    },
+    {
+      "source": "an-lushan",
+      "target": "an-shi-rebellion",
+      "relation": "发动叛乱",
+      "relation_en": "Launched the Rebellion"
+    },
+    {
+      "source": "an-lushan",
+      "target": "changan",
+      "relation": "攻陷长安",
+      "relation_en": "Captured Chang'an"
+    },
+    {
+      "source": "al-khwarizmi",
+      "target": "baghdad",
+      "relation": "智慧宫学者",
+      "relation_en": "Scholar at House of Wisdom"
+    },
+    {
+      "source": "al-khwarizmi",
+      "target": "paper",
+      "relation": "依赖造纸术传播",
+      "relation_en": "Relied on Paper Transmission"
+    },
+    {
+      "source": "gunpowder",
+      "target": "mongol-pax",
+      "relation": "经蒙古西征传播",
+      "relation_en": "Spread via Mongol Conquests"
+    },
+    {
+      "source": "compass",
+      "target": "quanzhou",
+      "relation": "航海应用",
+      "relation_en": "Applied in Navigation"
+    },
+    {
+      "source": "compass",
+      "target": "zheng-he",
+      "relation": "导航工具",
+      "relation_en": "Navigation Tool"
+    },
+    {
+      "source": "alfalfa",
+      "target": "horses",
+      "relation": "汗血马的饲料",
+      "relation_en": "Fodder for Ferghana Horses"
+    },
+    {
+      "source": "alfalfa",
+      "target": "zhang-qian",
+      "relation": "引入者",
+      "relation_en": "Introduced By"
+    },
+    {
+      "source": "sogdian-silver",
+      "target": "samarkand",
+      "relation": "原产地",
+      "relation_en": "Place of Origin"
+    },
+    {
+      "source": "sogdian-silver",
+      "target": "changan",
+      "relation": "传入地",
+      "relation_en": "Destination"
+    },
+    {
+      "source": "zhaojun-marriage",
+      "target": "wang-zhaojun",
+      "relation": "主角",
+      "relation_en": "Protagonist"
+    },
+    {
+      "source": "yijing-journey",
+      "target": "yijing",
+      "relation": "主角",
+      "relation_en": "Protagonist"
+    },
+    {
+      "source": "yijing-journey",
+      "target": "quanzhou",
+      "relation": "海路中线",
+      "relation_en": "Midpoint on Sea Route"
+    },
+    {
+      "source": "sogdian-trade-network",
+      "target": "samarkand",
+      "relation": "贸易中心",
+      "relation_en": "Trade Center"
+    },
+    {
+      "source": "sogdian-trade-network",
+      "target": "sogdian-silver",
+      "relation": "贸易商品",
+      "relation_en": "Trade Commodity"
+    },
+    {
+      "source": "sogdian-trade-network",
+      "target": "dunhuang",
+      "relation": "粟特聚落",
+      "relation_en": "Sogdian Settlement"
+    },
+    {
+      "source": "emperor-wu",
+      "target": "zhang-qian-mission",
+      "relation": "下令者",
+      "relation_en": "Commissioner"
+    },
+    {
+      "source": "faxian",
+      "target": "taxila",
+      "relation": "参学朝拜",
+      "relation_en": "Pilgrimage & Study"
+    },
+    {
+      "source": "xuanzang",
+      "target": "taxila",
+      "relation": "参学",
+      "relation_en": "Studied Here"
+    },
+    {
+      "source": "zhang-qian",
+      "target": "nisapur",
+      "relation": "途经安息",
+      "relation_en": "Passed Through Parthia"
+    },
+    {
+      "source": "kumarajiva",
+      "target": "taxila",
+      "relation": "早年学习",
+      "relation_en": "Studied in Youth"
+    },
+    {
+      "source": "quanzhou",
+      "target": "guangzhou",
+      "relation": "海上姊妹港",
+      "relation_en": "Sister maritime ports"
+    },
+    {
+      "source": "guangzhou",
+      "target": "palembang",
+      "relation": "南海航线",
+      "relation_en": "South China Sea route"
+    },
+    {
+      "source": "palembang",
+      "target": "malacca",
+      "relation": "马六甲海峡航线",
+      "relation_en": "Malacca Strait route"
+    },
+    {
+      "source": "malacca",
+      "target": "colombo",
+      "relation": "印度洋东段",
+      "relation_en": "Eastern Indian Ocean route"
+    },
+    {
+      "source": "colombo",
+      "target": "calicut",
+      "relation": "印度洋香料航线",
+      "relation_en": "Indian Ocean spice route"
+    },
+    {
+      "source": "calicut",
+      "target": "hormuz",
+      "relation": "阿拉伯海航线",
+      "relation_en": "Arabian Sea route"
+    },
+    {
+      "source": "hormuz",
+      "target": "aden",
+      "relation": "波斯湾-红海航线",
+      "relation_en": "Persian Gulf-Red Sea route"
+    },
+    {
+      "source": "aden",
+      "target": "alexandria",
+      "relation": "红海-地中海转运",
+      "relation_en": "Red Sea-Mediterranean transshipment"
+    },
+    {
+      "source": "aden",
+      "target": "mombasa",
+      "relation": "东非航线",
+      "relation_en": "East African route"
+    },
+    {
+      "source": "calicut",
+      "target": "mombasa",
+      "relation": "印度洋西段",
+      "relation_en": "Western Indian Ocean route"
+    },
+    {
+      "source": "changan",
+      "target": "guangzhou",
+      "relation": "内河水陆联运",
+      "relation_en": "Inland river-route connection"
+    },
+    {
+      "source": "alexandria",
+      "target": "constantinople",
+      "relation": "地中海航线",
+      "relation_en": "Mediterranean shipping route"
+    },
+    {
+      "source": "hormuz",
+      "target": "baghdad",
+      "relation": "波斯湾-两河流域",
+      "relation_en": "Persian Gulf-Mesopotamia route"
+    },
+    {
+      "source": "aden",
+      "target": "constantinople",
+      "relation": "红海-地中海中转",
+      "relation_en": "Red Sea-Mediterranean transit"
+    },
+    {
+      "source": "zheng-he-figure",
+      "target": "quanzhou",
+      "relation": "驻泊港",
+      "relation_en": "Anchorage port"
+    },
+    {
+      "source": "zheng-he-figure",
+      "target": "malacca",
+      "relation": "重要驻泊地（五次停留）",
+      "relation_en": "Key anchorage (stayed on 5 of 7 voyages)"
+    },
+    {
+      "source": "zheng-he-figure",
+      "target": "calicut",
+      "relation": "多次抵达",
+      "relation_en": "Arrived multiple times"
+    },
+    {
+      "source": "zheng-he-figure",
+      "target": "hormuz",
+      "relation": "后四次均抵此",
+      "relation_en": "Docked on voyages 4-7"
+    },
+    {
+      "source": "zheng-he-figure",
+      "target": "aden",
+      "relation": "访问",
+      "relation_en": "Visited"
+    },
+    {
+      "source": "zheng-he-figure",
+      "target": "mombasa",
+      "relation": "东非最远到达点",
+      "relation_en": "Farthest point in East Africa"
+    },
+    {
+      "source": "zheng-he-figure",
+      "target": "zheng-he",
+      "relation": "主角",
+      "relation_en": "Protagonist"
+    },
+    {
+      "source": "zheng-he-figure",
+      "target": "colombo",
+      "relation": "立碑纪念",
+      "relation_en": "Erected a commemorative stele"
+    },
+    {
+      "source": "wang-dayuan",
+      "target": "quanzhou",
+      "relation": "出发地",
+      "relation_en": "Departure point"
+    },
+    {
+      "source": "wang-dayuan",
+      "target": "palembang",
+      "relation": "记录三佛齐风土",
+      "relation_en": "Documented Srivijaya"
+    },
+    {
+      "source": "wang-dayuan",
+      "target": "calicut",
+      "relation": "记录",
+      "relation_en": "Documented"
+    },
+    {
+      "source": "wang-dayuan",
+      "target": "hormuz",
+      "relation": "记录波斯湾贸易",
+      "relation_en": "Documented Persian Gulf trade"
+    },
+    {
+      "source": "wang-dayuan",
+      "target": "aden",
+      "relation": "抵达并记录",
+      "relation_en": "Reached and documented"
+    },
+    {
+      "source": "zhou-daguan",
+      "target": "guangzhou",
+      "relation": "出发地",
+      "relation_en": "Departure point"
+    },
+    {
+      "source": "ibn-battuta",
+      "target": "calicut",
+      "relation": "多次到访",
+      "relation_en": "Visited multiple times"
+    },
+    {
+      "source": "ibn-battuta",
+      "target": "alexandria",
+      "relation": "抵达",
+      "relation_en": "Arrived"
+    },
+    {
+      "source": "faxian",
+      "target": "colombo",
+      "relation": "归国途中停留两年",
+      "relation_en": "Stayed 2 years on return journey"
+    },
+    {
+      "source": "faxian",
+      "target": "palembang",
+      "relation": "经海路归国经停",
+      "relation_en": "Stopped on maritime return route"
+    },
+    {
+      "source": "yijing",
+      "target": "guangzhou",
+      "relation": "出发地",
+      "relation_en": "Departure point"
+    },
+    {
+      "source": "yijing",
+      "target": "palembang",
+      "relation": "停留学习梵文六个月",
+      "relation_en": "Stayed 6 months to study Sanskrit"
+    },
+    {
+      "source": "frankincense",
+      "target": "aden",
+      "relation": "主要出口港",
+      "relation_en": "Main export port"
+    },
+    {
+      "source": "frankincense",
+      "target": "guangzhou",
+      "relation": "主要进口港",
+      "relation_en": "Main import port"
+    },
+    {
+      "source": "myrrh",
+      "target": "aden",
+      "relation": "主要出口港",
+      "relation_en": "Main export port"
+    },
+    {
+      "source": "ivory",
+      "target": "mombasa",
+      "relation": "东非出口港",
+      "relation_en": "East African export port"
+    },
+    {
+      "source": "ivory",
+      "target": "guangzhou",
+      "relation": "主要进口港",
+      "relation_en": "Main import port"
+    },
+    {
+      "source": "coral",
+      "target": "alexandria",
+      "relation": "地中海产地",
+      "relation_en": "Mediterranean origin"
+    },
+    {
+      "source": "clove",
+      "target": "malacca",
+      "relation": "经马六甲转运",
+      "relation_en": "Transshipped via Malacca"
+    },
+    {
+      "source": "spices",
+      "target": "calicut",
+      "relation": "集散中心",
+      "relation_en": "Distribution center"
+    },
+    {
+      "source": "spices",
+      "target": "malacca",
+      "relation": "转运枢纽",
+      "relation_en": "Transshipment hub"
+    },
+    {
+      "source": "maritime-trade-office",
+      "target": "guangzhou",
+      "relation": "首个设立地",
+      "relation_en": "First established here"
+    },
+    {
+      "source": "guangzhou-maritime-route",
+      "target": "guangzhou",
+      "relation": "起点",
+      "relation_en": "Starting point"
+    },
+    {
+      "source": "guangzhou-maritime-route",
+      "target": "malacca",
+      "relation": "途经",
+      "relation_en": "Via"
+    },
+    {
+      "source": "guangzhou-maritime-route",
+      "target": "hormuz",
+      "relation": "终点之一",
+      "relation_en": "One of the endpoints"
+    },
+    {
+      "source": "zheng-he",
+      "target": "zheng-he-figure",
+      "relation": "主角",
+      "relation_en": "Protagonist"
+    },
+    {
+      "source": "zheng-he",
+      "target": "malacca",
+      "relation": "重要节点",
+      "relation_en": "Key node"
+    },
+    {
+      "source": "zheng-he",
+      "target": "mombasa",
+      "relation": "最远到达",
+      "relation_en": "Farthest point reached"
+    },
+    {
+      "source": "zheng-he",
+      "target": "guangzhou",
+      "relation": "途经",
+      "relation_en": "Via"
+    },
+    {
+      "source": "tea",
+      "target": "guangzhou",
+      "relation": "海上出口港",
+      "relation_en": "Maritime export port"
+    },
+    {
+      "source": "porcelain",
+      "target": "quanzhou",
+      "relation": "海上出口港",
+      "relation_en": "Maritime export port"
+    },
+    {
+      "source": "porcelain",
+      "target": "aden",
+      "relation": "阿拉伯世界入口",
+      "relation_en": "Entry to Arab world"
+    },
+    {
+      "source": "silk",
+      "target": "alexandria",
+      "relation": "海上西传终点",
+      "relation_en": "Maritime western terminus"
+    }
   ]
 }
