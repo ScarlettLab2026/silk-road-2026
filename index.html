@@ -302,6 +302,7 @@
     <button class="speed-btn active" data-speed="1">1×</button>
     <button class="speed-btn" data-speed="2">2×</button>
     <button class="speed-btn" data-speed="4">4×</button>
+    <button id="anim-director" style="font-size:0.7rem;padding:3px 12px;border:1px solid var(--event);border-radius:12px;color:var(--event);background:transparent">🎬 导演</button>
     <button id="anim-exit" style="font-size:0.75rem;margin-left:4px">✕ 退出</button>
   </div>
   <div id="anim-progress">
@@ -609,7 +610,8 @@ function toggleRouteAnim() {
 function buildRouteSelector() {
   const el = document.getElementById('route-selector');
   const icons = { 'silk-westward': '🧵', 'paper-westward': '📜', 'buddhism-eastward': '🕉️',
-                  'compass-maritime': '🧭', 'spice-eastward': '🌿', 'porcelain-maritime': '🏺' };
+                  'compass-maritime': '🧭', 'spice-eastward': '🌿', 'porcelain-maritime': '🏺',
+                  'gunpowder-westward': '💥', 'tea-route': '🍵' };
   el.innerHTML = DATA.routes.map(r => `
     <div class="route-opt" data-id="${r.id}" onclick="selectRoute('${r.id}')">
       <div class="r-icon">${icons[r.id] || '🐫'}</div>
@@ -654,10 +656,16 @@ function selectRoute(id) {
   }
   routeTotalDist = routeDists[routeDists.length - 1];
 
-  // Draw polyline on map
-  if (routePolyline) map.removeLayer(routePolyline);
+  // Draw polylines: dim full + bright traveled
+  if (routePolyline) { map.removeLayer(routePolyline); routePolyline = null; }
+  if (window._routeTraveledLine) { map.removeLayer(window._routeTraveledLine); window._routeTraveledLine = null; }
+  // Dim full path
   routePolyline = L.polyline(routeLatLngs, {
-    color: 'var(--event)', weight: 3, opacity: 0.7, dashArray: '8 6'
+    color: 'rgba(199,91,58,0.2)', weight: 2, opacity: 0.6, dashArray: '6 6'
+  }).addTo(map);
+  // Bright traveled path (starts empty)
+  window._routeTraveledLine = L.polyline([], {
+    color: 'var(--event)', weight: 3.5, opacity: 0.9
   }).addTo(map);
 
   // Add city markers
@@ -719,14 +727,16 @@ function positionAt(progress) {
   for (let i = 1; i < routeDists.length; i++) {
     if (routeDists[i] >= targetDist) {
       const segLen = routeDists[i] - routeDists[i-1];
-      const segProgress = segLen > 0 ? (targetDist - routeDists[i-1]) / segLen : 0;
-      const lat = routeLatLngs[i-1][0] + segProgress * (routeLatLngs[i][0] - routeLatLngs[i-1][0]);
-      const lng = routeLatLngs[i-1][1] + segProgress * (routeLatLngs[i][1] - routeLatLngs[i-1][1]);
-      return { lat, lng, segIdx: i - 1 };
+      const rawT = segLen > 0 ? (targetDist - routeDists[i-1]) / segLen : 0;
+      // easeInOutCubic
+      const t = rawT < 0.5 ? 4*rawT*rawT*rawT : 1 - Math.pow(-2*rawT + 2, 3)/2;
+      const lat = routeLatLngs[i-1][0] + t * (routeLatLngs[i][0] - routeLatLngs[i-1][0]);
+      const lng = routeLatLngs[i-1][1] + t * (routeLatLngs[i][1] - routeLatLngs[i-1][1]);
+      return { lat, lng, segIdx: i - 1, rawSegProgress: rawT };
     }
   }
   const last = routeLatLngs.length - 1;
-  return { lat: routeLatLngs[last][0], lng: routeLatLngs[last][1], segIdx: last - 1 };
+  return { lat: routeLatLngs[last][0], lng: routeLatLngs[last][1], segIdx: last - 1, rawSegProgress: 1 };
 }
 
 function updateAnimInfo(segIdx) {
@@ -758,6 +768,25 @@ function animateRoute() {
   const pos = positionAt(routeProgress);
   if (routeAnimMarker) routeAnimMarker.setLatLng([pos.lat, pos.lng]);
 
+  // Update traveled polyline
+  if (window._routeTraveledLine && routeLatLngs.length > 1) {
+    const traveled = [];
+    for (let i = 0; i < routeLatLngs.length - 1; i++) {
+      const segStart = routeDists[i] / routeTotalDist;
+      const segEnd = routeDists[i+1] / routeTotalDist;
+      if (routeProgress >= segEnd) {
+        traveled.push(routeLatLngs[i]);
+      } else if (routeProgress >= segStart) {
+        traveled.push(routeLatLngs[i]);
+        traveled.push([pos.lat, pos.lng]);
+        break;
+      }
+    }
+    if (routeProgress >= 1) traveled.push(routeLatLngs[routeLatLngs.length - 1]);
+    if (traveled.length >= 2) window._routeTraveledLine.setLatLngs(traveled);
+    else window._routeTraveledLine.setLatLngs([]);
+  }
+
   // Update progress bar
   document.getElementById('bar-fill').style.width = (routeProgress * 100) + '%';
 
@@ -781,6 +810,7 @@ function stopRouteAnim() {
   routePlaying = false;
   if (routeRaf) { cancelAnimationFrame(routeRaf); routeRaf = null; }
   if (routePolyline) { map.removeLayer(routePolyline); routePolyline = null; }
+  if (window._routeTraveledLine) { map.removeLayer(window._routeTraveledLine); window._routeTraveledLine = null; }
   if (routeAnimMarker) { map.removeLayer(routeAnimMarker); routeAnimMarker = null; }
   // Remove route city markers
   markers.forEach(m => { if (m._routeMarker) { map.removeLayer(m); } });
@@ -831,6 +861,74 @@ document.getElementById('anim-exit').addEventListener('click', () => {
   toggleRouteAnim();
   // Re-show all city markers
   markers.forEach(m => { if (m._node) m.addTo(map); });
+});
+
+// ── Director Mode: auto-play all routes ──
+let directorMode = false;
+let directorRouteIdx = 0;
+let directorTimer = null;
+const DIRECTOR_ROUTE_DURATION = 20000; // 20s per route
+
+function toggleDirectorMode() {
+  directorMode = !directorMode;
+  const btn = document.getElementById('anim-director');
+
+  if (directorMode) {
+    if (!DATA.routes || !DATA.routes.length) return;
+    btn.textContent = '⏹ 停止';
+    btn.style.background = 'var(--event)';
+    btn.style.color = '#fff';
+    // Hide selector and info for cleaner view
+    document.getElementById('route-selector').style.display = 'none';
+    document.getElementById('anim-info').classList.remove('visible');
+    // Start with first route
+    directorRouteIdx = 0;
+    playDirectorRoute();
+  } else {
+    btn.textContent = '🎬 导演';
+    btn.style.background = 'transparent';
+    btn.style.color = 'var(--event)';
+    document.getElementById('route-selector').style.display = '';
+    stopRouteAnim();
+    if (directorTimer) { clearTimeout(directorTimer); directorTimer = null; }
+    document.getElementById('anim-controls').classList.remove('visible');
+    document.getElementById('anim-progress').classList.remove('visible');
+    // Return to route selection
+    buildRouteSelector();
+    document.getElementById('anim-controls').classList.add('visible');
+    document.getElementById('anim-progress').classList.add('visible');
+  }
+}
+
+function playDirectorRoute() {
+  if (!directorMode) return;
+  if (directorRouteIdx >= DATA.routes.length) {
+    // All done
+    directorMode = false;
+    toggleDirectorMode();
+    return;
+  }
+  selectRoute(DATA.routes[directorRouteIdx].id);
+  routeSpeed = 1.8; // slightly faster for auto-play
+  // Update speed buttons
+  document.querySelectorAll('#anim-controls .speed-btn').forEach(b => {
+    b.classList.toggle('active', parseInt(b.dataset.speed) === 2);
+  });
+
+  // Move to next route after duration
+  directorTimer = setTimeout(() => {
+    directorRouteIdx++;
+    playDirectorRoute();
+  }, DIRECTOR_ROUTE_DURATION);
+}
+
+document.getElementById('anim-director').addEventListener('click', toggleDirectorMode);
+
+// ESC to exit director mode
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && directorMode) {
+    toggleDirectorMode();
+  }
 });
 
 document.querySelectorAll('#anim-controls .speed-btn').forEach(btn => {

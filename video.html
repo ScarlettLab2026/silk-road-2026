@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>丝路传播路径 · 视频录制</title>
+<style>
+  :root {
+    --bg: #0d0d12; --accent: #d4a853; --text: #e0ddd5;
+    --text-dim: #9a9790; --event: #c75b3a;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #000; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; min-height: 100vh;
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+    color: var(--text);
+  }
+
+  .wrapper {
+    position: relative;
+    width: 960px; height: 540px; /* 1080p scaled 50% for screen fit */
+    box-shadow: 0 0 40px rgba(0,0,0,0.8);
+  }
+  canvas {
+    display: block; width: 100%; height: 100%;
+    border-radius: 8px;
+  }
+
+  .controls {
+    display: flex; gap: 12px; margin-top: 16px; align-items: center;
+  }
+  .controls button {
+    padding: 10px 24px; border: 1px solid var(--accent); border-radius: 8px;
+    background: rgba(212,168,83,0.1); color: var(--accent);
+    cursor: pointer; font-size: 0.9rem; font-weight: 600;
+    transition: all 0.2s;
+  }
+  .controls button:hover { background: var(--accent); color: #111; }
+  .controls button:disabled { opacity: 0.4; cursor: not-allowed; }
+  .controls button.recording { background: var(--event); border-color: var(--event); color: #fff; animation: recPulse 1s infinite; }
+  @keyframes recPulse { 0%,100%{opacity:1} 50%{opacity:0.6} }
+  .controls .status { font-size: 0.8rem; color: var(--text-dim); min-width: 120px; }
+  .controls select {
+    background: #1a1a22; color: var(--text); border: 1px solid var(--text-dim);
+    padding: 8px 12px; border-radius: 6px; font-size: 0.82rem;
+  }
+</style>
+</head>
+<body>
+
+<div class="wrapper"><canvas id="cv"></canvas></div>
+
+<div class="controls">
+  <button id="btnRec" onclick="startRecording()">🎬 开始录制</button>
+  <button id="btnPlay" onclick="togglePlay()">▶ 预览</button>
+  <select id="routeSelect" onchange="jumpToRoute(this.value)">
+    <option value="-1">全部路线 (自动)</option>
+  </select>
+  <span class="status" id="status">就绪 · 1920×1080 · 30fps</span>
+</div>
+
+<script>
+// ── Canvas setup ──
+const W = 1920, H = 1080;
+const cv = document.getElementById('cv');
+cv.width = W; cv.height = H;
+const ctx = cv.getContext('2d');
+
+// ── Projection ──
+const MAP_PAD = { top: 140, bottom: 140, left: 100, right: 100 };
+const MAP_W = W - MAP_PAD.left - MAP_PAD.right;
+const MAP_H = H - MAP_PAD.top - MAP_PAD.bottom;
+const LON_MIN = 22, LON_MAX = 125;
+const LAT_MIN = -6, LAT_MAX = 48;
+
+function project(lat, lng) {
+  const x = MAP_PAD.left + ((lng - LON_MIN) / (LON_MAX - LON_MIN)) * MAP_W;
+  const y = MAP_PAD.top + ((LAT_MAX - lat) / (LAT_MAX - LAT_MIN)) * MAP_H;
+  return { x, y };
+}
+
+// ── Load data ──
+let DATA = null;
+fetch('data/silk-road.json').then(r => r.json()).then(d => {
+  DATA = d;
+  buildRouteSelect();
+  drawStatic();
+});
+
+const cityCache = {};
+
+// ── Routes + Narration ──
+const NARRATIONS = {
+  'silk-westward': [
+    '丝绸从长安出发，穿越河西走廊……',
+    '经敦煌，过喀什，翻越帕米尔高原。',
+    '粟特商人接力运输，经撒马尔罕到巴格达。',
+    '最终到达君士坦丁堡——罗马人为之疯狂。',
+    '凯撒曾披丝绸出现在剧场，引起轰动。'
+  ],
+  'paper-westward': [
+    '公元751年，怛罗斯之战。',
+    '被俘的唐军造纸工匠将技术带入撒马尔罕。',
+    '此后造纸术经巴格达传入阿拉伯世界。',
+    '12世纪抵达欧洲——改变了人类文明进程。',
+    '从莎草纸到中国纸，知识传播从此加速。'
+  ],
+  'buddhism-eastward': [
+    '佛教从印度犍陀罗出发，沿丝路东渐。',
+    '经于阗、喀什，穿越塔克拉玛干。',
+    '在敦煌留下莫高窟——千年艺术的结晶。',
+    '经洛阳最终抵达长安，鸠摩罗什在此译经。',
+    '玄奘西行取经归来，法显写下佛国记。'
+  ],
+  'compass-maritime': [
+    '指南针从泉州装上宝船，随郑和舰队出航。',
+    '经广州、穿过马六甲海峡。',
+    '横跨印度洋，抵达卡利卡特的香料海岸。',
+    '经霍尔木兹入波斯湾，过亚丁进红海。',
+    '最终抵达亚历山大——大航海时代的关键技术。'
+  ],
+  'spice-eastward': [
+    '乳香和没药从阿拉伯半岛出发。',
+    '经红海、波斯湾，穿越印度洋。',
+    '在卡利卡特集散，经马六甲转运。',
+    '抵达广州市舶司——宋代最大宗的进口商品。',
+    '中国宫廷和寺庙中香烟缭绕数千年。'
+  ],
+  'porcelain-maritime': [
+    '瓷器从泉州出发——阿拉伯人称之为「中国雪」。',
+    '经南海到马六甲，再横渡印度洋。',
+    '在锡兰宝石岛补给，继续向西。',
+    '经霍尔木兹、亚丁，进入阿拉伯世界。',
+    '最终抵达东非蒙巴萨——至今海滩上仍有宋瓷碎片。'
+  ],
+  'gunpowder-westward': [
+    '火药诞生于唐代方士的炼丹炉中。',
+    '13世纪蒙古西征将火药武器带到中亚。',
+    '经撒马尔罕传入波斯和阿拉伯世界。',
+    '欧洲人学会制造火器，战争形态彻底改变。',
+    '从炼丹炉到火炮——一项技术改变了世界格局。'
+  ],
+  'tea-route': [
+    '茶叶从长安出发，中国的绿色黄金。',
+    '经洛阳，沿河西走廊到敦煌。',
+    '沿塔里木盆地南缘，抵达西域佛国于阗。',
+    '翻越喀喇昆仑山脉，进入印度次大陆。',
+    '茶马古道的马帮铃声在大山中回响了千年。'
+  ]
+};
+
+const TITLES = {
+  'silk-westward': '丝绸西传之路',
+  'paper-westward': '造纸术西传之路',
+  'buddhism-eastward': '佛教东传之路',
+  'compass-maritime': '指南针航海之路',
+  'spice-eastward': '香料东传之路',
+  'porcelain-maritime': '瓷器海上丝路',
+  'gunpowder-westward': '火药西传之路',
+  'tea-route': '茶马古道'
+};
+
+// ── Route list ──
+function buildRouteSelect() {
+  if (!DATA || !DATA.routes) return;
+  const sel = document.getElementById('routeSelect');
+  DATA.routes.forEach((r, i) => {
+    const opt = document.createElement('option');
+    opt.value = i;
+    opt.textContent = r.name;
+    sel.appendChild(opt);
+  });
+}
+
+// ── Draw static background ──
+function drawStatic() {
+  // Dark gradient background
+  const bg = ctx.createRadialGradient(W/2, H/2, 100, W/2, H/2, 1100);
+  bg.addColorStop(0, '#1a1a24');
+  bg.addColorStop(1, '#09090f');
+  ctx.fillStyle = bg;
+  ctx.fillRect(0, 0, W, H);
+
+  // Grid lines
+  ctx.strokeStyle = 'rgba(255,255,255,0.03)';
+  ctx.lineWidth = 0.5;
+  for (let lat = 0; lat <= 50; lat += 10) {
+    const y = project(lat, 0).y;
+    ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
+  }
+  for (let lng = 30; lng <= 120; lng += 15) {
+    const x = project(0, lng).x;
+    ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke();
+  }
+
+  // All cities as faint dots
+  if (!DATA) return;
+  ctx.fillStyle = 'rgba(212,168,83,0.3)';
+  DATA.nodes.cities.forEach(c => {
+    const p = project(c.lat, c.lng);
+    ctx.beginPath(); ctx.arc(p.x, p.y, 2.5, 0, Math.PI*2); ctx.fill();
+  });
+}
+
+// ── Animation state ──
+let playing = false;
+let recording = false;
+let rafId = null;
+let mediaRecorder = null;
+let recordedChunks = [];
+
+let currentRouteIdx = 0;
+let routeProgress = 0;    // 0-1 within current route
+let animStartTime = 0;
+let ROUTE_DURATION = 25000; // ms per route
+
+// Pre-computed route data
+let routeDataCache = [];
+
+function prepareRouteData() {
+  if (!DATA || !DATA.routes) return;
+  routeDataCache = DATA.routes.map(route => {
+    const points = route.nodes.map(nid => {
+      const c = DATA.nodes.cities.find(cc => cc.id === nid);
+      return c ? project(c.lat, c.lng) : null;
+    }).filter(Boolean);
+
+    // Cumulative distances
+    const dists = [0];
+    for (let i = 1; i < points.length; i++) {
+      const dx = points[i].x - points[i-1].x;
+      const dy = points[i].y - points[i-1].y;
+      dists.push(dists[i-1] + Math.sqrt(dx*dx + dy*dy));
+    }
+    const total = dists[dists.length - 1];
+
+    return { route, points, dists, total };
+  });
+}
+
+function positionOnRoute(rc, progress) {
+  const target = progress * rc.total;
+  for (let i = 1; i < rc.dists.length; i++) {
+    if (rc.dists[i] >= target) {
+      const segLen = rc.dists[i] - rc.dists[i-1];
+      const t = segLen > 0 ? (target - rc.dists[i-1]) / segLen : 0;
+      // easeInOutCubic
+      const et = t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3) / 2;
+      return {
+        x: rc.points[i-1].x + et * (rc.points[i].x - rc.points[i-1].x),
+        y: rc.points[i-1].y + et * (rc.points[i].y - rc.points[i-1].y),
+        segIdx: i - 1,
+        nodeIdx: t < 0.01 ? i - 1 : (t > 0.99 ? i : -1)
+      };
+    }
+  }
+  const last = rc.points.length - 1;
+  return { x: rc.points[last].x, y: rc.points[last].y, segIdx: last - 1, nodeIdx: last };
+}
+
+// ── Draw frame ──
+function drawFrame(routeIdx, progress) {
+  if (routeIdx < 0 || routeIdx >= routeDataCache.length) return;
+  const rc = routeDataCache[routeIdx];
+  const route = rc.route;
+  const pos = positionOnRoute(rc, Math.min(progress, 1));
+
+  ctx.clearRect(0, 0, W, H);
+  drawStatic();
+
+  // Draw all route paths faintly
+  ctx.strokeStyle = 'rgba(255,255,255,0.04)';
+  ctx.lineWidth = 1.5;
+  ctx.setLineDash([8, 6]);
+  routeDataCache.forEach((rrc, i) => {
+    if (i === routeIdx) return;
+    ctx.beginPath();
+    rrc.points.forEach((p, j) => j === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y));
+    ctx.stroke();
+  });
+  ctx.setLineDash([]);
+
+  // Active route — dim path behind, bright path ahead
+  // Behind (traveled)
+  ctx.strokeStyle = 'rgba(212,168,83,0.6)';
+  ctx.lineWidth = 3;
+  ctx.setLineDash([]);
+  ctx.beginPath();
+  rc.points.forEach((p, j) => {
+    if (j === 0) ctx.moveTo(p.x, p.y);
+    else if (rc.dists[j] / rc.total <= progress) ctx.lineTo(p.x, p.y);
+    else {
+      // interpolate to current position
+      const segProg = Math.min(progress * rc.total / rc.total, 1);
+      ctx.lineTo(pos.x, pos.y);
+    }
+  });
+  ctx.stroke();
+
+  // Ahead (dim)
+  ctx.strokeStyle = 'rgba(255,255,255,0.08)';
+  ctx.lineWidth = 2;
+  ctx.setLineDash([4, 8]);
+  ctx.beginPath();
+  ctx.moveTo(pos.x, pos.y);
+  for (let j = 0; j < rc.points.length; j++) {
+    if (rc.dists[j] / rc.total > progress) {
+      ctx.lineTo(rc.points[j].x, rc.points[j].y);
+    }
+  }
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  // City markers
+  rc.points.forEach((p, i) => {
+    const isStart = i === 0;
+    const isEnd = i === rc.points.length - 1;
+    const isReached = rc.dists[i] / rc.total <= progress;
+    const r = isStart || isEnd ? 6 : 4.5;
+
+    // Glow for reached cities
+    if (isReached) {
+      ctx.fillStyle = 'rgba(212,168,83,0.15)';
+      ctx.beginPath(); ctx.arc(p.x, p.y, 12, 0, Math.PI*2); ctx.fill();
+    }
+
+    ctx.fillStyle = isReached ? '#d4a853' : 'rgba(255,255,255,0.25)';
+    if (isStart) ctx.fillStyle = '#fff';
+    if (isEnd && progress >= 1) ctx.fillStyle = '#c75b3a';
+    ctx.beginPath(); ctx.arc(p.x, p.y, r, 0, Math.PI*2); ctx.fill();
+    ctx.strokeStyle = '#0d0d12'; ctx.lineWidth = 1.5; ctx.stroke();
+
+    // City name
+    const c = DATA.nodes.cities.find(cc => cc.id === route.nodes[i]);
+    if (c && (isStart || isEnd || isReached)) {
+      ctx.fillStyle = isReached ? '#e0ddd5' : 'rgba(255,255,255,0.3)';
+      ctx.font = `${isStart||isEnd?14:11}px "PingFang SC","Microsoft YaHei",sans-serif`;
+      ctx.textAlign = 'center';
+      ctx.fillText(c.name, p.x, p.y - 12);
+    }
+  });
+
+  // Animated marker
+  const glowGrad = ctx.createRadialGradient(pos.x, pos.y, 0, pos.x, pos.y, 20);
+  glowGrad.addColorStop(0, 'rgba(255,255,255,0.9)');
+  glowGrad.addColorStop(0.3, 'rgba(212,168,83,0.7)');
+  glowGrad.addColorStop(1, 'rgba(212,168,83,0)');
+  ctx.fillStyle = glowGrad;
+  ctx.beginPath(); ctx.arc(pos.x, pos.y, 20, 0, Math.PI*2); ctx.fill();
+
+  ctx.fillStyle = '#fff';
+  ctx.beginPath(); ctx.arc(pos.x, pos.y, 6, 0, Math.PI*2); ctx.fill();
+
+  // ── Overlay text ──
+
+  // Top: route title
+  ctx.fillStyle = '#d4a853';
+  ctx.font = 'bold 32px "PingFang SC","Microsoft YaHei",sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText(route.name, W/2, 60);
+
+  // Direction badge
+  ctx.fillStyle = 'rgba(199,91,58,0.2)';
+  const badgeW = ctx.measureText(route.direction).width + 30;
+  ctx.beginPath();
+  const bx = W/2 - badgeW/2, by = 76, bh = 28, br = 14;
+  ctx.moveTo(bx + br, by); ctx.lineTo(bx + badgeW - br, by);
+  ctx.arcTo(bx + badgeW, by, bx + badgeW, by + br, br);
+  ctx.arcTo(bx + badgeW, by + bh, bx + badgeW - br, by + bh, br);
+  ctx.arcTo(bx, by + bh, bx, by + bh - br, br);
+  ctx.arcTo(bx, by, bx + br, by, br);
+  ctx.fill();
+  ctx.fillStyle = '#e0ddd5';
+  ctx.font = '14px "PingFang SC","Microsoft YaHei",sans-serif';
+  ctx.fillText(`${route.direction} · ${route.nodes.length} 站`, W/2, 96);
+
+  // Bottom: narration
+  const narration = NARRATIONS[route.id] || [];
+  const narrationIdx = Math.min(Math.floor(progress * narration.length), narration.length - 1);
+  const narText = narration[narrationIdx] || '';
+  ctx.fillStyle = '#e0ddd5';
+  ctx.font = '20px "PingFang SC","Microsoft YaHei",sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText(narText, W/2, H - 80);
+
+  // Progress dots
+  const dotY = H - 40;
+  const dotSpacing = 24;
+  const totalDots = narration.length;
+  const startX = W/2 - (totalDots - 1) * dotSpacing / 2;
+  for (let i = 0; i < totalDots; i++) {
+    ctx.fillStyle = i <= narrationIdx ? '#d4a853' : 'rgba(255,255,255,0.2)';
+    ctx.beginPath();
+    ctx.arc(startX + i * dotSpacing, dotY, i === narrationIdx ? 5 : 3.5, 0, Math.PI*2);
+    ctx.fill();
+  }
+
+  // Route counter
+  ctx.fillStyle = 'rgba(255,255,255,0.3)';
+  ctx.font = '13px "PingFang SC","Microsoft YaHei",sans-serif';
+  ctx.textAlign = 'right';
+  ctx.fillText(`${routeIdx + 1} / ${routeDataCache.length}`, W - 40, 54);
+}
+
+// ── Opening title card ──
+function drawTitleCard(subtitle) {
+  ctx.clearRect(0, 0, W, H);
+  const bg = ctx.createRadialGradient(W/2, H/2, 100, W/2, H/2, 1100);
+  bg.addColorStop(0, '#14141c');
+  bg.addColorStop(1, '#06060a');
+  ctx.fillStyle = bg;
+  ctx.fillRect(0, 0, W, H);
+
+  // Decorative line
+  ctx.strokeStyle = 'rgba(212,168,83,0.2)';
+  ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(W/2 - 300, H/2 - 10); ctx.lineTo(W/2 + 300, H/2 - 10); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(W/2 - 200, H/2 + 30); ctx.lineTo(W/2 + 200, H/2 + 30); ctx.stroke();
+
+  ctx.fillStyle = '#d4a853';
+  ctx.font = 'bold 42px "PingFang SC","Microsoft YaHei",sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('从长安到罗马', W/2, H/2 - 50);
+
+  ctx.fillStyle = '#e0ddd5';
+  ctx.font = '28px "PingFang SC","Microsoft YaHei",sans-serif';
+  ctx.fillText(subtitle || '丝路上的八条生命线', W/2, H/2 + 20);
+
+  ctx.fillStyle = 'rgba(255,255,255,0.3)';
+  ctx.font = '16px "PingFang SC","Microsoft YaHei",sans-serif';
+  ctx.fillText('🐫 丝绸之路交互知识图谱 · 传播路径动画', W/2, H/2 + 70);
+}
+
+// ── Closing card ──
+function drawClosingCard() {
+  ctx.clearRect(0, 0, W, H);
+  const bg = ctx.createRadialGradient(W/2, H/2, 100, W/2, H/2, 1100);
+  bg.addColorStop(0, '#14141c');
+  bg.addColorStop(1, '#06060a');
+  ctx.fillStyle = bg;
+  ctx.fillRect(0, 0, W, H);
+
+  ctx.fillStyle = '#d4a853';
+  ctx.font = 'bold 36px "PingFang SC","Microsoft YaHei",sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('数据与代码全部开源', W/2, H/2 - 60);
+
+  ctx.fillStyle = '#e0ddd5';
+  ctx.font = '20px "PingFang SC","Microsoft YaHei",sans-serif';
+  ctx.fillText('scarlettlab2026.github.io/silk-road-2026', W/2, H/2);
+  ctx.fillText('github.com/ScarlettLab2026/silk-road-2026', W/2, H/2 + 35);
+
+  ctx.fillStyle = 'rgba(255,255,255,0.4)';
+  ctx.font = '16px "PingFang SC","Microsoft YaHei",sans-serif';
+  ctx.fillText('数据 CC BY-SA 4.0 · 代码 MIT · 欢迎 Star ⭐', W/2, H/2 + 80);
+
+  ctx.fillStyle = 'rgba(255,255,255,0.3)';
+  ctx.font = '15px "PingFang SC","Microsoft YaHei",sans-serif';
+  ctx.fillText('让世界看到中国的故事', W/2, H/2 + 120);
+}
+
+// ── Animation loop (full auto-play sequence) ──
+const PHASE_TITLE = 0, PHASE_ROUTE = 1, PHASE_CLOSING = 2, PHASE_DONE = 3;
+let phase = PHASE_TITLE;
+let phaseStart = 0;
+let fullStartTime = 0;
+const TITLE_DURATION = 4000;
+const CLOSING_DURATION = 5000;
+
+function animLoop(timestamp) {
+  if (!playing) return;
+
+  if (!fullStartTime) fullStartTime = timestamp;
+  const elapsed = timestamp - fullStartTime;
+
+  if (phase === PHASE_TITLE) {
+    drawTitleCard('丝路上的八条生命线');
+    if (elapsed >= TITLE_DURATION) {
+      phase = PHASE_ROUTE;
+      currentRouteIdx = 0;
+      fullStartTime = timestamp;
+    }
+  } else if (phase === PHASE_ROUTE) {
+    const routeElapsed = timestamp - fullStartTime;
+    routeProgress = Math.min(routeElapsed / ROUTE_DURATION, 1);
+    drawFrame(currentRouteIdx, routeProgress);
+
+    if (routeProgress >= 1) {
+      // Move to next route or closing
+      currentRouteIdx++;
+      if (currentRouteIdx >= routeDataCache.length) {
+        phase = PHASE_CLOSING;
+        fullStartTime = timestamp;
+      } else {
+        fullStartTime = timestamp;
+      }
+    }
+  } else if (phase === PHASE_CLOSING) {
+    drawClosingCard();
+    if (elapsed >= CLOSING_DURATION) {
+      phase = PHASE_DONE;
+      playing = false;
+      if (recording) stopRecording();
+      updateButtons();
+      return;
+    }
+  }
+
+  rafId = requestAnimationFrame(animLoop);
+}
+
+// ── Playback controls ──
+function togglePlay() {
+  if (!DATA) return;
+  if (!routeDataCache.length) prepareRouteData();
+  if (!routeDataCache.length) return;
+
+  if (playing) {
+    playing = false;
+    if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+  } else {
+    playing = true;
+    phase = PHASE_TITLE;
+    currentRouteIdx = 0;
+    routeProgress = 0;
+    fullStartTime = 0;
+    animLoop(performance.now());
+  }
+  updateButtons();
+}
+
+function jumpToRoute(idx) {
+  idx = parseInt(idx);
+  if (!DATA || !routeDataCache.length) prepareRouteData();
+  if (idx < 0) {
+    // Auto mode — reset to title
+    if (playing) {
+      playing = false; if (rafId) cancelAnimationFrame(rafId);
+    }
+    phase = PHASE_TITLE;
+    fullStartTime = 0;
+    updateButtons();
+    return;
+  }
+  if (idx >= routeDataCache.length) return;
+
+  if (playing) { playing = false; if (rafId) cancelAnimationFrame(rafId); }
+  currentRouteIdx = idx;
+  routeProgress = 0;
+  phase = PHASE_ROUTE;
+  fullStartTime = 0;
+  drawFrame(currentRouteIdx, 0);
+  updateButtons();
+  document.getElementById('status').textContent = `预览: ${TITLES[routeDataCache[idx].route.id]}`;
+}
+
+function updateButtons() {
+  document.getElementById('btnPlay').textContent = playing ? '⏸ 暂停' : '▶ 预览';
+  document.getElementById('btnRec').disabled = playing;
+  document.getElementById('routeSelect').disabled = playing || recording;
+}
+
+// ── Recording ──
+async function startRecording() {
+  if (!DATA) return;
+  if (!routeDataCache.length) prepareRouteData();
+  if (!routeDataCache.length) return;
+
+  const stream = cv.captureStream(30);
+  const mimeType = MediaRecorder.isTypeSupported('video/webm;codecs=vp9')
+    ? 'video/webm;codecs=vp9' : 'video/webm';
+
+  recordedChunks = [];
+  mediaRecorder = new MediaRecorder(stream, { mimeType, videoBitsPerSecond: 5000000 });
+  mediaRecorder.ondataavailable = e => { if (e.data.size > 0) recordedChunks.push(e.data); };
+  mediaRecorder.onstop = () => {
+    const blob = new Blob(recordedChunks, { type: 'video/webm' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = 'silk-road-routes.webm'; a.click();
+    URL.revokeObjectURL(url);
+    document.getElementById('status').textContent = '✅ 视频已下载 · silk-road-routes.webm';
+    recording = false;
+    document.getElementById('btnRec').classList.remove('recording');
+    document.getElementById('btnRec').textContent = '🎬 开始录制';
+    updateButtons();
+  };
+
+  mediaRecorder.start();
+  recording = true;
+  document.getElementById('btnRec').classList.add('recording');
+  document.getElementById('btnRec').textContent = '⏺ 录制中...';
+  document.getElementById('status').textContent = '录制中 · 1920×1080 · 30fps · ~3分钟';
+
+  // Start playback
+  playing = true;
+  phase = PHASE_TITLE;
+  currentRouteIdx = 0;
+  routeProgress = 0;
+  fullStartTime = 0;
+  updateButtons();
+  animLoop(performance.now());
+}
+
+function stopRecording() {
+  if (mediaRecorder && mediaRecorder.state === 'recording') {
+    mediaRecorder.stop();
+  }
+}
+
+// ── Init ──
+fetch('data/silk-road.json').then(r => r.json()).then(d => {
+  DATA = d;
+  buildRouteSelect();
+  prepareRouteData();
+  // Draw first route as preview
+  if (routeDataCache.length > 0) {
+    currentRouteIdx = 0;
+    drawFrame(0, 0);
+  }
+  document.getElementById('status').textContent = '✅ 数据就绪 · 1920×1080 · 30fps';
+});
+
+// Keyboard shortcuts
+document.addEventListener('keydown', e => {
+  if (e.key === ' ' || e.code === 'Space') { e.preventDefault(); togglePlay(); }
+  if (e.key === 'r' && !e.ctrlKey && !e.metaKey) { e.preventDefault(); startRecording(); }
+});
+</script>
+</body>
+</html>

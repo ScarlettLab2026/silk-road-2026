@@ -2527,6 +2527,94 @@
           "relation_en": "Red Sea → farthest point in East Africa"
         }
       ]
+    },
+    {
+      "id": "gunpowder-westward",
+      "name": "火药西传之路",
+      "name_en": "Gunpowder Travels West",
+      "goods_id": "gunpowder",
+      "goods_name": "火药",
+      "description": "火药发明于唐代，13世纪蒙古西征时将火药技术传入阿拉伯和欧洲。欧洲人将火药用于火器，反过来改变了战争形态和世界格局。从炼丹炉里的偶然发现到改变世界的技术，火药走过了最传奇的西传之路。",
+      "description_en": "Invented in Tang China, gunpowder spread to Arabia and Europe during the 13th-century Mongol conquests. Europeans adapted it for firearms, transforming warfare and the global order. From an alchemist's accidental discovery to a world-changing technology — gunpowder's journey west is legendary.",
+      "direction": "东→西",
+      "direction_en": "East → West",
+      "nodes": [
+        "changan",
+        "dunhuang",
+        "samarkand",
+        "baghdad",
+        "constantinople"
+      ],
+      "segments": [
+        {
+          "from": "changan",
+          "to": "dunhuang",
+          "relation": "唐代炼丹术 → 火药配方成熟",
+          "relation_en": "Tang alchemy → gunpowder formula perfected"
+        },
+        {
+          "from": "dunhuang",
+          "to": "samarkand",
+          "relation": "蒙古西征 → 火药武器传入中亚",
+          "relation_en": "Mongol conquest → gunpowder weapons reach Central Asia"
+        },
+        {
+          "from": "samarkand",
+          "to": "baghdad",
+          "relation": "经波斯 → 阿拉伯世界掌握火药",
+          "relation_en": "Via Persia → Arab world masters gunpowder"
+        },
+        {
+          "from": "baghdad",
+          "to": "constantinople",
+          "relation": "传入欧洲 → 火器改变战争形态",
+          "relation_en": "Reaches Europe → firearms transform warfare"
+        }
+      ]
+    },
+    {
+      "id": "tea-route",
+      "name": "茶马古道",
+      "name_en": "Tea Horse Road",
+      "goods_id": "tea",
+      "goods_name": "茶叶",
+      "description": "茶马古道是连接中国西南与西藏、南亚的古老商道。云南的茶叶由马帮驮运，翻越横断山脉进入西藏，换取藏区的良马。这条路比丝绸之路更险峻——悬崖峭壁上的马帮铃声，在大山中回响了千年。",
+      "description_en": "The Tea Horse Road was an ancient trade route connecting southwest China with Tibet and South Asia. Yunnan tea was carried by horse caravans across the Hengduan Mountains into Tibet, traded for fine Tibetan horses. More treacherous than the Silk Road — the sound of caravan bells echoed through these mountains for a thousand years.",
+      "direction": "东→西（西南）",
+      "direction_en": "East → West (Southwest)",
+      "nodes": [
+        "changan",
+        "luoyang",
+        "dunhuang",
+        "khotan",
+        "taxila"
+      ],
+      "segments": [
+        {
+          "from": "changan",
+          "to": "luoyang",
+          "relation": "中原茶文化 → 东汉都城",
+          "relation_en": "Central Plains tea culture → Eastern Han capital"
+        },
+        {
+          "from": "luoyang",
+          "to": "dunhuang",
+          "relation": "河西走廊 → 丝路咽喉",
+          "relation_en": "Hexi Corridor → Silk Road gateway"
+        },
+        {
+          "from": "dunhuang",
+          "to": "khotan",
+          "relation": "塔里木南缘 → 西域佛国于阗",
+          "relation_en": "Southern Tarim rim → Buddhist Khotan"
+        },
+        {
+          "from": "khotan",
+          "to": "taxila",
+          "relation": "翻越喀喇昆仑 → 印度次大陆",
+          "relation_en": "Across the Karakoram → Indian subcontinent"
+        }
+      ]
     }
   ]
 }

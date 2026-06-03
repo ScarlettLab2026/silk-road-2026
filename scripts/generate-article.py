@@ -7,6 +7,7 @@
   python3 scripts/generate-article.py cards      # 生成知识卡片（社交媒体用）
   python3 scripts/generate-article.py routes     # 生成人物路线描述
   python3 scripts/generate-article.py stats      # 打印数据统计
+  python3 scripts/generate-article.py video      # 生成B站视频分镜脚本
 """
 
 import json
@@ -256,10 +257,92 @@ def generate_routes(data):
 
     return out
 
+# ─── Video Script ───
+
+def generate_video_script(data):
+    """生成B站视频分镜脚本 — 8条传播路线 + 开场/结尾"""
+    routes = data.get('routes', [])
+    if not routes:
+        return "❌ 数据中没有传播路线"
+
+    city_map = {c['id']: c for c in data['nodes']['cities']}
+
+    out = []
+    out.append("# 🎬 丝绸之路传播路径 · B站视频分镜脚本")
+    out.append(f"\n> 生成时间: {datetime.now().strftime('%Y-%m-%d')}")
+    out.append(f"> 总路线数: {len(routes)}")
+    out.append("> 建议分辨率: 1920×1080 · 30fps")
+    out.append("> 建议BGM: 西域风格民乐 / 史诗管弦乐")
+    out.append("")
+
+    # 开场
+    out.append("---")
+    out.append("## 🎬 镜头 0: 开场标题 (0:00-0:04, 4s)")
+    out.append("")
+    out.append("**画面**: 深色地图背景，标题大字渐入")
+    out.append("**旁白**: 从长安到罗马，从泉州到蒙巴萨——")
+    out.append("**旁白**: 两千年来，一条路连接了东方与西方。")
+    out.append("**旁白**: 今天，我们沿着八条路线，重走丝绸之路。")
+    out.append("")
+
+    total_seconds = 4
+    for i, route in enumerate(routes):
+        seg_count = len(route.get('segments', []))
+        duration = max(18, seg_count * 6)  # ~6s per segment
+        start_time = total_seconds
+        end_time = total_seconds + duration
+        m, s = divmod(start_time, 60)
+        me, se = divmod(end_time, 60)
+
+        out.append("---")
+        out.append(f"## 🎬 镜头 {i+1}: {route['name']} ({m}:{s:02d}-{me}:{se:02d}, {duration}s)")
+        out.append("")
+        out.append(f"**路线**: {route['direction']} · {len(route['nodes'])} 个节点")
+        out.append(f"**物产/主题**: {route.get('goods_name', '—')}")
+        out.append("")
+        out.append(f"**画面**: {route['name']}路线动画，金色光点沿路径移动")
+        out.append(f"**旁白**: {route['description']}")
+        out.append("")
+
+        # Per-segment details
+        for j, seg in enumerate(route.get('segments', [])):
+            fc = city_map.get(seg['from'], {})
+            tc = city_map.get(seg['to'], {})
+            fn = fc.get('name', seg['from'])
+            tn = tc.get('name', seg['to'])
+            rel = seg.get('relation', '')
+            out.append(f"  **段 {j+1}**: {fn} → {tn}")
+            out.append(f"  _{rel}_")
+            out.append("")
+
+        out.append(f"**字幕**: 「{route['name']}」— {route['direction']}")
+        out.append("")
+
+        total_seconds += duration
+
+    # 结尾
+    m, s = divmod(total_seconds, 60)
+    out.append("---")
+    out.append(f"## 🎬 结尾 (总时长约 {m}分{s}秒)")
+    out.append("")
+    out.append("**画面**: 所有路线同时显示在地图上，汇聚成网")
+    out.append("**旁白**: 丝绸之路不是一条路，而是一张网。")
+    out.append("**旁白**: 数据和代码全部开源在 GitHub。")
+    out.append("**旁白**: 欢迎 star、fork、补充数据。")
+    out.append("**旁白**: 让世界看到中国的故事。")
+    out.append("")
+    out.append("**结尾字幕**:")
+    out.append("- 🐫 scarlettlab2026.github.io/silk-road-2026")
+    out.append("- 📦 github.com/ScarlettLab2026/silk-road-2026")
+    out.append("- 📜 数据 CC BY-SA 4.0 · 代码 MIT")
+    out.append("")
+
+    return '\n'.join(out)
+
 # ─── Main ───
 if __name__ == '__main__':
     if len(sys.argv) < 2:
-        print("用法: python3 generate-article.py [article|poster|cards|routes|stats]")
+        print("用法: python3 generate-article.py [article|poster|cards|routes|stats|video]")
         sys.exit(1)
 
     data = load_data()
@@ -291,3 +374,12 @@ if __name__ == '__main__':
 
     elif mode == 'stats':
         print_stats(data)
+
+    elif mode == 'video':
+        out_dir = os.path.join(os.path.dirname(__file__), '..', 'output')
+        os.makedirs(out_dir, exist_ok=True)
+        script = generate_video_script(data)
+        path = os.path.join(out_dir, 'video-script.md')
+        with open(path, 'w') as f:
+            f.write(script)
+        print(f"✅ 视频分镜脚本已生成: {path}")
