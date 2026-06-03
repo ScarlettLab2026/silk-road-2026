@@ -113,12 +113,12 @@
 </head>
 <body>
 
-<div style="text-align:center;margin-bottom:8px">
+<div style="text-align:center;margin-bottom:8px;position:sticky;top:16px;z-index:100">
   <button onclick="toggleTheme()" id="themeBtn" style="
-    background:var(--card-bg); border:1px solid var(--border); color:var(--text);
-    padding:8px 20px; border-radius:20px; cursor:pointer; font-size:0.82rem;
-    transition:all 0.2s;
-  ">☀️ 亮色模式 · 小红书截图更出片</button>
+    background:var(--accent); border:none; color:#111;
+    padding:10px 28px; border-radius:24px; cursor:pointer; font-size:0.85rem; font-weight:600;
+    transition:all 0.2s; box-shadow:0 2px 12px rgba(0,0,0,0.3);
+  ">☀️ 切换到亮色模式</button>
 </div>
 <h1 style="text-align:center;color:var(--accent);font-size:1.1rem;margin-bottom:8px">🐫 丝路知识问答卡片</h1>
 <p style="text-align:center;color:var(--text-dim);font-size:0.78rem;margin-bottom:32px">
@@ -474,20 +474,17 @@ function toggleTheme() {
   const isLight = document.body.classList.toggle('light');
   const btn = document.getElementById('themeBtn');
   if (isLight) {
-    btn.innerHTML = '🌙 暗色模式 · 经典丝路风格';
-    btn.style.background = 'var(--card-bg)';
+    btn.innerHTML = '🌙 切回暗色模式';
   } else {
-    btn.innerHTML = '☀️ 亮色模式 · 小红书截图更出片';
-    btn.style.background = 'var(--card-bg)';
+    btn.innerHTML = '☀️ 切换到亮色模式';
   }
-  // Persist preference
   localStorage.setItem('card-theme', isLight ? 'light' : 'dark');
 }
 
 // Restore saved preference
 if (localStorage.getItem('card-theme') === 'light') {
   document.body.classList.add('light');
-  document.getElementById('themeBtn').innerHTML = '🌙 暗色模式 · 经典丝路风格';
+  document.getElementById('themeBtn').innerHTML = '🌙 切回暗色模式';
 }
 </script>
 </body>
