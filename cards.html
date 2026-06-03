@@ -113,13 +113,16 @@
 </head>
 <body>
 
-<div style="text-align:center;margin-bottom:8px;position:sticky;top:16px;z-index:100">
-  <button onclick="toggleTheme()" id="themeBtn" style="
-    background:var(--accent); border:none; color:#111;
-    padding:10px 28px; border-radius:24px; cursor:pointer; font-size:0.85rem; font-weight:600;
-    transition:all 0.2s; box-shadow:0 2px 12px rgba(0,0,0,0.3);
-  ">☀️ 切换到亮色模式</button>
+<div style="
+  position:fixed;top:0;left:0;right:0;z-index:9999;
+  background:#b8860b;color:#111;text-align:center;
+  padding:14px 24px;font-weight:700;font-size:0.9rem;
+  cursor:pointer;letter-spacing:0.04em;
+  box-shadow:0 2px 16px rgba(0,0,0,0.3);
+" onclick="toggleTheme()" id="themeBtn">
+  ☀️ 点击切换亮色模式 · 小红书截图更出片
 </div>
+<div style="height:60px"></div>
 <h1 style="text-align:center;color:var(--accent);font-size:1.1rem;margin-bottom:8px">🐫 丝路知识问答卡片</h1>
 <p style="text-align:center;color:var(--text-dim);font-size:0.78rem;margin-bottom:32px">
   每张卡片独立可用 · 右键保存或截图 · 每天发一张到社交媒体
@@ -474,9 +477,13 @@ function toggleTheme() {
   const isLight = document.body.classList.toggle('light');
   const btn = document.getElementById('themeBtn');
   if (isLight) {
-    btn.innerHTML = '🌙 切回暗色模式';
+    btn.innerHTML = '🌙 点击切回暗色模式 · 经典丝路风格';
+    btn.style.background = '#2c2416';
+    btn.style.color = '#f5f0e8';
   } else {
-    btn.innerHTML = '☀️ 切换到亮色模式';
+    btn.innerHTML = '☀️ 点击切换亮色模式 · 小红书截图更出片';
+    btn.style.background = '#b8860b';
+    btn.style.color = '#111';
   }
   localStorage.setItem('card-theme', isLight ? 'light' : 'dark');
 }
@@ -484,7 +491,10 @@ function toggleTheme() {
 // Restore saved preference
 if (localStorage.getItem('card-theme') === 'light') {
   document.body.classList.add('light');
-  document.getElementById('themeBtn').innerHTML = '🌙 切回暗色模式';
+  const btn = document.getElementById('themeBtn');
+  btn.innerHTML = '🌙 点击切回暗色模式 · 经典丝路风格';
+  btn.style.background = '#2c2416';
+  btn.style.color = '#f5f0e8';
 }
 </script>
 </body>
