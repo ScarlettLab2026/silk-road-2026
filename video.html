@@ -80,15 +80,8 @@ function project(lat, lng) {
   return { x, y };
 }
 
-// ── Load data ──
+// ── Global state ──
 let DATA = null;
-fetch('data/silk-road.json').then(r => r.json()).then(d => {
-  DATA = d;
-  buildRouteSelect();
-  drawStatic();
-});
-
-const cityCache = {};
 
 // ── Routes + Narration ──
 const NARRATIONS = {
@@ -281,33 +274,28 @@ function drawFrame(routeIdx, progress) {
   });
   ctx.setLineDash([]);
 
-  // Active route — dim path behind, bright path ahead
-  // Behind (traveled)
+  // Active route — bright traveled path
   ctx.strokeStyle = 'rgba(212,168,83,0.6)';
   ctx.lineWidth = 3;
   ctx.setLineDash([]);
   ctx.beginPath();
+  let drawnToPos = false;
   rc.points.forEach((p, j) => {
-    if (j === 0) ctx.moveTo(p.x, p.y);
-    else if (rc.dists[j] / rc.total <= progress) ctx.lineTo(p.x, p.y);
-    else {
-      // interpolate to current position
-      const segProg = Math.min(progress * rc.total / rc.total, 1);
-      ctx.lineTo(pos.x, pos.y);
-    }
+    if (j === 0) { ctx.moveTo(p.x, p.y); return; }
+    if (rc.dists[j] / rc.total <= progress) { ctx.lineTo(p.x, p.y); return; }
+    if (!drawnToPos) { ctx.lineTo(pos.x, pos.y); drawnToPos = true; }
   });
+  if (progress >= 1 && !drawnToPos) { const lp = rc.points[rc.points.length-1]; ctx.lineTo(lp.x, lp.y); }
   ctx.stroke();
 
-  // Ahead (dim)
+  // Ahead (dim dashed)
   ctx.strokeStyle = 'rgba(255,255,255,0.08)';
   ctx.lineWidth = 2;
   ctx.setLineDash([4, 8]);
   ctx.beginPath();
   ctx.moveTo(pos.x, pos.y);
   for (let j = 0; j < rc.points.length; j++) {
-    if (rc.dists[j] / rc.total > progress) {
-      ctx.lineTo(rc.points[j].x, rc.points[j].y);
-    }
+    if (rc.dists[j] / rc.total > progress) ctx.lineTo(rc.points[j].x, rc.points[j].y);
   }
   ctx.stroke();
   ctx.setLineDash([]);
@@ -361,8 +349,8 @@ function drawFrame(routeIdx, progress) {
   ctx.fillText(route.name, W/2, 60);
 
   // Direction badge
-  ctx.fillStyle = 'rgba(199,91,58,0.2)';
-  const badgeW = ctx.measureText(route.direction).width + 30;
+  ctx.font = '14px "PingFang SC","Microsoft YaHei",sans-serif';
+  const badgeW = ctx.measureText(`${route.direction} · ${route.nodes.length} 站`).width + 30;
   ctx.beginPath();
   const bx = W/2 - badgeW/2, by = 76, bh = 28, br = 14;
   ctx.moveTo(bx + br, by); ctx.lineTo(bx + badgeW - br, by);
@@ -540,7 +528,9 @@ function jumpToRoute(idx) {
     }
     phase = PHASE_TITLE;
     fullStartTime = 0;
+    drawTitleCard('丝路上的八条生命线');
     updateButtons();
+    document.getElementById('status').textContent = '就绪 · 1920×1080 · 30fps';
     return;
   }
   if (idx >= routeDataCache.length) return;
