@@ -10,8 +10,13 @@
     --text-dim: #9a9790; --accent: #d4a853; --border: #333338;
     --city: #d4a853; --figure: #5b9bd5; --goods: #6aad6a; --event: #c75b3a; --chain: #c08a50;
   }
+  body.light {
+    --bg: #f5f0e8; --card-bg: #ffffff; --text: #2c2416;
+    --text-dim: #8c8068; --accent: #b8860b; --border: #e0d8c8;
+    --city: #b8860b; --figure: #3b7dc4; --goods: #4a8c4a; --event: #c75b3a; --chain: #a0723a;
+  }
   * { margin:0; padding:0; box-sizing:border-box; }
-  body { background: #111; font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; padding: 32px 24px; }
+  body { background: var(--bg); font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; padding: 32px 24px; transition: background 0.3s; }
 
   h2 { text-align: center; font-size: 1rem; color: var(--accent); margin: 40px 0 16px; letter-spacing: 0.1em; }
   h2:first-child { margin-top: 0; }
@@ -108,6 +113,13 @@
 </head>
 <body>
 
+<div style="text-align:center;margin-bottom:8px">
+  <button onclick="toggleTheme()" id="themeBtn" style="
+    background:var(--card-bg); border:1px solid var(--border); color:var(--text);
+    padding:8px 20px; border-radius:20px; cursor:pointer; font-size:0.82rem;
+    transition:all 0.2s;
+  ">☀️ 亮色模式 · 小红书截图更出片</button>
+</div>
 <h1 style="text-align:center;color:var(--accent);font-size:1.1rem;margin-bottom:8px">🐫 丝路知识问答卡片</h1>
 <p style="text-align:center;color:var(--text-dim);font-size:0.78rem;margin-bottom:32px">
   每张卡片独立可用 · 右键保存或截图 · 每天发一张到社交媒体
@@ -457,6 +469,26 @@ function buildAllCards(DATA) {
 }
 
 fetch(DATA_URL).then(r => r.json()).then(buildAllCards);
+
+function toggleTheme() {
+  const isLight = document.body.classList.toggle('light');
+  const btn = document.getElementById('themeBtn');
+  if (isLight) {
+    btn.innerHTML = '🌙 暗色模式 · 经典丝路风格';
+    btn.style.background = 'var(--card-bg)';
+  } else {
+    btn.innerHTML = '☀️ 亮色模式 · 小红书截图更出片';
+    btn.style.background = 'var(--card-bg)';
+  }
+  // Persist preference
+  localStorage.setItem('card-theme', isLight ? 'light' : 'dark');
+}
+
+// Restore saved preference
+if (localStorage.getItem('card-theme') === 'light') {
+  document.body.classList.add('light');
+  document.getElementById('themeBtn').innerHTML = '🌙 暗色模式 · 经典丝路风格';
+}
 </script>
 </body>
 </html>
