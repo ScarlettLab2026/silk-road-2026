@@ -152,6 +152,111 @@
   #graph-view .legend span { display: flex; align-items: center; gap: 5px; }
   #graph-view .legend .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
 
+  /* ── Route Animation ── */
+  #route-overlay {
+    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    z-index: 999; display: none; flex-direction: column;
+    pointer-events: none;
+  }
+  #route-overlay.active { display: flex; }
+  #route-selector {
+    position: absolute; top: 16px; left: 50%; transform: translateX(-50%);
+    display: flex; gap: 10px; overflow-x: auto; max-width: 90vw;
+    padding: 12px 16px; background: rgba(28,28,34,0.95);
+    border-radius: 14px; border: 1px solid var(--border);
+    z-index: 10; pointer-events: auto;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+  }
+  #route-selector .route-opt {
+    flex-shrink: 0; width: 180px; padding: 14px 16px;
+    background: var(--panel-bg); border: 1px solid var(--border);
+    border-radius: 10px; cursor: pointer; transition: all 0.2s;
+    text-align: center;
+  }
+  #route-selector .route-opt:hover { border-color: var(--accent); background: rgba(212,168,83,0.06); }
+  #route-selector .route-opt.active { border-color: var(--accent); background: rgba(212,168,83,0.1); }
+  #route-selector .route-opt .r-icon { font-size: 1.5rem; }
+  #route-selector .route-opt .r-name { font-size: 0.85rem; font-weight: 600; margin: 4px 0; }
+  #route-selector .route-opt .r-dir  { font-size: 0.65rem; color: var(--text-dim); }
+  #route-selector .route-opt .r-count { font-size: 0.6rem; color: var(--accent); margin-top: 2px; }
+
+  #anim-controls {
+    position: absolute; bottom: 68px; left: 50%; transform: translateX(-50%);
+    display: none; align-items: center; gap: 14px;
+    padding: 10px 20px; background: rgba(28,28,34,0.95);
+    border-radius: 24px; border: 1px solid var(--border);
+    z-index: 10; pointer-events: auto;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+  }
+  #anim-controls.visible { display: flex; }
+  #anim-controls button {
+    background: transparent; border: none; color: var(--text);
+    cursor: pointer; font-size: 1.2rem; padding: 4px 8px; border-radius: 8px;
+    transition: background 0.15s;
+  }
+  #anim-controls button:hover { background: rgba(255,255,255,0.1); }
+  #anim-controls button.speed-btn {
+    font-size: 0.7rem; padding: 3px 10px; border: 1px solid var(--border);
+    border-radius: 12px; color: var(--text-dim);
+  }
+  #anim-controls button.speed-btn.active { background: var(--accent); color: #111; border-color: var(--accent); }
+  #anim-progress {
+    position: absolute; bottom: 16px; left: 20px; right: 20px;
+    height: 36px; display: none; z-index: 10; pointer-events: auto;
+    align-items: center; gap: 0;
+  }
+  #anim-progress.visible { display: flex; }
+  #anim-progress .bar-bg {
+    flex: 1; height: 4px; background: var(--border); border-radius: 2px;
+    position: relative; overflow: visible;
+  }
+  #anim-progress .bar-fill {
+    height: 100%; background: var(--accent); border-radius: 2px;
+    transition: width 0.1s linear; width: 0%;
+  }
+  #anim-progress .bar-dots {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    display: flex; width: 100%; justify-content: space-between;
+  }
+  #anim-progress .bar-dots .dot {
+    width: 8px; height: 8px; border-radius: 50%; background: var(--border);
+    border: 2px solid var(--panel-bg); cursor: pointer;
+    transition: background 0.3s;
+  }
+  #anim-progress .bar-dots .dot.done { background: var(--accent); }
+  #anim-progress .bar-dots .dot.current { background: #fff; box-shadow: 0 0 8px var(--accent); }
+  #anim-progress .bar-labels {
+    display: flex; width: 100%; justify-content: space-between;
+    position: absolute; top: 12px; font-size: 0.55rem; color: var(--text-dim);
+  }
+  #anim-progress .bar-labels .lbl { text-align: center; transform: translateX(-50%); white-space: nowrap; }
+
+  #anim-info {
+    position: absolute; top: 120px; right: 20px; width: 280px;
+    padding: 16px; background: rgba(28,28,34,0.95);
+    border-radius: 12px; border: 1px solid var(--border);
+    z-index: 10; pointer-events: auto; display: none;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+  }
+  #anim-info.visible { display: block; }
+  #anim-info .seg-title { font-size: 0.8rem; font-weight: 600; color: var(--accent); }
+  #anim-info .seg-desc  { font-size: 0.75rem; color: var(--text-dim); margin-top: 4px; line-height: 1.5; }
+  #anim-info .seg-from  { font-size: 0.7rem; color: var(--text); margin-top: 6px; }
+
+  .marker-anim {
+    background: transparent !important; border: none !important;
+  }
+  .marker-anim .pulse {
+    width: 16px; height: 16px; background: var(--accent);
+    border-radius: 50%; box-shadow: 0 0 12px var(--accent), 0 0 24px rgba(212,168,83,0.5);
+    animation: pulse-ring 1.2s ease-out infinite;
+  }
+  @keyframes pulse-ring {
+    0% { box-shadow: 0 0 8px var(--accent), 0 0 16px rgba(212,168,83,0.4); }
+    50% { box-shadow: 0 0 20px var(--accent), 0 0 40px rgba(212,168,83,0.7); }
+    100% { box-shadow: 0 0 8px var(--accent), 0 0 16px rgba(212,168,83,0.4); }
+  }
+
   /* ── Responsive ── */
   @media (max-width: 768px) {
     main { flex-direction: column; }
@@ -165,6 +270,7 @@
   <h1>🐫 丝绸之路 <span class="sub">Silk Road · 交互知识图谱</span></h1>
   <div style="display:flex;gap:8px;align-items:center">
     <button class="lang-toggle" onclick="toggleView()" id="viewBtn">🕸 关系图</button>
+    <button class="lang-toggle" onclick="toggleRouteAnim()" id="routeBtn" style="background:rgba(199,91,58,0.15);border-color:var(--event)">🎬 传播</button>
     <button class="lang-toggle" onclick="toggleLang()" id="langBtn">English</button>
   </div>
 </header>
@@ -185,6 +291,28 @@
   </aside>
 </main>
 <div id="timeline-bar"></div>
+
+<!-- Route Animation Overlay -->
+<div id="route-overlay">
+  <div id="route-selector"></div>
+  <div id="anim-controls">
+    <button id="anim-prev" title="上一步">⏮</button>
+    <button id="anim-play" title="播放/暂停">▶</button>
+    <button id="anim-next" title="下一步">⏭</button>
+    <button class="speed-btn active" data-speed="1">1×</button>
+    <button class="speed-btn" data-speed="2">2×</button>
+    <button class="speed-btn" data-speed="4">4×</button>
+    <button id="anim-exit" style="font-size:0.75rem;margin-left:4px">✕ 退出</button>
+  </div>
+  <div id="anim-progress">
+    <div class="bar-bg">
+      <div class="bar-fill" id="bar-fill"></div>
+      <div class="bar-dots" id="bar-dots"></div>
+      <div class="bar-labels" id="bar-labels"></div>
+    </div>
+  </div>
+  <div id="anim-info"><div class="seg-title"></div><div class="seg-desc"></div><div class="seg-from"></div></div>
+</div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="https://d3js.org/d3.v7.min.js"></script>
@@ -427,6 +555,290 @@ document.getElementById('filters').addEventListener('click', e => {
   document.querySelectorAll('.filters button').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
   renderList();
+});
+
+// ── Route Animation ──
+let routeMode = false;
+let routePlaying = false;
+let routeRaf = null;
+let routeProgress = 0;
+let routeSpeed = 1;
+let routeCurrent = null; // selected route data
+let routeLatLngs = [];
+let routeDists = [];
+let routeTotalDist = 0;
+let routePolyline = null;
+let routeAnimMarker = null;
+let routeSegIdx = -1;
+
+function toggleRouteAnim() {
+  routeMode = !routeMode;
+  const overlay = document.getElementById('route-overlay');
+  const mapEl = document.getElementById('map');
+  const graphEl = document.getElementById('graph-view');
+  const routeBtn = document.getElementById('routeBtn');
+
+  if (routeMode) {
+    // Exit graph mode if active
+    if (currentView === 'graph') toggleView();
+    // Hide sidebar
+    document.querySelector('aside').style.display = 'none';
+    document.getElementById('timeline-bar').style.display = 'none';
+    overlay.classList.add('active');
+    routeBtn.style.background = 'var(--event)';
+    routeBtn.style.color = '#111';
+    routeBtn.textContent = '🎬 传播 ✓';
+    map.invalidateSize();
+    if (DATA.routes) buildRouteSelector();
+  } else {
+    stopRouteAnim();
+    document.querySelector('aside').style.display = '';
+    document.getElementById('timeline-bar').style.display = '';
+    overlay.classList.remove('active');
+    document.getElementById('route-selector').innerHTML = '';
+    document.getElementById('anim-controls').classList.remove('visible');
+    document.getElementById('anim-progress').classList.remove('visible');
+    document.getElementById('anim-info').classList.remove('visible');
+    routeBtn.style.background = 'rgba(199,91,58,0.15)';
+    routeBtn.style.color = '';
+    routeBtn.textContent = '🎬 传播';
+    map.invalidateSize();
+  }
+}
+
+function buildRouteSelector() {
+  const el = document.getElementById('route-selector');
+  const icons = { 'silk-westward': '🧵', 'paper-westward': '📜', 'buddhism-eastward': '🕉️',
+                  'compass-maritime': '🧭', 'spice-eastward': '🌿', 'porcelain-maritime': '🏺' };
+  el.innerHTML = DATA.routes.map(r => `
+    <div class="route-opt" data-id="${r.id}" onclick="selectRoute('${r.id}')">
+      <div class="r-icon">${icons[r.id] || '🐫'}</div>
+      <div class="r-name">${r.name}</div>
+      <div class="r-dir">${r.direction}</div>
+      <div class="r-count">${r.nodes.length} 个节点</div>
+    </div>
+  `).join('');
+}
+
+function selectRoute(id) {
+  stopRouteAnim();
+  routeCurrent = DATA.routes.find(r => r.id === id);
+  if (!routeCurrent) return;
+
+  // Highlight selected card
+  document.querySelectorAll('.route-opt').forEach(el => el.classList.remove('active'));
+  document.querySelector(`.route-opt[data-id="${id}"]`)?.classList.add('active');
+
+  // Build latLngs from route nodes
+  routeLatLngs = [];
+  const missingNodes = [];
+  routeCurrent.nodes.forEach(nodeId => {
+    const city = DATA.nodes.cities.find(c => c.id === nodeId);
+    if (city) {
+      routeLatLngs.push([city.lat, city.lng]);
+    } else {
+      missingNodes.push(nodeId);
+    }
+  });
+
+  if (routeLatLngs.length < 2) {
+    console.warn('Route has fewer than 2 valid cities');
+    return;
+  }
+
+  // Compute cumulative distances
+  routeDists = [0];
+  for (let i = 1; i < routeLatLngs.length; i++) {
+    const d = map.distance(routeLatLngs[i-1], routeLatLngs[i]);
+    routeDists.push(routeDists[i-1] + d);
+  }
+  routeTotalDist = routeDists[routeDists.length - 1];
+
+  // Draw polyline on map
+  if (routePolyline) map.removeLayer(routePolyline);
+  routePolyline = L.polyline(routeLatLngs, {
+    color: 'var(--event)', weight: 3, opacity: 0.7, dashArray: '8 6'
+  }).addTo(map);
+
+  // Add city markers
+  routeCurrent.nodes.forEach((nodeId, i) => {
+    const city = DATA.nodes.cities.find(c => c.id === nodeId);
+    if (!city) return;
+    const m = L.circleMarker([city.lat, city.lng], {
+      radius: i === 0 ? 9 : i === routeCurrent.nodes.length - 1 ? 9 : 6,
+      fillColor: i === 0 ? '#fff' : i === routeCurrent.nodes.length - 1 ? 'var(--event)' : 'var(--city)',
+      color: '#222', weight: 1.5, fillOpacity: 0.9
+    }).addTo(map);
+    const label = lang === 'zh' ? city.name : (city.name_en || city.name);
+    m.bindTooltip(label, { direction: 'top', permanent: i === 0 || i === routeCurrent.nodes.length - 1 });
+    m._routeMarker = true;
+  });
+
+  // Create animated marker
+  if (routeAnimMarker) map.removeLayer(routeAnimMarker);
+  const pulseIcon = L.divIcon({ className: 'marker-anim', html: '<div class="pulse"></div>', iconSize: [16, 16], iconAnchor: [8, 8] });
+  routeAnimMarker = L.marker(routeLatLngs[0], { icon: pulseIcon, zIndexOffset: 1000 }).addTo(map);
+
+  // Fit map to route
+  map.fitBounds(L.latLngBounds(routeLatLngs), { padding: [60, 60] });
+
+  // Show controls
+  document.getElementById('anim-controls').classList.add('visible');
+  document.getElementById('anim-progress').classList.add('visible');
+  document.getElementById('anim-info').classList.add('visible');
+
+  // Build progress bar
+  buildProgressBar();
+
+  // Reset and start
+  routeProgress = 0;
+  routeSegIdx = -1;
+  updateAnimInfo(0);
+  routePlaying = true;
+  document.getElementById('anim-play').textContent = '⏸';
+  animateRoute();
+}
+
+function buildProgressBar() {
+  const dotsEl = document.getElementById('bar-dots');
+  const labelsEl = document.getElementById('bar-labels');
+  dotsEl.innerHTML = routeCurrent.nodes.map((nid, i) => {
+    const city = DATA.nodes.cities.find(c => c.id === nid);
+    const label = city ? (lang === 'zh' ? city.name : (city.name_en || city.name)) : nid;
+    return `<span class="dot" data-idx="${i}" title="${label}" onclick="jumpToNode(${i})"></span>`;
+  }).join('');
+  labelsEl.innerHTML = routeCurrent.nodes.map(nid => {
+    const city = DATA.nodes.cities.find(c => c.id === nid);
+    const label = city ? (lang === 'zh' ? city.name : (city.name_en || city.name)) : nid;
+    return `<span class="lbl">${label}</span>`;
+  }).join('');
+}
+
+function positionAt(progress) {
+  const targetDist = progress * routeTotalDist;
+  for (let i = 1; i < routeDists.length; i++) {
+    if (routeDists[i] >= targetDist) {
+      const segLen = routeDists[i] - routeDists[i-1];
+      const segProgress = segLen > 0 ? (targetDist - routeDists[i-1]) / segLen : 0;
+      const lat = routeLatLngs[i-1][0] + segProgress * (routeLatLngs[i][0] - routeLatLngs[i-1][0]);
+      const lng = routeLatLngs[i-1][1] + segProgress * (routeLatLngs[i][1] - routeLatLngs[i-1][1]);
+      return { lat, lng, segIdx: i - 1 };
+    }
+  }
+  const last = routeLatLngs.length - 1;
+  return { lat: routeLatLngs[last][0], lng: routeLatLngs[last][1], segIdx: last - 1 };
+}
+
+function updateAnimInfo(segIdx) {
+  if (segIdx === routeSegIdx || segIdx < 0 || segIdx >= routeCurrent.segments.length) return;
+  routeSegIdx = segIdx;
+  const seg = routeCurrent.segments[segIdx];
+  const fromCity = DATA.nodes.cities.find(c => c.id === seg.from);
+  const toCity = DATA.nodes.cities.find(c => c.id === seg.to);
+  const fromName = fromCity ? (lang === 'zh' ? fromCity.name : (fromCity.name_en || fromCity.name)) : seg.from;
+  const toName = toCity ? (lang === 'zh' ? toCity.name : (toCity.name_en || toCity.name)) : seg.to;
+  const relText = lang === 'zh' ? seg.relation : (seg.relation_en || seg.relation);
+
+  const infoEl = document.getElementById('anim-info');
+  infoEl.querySelector('.seg-title').textContent = `${fromName} → ${toName}`;
+  infoEl.querySelector('.seg-desc').textContent = relText;
+  infoEl.querySelector('.seg-from').textContent = `${routeCurrent.name} · 第${segIdx+1}/${routeCurrent.segments.length}段`;
+}
+
+function animateRoute() {
+  if (!routePlaying || !routeCurrent) return;
+
+  routeProgress += 0.0005 * routeSpeed;
+  if (routeProgress >= 1) {
+    routeProgress = 1;
+    routePlaying = false;
+    document.getElementById('anim-play').textContent = '🔄';
+  }
+
+  const pos = positionAt(routeProgress);
+  if (routeAnimMarker) routeAnimMarker.setLatLng([pos.lat, pos.lng]);
+
+  // Update progress bar
+  document.getElementById('bar-fill').style.width = (routeProgress * 100) + '%';
+
+  // Update dots
+  const dots = document.querySelectorAll('#bar-dots .dot');
+  const targetSeg = pos.segIdx + 1; // the node we're approaching
+  dots.forEach((dot, i) => {
+    dot.classList.remove('done', 'current');
+    if (i <= pos.segIdx) dot.classList.add('done');
+    if (i === targetSeg && routeProgress < 1) dot.classList.add('current');
+    if (i === dots.length - 1 && routeProgress >= 1) dot.classList.add('current');
+  });
+
+  // Update segment info
+  updateAnimInfo(pos.segIdx);
+
+  routeRaf = requestAnimationFrame(animateRoute);
+}
+
+function stopRouteAnim() {
+  routePlaying = false;
+  if (routeRaf) { cancelAnimationFrame(routeRaf); routeRaf = null; }
+  if (routePolyline) { map.removeLayer(routePolyline); routePolyline = null; }
+  if (routeAnimMarker) { map.removeLayer(routeAnimMarker); routeAnimMarker = null; }
+  // Remove route city markers
+  markers.forEach(m => { if (m._routeMarker) { map.removeLayer(m); } });
+  markers = markers.filter(m => !m._routeMarker);
+  routeSegIdx = -1;
+}
+
+function jumpToNode(idx) {
+  if (!routeCurrent || idx < 0 || idx >= routeCurrent.nodes.length) return;
+  // Calculate progress to that node
+  const segs = routeCurrent.segments.length;
+  routeProgress = segs > 0 ? idx / segs : 0;
+  if (routeProgress > 1) routeProgress = 1;
+  const pos = positionAt(routeProgress);
+  if (routeAnimMarker) routeAnimMarker.setLatLng([pos.lat, pos.lng]);
+  document.getElementById('bar-fill').style.width = (routeProgress * 100) + '%';
+  updateAnimInfo(Math.min(pos.segIdx, routeCurrent.segments.length - 1));
+}
+
+// Animation control handlers
+document.getElementById('anim-play').addEventListener('click', () => {
+  if (routeProgress >= 1) {
+    // Replay
+    routeProgress = 0;
+    routeSegIdx = -1;
+    updateAnimInfo(0);
+    document.getElementById('bar-fill').style.width = '0%';
+    document.querySelectorAll('#bar-dots .dot').forEach(d => d.classList.remove('done', 'current'));
+  }
+  routePlaying = !routePlaying;
+  document.getElementById('anim-play').textContent = routePlaying ? '⏸' : (routeProgress >= 1 ? '🔄' : '▶');
+  if (routePlaying) animateRoute();
+});
+
+document.getElementById('anim-prev').addEventListener('click', () => {
+  if (!routeCurrent) return;
+  const curSeg = routeSegIdx >= 0 ? routeSegIdx : 0;
+  jumpToNode(Math.max(0, curSeg));
+});
+
+document.getElementById('anim-next').addEventListener('click', () => {
+  if (!routeCurrent) return;
+  const curSeg = routeSegIdx >= 0 ? routeSegIdx : 0;
+  jumpToNode(Math.min(routeCurrent.segments.length, curSeg + 1));
+});
+
+document.getElementById('anim-exit').addEventListener('click', () => {
+  toggleRouteAnim();
+  // Re-show all city markers
+  markers.forEach(m => { if (m._node) m.addTo(map); });
+});
+
+document.querySelectorAll('#anim-controls .speed-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    routeSpeed = parseInt(btn.dataset.speed);
+    document.querySelectorAll('#anim-controls .speed-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  });
 });
 
 // ── View toggle ──

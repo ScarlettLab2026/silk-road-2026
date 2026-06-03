@@ -2220,5 +2220,313 @@
       "relation": "海上西传终点",
       "relation_en": "Maritime western terminus"
     }
+  ],
+  "routes": [
+    {
+      "id": "silk-westward",
+      "name": "丝绸西传之路",
+      "name_en": "Silk Travels West",
+      "goods_id": "silk",
+      "goods_name": "丝绸",
+      "description": "丝绸从长安出发，穿越河西走廊、塔里木盆地，翻越帕米尔高原，经波斯到达罗马帝国。罗马贵族为之疯狂，凯撒曾披丝绸出现在剧场引起轰动。",
+      "description_en": "Silk traveled from Chang'an through the Hexi Corridor, across the Tarim Basin and Pamirs, through Persia to Rome. Roman elites were obsessed — Caesar caused a sensation wearing silk at the theatre.",
+      "direction": "东→西",
+      "direction_en": "East → West",
+      "nodes": [
+        "changan",
+        "dunhuang",
+        "kashgar",
+        "samarkand",
+        "baghdad",
+        "constantinople"
+      ],
+      "segments": [
+        {
+          "from": "changan",
+          "to": "dunhuang",
+          "relation": "河西走廊 → 丝路咽喉",
+          "relation_en": "Hexi Corridor → Silk Road gateway"
+        },
+        {
+          "from": "dunhuang",
+          "to": "kashgar",
+          "relation": "塔里木盆地 → 翻越葱岭",
+          "relation_en": "Tarim Basin → crossed the Pamirs"
+        },
+        {
+          "from": "kashgar",
+          "to": "samarkand",
+          "relation": "中亚枢纽 → 粟特商人接力",
+          "relation_en": "Central Asian hub → Sogdian merchants relay"
+        },
+        {
+          "from": "samarkand",
+          "to": "baghdad",
+          "relation": "波斯帝国 → 阿拔斯王朝",
+          "relation_en": "Persian Empire → Abbasid Caliphate"
+        },
+        {
+          "from": "baghdad",
+          "to": "constantinople",
+          "relation": "两河流域 → 拜占庭帝国",
+          "relation_en": "Mesopotamia → Byzantine Empire"
+        }
+      ]
+    },
+    {
+      "id": "paper-westward",
+      "name": "造纸术西传之路",
+      "name_en": "Paper Travels West",
+      "goods_id": "paper",
+      "goods_name": "造纸术",
+      "description": "公元751年怛罗斯之战，唐军造纸工匠被俘至撒马尔罕，造纸术由此传入阿拉伯世界，经巴格达、大马士革，最终在12世纪抵达欧洲，改变了人类文明的进程。",
+      "description_en": "After the 751 CE Battle of Talas, captured Tang papermakers brought the craft to Samarkand. From there papermaking spread through Baghdad and Damascus, reaching Europe by the 12th century — transforming civilization.",
+      "direction": "东→西",
+      "direction_en": "East → West",
+      "nodes": [
+        "changan",
+        "samarkand",
+        "baghdad",
+        "constantinople"
+      ],
+      "segments": [
+        {
+          "from": "changan",
+          "to": "samarkand",
+          "relation": "怛罗斯之战 → 造纸工匠被俘西传",
+          "relation_en": "Battle of Talas → captured artisans spread the craft"
+        },
+        {
+          "from": "samarkand",
+          "to": "baghdad",
+          "relation": "阿拉伯帝国 → 智慧宫抄写热潮",
+          "relation_en": "Arab Empire → House of Wisdom transcription boom"
+        },
+        {
+          "from": "baghdad",
+          "to": "constantinople",
+          "relation": "经大马士革 → 12世纪抵欧洲",
+          "relation_en": "Via Damascus → reached Europe 12th century"
+        }
+      ]
+    },
+    {
+      "id": "buddhism-eastward",
+      "name": "佛教东传之路",
+      "name_en": "Buddhism Travels East",
+      "goods_id": "buddhism",
+      "goods_name": "佛教",
+      "description": "佛教从印度经犍陀罗传入西域，沿丝路东渐。鸠摩罗什在长安译经，玄奘西行取经，法显写下《佛国记》。莫高窟壁画是这场千年传播的结晶。",
+      "description_en": "Buddhism traveled from India through Gandhara into the Western Regions, then eastward along the Silk Road. Kumarajiva translated sutras in Chang'an, Xuanzang journeyed west for scriptures, Faxian recorded his travels — the Mogao Caves are the crystallization of this millennium-long transmission.",
+      "direction": "西→东",
+      "direction_en": "West → East",
+      "nodes": [
+        "taxila",
+        "khotan",
+        "kashgar",
+        "dunhuang",
+        "luoyang",
+        "changan"
+      ],
+      "segments": [
+        {
+          "from": "taxila",
+          "to": "khotan",
+          "relation": "犍陀罗 → 西域佛国于阗",
+          "relation_en": "Gandhara → Buddhist kingdom of Khotan"
+        },
+        {
+          "from": "khotan",
+          "to": "kashgar",
+          "relation": "塔里木南缘 → 丝路交汇",
+          "relation_en": "Southern Tarim rim → Silk Road junction"
+        },
+        {
+          "from": "kashgar",
+          "to": "dunhuang",
+          "relation": "穿越塔克拉玛干 → 莫高窟",
+          "relation_en": "Across the Taklamakan → Mogao Caves"
+        },
+        {
+          "from": "dunhuang",
+          "to": "luoyang",
+          "relation": "河西走廊 → 东汉都城",
+          "relation_en": "Hexi Corridor → Eastern Han capital"
+        },
+        {
+          "from": "luoyang",
+          "to": "changan",
+          "relation": "中原弘法 → 译经中心",
+          "relation_en": "Central Plains dharma → translation center"
+        }
+      ]
+    },
+    {
+      "id": "compass-maritime",
+      "name": "指南针航海之路",
+      "name_en": "Compass Sets Sail",
+      "goods_id": "compass",
+      "goods_name": "指南针",
+      "description": "指南针从中国泉州出发，随郑和宝船下西洋，经马六甲、印度洋抵达阿拉伯和东非。阿拉伯商人又将航海罗盘传入地中海，为大航海时代提供了关键技术。",
+      "description_en": "The compass sailed from Quanzhou with Zheng He's treasure fleet through Malacca and across the Indian Ocean to Arabia and East Africa. Arab merchants then carried the navigational compass to the Mediterranean, providing key technology for the Age of Discovery.",
+      "direction": "东→西（海上）",
+      "direction_en": "East → West (Maritime)",
+      "nodes": [
+        "quanzhou",
+        "guangzhou",
+        "malacca",
+        "calicut",
+        "hormuz",
+        "aden",
+        "alexandria"
+      ],
+      "segments": [
+        {
+          "from": "quanzhou",
+          "to": "guangzhou",
+          "relation": "东南沿海 → 南海门户",
+          "relation_en": "Southeast coast → South China Sea gateway"
+        },
+        {
+          "from": "guangzhou",
+          "to": "malacca",
+          "relation": "南海 → 马六甲海峡",
+          "relation_en": "South China Sea → Malacca Strait"
+        },
+        {
+          "from": "malacca",
+          "to": "calicut",
+          "relation": "印度洋东段 → 香料海岸",
+          "relation_en": "Eastern Indian Ocean → Spice Coast"
+        },
+        {
+          "from": "calicut",
+          "to": "hormuz",
+          "relation": "阿拉伯海 → 波斯湾门户",
+          "relation_en": "Arabian Sea → Persian Gulf gateway"
+        },
+        {
+          "from": "hormuz",
+          "to": "aden",
+          "relation": "波斯湾 → 红海入口",
+          "relation_en": "Persian Gulf → Red Sea entrance"
+        },
+        {
+          "from": "aden",
+          "to": "alexandria",
+          "relation": "红海 → 地中海终点",
+          "relation_en": "Red Sea → Mediterranean terminus"
+        }
+      ]
+    },
+    {
+      "id": "spice-eastward",
+      "name": "香料东传之路",
+      "name_en": "Spices Travel East",
+      "goods_id": "frankincense",
+      "goods_name": "乳香与香料",
+      "description": "乳香、没药从阿拉伯半岛和东非出发，经红海、印度洋抵达广州。宋代香药贸易中乳香占最大份额，中国宫廷和寺庙中香烟缭绕数千年。",
+      "description_en": "Frankincense and myrrh traveled from Arabia and East Africa through the Red Sea and Indian Ocean to Guangzhou. Frankincense dominated Song dynasty incense trade — Chinese palaces and temples were filled with their fragrance for millennia.",
+      "direction": "西→东（海上）",
+      "direction_en": "West → East (Maritime)",
+      "nodes": [
+        "aden",
+        "hormuz",
+        "calicut",
+        "malacca",
+        "guangzhou",
+        "changan"
+      ],
+      "segments": [
+        {
+          "from": "aden",
+          "to": "hormuz",
+          "relation": "红海 → 波斯湾集散",
+          "relation_en": "Red Sea → Persian Gulf distribution"
+        },
+        {
+          "from": "hormuz",
+          "to": "calicut",
+          "relation": "阿拉伯海 → 印度香料海岸",
+          "relation_en": "Arabian Sea → Indian spice coast"
+        },
+        {
+          "from": "calicut",
+          "to": "malacca",
+          "relation": "印度洋 → 马六甲转运",
+          "relation_en": "Indian Ocean → Malacca transshipment"
+        },
+        {
+          "from": "malacca",
+          "to": "guangzhou",
+          "relation": "南海 → 广州市舶司",
+          "relation_en": "South China Sea → Guangzhou customs"
+        },
+        {
+          "from": "guangzhou",
+          "to": "changan",
+          "relation": "内河水陆联运 → 帝都长安",
+          "relation_en": "Inland river-route → Imperial Chang'an"
+        }
+      ]
+    },
+    {
+      "id": "porcelain-maritime",
+      "name": "瓷器海上丝路",
+      "name_en": "Porcelain Maritime Route",
+      "goods_id": "porcelain",
+      "goods_name": "瓷器",
+      "description": "中国瓷器从泉州出发，经南海、印度洋抵达阿拉伯和东非。阿拉伯人称之为'中国雪'(al-Ṣīnī)，欧洲人称之为'白色黄金'。至今在东非海滩上仍能发现宋代瓷片。",
+      "description_en": "Chinese porcelain sailed from Quanzhou through the South China Sea and Indian Ocean to Arabia and East Africa. Arabs called it 'al-Ṣīnī' (Chinese ware), Europeans called it 'white gold.' Song dynasty shards are still found on East African beaches today.",
+      "direction": "东→西（海上）",
+      "direction_en": "East → West (Maritime)",
+      "nodes": [
+        "quanzhou",
+        "guangzhou",
+        "malacca",
+        "colombo",
+        "hormuz",
+        "aden",
+        "mombasa"
+      ],
+      "segments": [
+        {
+          "from": "quanzhou",
+          "to": "guangzhou",
+          "relation": "东南大港 → 南海门户",
+          "relation_en": "Southeast great port → South China Sea gateway"
+        },
+        {
+          "from": "guangzhou",
+          "to": "malacca",
+          "relation": "南海 → 马六甲海峡",
+          "relation_en": "South China Sea → Malacca Strait"
+        },
+        {
+          "from": "malacca",
+          "to": "colombo",
+          "relation": "印度洋东段 → 锡兰宝石岛",
+          "relation_en": "Eastern Indian Ocean → Isle of Gems"
+        },
+        {
+          "from": "colombo",
+          "to": "hormuz",
+          "relation": "印度洋 → 波斯湾入口",
+          "relation_en": "Indian Ocean → Persian Gulf entrance"
+        },
+        {
+          "from": "hormuz",
+          "to": "aden",
+          "relation": "波斯湾 → 红海阿拉伯世界",
+          "relation_en": "Persian Gulf → Red Sea / Arab world"
+        },
+        {
+          "from": "aden",
+          "to": "mombasa",
+          "relation": "红海 → 东非最远到达点",
+          "relation_en": "Red Sea → farthest point in East Africa"
+        }
+      ]
+    }
   ]
 }
