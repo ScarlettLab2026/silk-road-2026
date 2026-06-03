@@ -410,11 +410,14 @@ function initTimeline() {
   });
 }
 
+// ── Type helpers ──
+const PLURAL_TO_SINGULAR = { cities: 'city', figures: 'figure', goods: 'goods', events: 'event' };
+
 // ── All entities flattened ──
 function allEntities() {
   const items = [];
   ['cities','figures','goods','events'].forEach(type => {
-    DATA.nodes[type].forEach(d => items.push({ type: type.slice(0,-1), data: d }));
+    DATA.nodes[type].forEach(d => items.push({ type: PLURAL_TO_SINGULAR[type], data: d }));
   });
   return items;
 }
@@ -466,7 +469,7 @@ function selectNode(id, type) {
   const t = type.endsWith('s') ? type : type + 's';
   const data = DATA.nodes[t]?.find(d => d.id === id);
   if (!data) return;
-  selectedItem = { id, type: type.endsWith('s') ? type.slice(0,-1) : type, data };
+  selectedItem = { id, type: PLURAL_TO_SINGULAR[t] || type, data };
 
   // Highlight on map
   markers.forEach(m => {
@@ -532,7 +535,7 @@ function renderDetail() {
       const rid = tag.dataset.id;
       let rtype = null;
       ['cities','figures','goods','events'].forEach(t => {
-        if (DATA.nodes[t].find(n => n.id === rid)) rtype = t.slice(0,-1);
+        if (DATA.nodes[t].find(n => n.id === rid)) rtype = PLURAL_TO_SINGULAR[t];
       });
       if (rtype) selectNode(rid, rtype);
     });
@@ -989,7 +992,7 @@ function buildGraph() {
   const nodes = [];
   const nodeMap = {};
   ['cities','figures','goods','events'].forEach(type => {
-    const singular = type.slice(0,-1);
+    const singular = PLURAL_TO_SINGULAR[type];
     DATA.nodes[type].forEach(d => {
       const n = {
         id: d.id, type: singular, name: get(d,'name'),
