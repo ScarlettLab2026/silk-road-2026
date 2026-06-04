@@ -59,6 +59,7 @@
   </select>
   <span class="status" id="status">就绪 · 1920×1080 · 30fps</span>
 </div>
+<div id="dlArea"></div>
 
 <script>
 // ── Canvas setup ──
@@ -639,10 +640,17 @@ async function startRecording() {
   mediaRecorder.onstop = () => {
     const blob = new Blob(recordedChunks, { type: 'video/webm' });
     const url = URL.createObjectURL(blob);
+    // Show download link in page (fallback if auto-download blocked)
+    document.getElementById('dlArea').innerHTML = `
+      <div style="margin-top:16px;padding:16px 24px;background:rgba(199,91,58,0.15);border:1px solid var(--event);border-radius:8px;text-align:center">
+        ✅ 录制完成！视频大小: ${(blob.size/1024/1024).toFixed(1)} MB<br>
+        <a href="${url}" download="silk-road-routes.webm" style="display:inline-block;margin-top:10px;padding:10px 28px;background:var(--accent);color:#111;border-radius:6px;font-weight:700;text-decoration:none;font-size:1rem">📥 点击下载视频</a>
+        <br><small style="color:var(--text-dim)">如自动下载被拦截，请点击上方按钮</small>
+      </div>`;
+    // Also try auto-download
     const a = document.createElement('a');
     a.href = url; a.download = 'silk-road-routes.webm'; a.click();
-    URL.revokeObjectURL(url);
-    document.getElementById('status').textContent = '✅ 视频已下载 · silk-road-routes.webm';
+    document.getElementById('status').textContent = '✅ 视频录制完成 · silk-road-routes.webm';
     recording = false;
     document.getElementById('btnRec').classList.remove('recording');
     document.getElementById('btnRec').textContent = '🎬 开始录制';
