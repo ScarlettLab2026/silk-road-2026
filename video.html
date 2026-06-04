@@ -97,16 +97,27 @@ async function preloadAudio() {
     }
   }
   audioLoaded = true;
-  document.getElementById('status').textContent = '✅ 数据+配音就绪 · 1920×1080 · 30fps';
+  const st = document.getElementById('status');
+  st.textContent = SHOULD_AUTO_RECORD
+    ? '✅ 配音就绪 · 🎬 自动录制模式启动中...'
+    : '✅ 数据+配音就绪 · 1920×1080 · 30fps';
 }
+
+let currentAudioSource = null;
 
 function playAudio(id) {
   if (!audioBuffers[id]) return;
+  // Stop previous audio to prevent overlapping voices
+  if (currentAudioSource) {
+    try { currentAudioSource.stop(); } catch(e) {}
+    currentAudioSource = null;
+  }
   const source = audioCtx.createBufferSource();
   source.buffer = audioBuffers[id];
   source.connect(audioCtx.destination); // monitoring
   source.connect(audioDest);            // recording
   source.start();
+  currentAudioSource = source;
 }
 
 // Kick off audio preload immediately
@@ -690,16 +701,25 @@ document.addEventListener('keydown', e => {
   if (e.key === 'r' && !e.ctrlKey && !e.metaKey) { e.preventDefault(); startRecording(); }
 });
 
-// ── Auto-record mode (?record in URL) ──
-if (window.location.search.includes('record')) {
-  // Wait for data + audio, then auto-start recording
-  const autoCheck = setInterval(() => {
-    if (DATA && audioLoaded && routeDataCache.length > 0) {
-      clearInterval(autoCheck);
-      document.getElementById('status').textContent = '🎬 自动录制模式 · 3秒后开始...';
-      setTimeout(() => startRecording(), 3000);
-    }
-  }, 500);
+// ── Auto-record: triggered by URL param ?record ──
+const SHOULD_AUTO_RECORD = (() => {
+  const s = window.location.search;
+  return s.includes('record') || s.includes('auto');
+})();
+
+// Expose for console: autoStartRecording()
+async function autoStartRecording() {
+  // Wait until everything is ready
+  while (!(DATA && audioLoaded && routeDataCache && routeDataCache.length > 0)) {
+    await new Promise(r => setTimeout(r, 300));
+  }
+  document.getElementById('status').textContent = '🎬 自动录制 · 3秒后开始...';
+  await new Promise(r => setTimeout(r, 3000));
+  startRecording();
+}
+
+if (SHOULD_AUTO_RECORD) {
+  autoStartRecording();
 }
 </script>
 </body>
