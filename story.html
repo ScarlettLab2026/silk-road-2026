@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>凿空西域 · 张骞的丝路</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<style>
+  :root {
+    --bg: #0d0d12; --card-bg: rgba(20,20,30,0.92); --accent: #d4a853;
+    --text: #e0ddd5; --text-dim: #9a9790; --border: rgba(255,255,255,0.08);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background: #000; font-family: -apple-system, "PingFang SC", "Noto Serif SC", "Microsoft YaHei", serif; overflow: hidden; height: 100vh; }
+
+  #map { position: fixed; inset: 0; z-index: 1; }
+  .leaflet-container { background: #0d0d12; }
+
+  /* ── Narrative Card ── */
+  #narrative {
+    position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%);
+    z-index: 10; width: min(92vw, 620px);
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 20px; padding: 32px 36px 28px;
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 8px 48px rgba(0,0,0,0.5);
+    transition: opacity 0.5s, transform 0.5s;
+    cursor: pointer; user-select: none;
+  }
+  #narrative.fading { opacity: 0; transform: translateX(-50%) translateY(20px); }
+  #narrative .chapter-num {
+    font-size: 0.7rem; letter-spacing: 0.2em; color: var(--accent);
+    text-transform: uppercase; margin-bottom: 6px;
+  }
+  #narrative h2 {
+    font-size: 1.5rem; font-weight: 700; color: #fff;
+    margin-bottom: 12px; letter-spacing: 0.04em; line-height: 1.4;
+  }
+  #narrative p {
+    font-size: 1rem; line-height: 1.85; color: var(--text);
+    margin-bottom: 6px;
+  }
+  #narrative .hint {
+    margin-top: 18px; font-size: 0.78rem; color: var(--text-dim);
+    display: flex; align-items: center; gap: 8px;
+  }
+  #narrative .hint .arrow { animation: bounce 1.2s infinite; }
+  @keyframes bounce { 0%,100%{transform:translateX(0)} 50%{transform:translateX(6px)} }
+
+  /* ── Progress Dots ── */
+  #progress {
+    position: fixed; top: 24px; left: 50%; transform: translateX(-50%);
+    z-index: 10; display: flex; gap: 10px;
+  }
+  #progress .dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: rgba(255,255,255,0.2); transition: all 0.4s;
+  }
+  #progress .dot.active { background: var(--accent); transform: scale(1.4); }
+  #progress .dot.done { background: rgba(212,168,83,0.5); }
+
+  /* ── Restart button ── */
+  #restart {
+    position: fixed; top: 24px; right: 24px; z-index: 10;
+    background: rgba(255,255,255,0.06); border: 1px solid var(--border);
+    color: var(--text-dim); padding: 8px 16px; border-radius: 20px;
+    font-size: 0.78rem; cursor: pointer; transition: all 0.3s;
+  }
+  #restart:hover { background: rgba(255,255,255,0.12); color: #fff; }
+
+  /* ── Responsive ── */
+  @media (max-width: 640px) {
+    #narrative { bottom: 16px; padding: 24px 20px 20px; border-radius: 16px; }
+    #narrative h2 { font-size: 1.2rem; }
+    #narrative p { font-size: 0.9rem; }
+  }
+</style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<div id="progress"></div>
+
+<button id="restart" onclick="restart()">🔄 重播</button>
+
+<div id="narrative" onclick="advance()">
+  <div class="chapter-num" id="chNum"></div>
+  <h2 id="chTitle"></h2>
+  <p id="chBody"></p>
+  <div id="badges" style="margin:8px 0 0;line-height:1.8"></div>
+  <div class="hint"><span class="arrow">→</span> 点击继续</div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+// ── Story Data ──
+const STORY = [
+  {
+    title: '凿空西域',
+    subtitle: '公元前139年 · 长安',
+    body: '汉武帝刘彻登基不久，北方面临匈奴的持续威胁。他做了一个大胆的决定：派遣使节穿越匈奴控制区，去联络西方的大月氏，联合夹击匈奴。这个几乎不可能完成的任务，落在了一个年轻的郎官身上——张骞。',
+    lat: 34.34, lng: 108.94, zoom: 6,
+    route: null, marker: 'changan',
+    showCities: ['changan'],
+    highlight: ['zhang-qian', 'emperor-wu']
+  },
+  {
+    title: '被捕：十年囚徒',
+    subtitle: '河西走廊 · 匈奴王庭',
+    body: '张骞率百余人出陇西，刚过黄河就被匈奴骑兵截获。军臣单于将他扣留在草原上，还给他娶了匈奴妻子，试图同化他。但张骞始终「持汉节不失」，保留了那根代表汉朝使节身份的节杖。这一关，就是整整十年。',
+    lat: 40.1, lng: 94.7, zoom: 5,
+    route: null, marker: 'dunhuang',
+    showCities: ['changan', 'dunhuang'],
+    highlight: ['zhang-qian', 'dunhuang']
+  },
+  {
+    title: '逃脱：一路向西',
+    subtitle: '穿越沙漠 · 翻越葱岭',
+    body: '趁匈奴内乱，张骞和随从堂邑父逃脱。他们没有回头向东，而是选择继续西行完成使命。穿越塔克拉玛干沙漠边缘，翻越帕米尔高原——这是中国人第一次用自己的脚步丈量这条通往西方的路。',
+    lat: 39.5, lng: 75.0, zoom: 5,
+    route: ['changan', 'dunhuang', 'kashgar'],
+    marker: 'kashgar',
+    showCities: ['changan', 'dunhuang', 'kashgar', 'khotan'],
+    highlight: ['zhang-qian', 'kashgar']
+  },
+  {
+    title: '抵达：大宛与大月氏',
+    subtitle: '费尔干纳 · 撒马尔罕',
+    body: '到达大宛（今费尔干纳）后，国王早就听说汉朝富庶，热情接待了张骞，派向导送他经康居抵达大月氏。然而大月氏已在阿姆河流域安居乐业，土地肥沃，不愿再与匈奴开战。张骞在此逗留一年多，走遍了西域各国，详细记录地理、物产和风俗。',
+    lat: 40.0, lng: 67.0, zoom: 5,
+    route: ['changan', 'dunhuang', 'kashgar', 'samarkand'],
+    marker: 'samarkand',
+    showCities: ['changan', 'dunhuang', 'kashgar', 'samarkand', 'bukhara'],
+    highlight: ['zhang-qian', 'samarkand', 'horses']
+  },
+  {
+    title: '归途：再次被俘',
+    subtitle: '南山羌中道 · 长安',
+    body: '张骞决定从南道（塔里木盆地南缘）经于阗、羌中返回，不料羌人已归附匈奴，他再次被俘。一年后，军臣单于去世，匈奴大乱，张骞趁乱带着匈奴妻子和堂邑父逃回长安。出发时一百余人，十三年后归来，只剩两人。',
+    lat: 37.0, lng: 88.0, zoom: 5,
+    route: ['samarkand', 'kashgar', 'khotan', 'changan'],
+    marker: 'changan',
+    showCities: ['samarkand', 'kashgar', 'khotan', 'dunhuang', 'changan'],
+    highlight: ['zhang-qian', 'khotan']
+  },
+  {
+    title: '凿空：丝路从此开启',
+    subtitle: '长安 · 汉武帝朝堂',
+    body: '回到长安，张骞向汉武帝呈上西域各国的详尽报告——大宛的汗血宝马、安息的银币、大夏的蜀布和邛竹杖。汉武帝大喜，封张骞为太中大夫。随后汉朝在西域设立河西四郡，丝绸之路的大门，被张骞一凿而开。司马迁在《史记》中用了两个字评价：「凿空」。',
+    lat: 38.5, lng: 85.0, zoom: 3.5,
+    route: ['changan', 'dunhuang', 'kashgar', 'samarkand', 'baghdad', 'constantinople'],
+    marker: null,
+    showCities: ['changan', 'dunhuang', 'kashgar', 'samarkand', 'baghdad', 'constantinople', 'luoyang'],
+    highlight: ['zhang-qian', 'emperor-wu', 'silk', 'horses', 'alfalfa', 'walnut']
+  },
+  {
+    title: '张骞的遗产',
+    subtitle: '一条路，改变世界',
+    body: '丝绸、苜蓿、胡桃、葡萄……张骞带回来的不止是地理情报，更是一张通往西方世界的路线图。在他之后，班超再定西域，玄奘沿着他开辟的路西行取经，粟特商人在这条路上接力贸易千年。从长安到罗马，从东方到西方——张骞是第一个走通这条路的人。',
+    lat: 38.0, lng: 72.0, zoom: 3.2,
+    route: null,
+    marker: null,
+    showCities: ['changan', 'dunhuang', 'kashgar', 'samarkand', 'baghdad', 'constantinople', 'taxila', 'kucha', 'damascus', 'venice'],
+    highlight: ['zhang-qian', 'ban-chao', 'xuanzang', 'zhang-qian-mission', 'silk', 'alfalfa', 'walnut', 'grapes', 'horses']
+  }
+];
+
+const TOTAL = STORY.length;
+
+// ── Init Map ──
+const map = L.map('map', {
+  zoomControl: false, attributionControl: false,
+  center: [38, 85], zoom: 4
+});
+L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+  maxZoom: 12
+}).addTo(map);
+
+let DATA = null;
+let currentChapter = 0;
+let routeLines = [];
+let cityMarkers = [];
+let highlightMarkers = [];
+
+// ── Load data ──
+fetch('data/silk-road.json').then(r => r.json()).then(d => {
+  DATA = d;
+  initProgress();
+  renderChapter(0);
+}).catch(() => {
+  // Fallback: load from absolute URL
+  fetch('https://scarlettlab2026.github.io/silk-road-2026/data/silk-road.json')
+    .then(r => r.json()).then(d => { DATA = d; initProgress(); renderChapter(0); });
+});
+
+// ── Progress dots ──
+function initProgress() {
+  const el = document.getElementById('progress');
+  el.innerHTML = STORY.map((_, i) =>
+    `<div class="dot${i===0?' active':''}" id="dot${i}"></div>`
+  ).join('');
+}
+
+function updateProgress(idx) {
+  for (let i = 0; i < TOTAL; i++) {
+    const d = document.getElementById('dot'+i);
+    if (!d) continue;
+    d.className = 'dot' + (i === idx ? ' active' : i < idx ? ' done' : '');
+  }
+}
+
+// ── Render chapter ──
+function renderChapter(idx) {
+  const ch = STORY[idx];
+  currentChapter = idx;
+  updateProgress(idx);
+
+  // Update narrative card
+  document.getElementById('chNum').textContent = `第 ${idx+1} 章 / ${TOTAL}`;
+  document.getElementById('chTitle').textContent = ch.subtitle;
+  document.getElementById('chBody').textContent = ch.body;
+
+  // Animate card
+  const card = document.getElementById('narrative');
+  card.classList.add('fading');
+  setTimeout(() => {
+    card.classList.remove('fading');
+  }, 200);
+
+  // Hint text for last chapter
+  document.querySelector('#narrative .hint').innerHTML =
+    idx < TOTAL - 1
+      ? '<span class="arrow">→</span> 点击继续'
+      : '<span style="font-size:1rem">🐫</span> 点击重播';
+
+  // Fly map
+  map.flyTo([ch.lat, ch.lng], ch.zoom, { duration: 1.8, easeLinearity: 0.25 });
+
+  // Clear previous
+  routeLines.forEach(l => map.removeLayer(l)); routeLines = [];
+  cityMarkers.forEach(m => map.removeLayer(m)); cityMarkers = [];
+  highlightMarkers.forEach(m => map.removeLayer(m)); highlightMarkers = [];
+
+  // Draw route if specified
+  if (ch.route && DATA) {
+    const pts = [];
+    ch.route.forEach(nid => {
+      const c = DATA.nodes.cities.find(cc => cc.id === nid);
+      if (c) pts.push([c.lat, c.lng]);
+    });
+    if (pts.length >= 2) {
+      // Dim background route
+      const dimLine = L.polyline(pts, {
+        color: 'rgba(212,168,83,0.15)', weight: 2, dashArray: '8 6'
+      }).addTo(map);
+      routeLines.push(dimLine);
+      // Bright traveled route
+      const brightLine = L.polyline(pts, {
+        color: 'rgba(212,168,83,0.8)', weight: 3.5, dashArray: '12 4',
+        className: 'story-route'
+      }).addTo(map);
+      routeLines.push(brightLine);
+    }
+  }
+
+  // Show relevant cities
+  if (ch.showCities && DATA) {
+    ch.showCities.forEach(nid => {
+      const c = DATA.nodes.cities.find(cc => cc.id === nid);
+      if (!c) return;
+      const isKey = nid === ch.marker || ch.highlight.includes(nid);
+      const isStart = nid === 'changan' || nid === 'luoyang';
+      const m = L.circleMarker([c.lat, c.lng], {
+        radius: isStart ? 8 : isKey ? 7 : 5,
+        fillColor: isStart ? '#fff' : 'var(--accent, #d4a853)',
+        color: '#0d0d12', weight: 1.5, fillOpacity: isKey ? 1 : 0.7
+      }).addTo(map);
+      m.bindTooltip(c.name, {
+        direction: 'top', offset: [0, -6],
+        className: 'story-tooltip'
+      });
+      cityMarkers.push(m);
+    });
+  }
+
+  // Highlight marker
+  if (ch.marker && DATA) {
+    const c = DATA.nodes.cities.find(cc => cc.id === ch.marker);
+    if (c) {
+      const pulse = L.circleMarker([c.lat, c.lng], {
+        radius: 14, fillColor: 'rgba(255,255,255,0.25)',
+        color: 'transparent', fillOpacity: 0.6
+      }).addTo(map);
+      highlightMarkers.push(pulse);
+      const center = L.circleMarker([c.lat, c.lng], {
+        radius: 8, fillColor: '#fff', color: '#0d0d12', weight: 2, fillOpacity: 1
+      }).addTo(map);
+      highlightMarkers.push(center);
+    }
+  }
+
+  // Show related entity badges (HTML, below narrative)
+  const badgeRow = document.getElementById('badges');
+  if (ch.highlight && DATA) {
+    const colors = { figure: '#5b9bd5', goods: '#6aad6a', event: '#c75b3a' };
+    badgeRow.innerHTML = ch.highlight.filter(id => id !== (ch.marker || '')).map(eid => {
+      let entity = null, cat = '';
+      for (const c of ['figures','goods','events']) {
+        entity = DATA.nodes[c].find(n => n.id === eid);
+        if (entity) { cat = c === 'figures' ? 'figure' : c === 'goods' ? 'goods' : 'event'; break; }
+      }
+      if (!entity) return '';
+      const color = colors[cat];
+      const label = entity.type || entity.category || entity.dynasty || '';
+      return `<span style="display:inline-block;padding:4px 10px;margin:2px;border-radius:10px;font-size:0.73rem;border:1px solid ${color};color:${color};background:rgba(255,255,255,0.03)"><strong>${entity.name}</strong> <span style="opacity:0.7">${label}</span></span>`;
+    }).join('');
+  } else {
+    badgeRow.innerHTML = '';
+  }
+}
+
+// ── Advance ──
+function advance() {
+  if (currentChapter < TOTAL - 1) {
+    renderChapter(currentChapter + 1);
+  } else {
+    restart();
+  }
+}
+
+function restart() {
+  routeLines.forEach(l => map.removeLayer(l)); routeLines = [];
+  cityMarkers.forEach(m => map.removeLayer(m)); cityMarkers = [];
+  highlightMarkers.forEach(m => map.removeLayer(m)); highlightMarkers = [];
+  renderChapter(0);
+}
+
+// Keyboard support
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === ' ' || e.code === 'Space') {
+    e.preventDefault(); advance();
+  }
+  if (e.key === 'ArrowLeft') {
+    e.preventDefault();
+    if (currentChapter > 0) renderChapter(currentChapter - 1);
+  }
+});
+</script>
+</body>
+</html>
