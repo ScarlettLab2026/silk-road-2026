@@ -689,6 +689,18 @@ document.addEventListener('keydown', e => {
   if (e.key === ' ' || e.code === 'Space') { e.preventDefault(); togglePlay(); }
   if (e.key === 'r' && !e.ctrlKey && !e.metaKey) { e.preventDefault(); startRecording(); }
 });
+
+// ── Auto-record mode (?record in URL) ──
+if (window.location.search.includes('record')) {
+  // Wait for data + audio, then auto-start recording
+  const autoCheck = setInterval(() => {
+    if (DATA && audioLoaded && routeDataCache.length > 0) {
+      clearInterval(autoCheck);
+      document.getElementById('status').textContent = '🎬 自动录制模式 · 3秒后开始...';
+      setTimeout(() => startRecording(), 3000);
+    }
+  }, 500);
+}
 </script>
 </body>
 </html>
