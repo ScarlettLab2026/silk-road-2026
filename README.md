@@ -31,6 +31,7 @@
 | ⚡ 事件 | 18 |
 | 🔗 关系边 | 255 |
 | 🎬 传播路线 | 8 |
+| 📖 交互故事 | 2（张骞·凿空西域 + 郑和·鲸波万里） |
 
 > *数据持续扩充中。欢迎贡献！*
 
@@ -82,6 +83,8 @@ npx serve .
 - [x] B站视频生成（Canvas 渲染 + MediaRecorder 录制，自动播放 8 条路线全景，~3 分钟视频一键下载）(v0.5.0)
 - [x] 数据增强 v0.6.0（+4城：大马士革/龟兹/高昌/威尼斯，+3人物：杜环/丘处机/马欢，+3物产：棉布/胡桃/琵琶，+2事件：甘英使大秦/杜环经行记，+52边）(v0.6.0)
 - [x] 海上丝路增强 v0.7.0（+3城：吉达/摩加迪沙/苏拉特，+2人物：亦黑迷失/杨庭璧，+2物产：珍珠/苏木，+2事件：亦黑迷失出使/汪大渊下西洋，+44边）(v0.7.0)
+- [x] 交互故事「凿空西域·张骞的丝路」story.html（7章地图叙事 + 飞越动画 + 实体标签 + 键盘导航）(v0.8.0)
+- [x] 交互故事「鲸波万里·郑和下西洋」story2.html（7章航海叙事 + 海洋蓝主题 + 双故事入口）(v0.9.0)
 - [ ] 数据 API（JSON endpoint）
 - [ ] 知识问答卡片（社交媒体分享用）
 - [ ] 短视频脚本自动生成
@@ -100,6 +103,15 @@ npx serve .
 - 更丰富的描述文本（中/英双语）
 - 纠错与勘误
 - 翻译质量改进
+
+## 支持项目
+
+如果这个项目对你有帮助，欢迎支持我们继续完善丝绸之路的开放数据：
+
+- ❤️ [爱发电](https://afdian.com/a/scarlettlab)
+- ⭐ [GitHub Sponsors](https://github.com/sponsors/ScarlettLab2026)
+
+所有支持将用于数据扩充、内容创作和服务器维护。每一份支持都会让这条路上多一盏灯。
 
 ## 许可证
 
@@ -128,12 +140,20 @@ Routes → Cities → Figures → Goods → Events → Technology transfer paths
 
 | Type | Count |
 |------|-------|
-| 🏙 Cities | 28 |
-| 👤 Figures | 18 |
-| 📦 Goods | 19 |
-| ⚡ Events | 14 |
-| 🔗 Edges | 159 |
+| 🏙 Cities | 35 |
+| 👤 Figures | 23 |
+| 📦 Goods | 24 |
+| ⚡ Events | 18 |
+| 🔗 Edges | 255 |
 | 🎬 Routes | 8 |
+| 📖 Stories | 2 (Zhang Qian + Zheng He) |
+
+## Support
+
+If this project is helpful to you, consider supporting our work on open Silk Road data:
+
+- ❤️ [Aifadian](https://afdian.com/a/scarlettlab)
+- ⭐ [GitHub Sponsors](https://github.com/sponsors/ScarlettLab2026)
 
 ## Contributing
 
