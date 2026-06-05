@@ -370,29 +370,31 @@ function buildAllCards(DATA) {
   // ── 关系链卡片 ──
   html += '<h2>🔗 关系链卡片</h2><div class="card-grid">';
 
-  // 链1: 张骞凿空西域
+  // 链1: 郑和下西洋
   html += buildChainCard(
-    '张骞凿空西域',
-    'Zhang Qian Opens the Western Regions',
-    '公元前138年，汉武帝派张骞出使西域。被匈奴扣留十年后逃脱，最终抵达大宛、大月氏，带回葡萄、苜蓿、大宛马。司马迁称之为"凿空"——打通了中国通往西域的大门。',
+    '郑和下西洋',
+    'Zheng He\'s Treasure Fleet',
+    '1405年至1433年，郑和七次率领当时世界上最庞大的船队远航西洋。62艘宝船、27000余名船员，从泉州出发，经东南亚、印度洋，最远抵达东非蒙巴萨。带回长颈鹿被当作瑞兽麒麟，轰动明朝。比哥伦布早了近一个世纪。',
     [
-      {id:'zhang-qian', name:'张骞', type:'figure', icon:'👤'},
-      {id:'han-wudi', name:'汉武帝', type:'figure', icon:'👤'},
-      {id:'dayuan', name:'大宛', type:'city', icon:'🏙️'},
-      {id:'alfalfa', name:'苜蓿', type:'goods', icon:'📦'},
+      {id:'zheng-he-figure', name:'郑和', type:'figure', icon:'👤'},
+      {id:'quanzhou', name:'泉州', type:'city', icon:'🏙️'},
+      {id:'malacca', name:'马六甲', type:'city', icon:'🏙️'},
+      {id:'mombasa', name:'蒙巴萨', type:'city', icon:'🏙️'},
+      {id:'zheng-he', name:'郑和下西洋', type:'event', icon:'⚡'},
     ]
   );
 
-  // 链2: 造纸术西传
+  // 链2: 杜环经行记
   html += buildChainCard(
-    '造纸术的西传之路',
-    'Paper Travels West',
-    '公元751年怛罗斯之战，唐军战败，被俘的造纸工匠将技术传入撒马尔罕。此后造纸术经巴格达传入阿拉伯世界，最终在12世纪抵达欧洲——改变了人类文明的进程。',
+    '杜环经行记',
+    'Du Huan\'s Travels Through the Caliphate',
+    '公元751年怛罗斯之战，唐军随军书记官杜环被俘，被带往阿拉伯帝国腹地。他在中亚、波斯、阿拉伯游历12年，到过巴格达、大马士革，甚至到达东非。762年乘商船从波斯湾经海路回到广州，著《经行记》——中国人第一部亲历阿拉伯世界的著作。',
     [
-      {id:'paper', name:'造纸术', type:'goods', icon:'📦'},
-      {id:'battle-of-talas', name:'怛罗斯之战', type:'event', icon:'⚡'},
-      {id:'samarkand', name:'撒马尔罕', type:'city', icon:'🏙️'},
+      {id:'du-huan', name:'杜环', type:'figure', icon:'👤'},
       {id:'baghdad', name:'巴格达', type:'city', icon:'🏙️'},
+      {id:'damascus', name:'大马士革', type:'city', icon:'🏙️'},
+      {id:'guangzhou', name:'广州', type:'city', icon:'🏙️'},
+      {id:'du-huan-travels', name:'杜环经行记', type:'event', icon:'⚡'},
     ]
   );
 
@@ -410,16 +412,17 @@ function buildAllCards(DATA) {
     ]
   );
 
-  // 链4: 丝绸 → 罗马
+  // 链4: 汪大渊下西洋
   html += buildChainCard(
-    '从长安到罗马：一条丝线的旅程',
-    'From Chang\'an to Rome: Journey of Silk',
-    '丝绸从长安出发，穿越河西走廊、塔里木盆地、翻越帕米尔高原，经波斯到达罗马帝国。罗马贵族疯狂追捧，凯撒曾披丝绸出现在剧场引起轰动。罗马元老院因黄金大量外流多次下令禁止穿丝绸——但从未奏效。',
+    '汪大渊下西洋',
+    'Wang Dayuan\'s Maritime Odyssey',
+    '元代民间航海家汪大渊，年仅20岁从泉州搭乘商船出海，两次远航印度洋。足迹遍及东南亚、印度、波斯湾、阿拉伯和东非海岸，共220余个国家和地区。归国后著《岛夷志略》，是中国第一部系统的海外地理著作，其航程之广甚至超越了马可·波罗。',
     [
-      {id:'silk', name:'丝绸', type:'goods', icon:'📦'},
-      {id:'changan', name:'长安', type:'city', icon:'🏙️'},
-      {id:'samarkand', name:'撒马尔罕', type:'city', icon:'🏙️'},
-      {id:'baghdad', name:'巴格达', type:'city', icon:'🏙️'},
+      {id:'wang-dayuan', name:'汪大渊', type:'figure', icon:'👤'},
+      {id:'quanzhou', name:'泉州', type:'city', icon:'🏙️'},
+      {id:'calicut', name:'卡利卡特', type:'city', icon:'🏙️'},
+      {id:'hormuz', name:'霍尔木兹', type:'city', icon:'🏙️'},
+      {id:'wang-dayuan-voyages', name:'汪大渊下西洋', type:'event', icon:'⚡'},
     ]
   );
 

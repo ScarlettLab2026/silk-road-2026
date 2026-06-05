@@ -25,8 +25,8 @@
   .frame-label .num { background: var(--accent); color: #111; width: 20px; height: 20px; border-radius: 50%; text-align: center; font-weight: 700; font-size: 0.7rem; line-height: 20px; }
 
   /* Map */
-  #map1, #map3, #map5 { height: 500px; }
-  #map1 .leaflet-container, #map3 .leaflet-container, #map5 .leaflet-container { background: #1a1a1f; }
+  #map1, #map3, #map5, #map6 { height: 500px; }
+  #map1 .leaflet-container, #map3 .leaflet-container, #map5 .leaflet-container, #map6 .leaflet-container { background: #1a1a1f; }
 
   /* Timeline */
   .mini-timeline {
@@ -81,7 +81,7 @@
 </head>
 <body>
 
-<h2>🐫 丝绸之路 · 小红书截图套件（5张）</h2>
+<h2>🐫 丝绸之路 · 小红书截图套件（6张）</h2>
 
 <!-- ====== 图1: 地图全景 ====== -->
 <div class="frame">
@@ -119,6 +119,17 @@
   <div id="map5"></div>
   <div class="mini-timeline" style="border-bottom: 1px solid var(--border)">
     <span class="tick">Han</span><span class="tick hl">Tang</span><span class="tick">Yuan</span><span class="tick">Ming</span>
+  </div>
+</div>
+
+<!-- ====== 图6: 郑和下西洋 ====== -->
+<div class="frame">
+  <div class="frame-label"><span class="num">6</span> 🚢 郑和下西洋 —— 海上丝路：泉州→东非蒙巴萨</div>
+  <div id="map6"></div>
+  <div class="legend-row">
+    <span><span class="dot" style="background:#5ea3b8"></span> 航海路线</span>
+    <span><span class="dot" style="background:#fff"></span> 主要港口</span>
+    <span>📏 航程约 15,000 公里</span>
   </div>
 </div>
 
@@ -255,11 +266,33 @@ fetch(DATA_URL).then(r => r.json()).then(DATA => {
     if (s && t) L.polyline([[s.lat,s.lng],[t.lat,t.lng]], { color: 'rgba(212,168,83,0.25)', weight: 1.2, dashArray: '4 6' }).addTo(map5);
   });
 
+  // ─── 图6: 郑和下西洋 海上丝路 ───
+  const map6 = L.map('map6', { zoomControl: false, attributionControl: false }).setView([8, 72], 3.2);
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', { maxZoom: 13 }).addTo(map6);
+  const maritimeRoute = ['quanzhou', 'guangzhou', 'palembang', 'malacca', 'colombo', 'calicut', 'hormuz', 'aden', 'mogadishu', 'mombasa'];
+  const maritimePts = [];
+  maritimeRoute.forEach(nid => {
+    const c = DATA.nodes.cities.find(cc => cc.id === nid);
+    if (c) {
+      maritimePts.push([c.lat, c.lng]);
+      const isKey = ['quanzhou','malacca','calicut','hormuz','mombasa'].includes(nid);
+      L.circleMarker([c.lat, c.lng], {
+        radius: isKey ? 9 : 6,
+        fillColor: isKey ? '#fff' : '#5ea3b8',
+        color: '#111', weight: 1.5, fillOpacity: isKey ? 1 : 0.85
+      }).bindTooltip(c.name, { direction: 'top', offset: [0, -6] }).addTo(map6);
+    }
+  });
+  if (maritimePts.length >= 2) {
+    L.polyline(maritimePts, { color: 'rgba(94,163,184,0.6)', weight: 3, dashArray: '10 5' }).addTo(map6);
+    L.polyline(maritimePts, { color: 'rgba(94,163,184,0.15)', weight: 1.5, dashArray: '4 8' }).addTo(map6);
+  }
+
   // Signal done
-  document.body.insertAdjacentHTML('beforeend', '<div style="text-align:center;padding:20px;color:var(--accent)">✅ 5张截图准备完毕 · 右键保存或用截图工具截取每张</div>');
+  document.body.insertAdjacentHTML('beforeend', '<div style="text-align:center;padding:20px;color:var(--accent)">✅ 6张截图准备完毕 · 右键保存或用截图工具截取每张</div>');
 
   // Fix map sizes after load
-  setTimeout(() => { map1.invalidateSize(); map3.invalidateSize(); map4.invalidateSize(); map5.invalidateSize(); }, 500);
+  setTimeout(() => { map1.invalidateSize(); map3.invalidateSize(); map4.invalidateSize(); map5.invalidateSize(); map6.invalidateSize(); }, 500);
 });
 </script>
 </body>
