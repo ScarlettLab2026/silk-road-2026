@@ -146,7 +146,7 @@ const STORY = [
     subtitle: '高昌国 · 吐鲁番',
     body: '走出沙漠，玄奘抵达西域佛国高昌。国王麴文泰深夜秉烛前来，深为玄奘的学识和虔诚折服，要强行留他为国师。玄奘说：「骨可碎，志不可夺。」绝食三日，气息奄奄。麴文泰终于让步，跪地结拜为兄弟，派二十五名随从、三十匹马、足够二十年的盘缠，并修国书给沿途二十四国请予放行。玄奘许诺归国时在此停留三年说法——十七年后，他兑现了诺言。',
     lat: 42.0, lng: 89.5, zoom: 5.5,
-    route: ['dunhuang', 'gaochang'],
+    route: ['changan', 'dunhuang', 'gaochang'],
     marker: 'gaochang',
     showCities: ['dunhuang', 'gaochang', 'kucha'],
     highlight: ['xuanzang', 'gaochang', 'buddhism']
@@ -156,7 +156,7 @@ const STORY = [
     subtitle: '天山 · 碎叶城',
     body: '从高昌经龟兹，玄奘面对西行最险恶的屏障——凌山（天山主峰）。「积雪弥满，蹊径难寻。飞雪雨下，七日七夜方出。」同行者冻死十之三四，牲畜损失过半。下山后抵达碎叶城（今吉尔吉斯斯坦托克马克），遇见西突厥统叶护可汗。可汗派翻译和护送队，玄奘经赭时国（塔什干）、飒秣建国（撒马尔罕），穿越中亚腹地，一路向印度前进。',
     lat: 42.0, lng: 75.5, zoom: 5,
-    route: ['gaochang', 'kucha', 'suyab', 'samarkand'],
+    route: ['changan', 'dunhuang', 'gaochang', 'kucha', 'suyab', 'samarkand'],
     marker: 'suyab',
     showCities: ['gaochang', 'kucha', 'suyab', 'samarkand'],
     highlight: ['xuanzang', 'suyab', 'buddhism']
@@ -166,7 +166,7 @@ const STORY = [
     subtitle: '塔克西拉 · 犍陀罗故地',
     body: '穿越铁门关，翻越大雪山（兴都库什山），玄奘进入古印度犍陀罗（今巴基斯坦）。这里是佛教艺术的诞生地——亚历山大的希腊雕塑匠与印度佛教信仰在此交融，创造出最早的佛像。玄奘遍访圣迹：佛陀割肉贸鸽处、舍身饲虎处、菩提树下金刚座。每到一处，虔诚礼拜，泪流满面。同行者劝他，「法师为何如此？」他答：「佛在此地为众生舍身，我今礼拜，岂能无泪。」',
     lat: 34.0, lng: 73.0, zoom: 5.5,
-    route: ['samarkand', 'taxila'],
+    route: ['changan', 'dunhuang', 'gaochang', 'kucha', 'suyab', 'samarkand', 'taxila'],
     marker: 'taxila',
     showCities: ['samarkand', 'taxila', 'kashgar'],
     highlight: ['xuanzang', 'buddhism', 'kumarajiva']
@@ -176,7 +176,7 @@ const STORY = [
     subtitle: '印度 · 那烂陀寺',
     body: '公元631年，玄奘终于抵达那烂陀寺——当时世界最大的佛教学府，万余僧侣在此研习。106岁的住持戒贤法师亲自收他为徒，传授《瑜伽师地论》。玄奘在此苦学五年，遍览经论，通晓梵文，学贯大小乘。他还游历了整个印度，造访佛教六大圣地，观察各地风俗——从甘蔗制糖到刑罚制度，从服饰饮食到语言文字，巨细无遗地记录。从长安至此，他已走过138个国家。',
     lat: 25.6, lng: 85.2, zoom: 6,
-    route: null,
+    route: ['changan', 'dunhuang', 'gaochang', 'kucha', 'suyab', 'samarkand', 'taxila'],
     marker: null,
     showCities: ['taxila'],
     highlight: ['xuanzang', 'buddhism', 'xuanzang-journey']
@@ -186,7 +186,7 @@ const STORY = [
     subtitle: '曲女城 · 戒日王宫廷',
     body: '戒日王在曲女城为玄奘举办「无遮大会」——全印度学术辩论会。到会者：十八位国王、三千高僧、两千婆罗门及外道学者。玄奘立《制恶见论》悬于会场门外，宣称：「若有一字无理，请斩首相谢。」整整十八天，无人能破一字。大乘众尊他为「大乘天」，小乘众尊他为「解脱天」。此后戒日王三请玄奘留印度，他一一谢绝：「我此来为求法，今法已得，当归以报国。」',
     lat: 27.0, lng: 80.0, zoom: 5.5,
-    route: null,
+    route: ['changan', 'dunhuang', 'gaochang', 'kucha', 'suyab', 'samarkand', 'taxila'],
     marker: null,
     showCities: ['taxila'],
     highlight: ['xuanzang', 'buddhism']
@@ -196,7 +196,7 @@ const STORY = [
     subtitle: '公元645年 · 长安',
     body: '阔别十七年，玄奘回到长安。带回佛经657部、佛像七尊、舍利一百五十粒。长安万人空巷，争睹圣僧归来。玄奘谢绝了唐太宗出仕的邀请，隐居大慈恩寺译经十九年，共译出《大般若经》等七十五部一千三百三十五卷。又口述《大唐西域记》——记录138个国家和地区的地理、历史、风俗，至今仍是研究古印度和中亚学术上不可替代的第一手资料。664年圆寂，百万人送葬。他取回来的不仅是佛经，更是一整个文明的光。',
     lat: 34.26, lng: 108.94, zoom: 5,
-    route: null,
+    route: ['changan', 'dunhuang', 'gaochang', 'kucha', 'suyab', 'samarkand', 'taxila'],
     marker: 'changan',
     showCities: ['changan', 'luoyang', 'dunhuang', 'gaochang', 'taxila'],
     highlight: ['xuanzang', 'xuanzang-journey', 'buddhism', 'changan']
