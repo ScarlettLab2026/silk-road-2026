@@ -63,7 +63,7 @@
 
   /* ── Progress Dots ── */
   #progress {
-    position: fixed; top: 24px; left: 50%; transform: translateX(-50%);
+    position: fixed; top: 60px; left: 50%; transform: translateX(-50%);
     z-index: 10; display: flex; gap: 10px;
   }
   #progress .dot {
@@ -72,6 +72,21 @@
   }
   #progress .dot.active { background: var(--accent); transform: scale(1.4); }
   #progress .dot.done { background: rgba(94,163,184,0.5); }
+
+  /* ── Story Nav ── */
+  #story-nav {
+    position: fixed; top: 24px; left: 50%; transform: translateX(-50%);
+    z-index: 10; display: flex; gap: 0; font-size: 0.73rem;
+  }
+  #story-nav a {
+    padding: 4px 12px; text-decoration: none; color: var(--text-dim);
+    border: 1px solid var(--border); background: rgba(0,0,0,0.3);
+    transition: all 0.2s; white-space: nowrap;
+  }
+  #story-nav a:first-child { border-radius: 14px 0 0 14px; }
+  #story-nav a:last-child { border-radius: 0 14px 14px 0; }
+  #story-nav a.active { color: var(--accent); border-color: var(--accent); background: rgba(94,163,184,0.1); }
+  #story-nav a:hover:not(.active) { color: #fff; background: rgba(255,255,255,0.06); }
 
   /* ── Nav buttons ── */
   #restart {
@@ -101,6 +116,12 @@
 <body>
 
 <div id="map"></div>
+
+<div id="story-nav">
+  <a href="story.html">📖 张骞</a>
+  <a href="story3.html">🧘 玄奘</a>
+  <a href="story2.html" class="active">🚢 郑和</a>
+</div>
 
 <div id="progress"></div>
 

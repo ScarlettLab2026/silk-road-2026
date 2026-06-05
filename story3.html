@@ -3,18 +3,33 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>凿空西域 · 张骞的丝路</title>
+<title>万里求法 · 玄奘西行</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <style>
   :root {
-    --bg: #0d0d12; --card-bg: rgba(20,20,30,0.92); --accent: #d4a853;
-    --text: #e0ddd5; --text-dim: #9a9790; --border: rgba(255,255,255,0.08);
+    --bg: #0f0d0c; --card-bg: rgba(24,20,18,0.93); --accent: #c47a38;
+    --text: #e8e0d8; --text-dim: #9b9085; --border: rgba(255,255,255,0.08);
   }
   * { margin:0; padding:0; box-sizing:border-box; }
   body { background: #000; font-family: -apple-system, "PingFang SC", "Noto Serif SC", "Microsoft YaHei", serif; overflow: hidden; height: 100vh; }
 
   #map { position: fixed; inset: 0; z-index: 1; }
-  .leaflet-container { background: #0d0d12; }
+  .leaflet-container { background: #0f0d0c; }
+
+  /* ── Story Nav ── */
+  #story-nav {
+    position: fixed; top: 24px; left: 50%; transform: translateX(-50%);
+    z-index: 10; display: flex; gap: 0; font-size: 0.73rem;
+  }
+  #story-nav a {
+    padding: 4px 12px; text-decoration: none; color: var(--text-dim);
+    border: 1px solid var(--border); background: rgba(0,0,0,0.3);
+    transition: all 0.2s; white-space: nowrap;
+  }
+  #story-nav a:first-child { border-radius: 14px 0 0 14px; }
+  #story-nav a:last-child { border-radius: 0 14px 14px 0; }
+  #story-nav a.active { color: var(--accent); border-color: var(--accent); background: rgba(196,122,56,0.1); }
+  #story-nav a:hover:not(.active) { color: #fff; background: rgba(255,255,255,0.06); }
 
   /* ── Narrative Card ── */
   #narrative {
@@ -71,24 +86,9 @@
     background: rgba(255,255,255,0.2); transition: all 0.4s;
   }
   #progress .dot.active { background: var(--accent); transform: scale(1.4); }
-  #progress .dot.done { background: rgba(212,168,83,0.5); }
+  #progress .dot.done { background: rgba(196,122,56,0.5); }
 
-  /* ── Story Nav ── */
-  #story-nav {
-    position: fixed; top: 24px; left: 50%; transform: translateX(-50%);
-    z-index: 10; display: flex; gap: 0; font-size: 0.73rem;
-  }
-  #story-nav a {
-    padding: 4px 12px; text-decoration: none; color: var(--text-dim);
-    border: 1px solid var(--border); background: rgba(0,0,0,0.3);
-    transition: all 0.2s; white-space: nowrap;
-  }
-  #story-nav a:first-child { border-radius: 14px 0 0 14px; }
-  #story-nav a:last-child { border-radius: 0 14px 14px 0; }
-  #story-nav a.active { color: var(--accent); border-color: var(--accent); background: rgba(212,168,83,0.1); }
-  #story-nav a:hover:not(.active) { color: #fff; background: rgba(255,255,255,0.06); }
-
-  /* ── Restart button ── */
+  /* ── Nav buttons ── */
   #restart {
     position: fixed; top: 24px; right: 24px; z-index: 10;
     background: rgba(255,255,255,0.06); border: 1px solid var(--border);
@@ -97,11 +97,11 @@
   }
   #restart:hover { background: rgba(255,255,255,0.12); color: #fff; }
 
-  /* ── Responsive ── */
   @media (max-width: 640px) {
     #narrative { bottom: 16px; padding: 24px 20px 20px; border-radius: 16px; }
     #narrative h2 { font-size: 1.2rem; }
     #narrative p { font-size: 0.9rem; }
+    #story-nav a { padding: 3px 9px; font-size: 0.68rem; }
   }
 </style>
 </head>
@@ -110,8 +110,8 @@
 <div id="map"></div>
 
 <div id="story-nav">
-  <a href="story.html" class="active">📖 张骞</a>
-  <a href="story3.html">🧘 玄奘</a>
+  <a href="story.html">📖 张骞</a>
+  <a href="story3.html" class="active">🧘 玄奘</a>
   <a href="story2.html">🚢 郑和</a>
 </div>
 
@@ -130,84 +130,84 @@
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-// ── Story Data ──
 const STORY = [
   {
-    title: '凿空西域',
-    subtitle: '公元前139年 · 长安',
-    body: '汉武帝刘彻登基不久，北方面临匈奴的持续威胁。他做了一个大胆的决定：派遣使节穿越匈奴控制区，去联络西方的大月氏，联合夹击匈奴。这个几乎不可能完成的任务，落在了一个年轻的郎官身上——张骞。',
-    lat: 34.34, lng: 108.94, zoom: 6,
-    route: null, marker: 'changan',
-    showCities: ['changan'],
-    highlight: ['zhang-qian', 'emperor-wu']
+    title: '万里求法',
+    subtitle: '公元629年 · 长安',
+    body: '贞观三年，27岁的玄奘从长安出发。唐初严禁百姓出境，他只能混在难民中偷渡西行。经秦州、兰州到凉州，一路讲经声名鹊起，引得凉州都督下令捉拿。玄奘昼伏夜出逃至瓜州，找到胡人向导石盘陀。夜渡葫芦河，偷越玉门关，独自踏入八百里莫贺延碛——「上无飞鸟，下无走兽」。四天五夜滴水未进，靠老马识途找到水源才活下来。',
+    lat: 38.0, lng: 102.0, zoom: 5,
+    route: ['changan', 'dunhuang'],
+    marker: 'dunhuang',
+    showCities: ['changan', 'dunhuang', 'luoyang'],
+    highlight: ['xuanzang', 'xuanzang-journey', 'buddhism']
   },
   {
-    title: '被捕：十年囚徒',
-    subtitle: '河西走廊 · 匈奴王庭',
-    body: '张骞率百余人出陇西，刚过黄河就被匈奴骑兵截获。军臣单于将他扣留在草原上，还给他娶了匈奴妻子，试图同化他。但张骞始终「持汉节不失」，保留了那根代表汉朝使节身份的节杖。这一关，就是整整十年。',
-    lat: 40.1, lng: 94.7, zoom: 5,
-    route: null, marker: 'dunhuang',
-    showCities: ['changan', 'dunhuang'],
-    highlight: ['zhang-qian', 'dunhuang']
+    title: '高昌绝食',
+    subtitle: '高昌国 · 吐鲁番',
+    body: '走出沙漠，玄奘抵达西域佛国高昌。国王麴文泰深夜秉烛前来，深为玄奘的学识和虔诚折服，要强行留他为国师。玄奘说：「骨可碎，志不可夺。」绝食三日，气息奄奄。麴文泰终于让步，跪地结拜为兄弟，派二十五名随从、三十匹马、足够二十年的盘缠，并修国书给沿途二十四国请予放行。玄奘许诺归国时在此停留三年说法——十七年后，他兑现了诺言。',
+    lat: 42.0, lng: 89.5, zoom: 5.5,
+    route: ['dunhuang', 'gaochang'],
+    marker: 'gaochang',
+    showCities: ['dunhuang', 'gaochang', 'kucha'],
+    highlight: ['xuanzang', 'gaochang', 'buddhism']
   },
   {
-    title: '逃脱：一路向西',
-    subtitle: '穿越沙漠 · 翻越葱岭',
-    body: '趁匈奴内乱，张骞和随从堂邑父逃脱。他们没有回头向东，而是选择继续西行完成使命。穿越塔克拉玛干沙漠边缘，翻越帕米尔高原——这是中国人第一次用自己的脚步丈量这条通往西方的路。',
-    lat: 39.5, lng: 75.0, zoom: 5,
-    route: ['changan', 'dunhuang', 'kashgar'],
-    marker: 'kashgar',
-    showCities: ['changan', 'dunhuang', 'kashgar', 'khotan'],
-    highlight: ['zhang-qian', 'kashgar']
+    title: '翻越凌山',
+    subtitle: '天山 · 碎叶城',
+    body: '从高昌经龟兹，玄奘面对西行最险恶的屏障——凌山（天山主峰）。「积雪弥满，蹊径难寻。飞雪雨下，七日七夜方出。」同行者冻死十之三四，牲畜损失过半。下山后抵达碎叶城（今吉尔吉斯斯坦托克马克），遇见西突厥统叶护可汗。可汗派翻译和护送队，玄奘经赭时国（塔什干）、飒秣建国（撒马尔罕），穿越中亚腹地，一路向印度前进。',
+    lat: 42.0, lng: 75.5, zoom: 5,
+    route: ['gaochang', 'kucha', 'suyab', 'samarkand'],
+    marker: 'suyab',
+    showCities: ['gaochang', 'kucha', 'suyab', 'samarkand'],
+    highlight: ['xuanzang', 'suyab', 'buddhism']
   },
   {
-    title: '抵达：大宛与大月氏',
-    subtitle: '费尔干纳 · 撒马尔罕',
-    body: '到达大宛（今费尔干纳）后，国王早就听说汉朝富庶，热情接待了张骞，派向导送他经康居抵达大月氏。然而大月氏已在阿姆河流域安居乐业，土地肥沃，不愿再与匈奴开战。张骞在此逗留一年多，走遍了西域各国，详细记录地理、物产和风俗。',
-    lat: 40.0, lng: 67.0, zoom: 5,
-    route: ['changan', 'dunhuang', 'kashgar', 'samarkand'],
-    marker: 'samarkand',
-    showCities: ['changan', 'dunhuang', 'kashgar', 'samarkand', 'bukhara'],
-    highlight: ['zhang-qian', 'samarkand', 'horses']
+    title: '犍陀罗·佛的容颜',
+    subtitle: '塔克西拉 · 犍陀罗故地',
+    body: '穿越铁门关，翻越大雪山（兴都库什山），玄奘进入古印度犍陀罗（今巴基斯坦）。这里是佛教艺术的诞生地——亚历山大的希腊雕塑匠与印度佛教信仰在此交融，创造出最早的佛像。玄奘遍访圣迹：佛陀割肉贸鸽处、舍身饲虎处、菩提树下金刚座。每到一处，虔诚礼拜，泪流满面。同行者劝他，「法师为何如此？」他答：「佛在此地为众生舍身，我今礼拜，岂能无泪。」',
+    lat: 34.0, lng: 73.0, zoom: 5.5,
+    route: ['samarkand', 'taxila'],
+    marker: 'taxila',
+    showCities: ['samarkand', 'taxila', 'kashgar'],
+    highlight: ['xuanzang', 'buddhism', 'kumarajiva']
   },
   {
-    title: '归途：再次被俘',
-    subtitle: '南山羌中道 · 长安',
-    body: '张骞决定从南道（塔里木盆地南缘）经于阗、羌中返回，不料羌人已归附匈奴，他再次被俘。一年后，军臣单于去世，匈奴大乱，张骞趁乱带着匈奴妻子和堂邑父逃回长安。出发时一百余人，十三年后归来，只剩两人。',
-    lat: 37.0, lng: 88.0, zoom: 5,
-    route: ['samarkand', 'kashgar', 'khotan', 'changan'],
-    marker: 'changan',
-    showCities: ['samarkand', 'kashgar', 'khotan', 'dunhuang', 'changan'],
-    highlight: ['zhang-qian', 'khotan']
-  },
-  {
-    title: '凿空：丝路从此开启',
-    subtitle: '长安 · 汉武帝朝堂',
-    body: '回到长安，张骞向汉武帝呈上西域各国的详尽报告——大宛的汗血宝马、安息的银币、大夏的蜀布和邛竹杖。汉武帝大喜，封张骞为太中大夫。随后汉朝在西域设立河西四郡，丝绸之路的大门，被张骞一凿而开。司马迁在《史记》中用了两个字评价：「凿空」。',
-    lat: 38.5, lng: 85.0, zoom: 3.5,
-    route: ['changan', 'dunhuang', 'kashgar', 'samarkand', 'baghdad', 'constantinople'],
-    marker: null,
-    showCities: ['changan', 'dunhuang', 'kashgar', 'samarkand', 'baghdad', 'constantinople', 'luoyang'],
-    highlight: ['zhang-qian', 'emperor-wu', 'silk', 'horses', 'alfalfa', 'walnut']
-  },
-  {
-    title: '张骞的遗产',
-    subtitle: '一条路，改变世界',
-    body: '丝绸、苜蓿、胡桃、葡萄……张骞带回来的不止是地理情报，更是一张通往西方世界的路线图。在他之后，班超再定西域，玄奘沿着他开辟的路西行取经，粟特商人在这条路上接力贸易千年。从长安到罗马，从东方到西方——张骞是第一个走通这条路的人。',
-    lat: 38.0, lng: 72.0, zoom: 3.2,
+    title: '那烂陀·智慧的海洋',
+    subtitle: '印度 · 那烂陀寺',
+    body: '公元631年，玄奘终于抵达那烂陀寺——当时世界最大的佛教学府，万余僧侣在此研习。106岁的住持戒贤法师亲自收他为徒，传授《瑜伽师地论》。玄奘在此苦学五年，遍览经论，通晓梵文，学贯大小乘。他还游历了整个印度，造访佛教六大圣地，观察各地风俗——从甘蔗制糖到刑罚制度，从服饰饮食到语言文字，巨细无遗地记录。从长安至此，他已走过138个国家。',
+    lat: 25.6, lng: 85.2, zoom: 6,
     route: null,
     marker: null,
-    showCities: ['changan', 'dunhuang', 'kashgar', 'samarkand', 'baghdad', 'constantinople', 'taxila', 'kucha', 'damascus', 'venice'],
-    highlight: ['zhang-qian', 'ban-chao', 'xuanzang', 'zhang-qian-mission', 'silk', 'alfalfa', 'walnut', 'grapes', 'horses']
+    showCities: ['taxila'],
+    highlight: ['xuanzang', 'buddhism', 'xuanzang-journey']
+  },
+  {
+    title: '曲女城·天竺之辩',
+    subtitle: '曲女城 · 戒日王宫廷',
+    body: '戒日王在曲女城为玄奘举办「无遮大会」——全印度学术辩论会。到会者：十八位国王、三千高僧、两千婆罗门及外道学者。玄奘立《制恶见论》悬于会场门外，宣称：「若有一字无理，请斩首相谢。」整整十八天，无人能破一字。大乘众尊他为「大乘天」，小乘众尊他为「解脱天」。此后戒日王三请玄奘留印度，他一一谢绝：「我此来为求法，今法已得，当归以报国。」',
+    lat: 27.0, lng: 80.0, zoom: 5.5,
+    route: null,
+    marker: null,
+    showCities: ['taxila'],
+    highlight: ['xuanzang', 'buddhism']
+  },
+  {
+    title: '归国·一灯照千年',
+    subtitle: '公元645年 · 长安',
+    body: '阔别十七年，玄奘回到长安。带回佛经657部、佛像七尊、舍利一百五十粒。长安万人空巷，争睹圣僧归来。玄奘谢绝了唐太宗出仕的邀请，隐居大慈恩寺译经十九年，共译出《大般若经》等七十五部一千三百三十五卷。又口述《大唐西域记》——记录138个国家和地区的地理、历史、风俗，至今仍是研究古印度和中亚学术上不可替代的第一手资料。664年圆寂，百万人送葬。他取回来的不仅是佛经，更是一整个文明的光。',
+    lat: 34.26, lng: 108.94, zoom: 5,
+    route: null,
+    marker: 'changan',
+    showCities: ['changan', 'luoyang', 'dunhuang', 'gaochang', 'taxila'],
+    highlight: ['xuanzang', 'xuanzang-journey', 'buddhism', 'changan']
   }
 ];
 
 const TOTAL = STORY.length;
 
-// ── Init Map ──
 const map = L.map('map', {
   zoomControl: false, attributionControl: false,
-  center: [38, 85], zoom: 4
+  center: [35, 85], zoom: 3.5
 });
 L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
   maxZoom: 12
@@ -219,18 +219,15 @@ let routeLines = [];
 let cityMarkers = [];
 let highlightMarkers = [];
 
-// ── Load data ──
 fetch('data/silk-road.json').then(r => r.json()).then(d => {
   DATA = d;
   initProgress();
   renderChapter(0);
 }).catch(() => {
-  // Fallback: load from absolute URL
   fetch('https://scarlettlab2026.github.io/silk-road-2026/data/silk-road.json')
     .then(r => r.json()).then(d => { DATA = d; initProgress(); renderChapter(0); });
 });
 
-// ── Progress dots ──
 function initProgress() {
   const el = document.getElementById('progress');
   el.innerHTML = STORY.map((_, i) =>
@@ -246,39 +243,30 @@ function updateProgress(idx) {
   }
 }
 
-// ── Render chapter ──
 function renderChapter(idx) {
   const ch = STORY[idx];
   currentChapter = idx;
   updateProgress(idx);
 
-  // Update narrative card
   document.getElementById('chNum').textContent = `第 ${idx+1} 章 / ${TOTAL}`;
   document.getElementById('chTitle').textContent = ch.subtitle;
   document.getElementById('chBody').textContent = ch.body;
 
-  // Animate card
   const card = document.getElementById('narrative');
   card.classList.add('fading');
-  setTimeout(() => {
-    card.classList.remove('fading');
-  }, 200);
+  setTimeout(() => { card.classList.remove('fading'); }, 200);
 
-  // Hint text for last chapter
   document.querySelector('#narrative .hint').innerHTML =
     idx < TOTAL - 1
       ? '<span class="arrow">→</span> 点击继续'
-      : '<span style="font-size:1rem">🐫</span> 点击重播';
+      : '<span style="font-size:1rem">🕉️</span> 点击重播';
 
-  // Fly map
   map.flyTo([ch.lat, ch.lng], ch.zoom, { duration: 1.8, easeLinearity: 0.25 });
 
-  // Clear previous
   routeLines.forEach(l => map.removeLayer(l)); routeLines = [];
   cityMarkers.forEach(m => map.removeLayer(m)); cityMarkers = [];
   highlightMarkers.forEach(m => map.removeLayer(m)); highlightMarkers = [];
 
-  // Draw route if specified
   if (ch.route && DATA) {
     const pts = [];
     ch.route.forEach(nid => {
@@ -286,57 +274,44 @@ function renderChapter(idx) {
       if (c) pts.push([c.lat, c.lng]);
     });
     if (pts.length >= 2) {
-      // Dim background route
-      const dimLine = L.polyline(pts, {
-        color: 'rgba(212,168,83,0.15)', weight: 2, dashArray: '8 6'
-      }).addTo(map);
-      routeLines.push(dimLine);
-      // Bright traveled route
-      const brightLine = L.polyline(pts, {
-        color: 'rgba(212,168,83,0.8)', weight: 3.5, dashArray: '12 4',
-        className: 'story-route'
-      }).addTo(map);
-      routeLines.push(brightLine);
+      routeLines.push(L.polyline(pts, {
+        color: 'rgba(196,122,56,0.15)', weight: 2, dashArray: '8 6'
+      }).addTo(map));
+      routeLines.push(L.polyline(pts, {
+        color: 'rgba(196,122,56,0.8)', weight: 3.5, dashArray: '12 4'
+      }).addTo(map));
     }
   }
 
-  // Show relevant cities
   if (ch.showCities && DATA) {
     ch.showCities.forEach(nid => {
       const c = DATA.nodes.cities.find(cc => cc.id === nid);
       if (!c) return;
-      const isKey = nid === ch.marker || ch.highlight.includes(nid);
+      const isKey = nid === ch.marker || (ch.highlight && ch.highlight.includes(nid));
       const isStart = nid === 'changan' || nid === 'luoyang';
       const m = L.circleMarker([c.lat, c.lng], {
         radius: isStart ? 8 : isKey ? 7 : 5,
-        fillColor: isStart ? '#fff' : 'var(--accent, #d4a853)',
-        color: '#0d0d12', weight: 1.5, fillOpacity: isKey ? 1 : 0.7
+        fillColor: isStart ? '#fff' : 'var(--accent, #c47a38)',
+        color: '#0f0d0c', weight: 1.5, fillOpacity: isKey ? 1 : 0.7
       }).addTo(map);
-      m.bindTooltip(c.name, {
-        direction: 'top', offset: [0, -6],
-        className: 'story-tooltip'
-      });
+      m.bindTooltip(c.name, { direction: 'top', offset: [0, -6] });
       cityMarkers.push(m);
     });
   }
 
-  // Highlight marker
   if (ch.marker && DATA) {
     const c = DATA.nodes.cities.find(cc => cc.id === ch.marker);
     if (c) {
-      const pulse = L.circleMarker([c.lat, c.lng], {
+      highlightMarkers.push(L.circleMarker([c.lat, c.lng], {
         radius: 14, fillColor: 'rgba(255,255,255,0.25)',
         color: 'transparent', fillOpacity: 0.6
-      }).addTo(map);
-      highlightMarkers.push(pulse);
-      const center = L.circleMarker([c.lat, c.lng], {
-        radius: 8, fillColor: '#fff', color: '#0d0d12', weight: 2, fillOpacity: 1
-      }).addTo(map);
-      highlightMarkers.push(center);
+      }).addTo(map));
+      highlightMarkers.push(L.circleMarker([c.lat, c.lng], {
+        radius: 8, fillColor: '#fff', color: '#0f0d0c', weight: 2, fillOpacity: 1
+      }).addTo(map));
     }
   }
 
-  // Show related entity badges (HTML, below narrative)
   const badgeRow = document.getElementById('badges');
   if (ch.highlight && DATA) {
     const colors = { figure: '#5b9bd5', goods: '#6aad6a', event: '#c75b3a' };
@@ -356,7 +331,6 @@ function renderChapter(idx) {
   }
 }
 
-// ── Advance ──
 function toggleCard() {
   const card = document.getElementById('narrative');
   const btn = document.getElementById('toggle-card');
@@ -384,7 +358,6 @@ function restart() {
   renderChapter(0);
 }
 
-// Keyboard support
 document.addEventListener('keydown', e => {
   if (e.key === 'ArrowRight' || e.key === ' ' || e.code === 'Space') {
     e.preventDefault(); advance();
