@@ -2751,12 +2751,6 @@
     },
     {
       "source": "zheng-he",
-      "target": "zheng-he-figure",
-      "relation": "主角",
-      "relation_en": "Protagonist"
-    },
-    {
-      "source": "zheng-he",
       "target": "malacca",
       "relation": "重要节点",
       "relation_en": "Key node"
@@ -3075,9 +3069,9 @@
     },
     {
       "source": "gan-ying-mission",
-      "target": "an-shi-rebellion",
+      "target": "baghdad",
       "relation": "途经两河流域",
-      "relation_en": "passed through Mesopotamia"
+      "relation_en": "Passed Through Mesopotamia"
     },
     {
       "source": "du-huan-travels",
@@ -3883,14 +3877,6 @@
       "relation": "朝圣商路",
       "relation_en": "Pilgrimage Trade Route",
       "description": "大马士革的朝圣商队每年经阿拉伯沙漠抵达麦加，形成固定商路",
-      "description_en": ""
-    },
-    {
-      "source": "mecca",
-      "target": "du-huan",
-      "relation": "文字记录",
-      "relation_en": "Textual Record",
-      "description": "杜环《经行记》记录了伊斯兰教早期仪式和麦加天房，为最早的中文伊斯兰教记录之一",
       "description_en": ""
     },
     {
