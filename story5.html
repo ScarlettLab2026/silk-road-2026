@@ -3,18 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>万里求法 · 玄奘西行</title>
+<title>东方见闻录 · 马可波罗东游</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <style>
   :root {
-    --bg: #0f0d0c; --card-bg: rgba(24,20,18,0.93); --accent: #c47a38;
-    --text: #e8e0d8; --text-dim: #9b9085; --border: rgba(255,255,255,0.08);
+    --bg: #0f0b0a; --card-bg: rgba(22,16,14,0.93); --accent: #c2714e;
+    --text: #e8ddd6; --text-dim: #9b8b7e; --border: rgba(255,255,255,0.08);
   }
   * { margin:0; padding:0; box-sizing:border-box; }
   body { background: #000; font-family: -apple-system, "PingFang SC", "Noto Serif SC", "Microsoft YaHei", serif; overflow: hidden; height: 100vh; }
 
   #map { position: fixed; inset: 0; z-index: 1; }
-  .leaflet-container { background: #0f0d0c; }
+  .leaflet-container { background: #0f0b0a; }
 
   /* ── Story Nav ── */
   #story-nav {
@@ -28,7 +28,7 @@
   }
   #story-nav a:first-child { border-radius: 14px 0 0 14px; }
   #story-nav a:last-child { border-radius: 0 14px 14px 0; }
-  #story-nav a.active { color: var(--accent); border-color: var(--accent); background: rgba(196,122,56,0.1); }
+  #story-nav a.active { color: var(--accent); border-color: var(--accent); background: rgba(194,113,78,0.1); }
   #story-nav a:hover:not(.active) { color: #fff; background: rgba(255,255,255,0.06); }
 
   /* ── Narrative Card ── */
@@ -86,7 +86,7 @@
     background: rgba(255,255,255,0.2); transition: all 0.4s;
   }
   #progress .dot.active { background: var(--accent); transform: scale(1.4); }
-  #progress .dot.done { background: rgba(196,122,56,0.5); }
+  #progress .dot.done { background: rgba(194,113,78,0.5); }
 
   /* ── Nav buttons ── */
   #restart {
@@ -112,9 +112,9 @@
 <div id="story-nav">
   <a href="story.html">📖 张骞</a>
   <a href="story4.html">🪷 法显</a>
-  <a href="story3.html" class="active">🧘 玄奘</a>
+  <a href="story3.html">🧘 玄奘</a>
   <a href="story2.html">🚢 郑和</a>
-  <a href="story5.html">🏛 马可·波罗</a>
+  <a href="story5.html" class="active">🏛 马可·波罗</a>
 </div>
 
 <div id="progress"></div>
@@ -134,74 +134,74 @@
 <script>
 const STORY = [
   {
-    title: '万里求法',
-    subtitle: '公元629年 · 长安',
-    body: '贞观三年，27岁的玄奘从长安出发。唐初严禁百姓出境，他只能混在难民中偷渡西行。经秦州、兰州到凉州，一路讲经声名鹊起，引得凉州都督下令捉拿。玄奘昼伏夜出逃至瓜州，找到胡人向导石盘陀。夜渡葫芦河，偷越玉门关，独自踏入八百里莫贺延碛——「上无飞鸟，下无走兽」。四天五夜滴水未进，靠老马识途找到水源才活下来。',
-    lat: 38.0, lng: 102.0, zoom: 5,
-    route: ['changan', 'dunhuang'],
+    title: '威尼斯启程',
+    subtitle: '公元1271年 · 威尼斯',
+    body: '1271年，17岁的马可·波罗登上父亲尼科洛和叔叔马费奥的商船。这已经是波罗兄弟第二次前往东方——上一次他们在布哈拉遇到忽必烈汗的使者，被邀请前往大都。这次他们带着罗马教廷的回信和圣油，准备走一条比父辈更远的商路。少年马可还不知道，这一去就是整整24年。从威尼斯潟湖启航，经亚得里亚海、爱琴海，抵达地中海东岸的阿卡港（今以色列）。然后换骆驼——真正的丝路，从现在开始。',
+    lat: 43.0, lng: 25.0, zoom: 4.2,
+    route: ['venice', 'constantinople'],
+    marker: 'venice',
+    showCities: ['venice', 'constantinople', 'hormuz'],
+    highlight: ['marco-polo', 'marco-polo-journey']
+  },
+  {
+    title: '穿越波斯',
+    subtitle: '大不里士 · 起儿漫 · 霍尔木兹',
+    body: '穿越小亚细亚进入波斯，波罗一家见识了真正的东方繁华。在大不里士，他们看到波斯地毯工坊的匠人用矿物染料编织图案，看到骆驼商队从印度运来胡椒和宝石。在起儿漫（克尔曼），波斯商人向他们展示波斯湾采来的珍珠——马可后来在书中写道：「起儿漫的绿松石冠绝天下。」抵达霍尔木兹港时，他们原计划乘船前往中国，但看到阿拉伯单桅帆船的木钉结构后，决定继续走陆路：「那些船只用椰索缝合，不用铁钉，太危险。」转向东北——进入中亚。',
+    lat: 32.0, lng: 54.0, zoom: 4.8,
+    route: ['venice', 'constantinople', 'isfahan', 'hormuz'],
+    marker: 'isfahan',
+    showCities: ['isfahan', 'hormuz', 'baghdad'],
+    highlight: ['marco-polo', 'marco-polo-journey', 'persian-carpet', 'pearls']
+  },
+  {
+    title: '翻越世界之巅',
+    subtitle: '帕米尔高原 · 喀什',
+    body: '离开波斯，波罗一家面对的是地球上最高峻的障碍——帕米尔高原。马可·波罗是第一位于书中详细描述帕米尔的欧洲人：「此地山极高峻，终年积雪。空气稀薄，鸟兽绝迹。火不能燃，水沸而不热——煮不熟食物。」他们在海拔4000米以上的冰山上跋涉四十余日。翻过雪岭，抵达喀什。马可惊叹于喀什市场的繁荣：和田玉、青金石、中国丝绸、波斯银器、中亚良马——「世界各地的商人都来到这里。」出喀什，沿着塔克拉玛干沙漠南缘的绿洲一路向东——真正的西域之旅开始了。',
+    lat: 39.5, lng: 75.0, zoom: 5,
+    route: ['venice', 'constantinople', 'isfahan', 'hormuz', 'kashgar'],
+    marker: 'kashgar',
+    showCities: ['kashgar', 'khotan', 'samarkand'],
+    highlight: ['marco-polo', 'kashgar', 'lapis-lazuli', 'jade']
+  },
+  {
+    title: '进入契丹',
+    subtitle: '敦煌 · 河西走廊 · 上都',
+    body: '从喀什东行，经于阗到敦煌。马可·波罗是第一个详细描写敦煌莫高窟的外国人——虽然他关注的重点与众不同：「敦煌的佛教徒每日焚香无数次，大佛殿里的灯火日夜不熄。」穿过河西走廊，进入汉地。沿路城镇密布，人口稠密，客栈干净整洁，驿站的马匹随时可以更换。马可一次次被震撼：「契丹（中国）的驿传制度非常了不起——每个驿站各好马四十匹，信使换马不换人，一日可行四百余里。」他后来在书中浓墨重彩地记录了这套蒙古帝国的驿传系统。1275年五月，经过四年跋涉，波罗一家终于抵达上都（今内蒙古正蓝旗）——忽必烈汗的夏季行宫。',
+    lat: 42.3, lng: 100.0, zoom: 4.5,
+    route: ['venice', 'constantinople', 'isfahan', 'hormuz', 'kashgar', 'dunhuang', 'beijing'],
     marker: 'dunhuang',
-    showCities: ['changan', 'dunhuang', 'luoyang'],
-    highlight: ['xuanzang', 'xuanzang-journey', 'buddhism']
+    showCities: ['kashgar', 'khotan', 'dunhuang', 'beijing'],
+    highlight: ['marco-polo', 'dunhuang', 'mongol-pax']
   },
   {
-    title: '高昌绝食',
-    subtitle: '高昌国 · 吐鲁番',
-    body: '走出沙漠，玄奘抵达西域佛国高昌。国王麴文泰深夜秉烛前来，深为玄奘的学识和虔诚折服，要强行留他为国师。玄奘说：「骨可碎，志不可夺。」绝食三日，气息奄奄。麴文泰终于让步，跪地结拜为兄弟，派二十五名随从、三十匹马、足够二十年的盘缠，并修国书给沿途二十四国请予放行。玄奘许诺归国时在此停留三年说法——十七年后，他兑现了诺言。',
-    lat: 42.0, lng: 89.5, zoom: 5.5,
-    route: ['changan', 'dunhuang', 'gaochang'],
-    marker: 'gaochang',
-    showCities: ['dunhuang', 'gaochang', 'kucha'],
-    highlight: ['xuanzang', 'gaochang', 'buddhism']
+    title: '忽必烈汗的客人',
+    subtitle: '公元1275年 · 元上都',
+    body: '在上都的竹宫（忽必烈可拆卸的行宫）中，尼科洛向大汗呈上教宗回信和耶路撒冷圣油。忽必烈注意到了这个20岁的年轻人——马可·波罗。他聪明、善于观察、学会了蒙古语和波斯语。大汗将他纳入侍从，派他出使各地。马可在书中详细描写了上都的壮丽：竹柱金漆、兽皮帐篷、万马奔腾的草原、猎鹰和雪豹——从法王路易九世到英格兰农夫，后来的欧洲读者被这些描述惊得目瞪口呆。上都，成了欧洲人几百年间对「东方」最浪漫的想象——柯勒律治笔下「Xanadu」的原型。随后忽必烈返回大都（北京）——马可第一次见到这座「世界最大之城」。',
+    lat: 41.5, lng: 113.0, zoom: 5.5,
+    route: ['venice', 'constantinople', 'isfahan', 'hormuz', 'kashgar', 'dunhuang', 'beijing'],
+    marker: 'beijing',
+    showCities: ['dunhuang', 'beijing', 'changan'],
+    highlight: ['marco-polo', 'beijing', 'mongol-pax', 'emperor-wu']
   },
   {
-    title: '翻越凌山',
-    subtitle: '天山 · 碎叶城',
-    body: '从高昌经龟兹，玄奘面对西行最险恶的屏障——凌山（天山主峰）。「积雪弥满，蹊径难寻。飞雪雨下，七日七夜方出。」同行者冻死十之三四，牲畜损失过半。下山后抵达碎叶城（今吉尔吉斯斯坦托克马克），遇见西突厥统叶护可汗。可汗派翻译和护送队，玄奘经赭时国（塔什干）、飒秣建国（撒马尔罕），穿越中亚腹地，一路向印度前进。',
-    lat: 42.0, lng: 75.5, zoom: 5,
-    route: ['changan', 'dunhuang', 'gaochang', 'kucha', 'suyab', 'samarkand'],
-    marker: 'suyab',
-    showCities: ['gaochang', 'kucha', 'suyab', 'samarkand'],
-    highlight: ['xuanzang', 'suyab', 'buddhism']
+    title: '仕元十七载',
+    subtitle: '大运河 · 杭州 · 刺桐港',
+    body: '马可·波罗在元朝度过了十七年。他替忽必烈出使各地，游历了大多数中国人一生都走不完的路。南下大运河，他被沿线的繁华惊呆：「沿途城镇相连，商铺林立，丝绸堆积如山。」抵达杭州（行在）——他称之为「天堂之城」：「城中有桥一万二千座，每座桥下可通大船。街上行人如织，任何商人都能在这里找到他想买的。」最后来到刺桐（泉州），他称之为「世界第一大港」：「胡椒、檀香、樟脑、珍珠、象牙、瓷器——从这里装船运往全世界。如果一个商人从亚历山大港运一船胡椒到欧洲，就有一百船胡椒运到刺桐。」马可从商人变成了元朝的「公务员」，用十七年走完了从北京到泉州、从云南到西藏的路。但思乡的种子，在威尼斯人心里从未熄灭。',
+    lat: 32.0, lng: 114.0, zoom: 4.8,
+    route: ['venice', 'constantinople', 'isfahan', 'hormuz', 'kashgar', 'dunhuang', 'beijing', 'quanzhou'],
+    marker: 'quanzhou',
+    showCities: ['beijing', 'quanzhou', 'guangzhou', 'hangzhou'],
+    highlight: ['marco-polo', 'quanzhou', 'black-pepper', 'porcelain', 'silk']
   },
   {
-    title: '犍陀罗·佛的容颜',
-    subtitle: '塔克西拉 · 犍陀罗故地',
-    body: '穿越铁门关，翻越大雪山（兴都库什山），玄奘进入古印度犍陀罗（今巴基斯坦）。这里是佛教艺术的诞生地——亚历山大的希腊雕塑匠与印度佛教信仰在此交融，创造出最早的佛像。玄奘遍访圣迹：佛陀割肉贸鸽处、舍身饲虎处、菩提树下金刚座。每到一处，虔诚礼拜，泪流满面。同行者劝他，「法师为何如此？」他答：「佛在此地为众生舍身，我今礼拜，岂能无泪。」',
-    lat: 34.0, lng: 73.0, zoom: 5.5,
-    route: ['changan', 'dunhuang', 'gaochang', 'kucha', 'suyab', 'samarkand', 'taxila'],
-    marker: 'taxila',
-    showCities: ['samarkand', 'taxila', 'kashgar'],
-    highlight: ['xuanzang', 'buddhism', 'kumarajiva']
-  },
-  {
-    title: '那烂陀·智慧的海洋',
-    subtitle: '印度 · 那烂陀寺',
-    body: '公元631年，玄奘终于抵达那烂陀寺——当时世界最大的佛教学府，万余僧侣在此研习。106岁的住持戒贤法师亲自收他为徒，传授《瑜伽师地论》。玄奘在此苦学五年，遍览经论，通晓梵文，学贯大小乘。他还游历了整个印度，造访佛教六大圣地，观察各地风俗——从甘蔗制糖到刑罚制度，从服饰饮食到语言文字，巨细无遗地记录。从长安至此，他已走过138个国家。',
-    lat: 25.6, lng: 85.2, zoom: 6,
-    route: ['changan', 'dunhuang', 'gaochang', 'kucha', 'suyab', 'samarkand', 'taxila'],
-    marker: null,
-    showCities: ['taxila'],
-    highlight: ['xuanzang', 'buddhism', 'xuanzang-journey']
-  },
-  {
-    title: '曲女城·天竺之辩',
-    subtitle: '曲女城 · 戒日王宫廷',
-    body: '戒日王在曲女城为玄奘举办「无遮大会」——全印度学术辩论会。到会者：十八位国王、三千高僧、两千婆罗门及外道学者。玄奘立《制恶见论》悬于会场门外，宣称：「若有一字无理，请斩首相谢。」整整十八天，无人能破一字。大乘众尊他为「大乘天」，小乘众尊他为「解脱天」。此后戒日王三请玄奘留印度，他一一谢绝：「我此来为求法，今法已得，当归以报国。」',
-    lat: 27.0, lng: 80.0, zoom: 5.5,
-    route: ['changan', 'dunhuang', 'gaochang', 'kucha', 'suyab', 'samarkand', 'taxila'],
-    marker: null,
-    showCities: ['taxila'],
-    highlight: ['xuanzang', 'buddhism']
-  },
-  {
-    title: '归国·一灯照千年',
-    subtitle: '公元645年 · 长安',
-    body: '阔别十七年，玄奘回到长安。带回佛经657部、佛像七尊、舍利一百五十粒。长安万人空巷，争睹圣僧归来。玄奘谢绝了唐太宗出仕的邀请，隐居大慈恩寺译经十九年，共译出《大般若经》等七十五部一千三百三十五卷。又口述《大唐西域记》——记录138个国家和地区的地理、历史、风俗，至今仍是研究古印度和中亚学术上不可替代的第一手资料。664年圆寂，百万人送葬。他取回来的不仅是佛经，更是一整个文明的光。',
-    lat: 34.26, lng: 108.94, zoom: 5,
-    route: ['changan', 'dunhuang', 'gaochang', 'kucha', 'suyab', 'samarkand', 'taxila'],
-    marker: 'changan',
-    showCities: ['changan', 'luoyang', 'dunhuang', 'gaochang', 'taxila'],
-    highlight: ['xuanzang', 'xuanzang-journey', 'buddhism', 'changan']
+    title: '归航·东方见闻录',
+    subtitle: '公元1295年 · 威尼斯',
+    body: '1291年，忽必烈将一位蒙古公主阔阔真远嫁波斯伊儿汗国。需要熟悉海路的人护送——马可·波罗主动请缨。1292年，船队从刺桐港（泉州）启航，十四艘中国远洋帆船。经占城、苏门答腊（停留五月等季风）、斯里兰卡、印度西海岸，抵达霍尔木兹——马可把这趟海上丝路的全程写进书中。1295年，波罗一家回到威尼斯，距出发时已过去24年。起初无人认出他们——穿着鞑靼长袍，说着异国语言。传说马可撕开袍衬，洒出红宝石、蓝宝石、珍珠——威尼斯人才相信，他们真的去过东方。三年后，马可在热那亚的监狱里遇到了作家鲁斯蒂谦。他口述24年游历，鲁斯蒂谦用法语写成《马可·波罗行纪》（又译《东方见闻录》）。这本书石破天惊：印度有香料群岛，中国有火井和石炭，日本有黄金铺成的宫殿，蒙古帝国的驿传一日可行四百里。两个世纪后，一个热那亚水手在他翻烂的《马可·波罗行纪》页边写满了批注——他叫哥伦布。1492年，哥伦布带着马可·波罗的书，向西航行试图到达书中的中国和印度，意外发现了新大陆。一本书，改变了世界地图。',
+    lat: 28.0, lng: 70.0, zoom: 3,
+    route: ['venice', 'constantinople', 'isfahan', 'hormuz', 'kashgar', 'dunhuang', 'beijing', 'quanzhou', 'hormuz', 'venice'],
+    marker: 'venice',
+    showCities: ['venice', 'quanzhou', 'hormuz', 'calicut'],
+    highlight: ['marco-polo', 'marco-polo-journey', 'zheng-he', 'ibn-battuta-journey']
   }
 ];
 
@@ -209,7 +209,7 @@ const TOTAL = STORY.length;
 
 const map = L.map('map', {
   zoomControl: false, attributionControl: false,
-  center: [35, 85], zoom: 3.5
+  center: [40, 60], zoom: 3
 });
 L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
   maxZoom: 12
@@ -261,7 +261,7 @@ function renderChapter(idx) {
   document.querySelector('#narrative .hint').innerHTML =
     idx < TOTAL - 1
       ? '<span class="arrow">→</span> 点击继续'
-      : '<span style="font-size:1rem">🕉️</span> 点击重播';
+      : '<span style="font-size:1rem">🏛</span> 点击重播';
 
   map.flyTo([ch.lat, ch.lng], ch.zoom, { duration: 1.8, easeLinearity: 0.25 });
 
@@ -277,10 +277,10 @@ function renderChapter(idx) {
     });
     if (pts.length >= 2) {
       routeLines.push(L.polyline(pts, {
-        color: 'rgba(196,122,56,0.15)', weight: 2, dashArray: '8 6'
+        color: 'rgba(194,113,78,0.15)', weight: 2, dashArray: '8 6'
       }).addTo(map));
       routeLines.push(L.polyline(pts, {
-        color: 'rgba(196,122,56,0.8)', weight: 3.5, dashArray: '12 4'
+        color: 'rgba(194,113,78,0.85)', weight: 3.5, dashArray: '12 4'
       }).addTo(map));
     }
   }
@@ -290,11 +290,11 @@ function renderChapter(idx) {
       const c = DATA.nodes.cities.find(cc => cc.id === nid);
       if (!c) return;
       const isKey = nid === ch.marker || (ch.highlight && ch.highlight.includes(nid));
-      const isStart = nid === 'changan' || nid === 'luoyang';
+      const isStart = nid === 'venice' || nid === 'beijing';
       const m = L.circleMarker([c.lat, c.lng], {
         radius: isStart ? 8 : isKey ? 7 : 5,
-        fillColor: isStart ? '#fff' : 'var(--accent, #c47a38)',
-        color: '#0f0d0c', weight: 1.5, fillOpacity: isKey ? 1 : 0.7
+        fillColor: isStart ? '#fff' : 'var(--accent, #c2714e)',
+        color: '#0f0b0a', weight: 1.5, fillOpacity: isKey ? 1 : 0.7
       }).addTo(map);
       m.bindTooltip(c.name, { direction: 'top', offset: [0, -6] });
       cityMarkers.push(m);
@@ -309,7 +309,7 @@ function renderChapter(idx) {
         color: 'transparent', fillOpacity: 0.6
       }).addTo(map));
       highlightMarkers.push(L.circleMarker([c.lat, c.lng], {
-        radius: 8, fillColor: '#fff', color: '#0f0d0c', weight: 2, fillOpacity: 1
+        radius: 8, fillColor: '#fff', color: '#0f0b0a', weight: 2, fillOpacity: 1
       }).addTo(map));
     }
   }
@@ -370,5 +370,4 @@ document.addEventListener('keydown', e => {
   }
 });
 </script>
-</body>
-</html>
+</body></html>

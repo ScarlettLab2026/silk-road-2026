@@ -2,7 +2,7 @@
   "meta": {
     "title": "丝绸之路知识图谱",
     "title_en": "Silk Road Knowledge Graph",
-    "version": "1.2.0",
+    "version": "1.2.1",
     "last_updated": "2026-06-06",
     "description": "一个关于丝绸之路的结构化开放数据集，涵盖城市、人物、物产、事件四大类实体及其关联关系。",
     "description_en": "An open structured dataset about the Silk Road, covering cities, figures, goods, and events and their interconnections."
@@ -844,6 +844,30 @@
         "description": "吐蕃王朝都邑，藏传佛教圣地。茶马古道的终点站——云南和四川的茶叶经横断山脉运至此地，换取藏马和麝香。藏人'宁可三日无粮，不可一日无茶'，是丝路茶叶贸易的最大消费市场之一。",
         "description_en": "Capital of the Tibetan Empire and sacred city of Tibetan Buddhism. The Tea-Horse Road's terminus — tea from Yunnan and Sichuan crossed the Hengduan Mountains to reach Lhasa, traded for Tibetan horses and musk. Tibet's tea obsession ('better three days without food than one without tea') made it one of the Silk Road's largest tea markets.",
         "significance": 4
+      },
+      {
+        "id": "hangzhou",
+        "name": "杭州",
+        "name_en": "Hangzhou",
+        "modern_name": "杭州",
+        "modern_name_en": "Hangzhou",
+        "country": "中国",
+        "country_en": "China",
+        "lat": 30.25,
+        "lng": 120.16,
+        "era": "隋 — 明",
+        "dynasties": [
+          "隋",
+          "唐",
+          "宋",
+          "元",
+          "明"
+        ],
+        "role": "大运河南端 / 海上丝路起点",
+        "role_en": "Grand Canal South Terminus / Maritime Silk Road Origin",
+        "description": "京杭大运河南端终点，南宋都城（临安）。马可·波罗称为「天堂之城」「世界上最美丽华贵之城」。丝绸、茶叶、瓷器从杭州经运河或海路运往世界。元代杭州是海上丝路的重要起点港之一。",
+        "description_en": "Southern terminus of the Grand Canal and capital of the Southern Song dynasty. Marco Polo called it the City of Heaven, \"the most beautiful and magnificent city in the world.\" Silk, tea, and porcelain were shipped worldwide via canal and sea from Hangzhou.",
+        "significance": 5
       }
     ],
     "figures": [
@@ -3902,6 +3926,41 @@
       "relation_en": "Musk–Tea Trade",
       "description": "青藏麝香经拉萨北上丝路抵撒马尔罕，同时茶叶由川滇入藏再西传中亚",
       "description_en": ""
+    },
+    {
+      "source": "hangzhou",
+      "target": "beijing",
+      "relation": "大运河连接",
+      "relation_en": "Grand Canal Connection",
+      "description": "杭州与大都（北京）通过京杭大运河相连，是南北物资流通的大动脉"
+    },
+    {
+      "source": "hangzhou",
+      "target": "quanzhou",
+      "relation": "海上丝路姊妹港",
+      "relation_en": "Maritime Silk Road Sister Port",
+      "description": "杭州和泉州是宋元时期海上丝路的两大出口港"
+    },
+    {
+      "source": "marco-polo",
+      "target": "hangzhou",
+      "relation": "称誉记录",
+      "relation_en": "Famously Recorded",
+      "description": "马可·波罗在其游记中以整章篇幅盛赞杭州（行在），称其「天堂之城」"
+    },
+    {
+      "source": "silk",
+      "target": "hangzhou",
+      "relation": "丝绸产地",
+      "relation_en": "Silk Production Center",
+      "description": "杭州自古为丝绸织造重镇，杭纺丝绸经海上丝路远销西亚和欧洲"
+    },
+    {
+      "source": "tea",
+      "target": "hangzhou",
+      "relation": "茶叶产地",
+      "relation_en": "Tea Production",
+      "description": "杭州龙井茶自宋代起名扬天下，是丝路茶叶贸易的重要品类"
     }
   ],
   "routes": [

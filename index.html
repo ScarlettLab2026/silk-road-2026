@@ -42,6 +42,25 @@
   }
   .lang-toggle:hover { background: var(--accent); color: #111; }
 
+  /* ── Search ── */
+  #searchResults .sr-item {
+    padding: 10px 18px; cursor: pointer; border-bottom: 1px solid rgba(255,255,255,0.04);
+    display: flex; align-items: center; gap: 10px; transition: background 0.15s;
+  }
+  #searchResults .sr-item:hover { background: rgba(255,255,255,0.06); }
+  #searchResults .sr-item .sr-icon { font-size: 1.1rem; flex-shrink: 0; }
+  #searchResults .sr-item .sr-name { font-weight: 600; font-size: 0.9rem; color: var(--text); }
+  #searchResults .sr-item .sr-type {
+    font-size: 0.68rem; padding: 1px 8px; border-radius: 8px; flex-shrink: 0;
+  }
+  #searchResults .sr-item .sr-desc {
+    font-size: 0.73rem; color: var(--text-dim); margin-top: 2px;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 280px;
+  }
+  #searchResults .no-result {
+    padding: 20px; text-align: center; color: var(--text-dim); font-size: 0.85rem;
+  }
+
   /* ── Main layout ── */
   main { display: flex; flex: 1; min-height: 0; }
   #map { flex: 1; z-index: 1; }
@@ -269,7 +288,13 @@
 <header>
   <h1>🐫 丝绸之路 <span class="sub">Silk Road · 交互知识图谱</span></h1>
   <div style="display:flex;gap:8px;align-items:center">
-    <a href="story.html" style="padding:5px 10px;border:1px solid var(--accent);border-radius:16px 0 0 16px;font-size:0.73rem;color:var(--accent);text-decoration:none;background:rgba(212,168,83,0.08);transition:all 0.2s" onmouseover="this.style.background='var(--accent)';this.style.color='#111'" onmouseout="this.style.background='rgba(212,168,83,0.08)';this.style.color='var(--accent)'">📖 张骞</a><a href="story4.html" style="padding:5px 10px;border:1px solid #5d8a7c;font-size:0.73rem;color:#5d8a7c;text-decoration:none;background:rgba(93,138,124,0.08);transition:all 0.2s;margin-left:-1px" onmouseover="this.style.background='#5d8a7c';this.style.color='#111'" onmouseout="this.style.background='rgba(93,138,124,0.08)';this.style.color='#5d8a7c'">🪷 法显</a><a href="story3.html" style="padding:5px 10px;border:1px solid #c47a38;font-size:0.73rem;color:#c47a38;text-decoration:none;background:rgba(196,122,56,0.08);transition:all 0.2s;margin-left:-1px" onmouseover="this.style.background='#c47a38';this.style.color='#111'" onmouseout="this.style.background='rgba(196,122,56,0.08)';this.style.color='#c47a38'">🧘 玄奘</a><a href="story2.html" style="padding:5px 10px;border:1px solid #5ea3b8;border-radius:0 16px 16px 0;font-size:0.73rem;color:#5ea3b8;text-decoration:none;background:rgba(94,163,184,0.08);transition:all 0.2s;margin-left:-1px" onmouseover="this.style.background='#5ea3b8';this.style.color='#111'" onmouseout="this.style.background='rgba(94,163,184,0.08)';this.style.color='#5ea3b8'">🚢 郑和</a>
+    <input type="text" id="searchBox" placeholder="🔍 搜索城市、人物、物产、事件..." autocomplete="off"
+      style="padding:6px 14px;border:1px solid var(--border);border-radius:18px;background:rgba(255,255,255,0.05);color:var(--text);font-size:0.78rem;width:200px;outline:none;transition:all 0.3s"
+      onfocus="this.style.width='260px';this.style.borderColor='var(--accent)'"
+      onblur="this.style.width='200px';this.style.borderColor='var(--border)';setTimeout(hideSearch,200)"
+      oninput="handleSearch(this.value)">
+    <div id="searchResults" style="display:none;position:fixed;top:52px;left:50%;transform:translateX(-50%);width:380px;max-height:360px;overflow-y:auto;background:var(--panel-bg);border:1px solid var(--border);border-radius:14px;box-shadow:0 12px 40px rgba(0,0,0,0.5);z-index:2000"></div>
+    <a href="story.html" style="padding:5px 10px;border:1px solid var(--accent);border-radius:16px 0 0 16px;font-size:0.73rem;color:var(--accent);text-decoration:none;background:rgba(212,168,83,0.08);transition:all 0.2s" onmouseover="this.style.background='var(--accent)';this.style.color='#111'" onmouseout="this.style.background='rgba(212,168,83,0.08)';this.style.color='var(--accent)'">📖 张骞</a><a href="story4.html" style="padding:5px 10px;border:1px solid #5d8a7c;border-radius:0;font-size:0.73rem;color:#5d8a7c;text-decoration:none;background:rgba(93,138,124,0.08);transition:all 0.2s;margin-left:-1px" onmouseover="this.style.background='#5d8a7c';this.style.color='#111'" onmouseout="this.style.background='rgba(93,138,124,0.08)';this.style.color='#5d8a7c'">🪷 法显</a><a href="story3.html" style="padding:5px 10px;border:1px solid #c47a38;border-radius:0;font-size:0.73rem;color:#c47a38;text-decoration:none;background:rgba(196,122,56,0.08);transition:all 0.2s;margin-left:-1px" onmouseover="this.style.background='#c47a38';this.style.color='#111'" onmouseout="this.style.background='rgba(196,122,56,0.08)';this.style.color='#c47a38'">🧘 玄奘</a><a href="story2.html" style="padding:5px 10px;border:1px solid #5ea3b8;border-radius:0;font-size:0.73rem;color:#5ea3b8;text-decoration:none;background:rgba(94,163,184,0.08);transition:all 0.2s;margin-left:-1px" onmouseover="this.style.background='#5ea3b8';this.style.color='#111'" onmouseout="this.style.background='rgba(94,163,184,0.08)';this.style.color='#5ea3b8'">🚢 郑和</a><a href="story5.html" style="padding:5px 10px;border:1px solid #c2714e;border-radius:0 16px 16px 0;font-size:0.73rem;color:#c2714e;text-decoration:none;background:rgba(194,113,78,0.08);transition:all 0.2s;margin-left:-1px" onmouseover="this.style.background='#c2714e';this.style.color='#111'" onmouseout="this.style.background='rgba(194,113,78,0.08)';this.style.color='#c2714e'">🏛 马可·波罗</a>
     <button class="lang-toggle" onclick="toggleView()" id="viewBtn">🕸 关系图</button>
     <button class="lang-toggle" onclick="toggleRouteAnim()" id="routeBtn" style="background:rgba(199,91,58,0.15);border-color:var(--event)">🎬 传播</button>
     <button class="lang-toggle" onclick="toggleLang()" id="langBtn">English</button>
@@ -1074,5 +1099,61 @@ function buildGraph() {
   <a href="https://afdian.com/a/scarlettlab" target="_blank" rel="noopener" style="padding:4px 10px;border-radius:12px;font-size:0.7rem;color:#e0ddd5;background:rgba(255,255,255,0.06);text-decoration:none;border:1px solid rgba(255,255,255,0.1);transition:all 0.2s" onmouseover="this.style.background='rgba(255,255,255,0.14)'" onmouseout="this.style.background='rgba(255,255,255,0.06)'">❤️ 爱发电</a>
   <a href="https://github.com/sponsors/ScarlettLab2026" target="_blank" rel="noopener" style="padding:4px 10px;border-radius:12px;font-size:0.7rem;color:#e0ddd5;background:rgba(255,255,255,0.06);text-decoration:none;border:1px solid rgba(255,255,255,0.1);transition:all 0.2s" onmouseover="this.style.background='rgba(255,255,255,0.14)'" onmouseout="this.style.background='rgba(255,255,255,0.06)'">⭐ Sponsor</a>
 </footer>
+
+<!-- Search -->
+<script>
+function handleSearch(query) {
+  const box = document.getElementById('searchResults');
+  if (!query || query.trim().length < 1) { box.style.display = 'none'; return; }
+  const q = query.toLowerCase().trim();
+  const results = [];
+  if (!DATA || !DATA.nodes) { box.style.display = 'none'; return; }
+  DATA.nodes.cities.forEach(n => {
+    if (n.name.includes(q) || n.name_en.toLowerCase().includes(q) || n.modern_name.includes(q) || n.description.includes(q))
+      results.push({...n, _type: 'city', _icon: '🏙', _color: 'rgba(212,168,83,0.2)', _colorText: '#d4a853'});
+  });
+  DATA.nodes.figures.forEach(n => {
+    if (n.name.includes(q) || n.name_en.toLowerCase().includes(q) || n.description.includes(q) || (n.type && n.type.includes(q)))
+      results.push({...n, _type: 'figure', _icon: '👤', _color: 'rgba(91,155,213,0.2)', _colorText: '#5b9bd5'});
+  });
+  DATA.nodes.goods.forEach(n => {
+    if (n.name.includes(q) || n.name_en.toLowerCase().includes(q) || n.description.includes(q) || (n.category && n.category.includes(q)))
+      results.push({...n, _type: 'goods', _icon: '📦', _color: 'rgba(106,173,106,0.2)', _colorText: '#6aad6a'});
+  });
+  DATA.nodes.events.forEach(n => {
+    if (n.name.includes(q) || n.name_en.toLowerCase().includes(q) || n.description.includes(q) || (n.dynasty && n.dynasty.includes(q)))
+      results.push({...n, _type: 'event', _icon: '⚡', _color: 'rgba(199,91,58,0.2)', _colorText: '#c75b3a'});
+  });
+  if (results.length === 0) {
+    box.innerHTML = '<div class="no-result">未找到匹配结果 ✨</div>';
+  } else {
+    box.innerHTML = results.slice(0, 15).map(r => {
+      const desc = (r.description || r.modern_name || r.era || '').slice(0, 60);
+      return `<div class="sr-item" onclick="searchSelect('${r.id}', '${r._type}')"
+        onmouseover="this.style.background='rgba(255,255,255,0.08)'" onmouseout="this.style.background=''">
+        <span class="sr-icon">${r._icon}</span>
+        <div style="flex:1;min-width:0">
+          <div class="sr-name">${r.name} <span style="font-weight:400;font-size:0.73rem;color:var(--text-dim)">${r.name_en||''}</span></div>
+          <div class="sr-desc">${desc}</div>
+        </div>
+        <span class="sr-type" style="background:${r._color};color:${r._colorText}">${r._type==='city'?'城市':r._type==='figure'?'人物':r._type==='goods'?'物产':'事件'}</span>
+      </div>`;
+    }).join('');
+    if (results.length > 15) box.innerHTML += `<div class="no-result" style="padding:10px">...还有 ${results.length-15} 条结果，请精细搜索</div>`;
+  }
+  box.style.display = 'block';
+}
+
+function searchSelect(id, type) {
+  document.getElementById('searchBox').value = '';
+  document.getElementById('searchResults').style.display = 'none';
+  if (typeof selectNode === 'function') selectNode(id, type);
+}
+
+function hideSearch() {
+  document.getElementById('searchResults').style.display = 'none';
+}
+
+</script>
 </body>
 </html>
