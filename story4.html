@@ -3,18 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>万里求法 · 玄奘西行</title>
+<title>白绢扇归 · 法显西行</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <style>
   :root {
-    --bg: #0f0d0c; --card-bg: rgba(24,20,18,0.93); --accent: #c47a38;
-    --text: #e8e0d8; --text-dim: #9b9085; --border: rgba(255,255,255,0.08);
+    --bg: #0c1110; --card-bg: rgba(16,24,22,0.93); --accent: #5d8a7c;
+    --text: #dde5e2; --text-dim: #8a968f; --border: rgba(255,255,255,0.08);
   }
   * { margin:0; padding:0; box-sizing:border-box; }
   body { background: #000; font-family: -apple-system, "PingFang SC", "Noto Serif SC", "Microsoft YaHei", serif; overflow: hidden; height: 100vh; }
 
   #map { position: fixed; inset: 0; z-index: 1; }
-  .leaflet-container { background: #0f0d0c; }
+  .leaflet-container { background: #0c1110; }
 
   /* ── Story Nav ── */
   #story-nav {
@@ -28,7 +28,7 @@
   }
   #story-nav a:first-child { border-radius: 14px 0 0 14px; }
   #story-nav a:last-child { border-radius: 0 14px 14px 0; }
-  #story-nav a.active { color: var(--accent); border-color: var(--accent); background: rgba(196,122,56,0.1); }
+  #story-nav a.active { color: var(--accent); border-color: var(--accent); background: rgba(93,138,124,0.1); }
   #story-nav a:hover:not(.active) { color: #fff; background: rgba(255,255,255,0.06); }
 
   /* ── Narrative Card ── */
@@ -86,7 +86,7 @@
     background: rgba(255,255,255,0.2); transition: all 0.4s;
   }
   #progress .dot.active { background: var(--accent); transform: scale(1.4); }
-  #progress .dot.done { background: rgba(196,122,56,0.5); }
+  #progress .dot.done { background: rgba(93,138,124,0.5); }
 
   /* ── Nav buttons ── */
   #restart {
@@ -111,8 +111,8 @@
 
 <div id="story-nav">
   <a href="story.html">📖 张骞</a>
-  <a href="story4.html">🪷 法显</a>
-  <a href="story3.html" class="active">🧘 玄奘</a>
+  <a href="story4.html" class="active">🪷 法显</a>
+  <a href="story3.html">🧘 玄奘</a>
   <a href="story2.html">🚢 郑和</a>
 </div>
 
@@ -133,74 +133,74 @@
 <script>
 const STORY = [
   {
-    title: '万里求法',
-    subtitle: '公元629年 · 长安',
-    body: '贞观三年，27岁的玄奘从长安出发。唐初严禁百姓出境，他只能混在难民中偷渡西行。经秦州、兰州到凉州，一路讲经声名鹊起，引得凉州都督下令捉拿。玄奘昼伏夜出逃至瓜州，找到胡人向导石盘陀。夜渡葫芦河，偷越玉门关，独自踏入八百里莫贺延碛——「上无飞鸟，下无走兽」。四天五夜滴水未进，靠老马识途找到水源才活下来。',
-    lat: 38.0, lng: 102.0, zoom: 5,
+    title: '六十出发',
+    subtitle: '公元399年 · 长安',
+    body: '后秦弘始元年，62岁的法显从长安出发。他本已年过花甲，却因汉地佛经戒律残缺不全，决意亲赴天竺求取真经。同行者：慧景、慧达、道整、慧应——四位比丘，五僧结伴。「欲令戒律流通汉地」，一念既定，万水千山。他们经张掖、过敦煌，穿过河西走廊，朝着未知的西方走去。在那个平均寿命不过四十的时代，六十出发——这本身就是一个奇迹。',
+    lat: 37.0, lng: 100.0, zoom: 5,
     route: ['changan', 'dunhuang'],
     marker: 'dunhuang',
-    showCities: ['changan', 'dunhuang', 'luoyang'],
-    highlight: ['xuanzang', 'xuanzang-journey', 'buddhism']
+    showCities: ['changan', 'luoyang', 'dunhuang'],
+    highlight: ['faxian', 'faxian-journey', 'buddhism']
   },
   {
-    title: '高昌绝食',
-    subtitle: '高昌国 · 吐鲁番',
-    body: '走出沙漠，玄奘抵达西域佛国高昌。国王麴文泰深夜秉烛前来，深为玄奘的学识和虔诚折服，要强行留他为国师。玄奘说：「骨可碎，志不可夺。」绝食三日，气息奄奄。麴文泰终于让步，跪地结拜为兄弟，派二十五名随从、三十匹马、足够二十年的盘缠，并修国书给沿途二十四国请予放行。玄奘许诺归国时在此停留三年说法——十七年后，他兑现了诺言。',
-    lat: 42.0, lng: 89.5, zoom: 5.5,
-    route: ['changan', 'dunhuang', 'gaochang'],
-    marker: 'gaochang',
-    showCities: ['dunhuang', 'gaochang', 'kucha'],
-    highlight: ['xuanzang', 'gaochang', 'buddhism']
+    title: '穿越沙海',
+    subtitle: '白龙堆 · 于阗',
+    body: '出敦煌，即是令人生畏的白龙堆沙漠——「沙河中多有恶鬼热风，遇则皆死，无一全者。上无飞鸟，下无走兽。」法显在《佛国记》里写下这段文字时，已在沙海中跋涉十七天。靠死人的白骨辨认方向，靠滴水支撑生命。穿越死亡之地后，他们抵达西域佛国于阗——塔克拉玛干南缘的绿洲明珠。正值佛诞日，全城万人空巷，彩车游行四五百步，法显惊叹：「尽西域诸国，佛事之盛，莫过于此。」他在于阗停留三月，观摩佛教盛会，记录下西域最繁华的佛国景象。',
+    lat: 38.5, lng: 87.0, zoom: 5.2,
+    route: ['changan', 'dunhuang', 'khotan'],
+    marker: 'khotan',
+    showCities: ['dunhuang', 'khotan', 'kashgar'],
+    highlight: ['faxian', 'khotan', 'buddhism']
   },
   {
-    title: '翻越凌山',
-    subtitle: '天山 · 碎叶城',
-    body: '从高昌经龟兹，玄奘面对西行最险恶的屏障——凌山（天山主峰）。「积雪弥满，蹊径难寻。飞雪雨下，七日七夜方出。」同行者冻死十之三四，牲畜损失过半。下山后抵达碎叶城（今吉尔吉斯斯坦托克马克），遇见西突厥统叶护可汗。可汗派翻译和护送队，玄奘经赭时国（塔什干）、飒秣建国（撒马尔罕），穿越中亚腹地，一路向印度前进。',
-    lat: 42.0, lng: 75.5, zoom: 5,
-    route: ['changan', 'dunhuang', 'gaochang', 'kucha', 'suyab', 'samarkand'],
-    marker: 'suyab',
-    showCities: ['gaochang', 'kucha', 'suyab', 'samarkand'],
-    highlight: ['xuanzang', 'suyab', 'buddhism']
-  },
-  {
-    title: '犍陀罗·佛的容颜',
-    subtitle: '塔克西拉 · 犍陀罗故地',
-    body: '穿越铁门关，翻越大雪山（兴都库什山），玄奘进入古印度犍陀罗（今巴基斯坦）。这里是佛教艺术的诞生地——亚历山大的希腊雕塑匠与印度佛教信仰在此交融，创造出最早的佛像。玄奘遍访圣迹：佛陀割肉贸鸽处、舍身饲虎处、菩提树下金刚座。每到一处，虔诚礼拜，泪流满面。同行者劝他，「法师为何如此？」他答：「佛在此地为众生舍身，我今礼拜，岂能无泪。」',
-    lat: 34.0, lng: 73.0, zoom: 5.5,
-    route: ['changan', 'dunhuang', 'gaochang', 'kucha', 'suyab', 'samarkand', 'taxila'],
+    title: '翻越葱岭',
+    subtitle: '帕米尔高原 · 天险',
+    body: '从于阗西行，法显面对的是地球上最险峻的屏障——葱岭（帕米尔高原）。「其道艰岨，崖岸险绝。其山唯石，壁立千仞。」同行僧侣慧景在此病倒，口吐白沫，对法显说：「我已不行，你们快走吧，不要都死在这里。」法显抱着同伴不肯放手，慧景最终死在葱岭之上。法显含泪埋葬同伴，独自继续前行。翻过雪岭，终于进入北印度——但五僧之中，已有一人永远留在了雪山上。此后慧达折返于阗，慧应病故于弗楼沙——走到印度的，只剩法显和道整两人。',
+    lat: 37.3, lng: 74.5, zoom: 5.5,
+    route: ['changan', 'dunhuang', 'khotan', 'taxila'],
     marker: 'taxila',
-    showCities: ['samarkand', 'taxila', 'kashgar'],
-    highlight: ['xuanzang', 'buddhism', 'kumarajiva']
+    showCities: ['khotan', 'kashgar', 'taxila'],
+    highlight: ['faxian', 'taxila', 'buddhism']
   },
   {
-    title: '那烂陀·智慧的海洋',
-    subtitle: '印度 · 那烂陀寺',
-    body: '公元631年，玄奘终于抵达那烂陀寺——当时世界最大的佛教学府，万余僧侣在此研习。106岁的住持戒贤法师亲自收他为徒，传授《瑜伽师地论》。玄奘在此苦学五年，遍览经论，通晓梵文，学贯大小乘。他还游历了整个印度，造访佛教六大圣地，观察各地风俗——从甘蔗制糖到刑罚制度，从服饰饮食到语言文字，巨细无遗地记录。从长安至此，他已走过138个国家。',
-    lat: 25.6, lng: 85.2, zoom: 6,
-    route: ['changan', 'dunhuang', 'gaochang', 'kucha', 'suyab', 'samarkand', 'taxila'],
+    title: '犍陀罗·佛的故乡',
+    subtitle: '塔克西拉 · 犍陀罗故地',
+    body: '进入犍陀罗，法显成为第一位详实记录这片佛土的汉僧。他踏遍塔克西拉的每一处圣迹——佛陀割肉贸鸽处、舍身饲虎塔、四天王献钵处。每到一处，焚香礼拜，记录地理位置、传说故事、建筑形制。他在弗楼沙（白沙瓦）瞻仰了举世闻名的佛钵，又在醯罗城见到了佛顶骨舍利。「日日有国王、长者以香华供养」，法显将这些细节一一载入笔记。与此同时，他震惊地发现——印度佛教的戒律经典，远比汉地完整。这正是他万死不辞来此的原因。',
+    lat: 33.8, lng: 72.5, zoom: 6,
+    route: ['changan', 'dunhuang', 'khotan', 'taxila'],
+    marker: null,
+    showCities: ['taxila', 'kashgar'],
+    highlight: ['faxian', 'buddhism', 'kumarajiva']
+  },
+  {
+    title: '恒河·抄经岁月',
+    subtitle: '中天竺 · 华氏城',
+    body: '越犍陀罗，渡印度河，法显进入中天竺。在华氏城（今巴特那）和祇园精舍等佛教中心，他度过了六年时光。学梵文、抄佛经、画佛像——法显是最早系统学习梵文的汉僧之一。他发现印度佛教戒律以口耳相传为主，「无本可写」，只能一字一句默诵记忆。道整在祇园精舍朝拜后感叹：「自今已去，永不复踏汉地。」决定终老印度。法显却说：「我本心欲令戒律流通汉地。」辞别同伴，独自背负着六年抄写的经卷和圣像，走向归途。此时出发时的五僧，只剩他一人东归。',
+    lat: 25.6, lng: 83.5, zoom: 5.5,
+    route: ['changan', 'dunhuang', 'khotan', 'taxila'],
     marker: null,
     showCities: ['taxila'],
-    highlight: ['xuanzang', 'buddhism', 'xuanzang-journey']
+    highlight: ['faxian', 'buddhism', 'faxian-journey']
   },
   {
-    title: '曲女城·天竺之辩',
-    subtitle: '曲女城 · 戒日王宫廷',
-    body: '戒日王在曲女城为玄奘举办「无遮大会」——全印度学术辩论会。到会者：十八位国王、三千高僧、两千婆罗门及外道学者。玄奘立《制恶见论》悬于会场门外，宣称：「若有一字无理，请斩首相谢。」整整十八天，无人能破一字。大乘众尊他为「大乘天」，小乘众尊他为「解脱天」。此后戒日王三请玄奘留印度，他一一谢绝：「我此来为求法，今法已得，当归以报国。」',
-    lat: 27.0, lng: 80.0, zoom: 5.5,
-    route: ['changan', 'dunhuang', 'gaochang', 'kucha', 'suyab', 'samarkand', 'taxila'],
-    marker: null,
-    showCities: ['taxila'],
-    highlight: ['xuanzang', 'buddhism']
+    title: '狮子国·白绢扇',
+    subtitle: '斯里兰卡 · 无畏山寺',
+    body: '法显乘商船沿恒河东下，再从多摩梨底港搭大舶入海，航行十四昼夜到达狮子国（斯里兰卡）。他在无畏山寺住下，继续搜寻汉地缺失的戒律经典。一天，在佛殿中，法显忽然看见一柄晋地所产的白绢扇供奉在佛像前——白色的丝绸扇子，来自万里之外的故国。他「不觉凄然泪下」。离开汉地已逾十年，同伴或死或散，只剩自己孤悬海外。他在狮子国停留两年，抄得《长阿含经》《杂阿含经》等汉地未见经典。412年，七十二岁的法显带上全部经卷，登上一艘返回中国的商船。',
+    lat: 6.9, lng: 80.0, zoom: 6,
+    route: ['changan', 'dunhuang', 'khotan', 'taxila', 'colombo'],
+    marker: 'colombo',
+    showCities: ['colombo', 'taxila'],
+    highlight: ['faxian', 'colombo', 'buddhism']
   },
   {
-    title: '归国·一灯照千年',
-    subtitle: '公元645年 · 长安',
-    body: '阔别十七年，玄奘回到长安。带回佛经657部、佛像七尊、舍利一百五十粒。长安万人空巷，争睹圣僧归来。玄奘谢绝了唐太宗出仕的邀请，隐居大慈恩寺译经十九年，共译出《大般若经》等七十五部一千三百三十五卷。又口述《大唐西域记》——记录138个国家和地区的地理、历史、风俗，至今仍是研究古印度和中亚学术上不可替代的第一手资料。664年圆寂，百万人送葬。他取回来的不仅是佛经，更是一整个文明的光。',
-    lat: 34.26, lng: 108.94, zoom: 5,
-    route: ['changan', 'dunhuang', 'gaochang', 'kucha', 'suyab', 'samarkand', 'taxila'],
+    title: '归航·一灯传千年',
+    subtitle: '公元412年 · 崂山',
+    body: '归途比来路更险。船行至印度洋，忽遇黑风暴——「天日晦暗，不知所向。商贾皆慌，欲弃小船以减重。」法显将经卷紧紧抱在怀中：「我为求法至此，今经已得，若船沉当与经俱没。」整整漂流九十余日，任风浪摆布，终于望见了崂山的海岸线。登陆后，当地官员误以为来者必是奸细，幸而太守李嶷识得其僧侣身份。法显没有回长安，而是直奔建康（南京），在道场寺与佛陀跋陀罗合作译经，共译出《摩诃僧祇律》《大般泥洹经》等六部经典。又著《佛国记》——九千五百余字，记录三十余国，是全世界现存最早的中亚-南亚游记。这部薄薄的小书，在一百多年后，被一位年轻僧人在长安读到——他叫玄奘。《佛国记》中法显笔下的菩提树下金刚座、祇园精舍说法处、醯罗城佛顶骨——一字一句，化作了玄奘出发的西行地图。一灯传千年，法显与玄奘，大师与弟子——虽隔百年，灵魂同路。',
+    lat: 26.0, lng: 90.0, zoom: 3.5,
+    route: ['changan', 'dunhuang', 'khotan', 'taxila', 'colombo'],
     marker: 'changan',
-    showCities: ['changan', 'luoyang', 'dunhuang', 'gaochang', 'taxila'],
-    highlight: ['xuanzang', 'xuanzang-journey', 'buddhism', 'changan']
+    showCities: ['changan', 'dunhuang', 'khotan', 'taxila', 'colombo'],
+    highlight: ['faxian', 'faxian-journey', 'buddhism', 'xuanzang']
   }
 ];
 
@@ -260,7 +260,7 @@ function renderChapter(idx) {
   document.querySelector('#narrative .hint').innerHTML =
     idx < TOTAL - 1
       ? '<span class="arrow">→</span> 点击继续'
-      : '<span style="font-size:1rem">🕉️</span> 点击重播';
+      : '<span style="font-size:1rem">🪷</span> 点击重播';
 
   map.flyTo([ch.lat, ch.lng], ch.zoom, { duration: 1.8, easeLinearity: 0.25 });
 
@@ -276,10 +276,10 @@ function renderChapter(idx) {
     });
     if (pts.length >= 2) {
       routeLines.push(L.polyline(pts, {
-        color: 'rgba(196,122,56,0.15)', weight: 2, dashArray: '8 6'
+        color: 'rgba(93,138,124,0.15)', weight: 2, dashArray: '8 6'
       }).addTo(map));
       routeLines.push(L.polyline(pts, {
-        color: 'rgba(196,122,56,0.8)', weight: 3.5, dashArray: '12 4'
+        color: 'rgba(93,138,124,0.8)', weight: 3.5, dashArray: '12 4'
       }).addTo(map));
     }
   }
@@ -292,8 +292,8 @@ function renderChapter(idx) {
       const isStart = nid === 'changan' || nid === 'luoyang';
       const m = L.circleMarker([c.lat, c.lng], {
         radius: isStart ? 8 : isKey ? 7 : 5,
-        fillColor: isStart ? '#fff' : 'var(--accent, #c47a38)',
-        color: '#0f0d0c', weight: 1.5, fillOpacity: isKey ? 1 : 0.7
+        fillColor: isStart ? '#fff' : 'var(--accent, #5d8a7c)',
+        color: '#0c1110', weight: 1.5, fillOpacity: isKey ? 1 : 0.7
       }).addTo(map);
       m.bindTooltip(c.name, { direction: 'top', offset: [0, -6] });
       cityMarkers.push(m);
@@ -308,7 +308,7 @@ function renderChapter(idx) {
         color: 'transparent', fillOpacity: 0.6
       }).addTo(map));
       highlightMarkers.push(L.circleMarker([c.lat, c.lng], {
-        radius: 8, fillColor: '#fff', color: '#0f0d0c', weight: 2, fillOpacity: 1
+        radius: 8, fillColor: '#fff', color: '#0c1110', weight: 2, fillOpacity: 1
       }).addTo(map));
     }
   }
