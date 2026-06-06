@@ -2,8 +2,8 @@
   "meta": {
     "title": "丝绸之路知识图谱",
     "title_en": "Silk Road Knowledge Graph",
-    "version": "0.7.0",
-    "last_updated": "2026-06-04",
+    "version": "1.2.0",
+    "last_updated": "2026-06-06",
     "description": "一个关于丝绸之路的结构化开放数据集，涵盖城市、人物、物产、事件四大类实体及其关联关系。",
     "description_en": "An open structured dataset about the Silk Road, covering cities, figures, goods, and events and their interconnections."
   },
@@ -752,6 +752,98 @@
         ],
         "role": "印度西海岸枢纽",
         "era": "元—明"
+      },
+      {
+        "id": "balkh",
+        "name": "巴里黑",
+        "name_en": "Balkh",
+        "modern_name": "巴尔赫",
+        "modern_name_en": "Balkh",
+        "country": "阿富汗",
+        "country_en": "Afghanistan",
+        "lat": 36.755,
+        "lng": 66.8975,
+        "era": "公元前 — 13世纪",
+        "dynasties": [
+          "贵霜",
+          "萨珊",
+          "阿拉伯",
+          "蒙古"
+        ],
+        "role": "佛教中心 / 贸易枢纽",
+        "role_en": "Buddhist Center / Trade Hub",
+        "description": "中亚最古老的城市之一，古称蓝氏城、缚喝罗。贵霜帝国时期为大乘佛教重镇，拥有著名的Naw Bahār佛寺。青金石矿产地巴达赫尚即在其东南，是丝路上宝石贸易的源头城市。",
+        "description_en": "One of Central Asia's most ancient cities, known in Chinese records as Lanshi or Boheluo. A major Mahayana Buddhist center under the Kushan Empire, home to the famed Naw Bahār monastery. The Badakhshan lapis lazuli mines lie to its southeast — Balkh sits at the source of the Silk Road's gemstone trade.",
+        "significance": 4
+      },
+      {
+        "id": "isfahan",
+        "name": "伊斯法罕",
+        "name_en": "Isfahan",
+        "modern_name": "伊斯法罕",
+        "modern_name_en": "Isfahan",
+        "country": "伊朗",
+        "country_en": "Iran",
+        "lat": 32.6539,
+        "lng": 51.666,
+        "era": "萨珊 — 萨法维",
+        "dynasties": [
+          "萨珊",
+          "塞尔柱",
+          "萨法维"
+        ],
+        "role": "波斯手工业中心",
+        "role_en": "Persian Craft Center",
+        "description": "波斯帝国的核心城市之一，以地毯、银器、细密画和建筑艺术闻名世界。伊斯法罕的地毯和金属器皿经丝路传入中国和欧洲，被誉为'世界的一半'。",
+        "description_en": "One of the Persian Empire's core cities, world-renowned for carpets, silverware, miniatures, and architecture. Isfahan's carpets and metalwork traveled the Silk Road to China and Europe — the city was called 'half the world.'",
+        "significance": 4
+      },
+      {
+        "id": "mecca",
+        "name": "麦加",
+        "name_en": "Mecca",
+        "modern_name": "麦加",
+        "modern_name_en": "Mecca",
+        "country": "沙特阿拉伯",
+        "country_en": "Saudi Arabia",
+        "lat": 21.3891,
+        "lng": 39.8579,
+        "era": "7世纪 — 至今",
+        "dynasties": [
+          "倭马亚",
+          "阿拔斯",
+          "法蒂玛",
+          "奥斯曼"
+        ],
+        "role": "伊斯兰教圣城 / 朝圣中心",
+        "role_en": "Islamic Holy City / Pilgrimage Center",
+        "description": "伊斯兰教第一圣城，全球穆斯林朝觐（Hajj）目的地。阿拉伯半岛的贸易十字路口，连接红海、印度洋与地中海商路。杜环《经行记》是最早记录伊斯兰教和麦加朝觐的中文文献。",
+        "description_en": "Islam's holiest city and destination of the Hajj pilgrimage. A crossroads of Arabian Peninsula trade, connecting the Red Sea, Indian Ocean, and Mediterranean routes. Du Huan's 'Jingxingji' is the earliest Chinese text to record Islam and the Meccan pilgrimage.",
+        "significance": 5
+      },
+      {
+        "id": "lhasa",
+        "name": "拉萨",
+        "name_en": "Lhasa",
+        "modern_name": "拉萨",
+        "modern_name_en": "Lhasa",
+        "country": "中国",
+        "country_en": "China",
+        "lat": 29.65,
+        "lng": 91.1,
+        "era": "7世纪 — 至今",
+        "dynasties": [
+          "唐",
+          "宋",
+          "元",
+          "明",
+          "清"
+        ],
+        "role": "吐蕃文化中心 / 茶马古道终点",
+        "role_en": "Tibetan Cultural Center / Tea-Horse Road Terminus",
+        "description": "吐蕃王朝都邑，藏传佛教圣地。茶马古道的终点站——云南和四川的茶叶经横断山脉运至此地，换取藏马和麝香。藏人'宁可三日无粮，不可一日无茶'，是丝路茶叶贸易的最大消费市场之一。",
+        "description_en": "Capital of the Tibetan Empire and sacred city of Tibetan Buddhism. The Tea-Horse Road's terminus — tea from Yunnan and Sichuan crossed the Hengduan Mountains to reach Lhasa, traded for Tibetan horses and musk. Tibet's tea obsession ('better three days without food than one without tea') made it one of the Silk Road's largest tea markets.",
+        "significance": 4
       }
     ],
     "figures": [
@@ -1348,6 +1440,120 @@
         "description": "苏木（苏枋木）产自东南亚热带地区，是古代最重要的红色染料之一，也可入药。宋代以后大量经海上丝路输入中国，用于染制官服、丝绸和漆器。明代郑和下西洋时苏木是主要贸易品之一。",
         "description_en": "Native to tropical Southeast Asia, sappanwood was one of the most important red dyes in the ancient world, also used medicinally. Mass-imported to China via the maritime Silk Road from the Song dynasty onward, dyeing official robes, silk, and lacquerware. A key trade item on Zheng He's voyages.",
         "significance": 3
+      },
+      {
+        "id": "lapis-lazuli",
+        "name": "青金石",
+        "name_en": "Lapis Lazuli",
+        "category": "宝石 / 颜料",
+        "category_en": "Gemstone / Pigment",
+        "origin": "巴达赫尚（今阿富汗）",
+        "origin_en": "Badakhshan (Afghanistan)",
+        "direction": "西→东",
+        "direction_en": "West → East",
+        "description": "产自阿富汗巴达赫尚矿山的深蓝色宝石，是丝路上最古老的长途贸易品之一。早在公元前3000年已运抵埃及和美索不达米亚。佛教壁画中的群青色（Ultramarine）即由此研磨而成，敦煌莫高窟、克孜尔千佛洞大量使用。",
+        "description_en": "Deep blue gemstone from the Badakhshan mines in Afghanistan, one of the oldest long-distance trade goods on the Silk Road. Reached Egypt and Mesopotamia by 3000 BCE. Ground into ultramarine pigment for Buddhist murals at Dunhuang and Kizil.",
+        "significance": 4,
+        "tags": [
+          "宝石",
+          "颜料",
+          "佛教艺术"
+        ]
+      },
+      {
+        "id": "black-pepper",
+        "name": "胡椒",
+        "name_en": "Black Pepper",
+        "category": "香料 / 调味品",
+        "category_en": "Spice / Condiment",
+        "origin": "印度马拉巴尔海岸 / 东南亚",
+        "origin_en": "Malabar Coast (India) / SE Asia",
+        "direction": "西→东 / 南→北",
+        "direction_en": "West → East / South → North",
+        "description": "海上丝路香料贸易之王。产自印度西南海岸和东南亚，经阿拉伯商人转运至中国和欧洲。唐代时已是广州港最大宗进口品之一，明代郑和船队大量采购。在欧洲被称为'黑色黄金'，一粒胡椒曾等价于一粒黄金。",
+        "description_en": "The king of maritime Silk Road spice trade. Grown on India's Malabar Coast and Southeast Asia, shipped by Arab merchants to China and Europe. One of the largest imports at Tang-era Guangzhou. Called 'black gold' in Europe — peppercorn was once worth its weight in gold.",
+        "significance": 5,
+        "tags": [
+          "香料",
+          "海上丝路",
+          "贸易大宗"
+        ]
+      },
+      {
+        "id": "sandalwood",
+        "name": "檀香",
+        "name_en": "Sandalwood",
+        "category": "香料 / 木材 / 宗教",
+        "category_en": "Incense / Timber / Religious",
+        "origin": "印度南部 / 东南亚岛屿",
+        "origin_en": "Southern India / SE Asian Islands",
+        "direction": "南→北",
+        "direction_en": "South → North",
+        "description": "印度和东南亚出产的珍贵香木，佛教法事中焚香礼佛的重要供品。唐代广州港大宗进口，长安大寺院均设檀香库。除礼佛外，檀香木还用于雕刻佛像、制作扇骨和高级家具。",
+        "description_en": "Precious fragrant wood from India and Southeast Asia, essential for Buddhist incense ceremonies. Imported in bulk through Tang-era Guangzhou; major Chang'an temples maintained sandalwood stores. Also carved into Buddha statues, fans, and luxury furniture.",
+        "significance": 4,
+        "tags": [
+          "香料",
+          "佛教",
+          "木材",
+          "工艺品"
+        ]
+      },
+      {
+        "id": "musk",
+        "name": "麝香",
+        "name_en": "Musk",
+        "category": "香料 / 药材",
+        "category_en": "Perfume / Medicine",
+        "origin": "青藏高原 / 中国西北",
+        "origin_en": "Tibetan Plateau / NW China",
+        "direction": "东→西",
+        "direction_en": "East → West",
+        "description": "产自青藏高原麝鹿的珍贵香料，是丝路上最名贵的动物性香料。经河西走廊和西域传入波斯、阿拉伯和欧洲，用于制作高级香水、药品和宗教仪式用香。波斯和阿拉伯商人称之为'中国麝香'，价比黄金。",
+        "description_en": "Precious animal-derived fragrance from the musk deer of the Tibetan Plateau, the most valuable animal perfume on the Silk Road. Carried via the Hexi Corridor and Western Regions to Persia, Arabia, and Europe. Used in luxury perfumes, medicines, and religious incense. Known to Persian and Arab merchants as 'Chinese Musk,' valued above gold.",
+        "significance": 3,
+        "tags": [
+          "香料",
+          "药材",
+          "奢侈品"
+        ]
+      },
+      {
+        "id": "persian-carpet",
+        "name": "波斯地毯",
+        "name_en": "Persian Carpet",
+        "category": "工艺品 / 纺织品",
+        "category_en": "Craft / Textile",
+        "origin": "波斯（今伊朗）",
+        "origin_en": "Persia (Iran)",
+        "direction": "西→东",
+        "direction_en": "West → East",
+        "description": "波斯工匠手工编织的精美地毯，以繁复花纹和矿物染料闻名。经陆上丝路传入中国，深受皇室贵族喜爱。唐代长安西市有专售波斯地毯的商铺，日本正仓院至今藏有唐代传入的波斯绒毯。",
+        "description_en": "Exquisite hand-woven carpets by Persian artisans, famed for intricate patterns and mineral dyes. Imported to China via the overland Silk Road and beloved by royalty. Tang-era Chang'an's West Market had dedicated Persian carpet shops; the Shōsōin treasury in Japan still preserves a Persian rug imported during the Tang dynasty.",
+        "significance": 3,
+        "tags": [
+          "工艺品",
+          "纺织品",
+          "奢侈品"
+        ]
+      },
+      {
+        "id": "rhubarb",
+        "name": "大黄",
+        "name_en": "Rhubarb",
+        "category": "药材",
+        "category_en": "Medicine",
+        "origin": "中国西北 / 青藏高原",
+        "origin_en": "NW China / Tibetan Plateau",
+        "direction": "东→西",
+        "direction_en": "East → West",
+        "description": "中国西北出产的药用大黄根茎，是丝路上最重要的药材出口品之一。自汉代起经西域传入波斯和阿拉伯，因其强力通便功效被欧洲视为万能良药。俄帝国在恰克图专设大黄贸易通道，大黄是少数直到近代仍在沿丝路大宗交易的药材。",
+        "description_en": "Medicinal rhubarb root from Northwest China, one of the Silk Road's most important pharmaceutical exports. Reached Persia and Arabia via the Western Regions from Han times onward. Europe prized it as a panacea for its purgative properties. Russia established a dedicated rhubarb trade route at Kyakhta — one of the few Silk Road medicines still traded in bulk into the modern era.",
+        "significance": 3,
+        "tags": [
+          "药材",
+          "贸易大宗"
+        ]
       }
     ],
     "events": [
@@ -1548,6 +1754,91 @@
         "description": "元代民间航海家汪大渊两次从泉州搭乘商船出海，历时近十年，游历南海、印度洋各地，最远到达东非沿岸和红海。归国后著《岛夷志略》，记录了220多个国家和地区的风土物产，是研究14世纪海上丝路的珍贵一手资料。",
         "description_en": "The Yuan-era private navigator Wang Dayuan sailed twice from Quanzhou on merchant ships over nearly a decade, reaching as far as East Africa and the Red Sea. His book 'Daoyi Zhilue' records over 220 countries and regions — an invaluable firsthand account of 14th-century maritime Silk Road.",
         "significance": 5
+      },
+      {
+        "id": "marco-polo-journey",
+        "name": "马可波罗东游",
+        "name_en": "Marco Polo's Journey to the East",
+        "year": 1271,
+        "end_year": 1295,
+        "display_year": "1271 — 1295年",
+        "dynasty": "元",
+        "description": "威尼斯商人马可·波罗随父亲和叔叔从威尼斯出发，经君士坦丁堡、波斯、帕米尔高原，于1275年抵达元大都（今北京）。在忽必烈汗朝中任职17年，游历中国各地。1295年回到威尼斯后将东方见闻口述成书《马可波罗行纪》，激起欧洲对东方的强烈向往，成为大航海时代的启蒙读物。",
+        "description_en": "Venetian merchant Marco Polo traveled with his father and uncle from Venice via Constantinople, Persia, and the Pamir Plateau, reaching Khanbaliq (Beijing) in 1275. He served Kublai Khan for 17 years, traveling extensively across China. Returning to Venice in 1295, his dictated 'Travels of Marco Polo' ignited European fascination with the East and became foundational reading for the Age of Discovery.",
+        "significance": 5,
+        "tags": [
+          "旅行家",
+          "东西交流",
+          "元朝"
+        ]
+      },
+      {
+        "id": "paper-spread-west",
+        "name": "造纸术西传",
+        "name_en": "Paper Spreads Westward",
+        "year": 751,
+        "end_year": 1200,
+        "display_year": "751 — 12世纪",
+        "dynasty": "唐 — 宋",
+        "description": "751年怛罗斯之战后，被俘唐军中的造纸工匠将造纸术传入撒马尔罕。撒马尔罕迅速成为伊斯兰世界造纸中心。随后经巴格达（794年）、大马士革、开罗，12世纪传入西班牙和西西里，造纸术在不到500年内完成从长安到欧洲的万里接力。",
+        "description_en": "After the Battle of Talas (751), captured Tang papermakers transmitted paper-making technology to Samarkand, which quickly became the Islamic world's paper center. From there it spread to Baghdad (794), Damascus, Cairo, and reached Spain and Sicily by the 12th century — a 10,000-li relay from Chang'an to Europe in under 500 years.",
+        "significance": 5,
+        "tags": [
+          "技术传播",
+          "造纸术",
+          "文化交流"
+        ]
+      },
+      {
+        "id": "tea-trade-boom",
+        "name": "茶叶贸易兴盛",
+        "name_en": "Tea Trade Boom",
+        "year": 780,
+        "end_year": 1400,
+        "display_year": "8 — 14世纪",
+        "dynasty": "唐 — 明",
+        "description": "中唐以后饮茶风气从寺院和文人圈扩散至全社会，茶圣陆羽著《茶经》（780年）。茶叶成为丝路大宗贸易品，经茶马古道入藏、西藏传入印度，经海上丝路输入日本和朝鲜，又经陆路入西域和蒙古。宋代设榷茶制度，茶叶成为继丝绸和瓷器之后的第三大出口品。",
+        "description_en": "After the mid-Tang, tea drinking spread from monasteries and literati to the whole of society. Lu Yu wrote the 'Classic of Tea' (780). Tea became a major Silk Road commodity, entering Tibet via the Tea-Horse Road and reaching India, Japan, and Korea by sea. The Song dynasty established a tea monopoly — tea ranked behind only silk and porcelain as China's third-largest export.",
+        "significance": 4,
+        "tags": [
+          "贸易",
+          "茶叶",
+          "茶马古道"
+        ]
+      },
+      {
+        "id": "islam-eastward-spread",
+        "name": "伊斯兰教沿丝路东传",
+        "name_en": "Islam Spreads Eastward along the Silk Road",
+        "year": 650,
+        "end_year": 1400,
+        "display_year": "7 — 14世纪",
+        "dynasty": "唐 — 元",
+        "description": "伊斯兰教在7世纪阿拉伯半岛兴起后，沿陆海两条丝路东传。陆路经波斯和中亚进入西域，喀什、于阗陆续伊斯兰化；海路经阿拉伯商人船队抵达广州、泉州、扬州。唐设蕃坊聚居穆斯林商人。元代大量色目穆斯林入仕，伊斯兰教与佛教、道教、景教在丝路上并存，形成罕见的宗教多元格局。",
+        "description_en": "After Islam's rise in 7th-century Arabia, it spread eastward along both Silk Roads. Overland, it reached the Western Regions via Persia and Central Asia, gradually Islamizing Kashgar and Khotan. By sea, Arab merchant fleets reached Guangzhou, Quanzhou, and Yangzhou. The Tang established foreign quarters for Muslim traders. Under the Yuan, many Central Asian Muslims served the court — Islam, Buddhism, Daoism, and Nestorian Christianity coexisted in a rare moment of religious pluralism along the Silk Road.",
+        "significance": 5,
+        "tags": [
+          "宗教",
+          "文化交流",
+          "海上丝路"
+        ]
+      },
+      {
+        "id": "ibn-battuta-journey",
+        "name": "伊本·白图泰远游",
+        "name_en": "Ibn Battuta's Travels",
+        "year": 1325,
+        "end_year": 1354,
+        "display_year": "1325 — 1354年",
+        "dynasty": "元 — 明",
+        "description": "摩洛哥穆斯林旅行家伊本·白图泰从丹吉尔出发，穿越北非、中东、中亚、印度，1346年经海路抵达中国泉州，游历广州、杭州、大都。其《伊本·白图泰游记》记录了元代中国港口繁荣的穆斯林社区和海上贸易盛况。他一生旅行约12万公里，是古代旅行最远的人之一，被称为'伊斯兰的马可·波罗'。",
+        "description_en": "Moroccan Muslim traveler Ibn Battuta departed Tangier, crossing North Africa, the Middle East, Central Asia, and India, reaching Quanzhou by sea in 1346. He visited Guangzhou, Hangzhou, and Khanbaliq. His 'Rihla' (Travels) documents the thriving Muslim communities and maritime trade in Yuan China. Traveling approximately 120,000 km in his lifetime, he is among the most widely traveled people in pre-modern history — called the 'Islamic Marco Polo.'",
+        "significance": 5,
+        "tags": [
+          "旅行家",
+          "海上丝路",
+          "东西交流"
+        ]
       }
     ]
   },
@@ -3081,6 +3372,550 @@
       "target": "mogadishu",
       "relation": "记录木骨都束",
       "relation_en": "documented Mogadishu"
+    },
+    {
+      "source": "lapis-lazuli",
+      "target": "balkh",
+      "relation": "原产地",
+      "relation_en": "Origin",
+      "description": "阿富汗巴达赫尚（蓝氏城/巴里黑附近）是世界最古老的青金石矿产地，开采已逾6000年",
+      "description_en": ""
+    },
+    {
+      "source": "lapis-lazuli",
+      "target": "khotan",
+      "relation": "贸易中转",
+      "relation_en": "Trade Transit",
+      "description": "于阗是青金石从阿富汗进入西域和中原的关键中转站",
+      "description_en": ""
+    },
+    {
+      "source": "lapis-lazuli",
+      "target": "dunhuang",
+      "relation": "消费 / 艺术使用",
+      "relation_en": "Consumption / Artistic Use",
+      "description": "敦煌莫高窟壁画大量使用青金石研磨的群青颜料，飞天衣袂的蓝色即由此而来",
+      "description_en": ""
+    },
+    {
+      "source": "lapis-lazuli",
+      "target": "kashgar",
+      "relation": "集散 / 贸易",
+      "relation_en": "Trade Hub",
+      "description": "喀什是青金石北传天山以北草原丝路的重要集散地",
+      "description_en": ""
+    },
+    {
+      "source": "lapis-lazuli",
+      "target": "buddhism",
+      "relation": "宗教艺术颜料",
+      "relation_en": "Religious Art Pigment",
+      "description": "青金石研磨的群青是佛教壁画中最珍贵的蓝色颜料，象征佛法庄严",
+      "description_en": ""
+    },
+    {
+      "source": "black-pepper",
+      "target": "calicut",
+      "relation": "原产地",
+      "relation_en": "Origin",
+      "description": "印度西南海岸的卡利卡特（古里）是胡椒核心产区，郑和船队的重要靠泊港",
+      "description_en": ""
+    },
+    {
+      "source": "black-pepper",
+      "target": "guangzhou",
+      "relation": "进口港",
+      "relation_en": "Import Port",
+      "description": "唐代广州港是胡椒最大进口港，阿拉伯商船每年运来大量胡椒",
+      "description_en": ""
+    },
+    {
+      "source": "black-pepper",
+      "target": "quanzhou",
+      "relation": "进口港",
+      "relation_en": "Import Port",
+      "description": "宋元时期泉州超越广州成为胡椒第一大进口港，赵汝适《诸蕃志》详记胡椒来源",
+      "description_en": ""
+    },
+    {
+      "source": "black-pepper",
+      "target": "malacca",
+      "relation": "贸易中转",
+      "relation_en": "Trade Transit",
+      "description": "马六甲是东南亚胡椒和香料贸易的咽喉中转港",
+      "description_en": ""
+    },
+    {
+      "source": "black-pepper",
+      "target": "zheng-he",
+      "relation": "大量采购",
+      "relation_en": "Bulk Purchase",
+      "description": "郑和下西洋时大量采购胡椒，明廷曾以胡椒折抵官员俸禄",
+      "description_en": ""
+    },
+    {
+      "source": "black-pepper",
+      "target": "spices",
+      "relation": "核心品类",
+      "relation_en": "Core Category",
+      "description": "胡椒占海上香料贸易量最大份额，堪称'香料之王'",
+      "description_en": ""
+    },
+    {
+      "source": "sandalwood",
+      "target": "calicut",
+      "relation": "产地 / 贸易港",
+      "relation_en": "Origin / Trade Port",
+      "description": "印度南部的卡利卡特是檀香木的重要产地和输出港",
+      "description_en": ""
+    },
+    {
+      "source": "sandalwood",
+      "target": "malacca",
+      "relation": "集散地",
+      "relation_en": "Trade Hub",
+      "description": "马六甲汇聚印度檀香和印尼檀香，再北上输入中国",
+      "description_en": ""
+    },
+    {
+      "source": "sandalwood",
+      "target": "guangzhou",
+      "relation": "进口港",
+      "relation_en": "Import Port",
+      "description": "唐代广州港大量进口檀香木，长安寺院专设檀香库储备法事用香",
+      "description_en": ""
+    },
+    {
+      "source": "sandalwood",
+      "target": "buddhism",
+      "relation": "宗教用途",
+      "relation_en": "Religious Use",
+      "description": "檀香是佛教法事中最常用的焚香供品，也是雕刻佛像的上等材料",
+      "description_en": ""
+    },
+    {
+      "source": "musk",
+      "target": "changan",
+      "relation": "集散 / 出口起点",
+      "relation_en": "Trade Hub / Export Origin",
+      "description": "青藏高原产的麝香在长安汇集，经丝路西传波斯和阿拉伯",
+      "description_en": ""
+    },
+    {
+      "source": "musk",
+      "target": "samarkand",
+      "relation": "贸易中转",
+      "relation_en": "Trade Transit",
+      "description": "撒马尔罕是麝香从中国经中亚传入波斯的重要中转站",
+      "description_en": ""
+    },
+    {
+      "source": "musk",
+      "target": "baghdad",
+      "relation": "消费 / 加工",
+      "relation_en": "Consumption / Processing",
+      "description": "阿拔斯王朝的巴格达宫廷和贵族消费大量'中国麝香'，用于调香和制药",
+      "description_en": ""
+    },
+    {
+      "source": "musk",
+      "target": "dunhuang",
+      "relation": "贸易通道",
+      "relation_en": "Trade Route",
+      "description": "敦煌是麝香经河西走廊西传的必经关口，藏经洞文书中有麝香贸易记录",
+      "description_en": ""
+    },
+    {
+      "source": "persian-carpet",
+      "target": "isfahan",
+      "relation": "原产地",
+      "relation_en": "Origin",
+      "description": "伊斯法罕是波斯地毯的核心产地，以繁复花纹和植物染料著称",
+      "description_en": ""
+    },
+    {
+      "source": "persian-carpet",
+      "target": "baghdad",
+      "relation": "集散 / 贸易",
+      "relation_en": "Trade Hub",
+      "description": "巴格达是波斯地毯在阿拔斯时期的集散中心",
+      "description_en": ""
+    },
+    {
+      "source": "persian-carpet",
+      "target": "changan",
+      "relation": "消费市场",
+      "relation_en": "Consumer Market",
+      "description": "唐代长安西市有专售波斯地毯的商铺，深受皇室和贵族喜爱",
+      "description_en": ""
+    },
+    {
+      "source": "persian-carpet",
+      "target": "samarkand",
+      "relation": "贸易中转",
+      "relation_en": "Trade Transit",
+      "description": "波斯地毯经撒马尔罕沿丝路东传至中国，粟特商人充当关键中间人",
+      "description_en": ""
+    },
+    {
+      "source": "rhubarb",
+      "target": "changan",
+      "relation": "集散起点",
+      "relation_en": "Collection / Export Origin",
+      "description": "西北所产大黄在长安集散，经丝路西传至波斯和欧洲",
+      "description_en": ""
+    },
+    {
+      "source": "rhubarb",
+      "target": "samarkand",
+      "relation": "贸易中转",
+      "relation_en": "Trade Transit",
+      "description": "撒马尔罕是大黄西传波斯和阿拉伯的关键中转站",
+      "description_en": ""
+    },
+    {
+      "source": "rhubarb",
+      "target": "dunhuang",
+      "relation": "陆路通道",
+      "relation_en": "Overland Route",
+      "description": "敦煌是西北大黄沿河西走廊西传的必经关口",
+      "description_en": ""
+    },
+    {
+      "source": "marco-polo-journey",
+      "target": "marco-polo",
+      "relation": "主角",
+      "relation_en": "Protagonist",
+      "description": "马可·波罗是这次横跨欧亚旅行的核心人物",
+      "description_en": ""
+    },
+    {
+      "source": "marco-polo-journey",
+      "target": "venice",
+      "relation": "出发地与归来地",
+      "relation_en": "Departure and Return",
+      "description": "马可·波罗从威尼斯出发，24年后回到威尼斯",
+      "description_en": ""
+    },
+    {
+      "source": "marco-polo-journey",
+      "target": "kashgar",
+      "relation": "途经",
+      "relation_en": "Passed Through",
+      "description": "马可·波罗翻越帕米尔高原后经喀什进入中国",
+      "description_en": ""
+    },
+    {
+      "source": "marco-polo-journey",
+      "target": "dunhuang",
+      "relation": "途经",
+      "relation_en": "Passed Through",
+      "description": "马可·波罗途经敦煌进入河西走廊，对中国城市繁荣惊叹不已",
+      "description_en": ""
+    },
+    {
+      "source": "marco-polo-journey",
+      "target": "mongol-pax",
+      "relation": "时代背景",
+      "relation_en": "Historical Context",
+      "description": "蒙古和平时期欧亚交通畅通，马可·波罗得以安全横穿整个亚洲",
+      "description_en": ""
+    },
+    {
+      "source": "paper-spread-west",
+      "target": "paper",
+      "relation": "技术本体",
+      "relation_en": "Technology Itself",
+      "description": "造纸术从中国向西方传播的技术转移链条",
+      "description_en": ""
+    },
+    {
+      "source": "paper-spread-west",
+      "target": "battle-of-talas",
+      "relation": "触发事件",
+      "relation_en": "Trigger Event",
+      "description": "怛罗斯之战的俘虏成为造纸术西传的关键推动者",
+      "description_en": ""
+    },
+    {
+      "source": "paper-spread-west",
+      "target": "samarkand",
+      "relation": "第一个传播节点",
+      "relation_en": "First Transmission Node",
+      "description": "撒马尔罕是中国境外第一个造纸中心，751年后迅速崛起",
+      "description_en": ""
+    },
+    {
+      "source": "paper-spread-west",
+      "target": "baghdad",
+      "relation": "传播节点",
+      "relation_en": "Transmission Node",
+      "description": "巴格达于794年建立造纸作坊，百年内取代羊皮纸和莎草纸",
+      "description_en": ""
+    },
+    {
+      "source": "paper-spread-west",
+      "target": "damascus",
+      "relation": "传播节点",
+      "relation_en": "Transmission Node",
+      "description": "大马士革是造纸术传入欧洲前的最后一站，'大马士纸'流行于地中海",
+      "description_en": ""
+    },
+    {
+      "source": "tea-trade-boom",
+      "target": "tea",
+      "relation": "贸易本体",
+      "relation_en": "Trade Commodity",
+      "description": "茶叶从中唐起从寺院饮品变为全民消费品，并走向国际贸易",
+      "description_en": ""
+    },
+    {
+      "source": "tea-trade-boom",
+      "target": "changan",
+      "relation": "消费中心",
+      "relation_en": "Consumer Hub",
+      "description": "长安是中晚唐茶叶消费和贸易的中心城市",
+      "description_en": ""
+    },
+    {
+      "source": "tea-trade-boom",
+      "target": "lhasa",
+      "relation": "主要输入地",
+      "relation_en": "Major Import Region",
+      "description": "吐蕃是茶叶消费重镇，茶马古道以茶易马，藏人'宁可三日无粮，不可一日无茶'",
+      "description_en": ""
+    },
+    {
+      "source": "tea-trade-boom",
+      "target": "guangzhou",
+      "relation": "出口港",
+      "relation_en": "Export Port",
+      "description": "广州是茶叶海上输出的主要港口，日本和朝鲜的茶种由此运出",
+      "description_en": ""
+    },
+    {
+      "source": "tea-trade-boom",
+      "target": "buddhism",
+      "relation": "文化推动",
+      "relation_en": "Cultural Driver",
+      "description": "禅宗寺院将饮茶从修行方式推广至社会，'茶禅一味'由此而来",
+      "description_en": ""
+    },
+    {
+      "source": "islam-eastward-spread",
+      "target": "kashgar",
+      "relation": "首批伊斯兰化",
+      "relation_en": "First Islamization",
+      "description": "喀什是西域最早伊斯兰化的城市之一，喀喇汗王朝以此为都传教",
+      "description_en": ""
+    },
+    {
+      "source": "islam-eastward-spread",
+      "target": "khotan",
+      "relation": "伊斯兰化节点",
+      "relation_en": "Islamization Node",
+      "description": "于阗佛教王国在与喀喇汗王朝长期战争后于11世纪伊斯兰化，标志西域宗教格局巨变",
+      "description_en": ""
+    },
+    {
+      "source": "islam-eastward-spread",
+      "target": "guangzhou",
+      "relation": "海路抵达",
+      "relation_en": "Arrival by Sea",
+      "description": "阿拉伯和波斯穆斯林商人最早在唐代经海路抵达广州，设蕃坊、建怀圣寺",
+      "description_en": ""
+    },
+    {
+      "source": "islam-eastward-spread",
+      "target": "quanzhou",
+      "relation": "海路重镇",
+      "relation_en": "Key Maritime City",
+      "description": "宋元时期泉州成为最大穆斯林海商聚集地，清净寺是中国最古老清真寺之一",
+      "description_en": ""
+    },
+    {
+      "source": "islam-eastward-spread",
+      "target": "baghdad",
+      "relation": "宗教扩散起点",
+      "relation_en": "Religious Diffusion Origin",
+      "description": "阿拔斯王朝的巴格达是伊斯兰文明中心，宗教沿丝路扩散至中亚和中国的起点之一",
+      "description_en": ""
+    },
+    {
+      "source": "ibn-battuta-journey",
+      "target": "ibn-battuta",
+      "relation": "主角",
+      "relation_en": "Protagonist",
+      "description": "伊本·白图泰从摩洛哥出发，经海路抵达中国，留下了伊斯兰世界最重要的东方游记",
+      "description_en": ""
+    },
+    {
+      "source": "ibn-battuta-journey",
+      "target": "quanzhou",
+      "relation": "中国第一站",
+      "relation_en": "First Stop in China",
+      "description": "伊本·白图泰称泉州为'刺桐港'，誉之为'世界最大港口'",
+      "description_en": ""
+    },
+    {
+      "source": "ibn-battuta-journey",
+      "target": "guangzhou",
+      "relation": "游历",
+      "relation_en": "Visited",
+      "description": "伊本·白图泰游历广州，记录当地繁荣的穆斯林社区和蕃坊生活",
+      "description_en": ""
+    },
+    {
+      "source": "ibn-battuta-journey",
+      "target": "calicut",
+      "relation": "途经",
+      "relation_en": "Passed Through",
+      "description": "伊本·白图泰途经卡利卡特，记录印度西海岸与中国之间的繁荣贸易",
+      "description_en": ""
+    },
+    {
+      "source": "faxian",
+      "target": "colombo",
+      "relation": "停留抄经",
+      "relation_en": "Stayed for Sutra Copying",
+      "description": "法显在斯里兰卡（师子国）停留两年，抄写大量佛经，见到当地商人供奉汉地白绢扇而思乡落泪",
+      "description_en": ""
+    },
+    {
+      "source": "faxian",
+      "target": "palembang",
+      "relation": "归途遇险",
+      "relation_en": "Perilous Return",
+      "description": "法显在苏门答腊换船滞留五月，海上遭遇风暴九死一生，最终返回中国",
+      "description_en": ""
+    },
+    {
+      "source": "du-huan",
+      "target": "mecca",
+      "relation": "游历记录",
+      "relation_en": "Travel Record",
+      "description": "杜环可能是第一位到达阿拉伯半岛并留下文字记录的中原人，其《经行记》记录了伊斯兰教早期面貌",
+      "description_en": ""
+    },
+    {
+      "source": "du-huan",
+      "target": "damascus",
+      "relation": "游历记录",
+      "relation_en": "Travel Record",
+      "description": "杜环被俘后在阿拉伯世界游历，可能到过大马士革，记录了倭马亚王朝的繁华",
+      "description_en": ""
+    },
+    {
+      "source": "balkh",
+      "target": "samarkand",
+      "relation": "丝路节点",
+      "relation_en": "Silk Road Node",
+      "description": "巴里黑和撒马尔罕是粟特-巴克特里亚商路的两大枢纽",
+      "description_en": ""
+    },
+    {
+      "source": "balkh",
+      "target": "kashgar",
+      "relation": "贸易路线",
+      "relation_en": "Trade Route",
+      "description": "巴里黑北越帕米尔高原可至喀什，是阿富汗通往西域的北线",
+      "description_en": ""
+    },
+    {
+      "source": "balkh",
+      "target": "buddhism",
+      "relation": "佛教中心",
+      "relation_en": "Buddhist Center",
+      "description": "贵霜时期的巴里黑是大乘佛教在中亚的重要中心，Naw Bahār寺闻名丝路",
+      "description_en": ""
+    },
+    {
+      "source": "balkh",
+      "target": "xuanzang",
+      "relation": "途经参访",
+      "relation_en": "Visited",
+      "description": "玄奘《大唐西域记》详细记录了巴里黑（缚喝罗国）的佛教遗迹",
+      "description_en": ""
+    },
+    {
+      "source": "isfahan",
+      "target": "baghdad",
+      "relation": "波斯文化圈",
+      "relation_en": "Persian Cultural Sphere",
+      "description": "伊斯法罕和巴格达是伊斯兰波斯文化的双城，手工业产品和艺术品互通",
+      "description_en": ""
+    },
+    {
+      "source": "isfahan",
+      "target": "samarkand",
+      "relation": "丝路东传",
+      "relation_en": "Silk Road Eastward",
+      "description": "伊斯法罕的地毯和金属器皿经撒马尔罕沿丝路东传至中国",
+      "description_en": ""
+    },
+    {
+      "source": "isfahan",
+      "target": "nisapur",
+      "relation": "呼罗珊商路",
+      "relation_en": "Khurasan Trade Route",
+      "description": "伊斯法罕和尼沙普尔是波斯高原东西两大商业中心，共同构成呼罗珊商路",
+      "description_en": ""
+    },
+    {
+      "source": "mecca",
+      "target": "jeddah",
+      "relation": "海上门户",
+      "relation_en": "Maritime Gateway",
+      "description": "吉达是麦加的红海门户港，朝圣者和商旅由此登陆前往麦加",
+      "description_en": ""
+    },
+    {
+      "source": "mecca",
+      "target": "aden",
+      "relation": "红海-印度洋贸易",
+      "relation_en": "Red Sea–Indian Ocean Trade",
+      "description": "麦加商人与亚丁港连接红海和印度洋贸易圈，阿拉伯香料和非洲象牙由此北上",
+      "description_en": ""
+    },
+    {
+      "source": "mecca",
+      "target": "damascus",
+      "relation": "朝圣商路",
+      "relation_en": "Pilgrimage Trade Route",
+      "description": "大马士革的朝圣商队每年经阿拉伯沙漠抵达麦加，形成固定商路",
+      "description_en": ""
+    },
+    {
+      "source": "mecca",
+      "target": "du-huan",
+      "relation": "文字记录",
+      "relation_en": "Textual Record",
+      "description": "杜环《经行记》记录了伊斯兰教早期仪式和麦加天房，为最早的中文伊斯兰教记录之一",
+      "description_en": ""
+    },
+    {
+      "source": "lhasa",
+      "target": "changan",
+      "relation": "唐蕃关系",
+      "relation_en": "Tang-Tibetan Relations",
+      "description": "拉萨和长安通过唐蕃古道相连，文成公主即由此入藏",
+      "description_en": ""
+    },
+    {
+      "source": "lhasa",
+      "target": "dunhuang",
+      "relation": "青藏-丝路交汇",
+      "relation_en": "Tibet–Silk Road Intersection",
+      "description": "吐蕃强盛时期曾控制敦煌数十年，敦煌文书中有大量藏文文献",
+      "description_en": ""
+    },
+    {
+      "source": "lhasa",
+      "target": "samarkand",
+      "relation": "麝香-茶叶贸易",
+      "relation_en": "Musk–Tea Trade",
+      "description": "青藏麝香经拉萨北上丝路抵撒马尔罕，同时茶叶由川滇入藏再西传中亚",
+      "description_en": ""
     }
   ],
   "routes": [
