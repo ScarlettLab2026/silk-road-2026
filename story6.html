@@ -3,32 +3,32 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>东方见闻录 · 马可波罗东游</title>
+<title>万里俘踪 · 杜环经行记</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <style>
   :root {
-    --bg: #0f0b0a; --card-bg: rgba(22,16,14,0.93); --accent: #c2714e;
-    --text: #e8ddd6; --text-dim: #9b8b7e; --border: rgba(255,255,255,0.08);
+    --bg: #0d0c0a; --card-bg: rgba(20,17,13,0.93); --accent: #b08040;
+    --text: #e6ddd0; --text-dim: #9b8d78; --border: rgba(255,255,255,0.08);
   }
   * { margin:0; padding:0; box-sizing:border-box; }
   body { background: #000; font-family: -apple-system, "PingFang SC", "Noto Serif SC", "Microsoft YaHei", serif; overflow: hidden; height: 100vh; }
 
   #map { position: fixed; inset: 0; z-index: 1; }
-  .leaflet-container { background: #0f0b0a; }
+  .leaflet-container { background: #0d0c0a; }
 
   /* ── Story Nav ── */
   #story-nav {
     position: fixed; top: 24px; left: 50%; transform: translateX(-50%);
-    z-index: 10; display: flex; gap: 0; font-size: 0.73rem;
+    z-index: 10; display: flex; gap: 0; font-size: 0.7rem;
   }
   #story-nav a {
-    padding: 4px 12px; text-decoration: none; color: var(--text-dim);
+    padding: 4px 10px; text-decoration: none; color: var(--text-dim);
     border: 1px solid var(--border); background: rgba(0,0,0,0.3);
     transition: all 0.2s; white-space: nowrap;
   }
   #story-nav a:first-child { border-radius: 14px 0 0 14px; }
   #story-nav a:last-child { border-radius: 0 14px 14px 0; }
-  #story-nav a.active { color: var(--accent); border-color: var(--accent); background: rgba(194,113,78,0.1); }
+  #story-nav a.active { color: var(--accent); border-color: var(--accent); background: rgba(176,128,64,0.1); }
   #story-nav a:hover:not(.active) { color: #fff; background: rgba(255,255,255,0.06); }
 
   /* ── Narrative Card ── */
@@ -86,7 +86,7 @@
     background: rgba(255,255,255,0.2); transition: all 0.4s;
   }
   #progress .dot.active { background: var(--accent); transform: scale(1.4); }
-  #progress .dot.done { background: rgba(194,113,78,0.5); }
+  #progress .dot.done { background: rgba(176,128,64,0.5); }
 
   /* ── Nav buttons ── */
   #restart {
@@ -101,7 +101,7 @@
     #narrative { bottom: 16px; padding: 24px 20px 20px; border-radius: 16px; }
     #narrative h2 { font-size: 1.2rem; }
     #narrative p { font-size: 0.9rem; }
-    #story-nav a { padding: 3px 9px; font-size: 0.68rem; }
+    #story-nav a { padding: 3px 7px; font-size: 0.64rem; }
   }
 </style>
 </head>
@@ -114,8 +114,8 @@
   <a href="story4.html">🪷 法显</a>
   <a href="story3.html">🧘 玄奘</a>
   <a href="story2.html">🚢 郑和</a>
-  <a href="story5.html" class="active">🏛 马可·波罗</a>
-  <a href="story6.html">🏜 杜环</a>
+  <a href="story5.html">🏛 马可·波罗</a>
+  <a href="story6.html" class="active">🏜 杜环</a>
 </div>
 
 <div id="progress"></div>
@@ -135,74 +135,74 @@
 <script>
 const STORY = [
   {
-    title: '威尼斯启程',
-    subtitle: '公元1271年 · 威尼斯',
-    body: '1271年，17岁的马可·波罗登上父亲尼科洛和叔叔马费奥的商船。这已经是波罗兄弟第二次前往东方——上一次他们在布哈拉遇到忽必烈汗的使者，被邀请前往大都。这次他们带着罗马教廷的回信和圣油，准备走一条比父辈更远的商路。少年马可还不知道，这一去就是整整24年。从威尼斯潟湖启航，经亚得里亚海、爱琴海，抵达地中海东岸的阿卡港（今以色列）。然后换骆驼——真正的丝路，从现在开始。',
-    lat: 43.0, lng: 25.0, zoom: 4.2,
-    route: ['venice', 'constantinople'],
-    marker: 'venice',
-    showCities: ['venice', 'constantinople', 'hormuz'],
-    highlight: ['marco-polo', 'marco-polo-journey']
+    title: '怛罗斯之俘',
+    subtitle: '公元751年 · 怛罗斯',
+    body: '天宝十年，大唐安西节度使高仙芝率军深入中亚，在怛罗斯河畔与阿拉伯帝国（大食）的阿拔斯军队相遇。这是一场决定了世界文明走向的战役。唐军因葛逻禄部叛变而溃败，数千唐军被俘。俘虏中有一个名叫杜环的年轻人——他既非将军也非使臣，只是一个随军西行的普通文人。阿拉伯人没有杀他。他们把他和其他俘虏一起，押往帝国的腹地。杜环不知道等待他的是什么。他不知道这一去就是十一年。更不知道——他即将成为第一位亲眼见证伊斯兰世界、并留下文字记录的中国人。',
+    lat: 42.8, lng: 71.3, zoom: 5,
+    route: ['samarkand'],
+    marker: null,
+    showCities: ['samarkand', 'kashgar', 'balkh'],
+    highlight: ['du-huan', 'battle-of-talas', 'du-huan-travels']
   },
   {
-    title: '穿越波斯',
-    subtitle: '大不里士 · 起儿漫 · 霍尔木兹',
-    body: '穿越小亚细亚进入波斯，波罗一家见识了真正的东方繁华。在大不里士，他们看到波斯地毯工坊的匠人用矿物染料编织图案，看到骆驼商队从印度运来胡椒和宝石。在起儿漫（克尔曼），波斯商人向他们展示波斯湾采来的珍珠——马可后来在书中写道：「起儿漫的绿松石冠绝天下。」抵达霍尔木兹港时，他们原计划乘船前往中国，但看到阿拉伯单桅帆船的木钉结构后，决定继续走陆路：「那些船只用椰索缝合，不用铁钉，太危险。」转向东北——进入中亚。',
-    lat: 32.0, lng: 54.0, zoom: 4.8,
-    route: ['venice', 'constantinople', 'isfahan', 'hormuz'],
-    marker: 'isfahan',
-    showCities: ['isfahan', 'hormuz', 'baghdad'],
-    highlight: ['marco-polo', 'marco-polo-journey', 'persian-carpet', 'pearls']
+    title: '撒马尔罕的新世界',
+    subtitle: '中亚 · 撒马尔罕',
+    body: '阿拉伯军队将俘虏编入后勤队伍，杜环随军穿越河中地区，抵达撒马尔罕——当时伊斯兰世界最东端的文明重镇。他震惊地发现，这座城市里竟有唐人街：一批被俘的唐朝工匠正在这里开办造纸作坊。正是这些俘虏，将造纸术首次带到了伊斯兰世界。杜环后来在《经行记》中写道：「绫绢机杼，金银匠、画匠，汉匠起作。画者，京兆人樊淑、刘泚；织络者，河东人乐怀、吕礼。」——他记下了每一个同胞的名字。在陌生的异教徒城市里，中国工匠的手艺正在改变世界。',
+    lat: 39.6, lng: 66.9, zoom: 5.2,
+    route: ['samarkand'],
+    marker: 'samarkand',
+    showCities: ['samarkand', 'bukhara', 'balkh'],
+    highlight: ['du-huan', 'paper', 'du-huan-travels', 'paper-spread-west']
   },
   {
-    title: '翻越世界之巅',
-    subtitle: '帕米尔高原 · 喀什',
-    body: '离开波斯，波罗一家面对的是地球上最高峻的障碍——帕米尔高原。马可·波罗是第一位于书中详细描述帕米尔的欧洲人：「此地山极高峻，终年积雪。空气稀薄，鸟兽绝迹。火不能燃，水沸而不热——煮不熟食物。」他们在海拔4000米以上的冰山上跋涉四十余日。翻过雪岭，抵达喀什。马可惊叹于喀什市场的繁荣：和田玉、青金石、中国丝绸、波斯银器、中亚良马——「世界各地的商人都来到这里。」出喀什，沿着塔克拉玛干沙漠南缘的绿洲一路向东——真正的西域之旅开始了。',
-    lat: 39.5, lng: 75.0, zoom: 5,
-    route: ['venice', 'constantinople', 'isfahan', 'hormuz', 'kashgar'],
-    marker: 'kashgar',
-    showCities: ['kashgar', 'khotan', 'samarkand'],
-    highlight: ['marco-polo', 'kashgar', 'lapis-lazuli', 'jade']
+    title: '巴格达的黄金时代',
+    subtitle: '阿拉伯帝国 · 巴格达',
+    body: '离开撒马尔罕，杜环被带到了阿拔斯王朝的首都——巴格达。公元八世纪中期的巴格达，是全世界最繁华的城市。他看到了什么？图书馆里收藏着希腊、波斯、印度的著作。医院里有系统化的医学体系。市场上流通着从中国到非洲的货物。杜环在《经行记》中记录了大食（阿拉伯）的物产：椰枣、乳香、没药、犀角、象牙、珠宝——他的目光始终是商人的目光、文人的笔触。他还记录了阿拉伯人的饮食、服饰、婚丧嫁娶。最惊人的是——他记录了伊斯兰教的信仰体系。一千三百年后，这些文字仍然是中国最早、最准确的伊斯兰教现场观察。',
+    lat: 33.3, lng: 44.4, zoom: 5,
+    route: ['samarkand', 'baghdad'],
+    marker: 'baghdad',
+    showCities: ['samarkand', 'baghdad', 'damascus'],
+    highlight: ['du-huan', 'baghdad', 'frankincense', 'myrrh']
   },
   {
-    title: '进入契丹',
-    subtitle: '敦煌 · 河西走廊 · 上都',
-    body: '从喀什东行，经于阗到敦煌。马可·波罗是第一个详细描写敦煌莫高窟的外国人——虽然他关注的重点与众不同：「敦煌的佛教徒每日焚香无数次，大佛殿里的灯火日夜不熄。」穿过河西走廊，进入汉地。沿路城镇密布，人口稠密，客栈干净整洁，驿站的马匹随时可以更换。马可一次次被震撼：「契丹（中国）的驿传制度非常了不起——每个驿站各好马四十匹，信使换马不换人，一日可行四百余里。」他后来在书中浓墨重彩地记录了这套蒙古帝国的驿传系统。1275年五月，经过四年跋涉，波罗一家终于抵达上都（今内蒙古正蓝旗）——忽必烈汗的夏季行宫。',
-    lat: 42.3, lng: 100.0, zoom: 4.5,
-    route: ['venice', 'constantinople', 'isfahan', 'hormuz', 'kashgar', 'dunhuang', 'beijing'],
-    marker: 'dunhuang',
-    showCities: ['kashgar', 'khotan', 'dunhuang', 'beijing'],
-    highlight: ['marco-polo', 'dunhuang', 'mongol-pax']
+    title: '大食法与伊斯兰',
+    subtitle: '阿拉伯帝国 · 大马士革',
+    body: '随阿拉伯军队和商队西行，杜环抵达了大马士革。这座城市是倭马亚王朝的旧都，拥有宏伟的倭马亚清真寺和繁荣的市场。在这里，杜环对伊斯兰教做了中国历史上第一次系统性记录。他在《经行记》中写道：「大食法者，不食猪狗驴马等肉，不拜国王父母之尊，不信鬼神，唯拜天（Allah）。大食王每七日一礼拜，登高座为众说法。一日五时礼天。」——日五次礼拜、周五聚礼、不吃猪肉、不拜偶像，准确到令人惊叹。他的记录比后来宋代的《岭外代答》早了三百多年，比明代的《瀛涯胜览》早了六百年。一个战俘，做出了中国最早的比较宗教学田野调查。',
+    lat: 33.5, lng: 36.3, zoom: 5.5,
+    route: ['samarkand', 'baghdad', 'damascus'],
+    marker: 'damascus',
+    showCities: ['baghdad', 'damascus', 'mecca'],
+    highlight: ['du-huan', 'islam-eastward-spread', 'du-huan-travels']
   },
   {
-    title: '忽必烈汗的客人',
-    subtitle: '公元1275年 · 元上都',
-    body: '在上都的竹宫（忽必烈可拆卸的行宫）中，尼科洛向大汗呈上教宗回信和耶路撒冷圣油。忽必烈注意到了这个20岁的年轻人——马可·波罗。他聪明、善于观察、学会了蒙古语和波斯语。大汗将他纳入侍从，派他出使各地。马可在书中详细描写了上都的壮丽：竹柱金漆、兽皮帐篷、万马奔腾的草原、猎鹰和雪豹——从法王路易九世到英格兰农夫，后来的欧洲读者被这些描述惊得目瞪口呆。上都，成了欧洲人几百年间对「东方」最浪漫的想象——柯勒律治笔下「Xanadu」的原型。随后忽必烈返回大都（北京）——马可第一次见到这座「世界最大之城」。',
-    lat: 41.5, lng: 113.0, zoom: 5.5,
-    route: ['venice', 'constantinople', 'isfahan', 'hormuz', 'kashgar', 'dunhuang', 'beijing'],
-    marker: 'beijing',
-    showCities: ['dunhuang', 'beijing', 'changan'],
-    highlight: ['marco-polo', 'beijing', 'mongol-pax', 'emperor-wu']
+    title: '摩邻国·非洲见闻',
+    subtitle: '东非 · 摩邻国',
+    body: '离开大马士革后，杜环随阿拉伯商队继续南下。他到达了一个叫「摩邻国」的地方。关于摩邻国在哪，学界争论至今——有说是肯尼亚的马林迪，有说是摩洛哥，也有说是索马里的摩加迪沙。无论哪种说法，杜环都是第一位留下非洲文字记录的中国人。他在《经行记》里写道：「摩邻国，在勃萨罗国西南，渡大碛，行二千里至其国。其人黑，其俗犷。少五谷，食肉。无衣服，唯以羊皮遮形。」——对撒哈拉以南非洲人民肤色、气候、饮食和服饰的观察，在中国文献史上是第一次。杜环此时离开唐土已近十年。没有同伴、没有使命、没有归期。但他一直在记录。',
+    lat: -3.0, lng: 39.0, zoom: 5,
+    route: ['samarkand', 'baghdad', 'damascus', 'mombasa'],
+    marker: 'mombasa',
+    showCities: ['mombasa', 'aden', 'mecca'],
+    highlight: ['du-huan', 'ivory', 'frankincense']
   },
   {
-    title: '仕元十七载',
-    subtitle: '大运河 · 杭州 · 刺桐港',
-    body: '马可·波罗在元朝度过了十七年。他替忽必烈出使各地，游历了大多数中国人一生都走不完的路。南下大运河，他被沿线的繁华惊呆：「沿途城镇相连，商铺林立，丝绸堆积如山。」抵达杭州（行在）——他称之为「天堂之城」：「城中有桥一万二千座，每座桥下可通大船。街上行人如织，任何商人都能在这里找到他想买的。」最后来到刺桐（泉州），他称之为「世界第一大港」：「胡椒、檀香、樟脑、珍珠、象牙、瓷器——从这里装船运往全世界。如果一个商人从亚历山大港运一船胡椒到欧洲，就有一百船胡椒运到刺桐。」马可从商人变成了元朝的「公务员」，用十七年走完了从北京到泉州、从云南到西藏的路。但思乡的种子，在威尼斯人心里从未熄灭。',
-    lat: 32.0, lng: 114.0, zoom: 4.8,
-    route: ['venice', 'constantinople', 'isfahan', 'hormuz', 'kashgar', 'dunhuang', 'beijing', 'quanzhou'],
-    marker: 'quanzhou',
-    showCities: ['beijing', 'quanzhou', 'guangzhou', 'hangzhou'],
-    highlight: ['marco-polo', 'quanzhou', 'black-pepper', 'porcelain', 'silk']
+    title: '麦加·天房之前',
+    subtitle: '阿拉伯半岛 · 麦加',
+    body: '从非洲折返阿拉伯半岛，杜环到达了麦加——伊斯兰教的圣城。他是第一位留下麦加记录的中文作者。《经行记》记载：「大食王号暮门（Amir al-Mu\'minin，信士的长官），都此处。其城方十五里，城内有天房（Kaaba）。」他还描述了朝觐（Hajj）的仪式：「七日一王出礼拜，登高座，为众说法。」杜环观察到的麦加，正是阿拔斯王朝鼎盛时期的伊斯兰文明心脏。这座城市连接着红海与印度洋贸易圈——阿拉伯商船从亚丁港起航，带着乳香、没药、象牙，驶向印度和更远的东方。杜环或许就在这里找到了回家的路——搭乘一艘前往中国的阿拉伯商船。',
+    lat: 22.0, lng: 41.0, zoom: 5,
+    route: ['samarkand', 'baghdad', 'damascus', 'mombasa', 'mecca'],
+    marker: 'mecca',
+    showCities: ['mecca', 'jeddah', 'aden', 'hormuz'],
+    highlight: ['du-huan', 'ibn-battuta-journey', 'frankincense']
   },
   {
-    title: '归航·东方见闻录',
-    subtitle: '公元1295年 · 威尼斯',
-    body: '1291年，忽必烈将一位蒙古公主阔阔真远嫁波斯伊儿汗国。需要熟悉海路的人护送——马可·波罗主动请缨。1292年，船队从刺桐港（泉州）启航，十四艘中国远洋帆船。经占城、苏门答腊（停留五月等季风）、斯里兰卡、印度西海岸，抵达霍尔木兹——马可把这趟海上丝路的全程写进书中。1295年，波罗一家回到威尼斯，距出发时已过去24年。起初无人认出他们——穿着鞑靼长袍，说着异国语言。传说马可撕开袍衬，洒出红宝石、蓝宝石、珍珠——威尼斯人才相信，他们真的去过东方。三年后，马可在热那亚的监狱里遇到了作家鲁斯蒂谦。他口述24年游历，鲁斯蒂谦用法语写成《马可·波罗行纪》（又译《东方见闻录》）。这本书石破天惊：印度有香料群岛，中国有火井和石炭，日本有黄金铺成的宫殿，蒙古帝国的驿传一日可行四百里。两个世纪后，一个热那亚水手在他翻烂的《马可·波罗行纪》页边写满了批注——他叫哥伦布。1492年，哥伦布带着马可·波罗的书，向西航行试图到达书中的中国和印度，意外发现了新大陆。一本书，改变了世界地图。',
-    lat: 28.0, lng: 70.0, zoom: 3,
-    route: ['venice', 'constantinople', 'isfahan', 'hormuz', 'kashgar', 'dunhuang', 'beijing', 'quanzhou', 'hormuz', 'venice'],
-    marker: 'venice',
-    showCities: ['venice', 'quanzhou', 'hormuz', 'calicut'],
-    highlight: ['marco-polo', 'marco-polo-journey', 'zheng-he', 'ibn-battuta-journey']
+    title: '归航·失落的经行记',
+    subtitle: '公元762年 · 广州',
+    body: '唐代宗宝应元年（762年），杜环在阿拉伯帝国漂泊了十一年后，搭乘一艘阿拉伯商船从波斯湾启航。经印度洋、马六甲海峡、南海——全程走海上丝路——终于回到了中国。船在广州港靠岸。他踏上故土的那一刻，距离怛罗斯那场改变命运的战役，已经过去了整整十一年。回到中国后，杜环写了一本书——《经行记》。记录了他亲眼所见的阿拉伯帝国、伊斯兰教、非洲和沿途风土。这是全世界第一本由中国人在伊斯兰世界完成的实地考察笔记。可惜，原书在宋代以后失传了。我们今天能读到的，只有唐代杜佑《通典》中引用的1511个字。区区一千五百字，却涵盖了地理、宗教、物产、风俗、政治——每一个字都是从十一年的漂泊里蒸馏出来的。杜佑在《通典》里引用时写道：「杜环《经行记》云……」——他不知道，自己正在拯救中国历史上最珍贵的域外见闻录。一千三百年后，当我们谈起'最早到达非洲的中国人'时，答案是一个战俘的名字。他没有选择出发。但他选择了记录。',
+    lat: 15.0, lng: 70.0, zoom: 3,
+    route: ['samarkand', 'baghdad', 'damascus', 'mombasa', 'mecca', 'guangzhou'],
+    marker: 'guangzhou',
+    showCities: ['guangzhou', 'quanzhou', 'mecca', 'baghdad'],
+    highlight: ['du-huan', 'du-huan-travels', 'guangzhou-maritime-route', 'paper']
   }
 ];
 
@@ -210,7 +210,7 @@ const TOTAL = STORY.length;
 
 const map = L.map('map', {
   zoomControl: false, attributionControl: false,
-  center: [40, 60], zoom: 3
+  center: [35, 55], zoom: 3
 });
 L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
   maxZoom: 12
@@ -262,7 +262,7 @@ function renderChapter(idx) {
   document.querySelector('#narrative .hint').innerHTML =
     idx < TOTAL - 1
       ? '<span class="arrow">→</span> 点击继续'
-      : '<span style="font-size:1rem">🏛</span> 点击重播';
+      : '<span style="font-size:1rem">🏜</span> 点击重播';
 
   map.flyTo([ch.lat, ch.lng], ch.zoom, { duration: 1.8, easeLinearity: 0.25 });
 
@@ -278,10 +278,10 @@ function renderChapter(idx) {
     });
     if (pts.length >= 2) {
       routeLines.push(L.polyline(pts, {
-        color: 'rgba(194,113,78,0.15)', weight: 2, dashArray: '8 6'
+        color: 'rgba(176,128,64,0.12)', weight: 2, dashArray: '8 6'
       }).addTo(map));
       routeLines.push(L.polyline(pts, {
-        color: 'rgba(194,113,78,0.85)', weight: 3.5, dashArray: '12 4'
+        color: 'rgba(176,128,64,0.8)', weight: 3.5, dashArray: '12 4'
       }).addTo(map));
     }
   }
@@ -291,11 +291,11 @@ function renderChapter(idx) {
       const c = DATA.nodes.cities.find(cc => cc.id === nid);
       if (!c) return;
       const isKey = nid === ch.marker || (ch.highlight && ch.highlight.includes(nid));
-      const isStart = nid === 'venice' || nid === 'beijing';
+      const isStart = nid === 'samarkand' || nid === 'guangzhou';
       const m = L.circleMarker([c.lat, c.lng], {
         radius: isStart ? 8 : isKey ? 7 : 5,
-        fillColor: isStart ? '#fff' : 'var(--accent, #c2714e)',
-        color: '#0f0b0a', weight: 1.5, fillOpacity: isKey ? 1 : 0.7
+        fillColor: isStart ? '#fff' : 'var(--accent, #b08040)',
+        color: '#0d0c0a', weight: 1.5, fillOpacity: isKey ? 1 : 0.7
       }).addTo(map);
       m.bindTooltip(c.name, { direction: 'top', offset: [0, -6] });
       cityMarkers.push(m);
@@ -310,7 +310,7 @@ function renderChapter(idx) {
         color: 'transparent', fillOpacity: 0.6
       }).addTo(map));
       highlightMarkers.push(L.circleMarker([c.lat, c.lng], {
-        radius: 8, fillColor: '#fff', color: '#0f0b0a', weight: 2, fillOpacity: 1
+        radius: 8, fillColor: '#fff', color: '#0d0c0a', weight: 2, fillOpacity: 1
       }).addTo(map));
     }
   }
