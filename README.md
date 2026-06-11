@@ -1,171 +1,98 @@
-# 🐫 丝绸之路 · 交互知识图谱
-
-> 一个开放、结构化、双语（中/英）的丝绸之路知识图谱项目。从数据出发，渲染出多种内容形态。
-
-**[🌐 在线预览](https://ScarlettLab2026.github.io/silk-road-2026)** · **[📂 浏览数据](./data/silk-road.json)** · **[🤝 贡献指南](./CONTRIBUTING.md)**
-
----
-
-## 这是什么？
-
-这是一个关于「丝绸之路」的结构化开放数据集和交互式网站。我们将丝路上的人、地、物、事拆解为**实体**和**关系**，用一张活的图谱把它们连在一起。
-
-路线 → 城市 → 人物 → 物产 → 事件 → 技术传播路径 → 文化交流轨迹 —— 全都关联在一起。
-
-### 核心特点
-
-- **单一数据源**（[silk-road.json](./data/silk-road.json)），所有内容从同一份数据渲染
-- **双语支持**，中文和 English 可一键切换
-- **交互式地图**（Leaflet.js），直观展示地理关系
-- **朝代时间轴**，按历史时期筛选
-- **知识图谱**，实体间的关联关系可视化
-- **开源开放**，数据遵循 CC BY-SA 4.0 协议
-
-## 当前数据规模
-
-| 类型 | 数量 |
-|------|------|
-| 🏙 城市 | 35 |
-| 👤 人物 | 23 |
-| 📦 物产 | 24 |
-| ⚡ 事件 | 18 |
-| 🔗 关系边 | 255 |
-| 🎬 传播路线 | 8 |
-| 📖 交互故事 | 2（张骞·凿空西域 + 郑和·鲸波万里） |
-
-> *数据持续扩充中。欢迎贡献！*
-
-## 技术栈
-
-- **数据层**：JSON（结构化知识图谱）
-- **前端**：纯 HTML/CSS/JS + [Leaflet.js](https://leafletjs.com/) 地图
-- **部署**：GitHub Pages（静态站点，零成本）
-
-## 本地运行
-
-```bash
-# 克隆仓库
-git clone https://github.com/ScarlettLab2026/silk-road-2026.git
-cd silk-road2026
-
-# 启动本地服务器（任选一种）
-python3 -m http.server 8080
-# 或
-npx serve .
-
-# 浏览器打开 http://localhost:8080
-```
-
-## 项目愿景
-
-我们的目标不是做一个网站，而是养一个**活的系统**：
-
-```
-知识图谱 ──→ 自动生成多种内容 ──→ 多渠道分发 ──→ 反馈回流 ──→ 图谱增强
-                                                        ↑
-                                              ←─────────┘
-```
-
-每一步的产出，都会成为下一步的燃料。每一次新增数据，所有输出形态同步受益。
-
-## 路线图
-
-- [x] 基础知识图谱 (v0.1.0)
-- [x] 交互式网页（地图 + 时间轴 + 详情面板）
-- [x] 更多城市与节点（楼兰、和田、木鹿、布哈拉、赫拉特、泉州、元大都）(v0.2.0)
-- [x] 更多人物（班超、法显、鸠摩罗什、伊本·白图泰、拉班·扫马、李白）(v0.2.0)
-- [x] 更多物产与事件（茶叶、西域马、佛教、和田玉、班超定西域、法显西行、景教碑、安史之乱）(v0.2.0)
-- [x] 再扩充（安息、塔克西拉、碎叶、赖伊、汉武帝、王昭君、义净、安禄山、花剌子密、火药、指南针、苜蓿、粟特银器、昭君出塞、义净西行、粟特网络）(v0.3.0)
-- [x] 人物关系网络图（D3.js 力导向图）(v0.3.0)
-- [x] 内容生成脚本（公众号文章/海报/知识卡片自动生成）(v0.3.0)
-- [x] 海上丝绸之路专题（广州、马六甲、卡利卡特、科伦坡、霍尔木兹、亚丁、亚历山大、蒙巴萨、巨港等 9 个海上丝路城市 + 郑和/汪大渊/周达观 + 乳香/没药/象牙/红珊瑚/丁香 + 市舶司/广州通海夷道）(v0.4.0)
-- [x] 物产传播路径动画（8条路线：丝绸/造纸术/佛教/指南针/香料/瓷器/火药/茶马古道，脉冲动画marker+逐段亮起+缓动+导演模式+速度控制+分段解说）(v0.5.0)
-- [x] B站视频生成（Canvas 渲染 + MediaRecorder 录制，自动播放 8 条路线全景，~3 分钟视频一键下载）(v0.5.0)
-- [x] 数据增强 v0.6.0（+4城：大马士革/龟兹/高昌/威尼斯，+3人物：杜环/丘处机/马欢，+3物产：棉布/胡桃/琵琶，+2事件：甘英使大秦/杜环经行记，+52边）(v0.6.0)
-- [x] 海上丝路增强 v0.7.0（+3城：吉达/摩加迪沙/苏拉特，+2人物：亦黑迷失/杨庭璧，+2物产：珍珠/苏木，+2事件：亦黑迷失出使/汪大渊下西洋，+44边）(v0.7.0)
-- [x] 交互故事「凿空西域·张骞的丝路」story.html（7章地图叙事 + 飞越动画 + 实体标签 + 键盘导航）(v0.8.0)
-- [x] 交互故事「鲸波万里·郑和下西洋」story2.html（7章航海叙事 + 海洋蓝主题 + 双故事入口）(v0.9.0)
-- [ ] 数据 API（JSON endpoint）
-- [ ] 知识问答卡片（社交媒体分享用）
-- [ ] 短视频脚本自动生成
-- [ ] 社区贡献机制（Pull Request 模板）
-
-## 如何贡献
-
-1. Fork 本仓库
-2. 在 `data/silk-road.json` 中添加或修改实体/关系
-3. 确保 JSON 格式有效（可用 `python3 -m json.tool data/silk-road.json` 验证）
-4. 提交 Pull Request 并描述你的修改
-
-欢迎贡献：
-- 新的城市、人物、物产、事件节点
-- 实体之间新的关联关系
-- 更丰富的描述文本（中/英双语）
-- 纠错与勘误
-- 翻译质量改进
-
-## 支持项目
-
-如果这个项目对你有帮助，欢迎支持我们继续完善丝绸之路的开放数据：
-
-- ❤️ [爱发电](https://afdian.com/a/scarlettlab)
-- ⭐ [GitHub Sponsors](https://github.com/sponsors/ScarlettLab2026)
-
-所有支持将用于数据扩充、内容创作和服务器维护。每一份支持都会让这条路上多一盏灯。
-
-## 许可证
-
-- 数据：[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
-- 代码：[MIT](./LICENSE)
-
----
-
-<p align="center">
-  <i>凿空西域，连通世界。从长安到罗马，每一步都在创造历史。</i>
-</p>
-
----
-
 # 🐫 Silk Road · Interactive Knowledge Graph
 
-> An open, structured, bilingual (ZH/EN) knowledge graph of the Silk Road. Data first — multiple content forms rendered from one source.
+> **An open-source, interactive map of 2,000 years of East-West exchange.** 40 cities. 30 trade goods. 326 connections. 6 interactive stories. One JSON file drives it all.
+
+**[🌐 Live Demo](https://ScarlettLab2026.github.io/silk-road-2026)** · **[📂 Browse Data](./data/silk-road.json)** · **[🤝 Contribute](./CONTRIBUTING.md)**
+
+---
 
 ## What is this?
 
-A structured open dataset and interactive website about the Silk Road. We break down the people, places, goods, and events into **entities** and **relationships**, connected in a living knowledge graph.
+We broke down 2,000 years of Silk Road history into a structured knowledge graph. Every city, figure, trade good, and historical event is connected — and you can explore all of it interactively.
 
-Routes → Cities → Figures → Goods → Events → Technology transfer paths → Cultural exchange trajectories — all interconnected.
+**🗺️ Interactive Map** — 40 cities on real geographic coordinates across Eurasia, the Indian Ocean, and East Africa
+
+**🕸️ Relationship Graph** — D3.js force-directed graph with 326 edges. Drag nodes, discover hidden connections
+
+**⏳ Dynasty Timeline** — Filter by dynasty (Han → Tang → Yuan → Ming). Map and data sync instantly
+
+**🎬 8 Animated Trade Routes** — Watch silk, paper, gunpowder, Buddhism, and tea travel across the map as golden pulse dots with voice narration
+
+**📖 6 Interactive Stories** — Follow 6 travelers chapter by chapter. The map flies to each location as the story unfolds:
+
+| Story | Traveler | Route | Era | Color |
+|-------|----------|-------|-----|-------|
+| 📖 凿空西域 | **Zhang Qian** | Chang'an → Samarkand | 138 BCE | `#d4a853` Desert Gold |
+| 🪷 白绢扇归 | **Faxian** | Chang'an → India → Sri Lanka, at age 60 | 399 CE | `#5d8a7c` Ancient Green |
+| 🧘 万里求法 | **Xuanzang** | Chang'an → Nalanda → Chang'an, 17 years | 629 CE | `#c47a38` Buddhist Gold |
+| 🚢 鲸波万里 | **Zheng He** | Nanjing → East Africa, 7 voyages | 1405 CE | `#5ea3b8` Ocean Blue |
+| 🏛 东方见闻录 | **Marco Polo** | Venice → Khanbaliq → Venice, 24 years | 1271 CE | `#c2714e` Venetian Red |
+| 🏜 万里俘踪 | **Du Huan** | Talas → Baghdad → Africa → Guangzhou, 11 years as a war captive | 751 CE | `#b08040` Desert Bronze |
+
+**🔍 Full-text Search** — Search across 116 entities in Chinese and English
+
+**🌓 Bilingual** — Chinese / English toggle. All data, UI, and story text in both languages
 
 ## Data Scale
 
-| Type | Count |
-|------|-------|
-| 🏙 Cities | 35 |
-| 👤 Figures | 23 |
-| 📦 Goods | 24 |
-| ⚡ Events | 18 |
-| 🔗 Edges | 255 |
-| 🎬 Routes | 8 |
-| 📖 Stories | 2 (Zhang Qian + Zheng He) |
+| Type | Count | Examples |
+|------|-------|----------|
+| 🏙 Cities | **40** | Chang'an, Samarkand, Baghdad, Venice, Mombasa, Lhasa |
+| 👤 Figures | **23** | Zhang Qian, Faxian, Xuanzang, Zheng He, Marco Polo, Du Huan |
+| 📦 Goods | **30** | Silk, paper, porcelain, tea, lapis lazuli, black pepper, musk |
+| ⚡ Events | **23** | Zhang Qian's Mission, Battle of Talas, Islam Eastward Spread, Tea Trade Boom |
+| 🔗 Edges | **326** | Every figure→city, goods→route, event→figure connection |
+| 🎬 Routes | **8** | Silk Westward, Paper to Europe, Buddhism Eastward, Tea-Horse Road |
+| 📖 Stories | **6** | 7 chapters each, interactive map flyover narration |
+
+## Tech Stack
+
+- **Data:** Single JSON file (43 KB) — the single source of truth
+- **Frontend:** Vanilla HTML/CSS/JS — zero frameworks
+- **Map:** [Leaflet.js](https://leafletjs.com/) + CartoDB dark tiles
+- **Graph:** [D3.js v7](https://d3js.org/) force simulation
+- **Animation:** Canvas + requestAnimationFrame
+- **Deployment:** GitHub Pages — push to deploy, zero hosting cost
+
+## Why this approach?
+
+**Single data source → Multiple content forms.** Add one city to the JSON, and it instantly appears on the map, in the relationship graph, on the timeline, in the knowledge cards, and in the API output. No duplication, no drift.
+
+```
+JSON Data ──→ Map + Graph + Timeline + Cards + Stories + API
+     ↑                                                      │
+     └──────────── Community contributions ←────────────────┘
+```
+
+## Try It
+
+```bash
+git clone https://github.com/ScarlettLab2026/silk-road-2026.git
+cd silk-road-2026
+python3 -m http.server 8080
+# Open http://localhost:8080
+```
+
+Or just visit the [live demo](https://ScarlettLab2026.github.io/silk-road-2026).
+
+## Contribute
+
+We welcome:
+- New cities, figures, goods, or events
+- Richer descriptions (Chinese + English)
+- Historical corrections and fact-checking
+- Translation improvements
+- New interactive story suggestions
+
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for details. All data is [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), all code is [MIT](./LICENSE).
 
 ## Support
-
-If this project is helpful to you, consider supporting our work on open Silk Road data:
 
 - ❤️ [Aifadian](https://afdian.com/a/scarlettlab)
 - ⭐ [GitHub Sponsors](https://github.com/sponsors/ScarlettLab2026)
 
-## Contributing
-
-We welcome contributions of new nodes, richer descriptions, corrections, and translations.
-
-## License
-
-- Data: [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
-- Code: [MIT](./LICENSE)
-
 ---
 
 <p align="center">
-  <i>From Chang'an to Rome — opening the way, connecting the world.</i>
+  <i>From Chang'an to Rome, from Quanzhou to Mombasa — every step made history.</i>
 </p>
