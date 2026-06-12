@@ -1,0 +1,92 @@
+<!--
+  Silk Road Knowledge Graph — Story Contribution Template
+  ======================================================
+  Copy this file, fill in the placeholders, and submit a PR.
+
+  Required before starting:
+  1. Add your figure to data/silk-road.json (id, name, description, era, etc.)
+  2. Add a corresponding event to data/silk-road.json
+  3. Add edges connecting your figure/event to relevant cities/goods/events
+  4. Validate JSON: python3 -m json.tool data/silk-road.json
+
+  Color: pick a unique accent color (hex) not used by existing stories:
+    Zhang Qian #d4a853 | Faxian #5d8a7c | Xuanzang #c47a38
+    Zheng He #5ea3b8  | Marco Polo #c2714e | Du Huan #b08040
+    Wang Dayuan #3a7ca5
+-->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YOUR_TITLE_HERE</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<link rel="stylesheet" href="css/story-common.css" />
+<style>
+:root {
+  --bg: #000000; --card-bg: rgba(0,0,0,0.93); --accent: #YOUR_COLOR;
+  --text: #e0e0e0; --text-dim: #909090; --border: rgba(255,255,255,0.08);
+  --accent-r: R; --accent-g: G; --accent-b: B;   <!-- Set RGB components of YOUR_COLOR -->
+}
+</style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<div id="story-nav">
+  <!-- ADD all existing story links here. Check the latest story file for the complete nav. -->
+  <a href="story.html">📖 张骞</a>
+  <a href="story4.html">🪷 法显</a>
+  <a href="story3.html">🧘 玄奘</a>
+  <a href="story2.html">🚢 郑和</a>
+  <a href="story5.html">🏛 马可·波罗</a>
+  <a href="story6.html">🏜 杜环</a>
+  <a href="story7.html">⚓ 汪大渊</a>
+  <!-- ADD your story link here with class="active" -->
+</div>
+
+<div id="progress"></div>
+
+<a href="index.html" id="back">← 返回地图</a>
+<button id="theme-toggle" onclick="toggleTheme()">☀️</button>
+<button id="restart" onclick="restart()">🔄 重播</button>
+
+<div id="narrative" onclick="advance()">
+  <button id="toggle-card" onclick="event.stopPropagation();toggleCard()" title="收起/展开">─</button>
+  <div class="chapter-num" id="chNum"></div>
+  <h2 id="chTitle"></h2>
+  <p id="chBody"></p>
+  <div id="badges" style="margin:8px 0 0;line-height:1.8"></div>
+  <div class="hint"><span class="arrow">→</span> 点击继续</div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+const STORY_CONFIG = {
+  accent: '#YOUR_COLOR',
+  accentRgb: 'R,G,B',           // RGB of YOUR_COLOR (e.g. '58,124,165')
+  mapCenter: [LAT, LNG],        // Initial map center (e.g. [35, 85])
+  mapZoom: ZOOM,                // Initial zoom level (e.g. 3.5)
+  startCities: ['city_id_1'],   // City IDs that get special "start" markers
+  restartEmoji: '🎯',           // Emoji for the restart hint on last chapter
+  tileBg: '#BG_COLOR'           // Should match --bg
+};
+
+const STORY = [
+  // Each chapter object has these fields:
+  {
+    title: 'Chapter Internal Title',      // Used for organization
+    subtitle: 'Year · Location',           // DISPLAYED as the chapter heading
+    body: 'Narrative text (2-5 sentences recommended).',
+    lat: 0.0, lng: 0.0, zoom: 5,          // Map fly-to target
+    route: ['city_id_1'],                  // City IDs for route polyline (CUMULATIVE)
+    marker: 'city_id_featured',            // City ID for pulse highlight, or null
+    showCities: ['city_id_1', 'city_id_2'],// City IDs for circle markers
+    highlight: ['figure_id', 'event_id']   // Entity IDs for badge rendering
+  },
+  // ... 6 more chapters (7 total recommended)
+];
+</script>
+<script src="js/story-engine.js"></script>
+</body></html>

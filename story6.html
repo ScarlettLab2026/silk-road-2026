@@ -5,112 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>万里俘踪 · 杜环经行记</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<link rel="stylesheet" href="css/story-common.css" />
 <style>
-  :root {
-    --bg: #0d0c0a; --card-bg: rgba(20,17,13,0.93); --accent: #b08040;
-    --text: #e6ddd0; --text-dim: #9b8d78; --border: rgba(255,255,255,0.08);
-  }
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body { background: #000; font-family: -apple-system, "PingFang SC", "Noto Serif SC", "Microsoft YaHei", serif; overflow: hidden; height: 100vh; }
-
-  #map { position: fixed; inset: 0; z-index: 1; }
-  .leaflet-container { background: #0d0c0a; }
-
-  /* ── Story Nav ── */
-  #story-nav {
-    position: fixed; top: 24px; left: 50%; transform: translateX(-50%);
-    z-index: 10; display: flex; gap: 0; font-size: 0.7rem;
-  }
-  #story-nav a {
-    padding: 4px 10px; text-decoration: none; color: var(--text-dim);
-    border: 1px solid var(--border); background: rgba(0,0,0,0.3);
-    transition: all 0.2s; white-space: nowrap;
-  }
-  #story-nav a:first-child { border-radius: 14px 0 0 14px; }
-  #story-nav a:last-child { border-radius: 0 14px 14px 0; }
-  #story-nav a.active { color: var(--accent); border-color: var(--accent); background: rgba(176,128,64,0.1); }
-  #story-nav a:hover:not(.active) { color: #fff; background: rgba(255,255,255,0.06); }
-
-  /* ── Narrative Card ── */
-  #narrative {
-    position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%);
-    z-index: 10; width: min(92vw, 620px);
-    background: var(--card-bg); border: 1px solid var(--border);
-    border-radius: 20px; padding: 32px 36px 28px;
-    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-    box-shadow: 0 8px 48px rgba(0,0,0,0.5);
-    transition: opacity 0.5s, transform 0.5s;
-    cursor: pointer; user-select: none;
-  }
-  #narrative.fading { opacity: 0; transform: translateX(-50%) translateY(20px); }
-  #narrative.collapsed { padding: 12px 24px; }
-  #narrative.collapsed p,
-  #narrative.collapsed #badges { display: none; }
-  #narrative.collapsed h2 { font-size: 0.95rem; margin-bottom: 0; }
-  #narrative.collapsed .chapter-num { margin-bottom: 0; }
-  #narrative.collapsed .hint { margin-top: 0; margin-left: 12px; display: inline-flex; }
-  #toggle-card {
-    position: absolute; top: 10px; right: 16px;
-    background: none; border: none; color: var(--text-dim);
-    font-size: 1.1rem; cursor: pointer; z-index: 2; padding: 2px 8px;
-    line-height: 1; transition: color 0.2s;
-  }
-  #toggle-card:hover { color: #fff; }
-  #narrative.collapsed #toggle-card { top: 50%; transform: translateY(-50%); }
-  #narrative .chapter-num {
-    font-size: 0.7rem; letter-spacing: 0.2em; color: var(--accent);
-    text-transform: uppercase; margin-bottom: 6px;
-  }
-  #narrative h2 {
-    font-size: 1.5rem; font-weight: 700; color: #fff;
-    margin-bottom: 12px; letter-spacing: 0.04em; line-height: 1.4;
-  }
-  #narrative p {
-    font-size: 1rem; line-height: 1.85; color: var(--text);
-    margin-bottom: 6px;
-  }
-  #narrative .hint {
-    margin-top: 18px; font-size: 0.78rem; color: var(--text-dim);
-    display: flex; align-items: center; gap: 8px;
-  }
-  #narrative .hint .arrow { animation: bounce 1.2s infinite; }
-  @keyframes bounce { 0%,100%{transform:translateX(0)} 50%{transform:translateX(6px)} }
-
-  /* ── Progress Dots ── */
-  #progress {
-    position: fixed; top: 60px; left: 50%; transform: translateX(-50%);
-    z-index: 10; display: flex; gap: 10px;
-  }
-  #progress .dot {
-    width: 10px; height: 10px; border-radius: 50%;
-    background: rgba(255,255,255,0.2); transition: all 0.4s;
-  }
-  #progress .dot.active { background: var(--accent); transform: scale(1.4); }
-  #progress .dot.done { background: rgba(176,128,64,0.5); }
-
-  /* ── Nav buttons ── */
-  #restart {
-    position: fixed; top: 24px; right: 24px; z-index: 10;
-    background: rgba(255,255,255,0.06); border: 1px solid var(--border);
-    color: var(--text-dim); padding: 8px 16px; border-radius: 20px;
-    font-size: 0.78rem; cursor: pointer; transition: all 0.3s;
-  }
-  #restart:hover { background: rgba(255,255,255,0.12); color: #fff; }
-  #back {
-    position: fixed; top: 24px; left: 24px; z-index: 10;
-    background: rgba(255,255,255,0.06); border: 1px solid var(--border);
-    color: var(--text-dim); padding: 8px 16px; border-radius: 20px;
-    font-size: 0.78rem; cursor: pointer; transition: all 0.3s;
-    text-decoration: none;
-  }
-  #back:hover { background: rgba(255,255,255,0.12); color: #fff; }
-
-  @media (max-width: 640px) {
-    #narrative { bottom: 16px; padding: 24px 20px 20px; border-radius: 16px; }
-    #narrative h2 { font-size: 1.2rem; }
-    #narrative p { font-size: 0.9rem; }
-    #story-nav a { padding: 3px 7px; font-size: 0.64rem; }
-  }
+:root {
+  --bg: #0d0c0a; --card-bg: rgba(176,128,64,0.93); --accent: #b08040;
+  --text: #e6ddd0; --text-dim: #9b8d78; --border: rgba(255,255,255,0.08);
+  --accent-r: 176; --accent-g: 128; --accent-b: 64;
+}
 </style>
 </head>
 <body>
@@ -124,11 +25,13 @@
   <a href="story2.html">🚢 郑和</a>
   <a href="story5.html">🏛 马可·波罗</a>
   <a href="story6.html" class="active">🏜 杜环</a>
+  <a href="story7.html">⚓ 汪大渊</a>
 </div>
 
 <div id="progress"></div>
 
 <a href="index.html" id="back">← 返回地图</a>
+<button id="theme-toggle" onclick="toggleTheme()">☀️</button>
 <button id="restart" onclick="restart()">🔄 重播</button>
 
 <div id="narrative" onclick="advance()">
@@ -142,7 +45,17 @@
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-const STORY = [
+const STORY_CONFIG = {
+  accent: '#b08040',
+  accentRgb: '176,128,64',
+  mapCenter: [35, 55],
+  mapZoom: 3,
+  startCities: ["samarkand", "guangzhou"],
+  restartEmoji: '🏜',
+  tileBg: '#0d0c0a'
+};
+
+[
   {
     title: '怛罗斯之俘',
     subtitle: '公元751年 · 怛罗斯',
@@ -214,170 +127,6 @@ const STORY = [
     highlight: ['du-huan', 'du-huan-travels', 'guangzhou-maritime-route', 'paper']
   }
 ];
-
-const TOTAL = STORY.length;
-
-const map = L.map('map', {
-  zoomControl: false, attributionControl: false,
-  center: [35, 55], zoom: 3
-});
-L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-  maxZoom: 12
-}).addTo(map);
-
-let DATA = null;
-let currentChapter = 0;
-let routeLines = [];
-let cityMarkers = [];
-let highlightMarkers = [];
-
-fetch('data/silk-road.json').then(r => r.json()).then(d => {
-  DATA = d;
-  initProgress();
-  renderChapter(0);
-}).catch(() => {
-  fetch('https://scarlettlab2026.github.io/silk-road-2026/data/silk-road.json')
-    .then(r => r.json()).then(d => { DATA = d; initProgress(); renderChapter(0); });
-});
-
-function initProgress() {
-  const el = document.getElementById('progress');
-  el.innerHTML = STORY.map((_, i) =>
-    `<div class="dot${i===0?' active':''}" id="dot${i}"></div>`
-  ).join('');
-}
-
-function updateProgress(idx) {
-  for (let i = 0; i < TOTAL; i++) {
-    const d = document.getElementById('dot'+i);
-    if (!d) continue;
-    d.className = 'dot' + (i === idx ? ' active' : i < idx ? ' done' : '');
-  }
-}
-
-function renderChapter(idx) {
-  const ch = STORY[idx];
-  currentChapter = idx;
-  updateProgress(idx);
-
-  document.getElementById('chNum').textContent = `第 ${idx+1} 章 / ${TOTAL}`;
-  document.getElementById('chTitle').textContent = ch.subtitle;
-  document.getElementById('chBody').textContent = ch.body;
-
-  const card = document.getElementById('narrative');
-  card.classList.add('fading');
-  setTimeout(() => { card.classList.remove('fading'); }, 200);
-
-  document.querySelector('#narrative .hint').innerHTML =
-    idx < TOTAL - 1
-      ? '<span class="arrow">→</span> 点击继续'
-      : '<span style="font-size:1rem">🏜</span> 点击重播';
-
-  map.flyTo([ch.lat, ch.lng], ch.zoom, { duration: 1.8, easeLinearity: 0.25 });
-
-  routeLines.forEach(l => map.removeLayer(l)); routeLines = [];
-  cityMarkers.forEach(m => map.removeLayer(m)); cityMarkers = [];
-  highlightMarkers.forEach(m => map.removeLayer(m)); highlightMarkers = [];
-
-  if (ch.route && DATA) {
-    const pts = [];
-    ch.route.forEach(nid => {
-      const c = DATA.nodes.cities.find(cc => cc.id === nid);
-      if (c) pts.push([c.lat, c.lng]);
-    });
-    if (pts.length >= 2) {
-      routeLines.push(L.polyline(pts, {
-        color: 'rgba(176,128,64,0.12)', weight: 2, dashArray: '8 6'
-      }).addTo(map));
-      routeLines.push(L.polyline(pts, {
-        color: 'rgba(176,128,64,0.8)', weight: 3.5, dashArray: '12 4'
-      }).addTo(map));
-    }
-  }
-
-  if (ch.showCities && DATA) {
-    ch.showCities.forEach(nid => {
-      const c = DATA.nodes.cities.find(cc => cc.id === nid);
-      if (!c) return;
-      const isKey = nid === ch.marker || (ch.highlight && ch.highlight.includes(nid));
-      const isStart = nid === 'samarkand' || nid === 'guangzhou';
-      const m = L.circleMarker([c.lat, c.lng], {
-        radius: isStart ? 8 : isKey ? 7 : 5,
-        fillColor: isStart ? '#fff' : 'var(--accent, #b08040)',
-        color: '#0d0c0a', weight: 1.5, fillOpacity: isKey ? 1 : 0.7
-      }).addTo(map);
-      m.bindTooltip(c.name, { direction: 'top', offset: [0, -6] });
-      cityMarkers.push(m);
-    });
-  }
-
-  if (ch.marker && DATA) {
-    const c = DATA.nodes.cities.find(cc => cc.id === ch.marker);
-    if (c) {
-      highlightMarkers.push(L.circleMarker([c.lat, c.lng], {
-        radius: 14, fillColor: 'rgba(255,255,255,0.25)',
-        color: 'transparent', fillOpacity: 0.6
-      }).addTo(map));
-      highlightMarkers.push(L.circleMarker([c.lat, c.lng], {
-        radius: 8, fillColor: '#fff', color: '#0d0c0a', weight: 2, fillOpacity: 1
-      }).addTo(map));
-    }
-  }
-
-  const badgeRow = document.getElementById('badges');
-  if (ch.highlight && DATA) {
-    const colors = { figure: '#5b9bd5', goods: '#6aad6a', event: '#c75b3a' };
-    badgeRow.innerHTML = ch.highlight.filter(id => id !== (ch.marker || '')).map(eid => {
-      let entity = null, cat = '';
-      for (const c of ['figures','goods','events']) {
-        entity = DATA.nodes[c].find(n => n.id === eid);
-        if (entity) { cat = c === 'figures' ? 'figure' : c === 'goods' ? 'goods' : 'event'; break; }
-      }
-      if (!entity) return '';
-      const color = colors[cat];
-      const label = entity.type || entity.category || entity.dynasty || '';
-      return `<span style="display:inline-block;padding:4px 10px;margin:2px;border-radius:10px;font-size:0.73rem;border:1px solid ${color};color:${color};background:rgba(255,255,255,0.03)"><strong>${entity.name}</strong> <span style="opacity:0.7">${label}</span></span>`;
-    }).join('');
-  } else {
-    badgeRow.innerHTML = '';
-  }
-}
-
-function toggleCard() {
-  const card = document.getElementById('narrative');
-  const btn = document.getElementById('toggle-card');
-  card.classList.toggle('collapsed');
-  btn.textContent = card.classList.contains('collapsed') ? '＋' : '─';
-}
-
-function advance() {
-  const card = document.getElementById('narrative');
-  if (card.classList.contains('collapsed')) {
-    toggleCard();
-    return;
-  }
-  if (currentChapter < TOTAL - 1) {
-    renderChapter(currentChapter + 1);
-  } else {
-    restart();
-  }
-}
-
-function restart() {
-  routeLines.forEach(l => map.removeLayer(l)); routeLines = [];
-  cityMarkers.forEach(m => map.removeLayer(m)); cityMarkers = [];
-  highlightMarkers.forEach(m => map.removeLayer(m)); highlightMarkers = [];
-  renderChapter(0);
-}
-
-document.addEventListener('keydown', e => {
-  if (e.key === 'ArrowRight' || e.key === ' ' || e.code === 'Space') {
-    e.preventDefault(); advance();
-  }
-  if (e.key === 'ArrowLeft') {
-    e.preventDefault();
-    if (currentChapter > 0) renderChapter(currentChapter - 1);
-  }
-});
 </script>
+<script src="js/story-engine.js"></script>
 </body></html>

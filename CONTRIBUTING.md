@@ -113,6 +113,19 @@ python3 -m http.server 8080
 # 浏览器打开 http://localhost:8080
 ```
 
+## 创建交互故事
+
+想为一位丝路旅行家制作交互地图故事？使用我们的模板：
+
+1. **复制模板**: 从 [`.github/STORY_TEMPLATE.html`](./.github/STORY_TEMPLATE.html) 复制故事骨架
+2. **添加数据**: 在 `data/silk-road.json` 中补充人物、事件和关系边
+3. **编写叙事**: 填写 7 章 STORY 数组（每章标题、副标题、正文、坐标、路线、关联实体）
+4. **更新导航**: 在所有现有故事文件的 `#story-nav` 和 `index.html` 的故事按钮行中添加新链接
+5. **更新 meta**: 将 `index.html` 中的故事计数递增
+6. **提交 PR**: 参考 [`.github/pull_request_template.md`](./.github/pull_request_template.md) 检查清单
+
+故事引擎会自动处理：地图飞越、路线绘制、城市标记、实体标签、键盘导航、暗/亮切换。你只需要提供 `STORY_CONFIG` 和 `STORY` 数据。
+
 ## 行为准则
 
 - 确保描述文本基于可查证的历史资料

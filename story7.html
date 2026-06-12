@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>碧海遗篇 · 汪大渊远航</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<link rel="stylesheet" href="css/story-common.css" />
+<style>
+:root {
+  --bg: #0a1018; --card-bg: rgba(14,22,28,0.93); --accent: #3a7ca5;
+  --text: #dde4e8; --text-dim: #8a959b; --border: rgba(255,255,255,0.08);
+  --accent-r: 58; --accent-g: 124; --accent-b: 165;
+}
+</style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<div id="story-nav">
+  <a href="story.html">📖 张骞</a>
+  <a href="story4.html">🪷 法显</a>
+  <a href="story3.html">🧘 玄奘</a>
+  <a href="story2.html">🚢 郑和</a>
+  <a href="story5.html">🏛 马可·波罗</a>
+  <a href="story6.html">🏜 杜环</a>
+  <a href="story7.html" class="active">⚓ 汪大渊</a>
+</div>
+
+<div id="progress"></div>
+
+<a href="index.html" id="back">← 返回地图</a>
+<button id="theme-toggle" onclick="toggleTheme()">☀️</button>
+<button id="restart" onclick="restart()">🔄 重播</button>
+
+<div id="narrative" onclick="advance()">
+  <button id="toggle-card" onclick="event.stopPropagation();toggleCard()" title="收起/展开">─</button>
+  <div class="chapter-num" id="chNum"></div>
+  <h2 id="chTitle"></h2>
+  <p id="chBody"></p>
+  <div id="badges" style="margin:8px 0 0;line-height:1.8"></div>
+  <div class="hint"><span class="arrow">→</span> 点击继续</div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+const STORY_CONFIG = {
+  accent: '#3a7ca5',
+  accentRgb: '58,124,165',
+  mapCenter: [24, 110],
+  mapZoom: 3.5,
+  startCities: ['quanzhou'],
+  restartEmoji: '⚓',
+  tileBg: '#0a1018'
+};
+
+const STORY = [
+  {
+    title: '少年出海',
+    subtitle: '公元1330年 · 泉州刺桐港',
+    body: '元至顺元年（1330年），泉州刺桐港。一个二十岁的江西青年，名叫汪大渊，做了他那个时代最大胆的决定——跳上一艘阿拉伯商船，出海。他不是官员，没有帝国使命；不是商人，没有万贯资本；不是和尚，没有朝圣目标。他只是一个对世界充满好奇的年轻人。他后来在《岛夷志略》的序言里轻描淡写地写道：「余尝附海舶，浮海经年。」——"我曾经搭乘海船，在海上漂泊了好几年"——一句话概括了两段跨越十年的远航。泉州港的码头上，印度商人在卸胡椒，波斯人在装绸缎，索马里的象牙和乳香散发着异域的气味。二十岁的汪大渊看着这一切，登上了船。',
+    lat: 24.87, lng: 118.68, zoom: 5,
+    route: ['quanzhou'],
+    marker: null,
+    showCities: ['quanzhou', 'guangzhou'],
+    highlight: ['wang-dayuan', 'wang-dayuan-voyages']
+  },
+  {
+    title: '南海遗城',
+    subtitle: '南洋 · 三佛齐（巨港）',
+    body: '商船沿占城（越南）海岸南下，穿越暹罗湾，进入巽他海峡。汪大渊到达了三佛齐——一个曾经称霸东南亚海路的帝国，如今已是残阳余晖。汪大渊在《岛夷志略》中记录了这里的热带气候、棕榈林和海上贸易遗风。他注意到一条惊人的商业规则：三佛齐的市场上，来自阿拉伯的乳香还可以在香料中浸泡增加重量，而来自中国的货物——丝绸、瓷器、铜钱——从不缺斤少两。他写道：「番人重信。」——两个词，概括了他对东南亚贸易圈的观察：规则就是信用。一个二十岁的中国青年，在南海边第一次感受到了全球化。',
+    lat: -2.0, lng: 106.0, zoom: 4.5,
+    route: ['quanzhou', 'palembang'],
+    marker: 'palembang',
+    showCities: ['palembang', 'quanzhou', 'malacca'],
+    highlight: ['wang-dayuan', 'porcelain', 'silk']
+  },
+  {
+    title: '满剌加·海峡之门',
+    subtitle: '马六甲海峡 · 满剌加（马六甲）',
+    body: '离开三佛齐旧地，商船北上进入马六甲海峡——世界上最繁忙的航道之一。汪大渊抵达了新兴的满剌加王国。这里与衰败的三佛齐形成鲜明对比：阿拉伯帆船、印度大舶、中国福船、爪哇商船，在港口川流不息。这条海峡是东西方贸易的咽喉：从波斯湾运来的乳香和没药，从印度运来的棉布和宝石，从中国运来的丝绸、瓷器和铜钱，全部在这里交汇。汪大渊记录下了满剌加人的贸易习惯、服饰、饮食和信仰。他没有旅行指南参考——他同时是旅行者、记者、和地图的绘制者。',
+    lat: 2.19, lng: 102.25, zoom: 5,
+    route: ['quanzhou', 'palembang', 'malacca'],
+    marker: 'malacca',
+    showCities: ['malacca', 'palembang', 'calicut'],
+    highlight: ['wang-dayuan', 'wang-dayuan-voyages', 'maritime-trade-office']
+  },
+  {
+    title: '古里佛·胡椒之都',
+    subtitle: '公元1330–1334年 · 印度西南岸 · 卡利卡特（古里佛）',
+    body: '穿过孟加拉湾和锡兰（斯里兰卡）的南端，汪大渊抵达了印度马拉巴海岸的卡利卡特——汪大渊称之为"古里佛"。这里是全印度最大的胡椒市场，全欧洲和全亚洲的香料商人都聚集在此。汪大渊做了"田野调查"：记录了印度的种姓制度——「人有四等」——和税收制度。他看到马拉巴人吃胡椒比米饭还多，看到船队从红海和东非满载而归。最让他惊讶的是这里的度量衡体系——印度人用胡椒粒称重，阿拉伯人用砝码，中国人用铜钱——三种货币体系在这个港口无缝兼容。汪大渊写道：「居人肩摩，市不易价。」——人多得肩膀碰肩膀，但价格从不坑人。此时距他离开泉州，已过去一年多。',
+    lat: 11.26, lng: 75.78, zoom: 5,
+    route: ['quanzhou', 'palembang', 'malacca', 'calicut'],
+    marker: 'calicut',
+    showCities: ['calicut', 'hormuz', 'malacca'],
+    highlight: ['wang-dayuan', 'pepper', 'frankincense']
+  },
+  {
+    title: '甘埋里·波斯湾的尽头',
+    subtitle: '公元1330–1334年 · 波斯湾 · 霍尔木兹（甘埋里）',
+    body: '沿印度西海岸北上，商船在冬季乘着东北季风穿越阿拉伯海，进入霍尔木兹海峡——波斯湾的门户。汪大渊到达了霍尔木兹（他称之为"甘埋里"），这座岛屿是波斯湾最繁忙的贸易中转站。他看到的景象超出了所有想象：非洲的象牙和犀角经过这里运往印度和中国；波斯的织锦和金属器在这里装船东行；阿拉伯的乳香和没药从这里出发，途经印度中转，最终到达泉州。他记录了波斯湾的珍珠采集业、阿拉伯人的航海技术、伊斯兰教的礼拜习俗。汪大渊笔下：「地产真珠，大者如豆。海人没水采之。」——他如此冷静地写下采珠人潜入海底的场面，仿佛自己也在屏息。',
+    lat: 27.10, lng: 56.45, zoom: 5,
+    route: ['quanzhou', 'palembang', 'malacca', 'calicut', 'hormuz'],
+    marker: 'hormuz',
+    showCities: ['hormuz', 'aden', 'calicut'],
+    highlight: ['wang-dayuan-voyages', 'ivory', 'pearl']
+  },
+  {
+    title: '黑非洲的初遇',
+    subtitle: '阿拉伯海 · 亚丁 → 东非 · 蒙巴萨 / 摩加迪沙',
+    body: '从波斯湾折向南行，商船沿着阿拉伯半岛的海岸线驶向亚丁（汪大渊称之为"哑靼"），然后顺着非洲之角南下。汪大渊到达了摩加迪沙（木骨都束）和蒙巴萨（层摇罗），成为继杜环（阿拉伯世界路线）之后又一位到达非洲并留下文字记录的中国人。他记录了非洲东海岸的气候——「其地炎熱，四時如夏」；地理——「滨海而居，民食鱼兽」；贸易物产——「地产象牙、犀角、龙涎、鹤顶」。最有趣的是他对当地人的观察：「其人面黑如漆，齿白如银。」语气中没有任何贬义——一个元代中国青年的非洲见闻，惊人地理性、精确。此时他已离家超过三年。',
+    lat: 0.0, lng: 45.0, zoom: 4.5,
+    route: ['quanzhou', 'palembang', 'malacca', 'calicut', 'hormuz', 'aden', 'mombasa'],
+    marker: 'mombasa',
+    showCities: ['mombasa', 'mogadishu', 'aden', 'hormuz'],
+    highlight: ['wang-dayuan', 'ivory', 'frankincense']
+  },
+  {
+    title: '岛夷志略·一个人的地理大发现',
+    subtitle: '公元1339年 · 归航 → 1349年 · 《岛夷志略》成书',
+    body: '第一次远航历时四年（1330–1334）。回到泉州休整三年后，汪大渊再次出海（1337–1339）——这次他走得更远，补完了对东非和红海的记录。两次远航，累计近十年漂泊，足迹遍布220多个地方。回到家后，汪大渊做了一件改变历史的事：他坐下来，写了一本书——《岛夷志略》。全书记录了99个国家和地区的名称、方位、物产、风俗、航路。这本书和同时代的《马可·波罗行纪》及《伊本·白图泰游记》一起，构成了十四世纪人类对世界的三大想象——但汪大渊是最不为人知的那一个。《岛夷志略》后来被明代《瀛涯胜览》和《星槎胜览》频繁引用——郑和的随从们出发前，把这本书翻了一遍又一遍。一个民间青年，用一本书记录的海洋世界，成了大明帝国官方远航的"谷歌地图"。汪大渊没有宝船、没有舰队、没有官职。他只有一双眼睛、一支笔、和一个二十岁青年的好奇心。而这——就够了。',
+    lat: 20.0, lng: 85.0, zoom: 3,
+    route: ['quanzhou', 'palembang', 'malacca', 'calicut', 'hormuz', 'aden', 'mombasa', 'quanzhou'],
+    marker: 'quanzhou',
+    showCities: ['quanzhou', 'palembang', 'malacca', 'calicut', 'hormuz', 'aden', 'mombasa', 'mogadishu'],
+    highlight: ['wang-dayuan', 'wang-dayuan-voyages', 'zheng-he-figure', 'guangzhou-maritime-route']
+  }
+];
+</script>
+<script src="js/story-engine.js"></script>
+</body></html>

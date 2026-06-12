@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta charset="UTF-8"><title>郑和下西洋</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{display:flex;justify-content:center;align-items:center;min-height:100vh;background:#111}
+.poster{
+  width:1080px;height:1440px;
+  background:linear-gradient(180deg,#060e13 0%,#0d1f29 40%,#060e13 100%);
+  color:#d0dfe8;padding:80px 90px;position:relative;overflow:hidden;
+  font-family:"PingFang SC","Noto Serif SC","STSong",serif;
+}
+/* Decorative wave lines */
+.poster::before{
+  content:'';position:absolute;top:0;left:0;width:100%;height:100%;
+  background:
+    repeating-linear-gradient(0deg,transparent,transparent 60px,rgba(94,163,184,0.03) 60px,rgba(94,163,184,0.03) 61px);
+}
+.poster::after{
+  content:'';position:absolute;bottom:200px;left:0;width:100%;height:300px;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1080 300'%3E%3Cpath d='M0,150 Q180,30 360,150 T720,150 T1080,150' stroke='rgba(94,163,184,0.12)' fill='none' stroke-width='2'/%3E%3Cpath d='M0,200 Q180,100 360,200 T720,200 T1080,200' stroke='rgba(94,163,184,0.08)' fill='none' stroke-width='1.5'/%3E%3C/svg%3E");
+}
+.badge{
+  display:inline-block;border:1px solid rgba(94,163,184,0.4);
+  color:#5ea3b8;font-size:22px;padding:8px 28px;border-radius:30px;
+  letter-spacing:0.2em;margin-bottom:36px;position:relative;z-index:1;
+}
+h1{
+  font-size:64px;font-weight:900;letter-spacing:0.08em;
+  background:linear-gradient(180deg,#e8f4f8 0%,#5ea3b8 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  line-height:1.25;margin-bottom:16px;position:relative;z-index:1;
+}
+.subtitle{
+  font-size:28px;color:rgba(255,255,255,0.5);margin-bottom:50px;
+  letter-spacing:0.1em;position:relative;z-index:1;
+}
+.magic-number{
+  display:flex;gap:40px;margin-bottom:50px;position:relative;z-index:1;
+}
+.num-box{
+  text-align:center;padding:24px 32px;
+  background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);
+  border-radius:16px;flex:1;
+}
+.num-box .num{
+  font-size:48px;font-weight:900;color:#5ea3b8;line-height:1.1;
+  font-family:"SF Mono","Menlo",monospace;
+}
+.num-box .label{font-size:18px;color:rgba(255,255,255,0.4);margin-top:6px}
+.highlight-box{
+  background:rgba(94,163,184,0.08);border:1px solid rgba(94,163,184,0.2);
+  border-radius:20px;padding:36px 40px;margin-bottom:44px;
+  position:relative;z-index:1;
+}
+.highlight-box .emoji{font-size:60px;margin-bottom:8px}
+.highlight-box .title{font-size:28px;font-weight:700;color:#fff;margin-bottom:8px}
+.highlight-box .desc{font-size:22px;color:rgba(255,255,255,0.6);line-height:1.6}
+.route-line{
+  display:flex;align-items:center;gap:0;margin-bottom:48px;
+  font-size:17px;color:rgba(255,255,255,0.4);
+  position:relative;z-index:1;flex-wrap:wrap;
+}
+.route-line span{color:#8bc4d4;padding:4px 8px}
+.route-line .arrow{color:rgba(94,163,184,0.3)}
+.footer-cta{
+  position:absolute;bottom:80px;left:90px;right:90px;
+  text-align:center;border-top:1px solid rgba(255,255,255,0.06);
+  padding-top:36px;position:relative;z-index:1;
+}
+.footer-cta .link{font-size:22px;color:#5ea3b8}
+.footer-cta .open-source{font-size:17px;color:rgba(255,255,255,0.25);margin-top:10px}
+</style></head>
+<body>
+<div class="poster">
+  <div class="badge">🚢 郑和下西洋 · 1405—1433</div>
+  <h1>郑和从非洲带回来<br>一只长颈鹿</h1>
+  <div class="subtitle">明朝人全体起立：麒麟下凡了 🦒👑</div>
+
+  <div class="magic-number">
+    <div class="num-box"><div class="num">200+</div><div class="label">艘宝船</div></div>
+    <div class="num-box"><div class="num">27,000</div><div class="label">随行人员</div></div>
+    <div class="num-box"><div class="num">137m</div><div class="label">旗舰长度</div></div>
+  </div>
+
+  <div class="highlight-box">
+    <div class="emoji">🦒</div>
+    <div class="title">1414年 · 麻林国（今肯尼亚）</div>
+    <div class="desc">郑和船队带回一只「祖剌法」— 阿拉伯语长颈鹿。明朝人从未见过这种生物，遍体鳞纹、形貌端庄、性格温顺——群臣跪奏：此乃麒麟现世，圣人出而王道昌。</div>
+  </div>
+
+  <div class="route-line">
+    南京<span class="arrow">→</span>泉州<span class="arrow">→</span>占城<span class="arrow">→</span>
+    满剌加<span class="arrow">→</span>锡兰<span class="arrow">→</span>
+    卡利卡特<span class="arrow">→</span>忽鲁谟斯<span class="arrow">→</span>
+    木骨都束<span class="arrow">→</span>麻林
+  </div>
+
+  <div class="footer-cta">
+    <div class="link">🔗 scarlettlab2026.github.io/silk-road-2026</div>
+    <div class="open-source">六部丝路交互故事 · 40城 · 326条关系边 · 全部开源 🌟</div>
+  </div>
+</div>
+</body>
+</html>
