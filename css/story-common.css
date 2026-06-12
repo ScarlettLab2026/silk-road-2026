@@ -145,6 +145,7 @@ body { background: #000; font-family: -apple-system, "PingFang SC", "Noto Serif 
 
 /* ── Light Theme ── */
 body.light {
+  background: #f0ebe0;
   --bg: #f0ebe0;
   --card-bg: rgba(255,255,250,0.93);
   --text: #3d3427;

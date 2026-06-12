@@ -78,7 +78,8 @@ NAV_LINKS = '''  <a href="story.html">📖 张骞</a>
   <a href="story3.html">🧘 玄奘</a>
   <a href="story2.html">🚢 郑和</a>
   <a href="story5.html">🏛 马可·波罗</a>
-  <a href="story6.html">🏜 杜环</a>'''
+  <a href="story6.html">🏜 杜环</a>
+  <a href="story7.html">⚓ 汪大渊</a>'''
 
 def build_html(filename, config):
     """Build refactored story HTML."""
@@ -145,7 +146,7 @@ const STORY_CONFIG = {{
   tileBg: '{cfg['bg']}'
 }};
 
-{story_array}
+const STORY = {story_array}
 </script>
 <script src="js/story-engine.js"></script>
 </body></html>
