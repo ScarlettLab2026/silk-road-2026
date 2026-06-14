@@ -2,8 +2,8 @@
   "meta": {
     "title": "丝绸之路知识图谱",
     "title_en": "Silk Road Knowledge Graph",
-    "version": "1.2.1",
-    "last_updated": "2026-06-06",
+    "version": "1.3.0",
+    "last_updated": "2026-06-14",
     "description": "一个关于丝绸之路的结构化开放数据集，涵盖城市、人物、物产、事件四大类实体及其关联关系。",
     "description_en": "An open structured dataset about the Silk Road, covering cities, figures, goods, and events and their interconnections."
   },
@@ -868,6 +868,27 @@
         "description": "京杭大运河南端终点，南宋都城（临安）。马可·波罗称为「天堂之城」「世界上最美丽华贵之城」。丝绸、茶叶、瓷器从杭州经运河或海路运往世界。元代杭州是海上丝路的重要起点港之一。",
         "description_en": "Southern terminus of the Grand Canal and capital of the Southern Song dynasty. Marco Polo called it the City of Heaven, \"the most beautiful and magnificent city in the world.\" Silk, tea, and porcelain were shipped worldwide via canal and sea from Hangzhou.",
         "significance": 5
+      },
+      {
+        "id": "shanshan",
+        "name": "鄯善",
+        "name_en": "Shanshan",
+        "modern_name": "若羌",
+        "modern_name_en": "Ruoqiang",
+        "country": "中国",
+        "country_en": "China",
+        "lat": 39.02,
+        "lng": 88.17,
+        "era": "公元前1世纪 — 公元5世纪",
+        "dynasties": [
+          "汉",
+          "魏晋"
+        ],
+        "role": "西域南道门户",
+        "role_en": "Southern Route Gateway",
+        "description": "西域三十六国之一，楼兰改名后的延续政权。扼守西域南道咽喉，是汉朝与匈奴争夺西域的前沿据点。班超在此夜袭匈奴使者，留下「不入虎穴焉得虎子」的千古名言。",
+        "description_en": "One of the 36 kingdoms of the Western Regions, successor to Loulan. It guarded the strategic southern route and was a frontline state in the Han-Xiongnu rivalry. Ban Chao's legendary night raid on Xiongnu envoys took place here.",
+        "significance": 4
       }
     ],
     "figures": [
@@ -3961,6 +3982,102 @@
       "relation": "茶叶产地",
       "relation_en": "Tea Production",
       "description": "杭州龙井茶自宋代起名扬天下，是丝路茶叶贸易的重要品类"
+    },
+    {
+      "source": "ban-chao",
+      "target": "shanshan",
+      "relation": "夜袭威慑",
+      "relation_en": "Night Raid Intimidation",
+      "description": "率36人夜袭匈奴使团，威震鄯善——「不入虎穴，焉得虎子」"
+    },
+    {
+      "source": "ban-chao",
+      "target": "khotan",
+      "relation": "斩杀巫师降于阗",
+      "relation_en": "Executed Shaman, Subdued Khotan",
+      "description": "斩杀向汉使索马的于阗神巫，于阗王恐惧归附汉朝"
+    },
+    {
+      "source": "ban-chao",
+      "target": "luoyang",
+      "relation": "出生地与归葬地",
+      "relation_en": "Birthplace and Burial Place",
+      "description": "班超生于洛阳，31年西域经营后上书「但愿生入玉门关」，71岁归洛阳同年病逝"
+    },
+    {
+      "source": "ban-chao",
+      "target": "kucha",
+      "relation": "平定龟兹",
+      "relation_en": "Pacified Kucha",
+      "description": "龟兹倚仗匈奴势力称霸西域，班超率联军击退龟兹，扶立亲汉新王"
+    },
+    {
+      "source": "ban-chao-campaign",
+      "target": "shanshan",
+      "relation": "发生地",
+      "relation_en": "Location"
+    },
+    {
+      "source": "ban-chao-campaign",
+      "target": "khotan",
+      "relation": "发生地",
+      "relation_en": "Location"
+    },
+    {
+      "source": "ban-chao-campaign",
+      "target": "kashgar",
+      "relation": "发生地",
+      "relation_en": "Location"
+    },
+    {
+      "source": "ban-chao-campaign",
+      "target": "kucha",
+      "relation": "发生地",
+      "relation_en": "Location"
+    },
+    {
+      "source": "ban-chao-campaign",
+      "target": "luoyang",
+      "relation": "起始地/终结地",
+      "relation_en": "Origin/End Point"
+    },
+    {
+      "source": "gan-ying-mission",
+      "target": "baghdad",
+      "relation": "途经",
+      "relation_en": "Passed Through",
+      "description": "甘英西行穿越安息（帕提亚帝国），途经美索不达米亚，抵达条支（波斯湾）"
+    },
+    {
+      "source": "gan-ying-mission",
+      "target": "hormuz",
+      "relation": "疑似抵达",
+      "relation_en": "Possibly Reached",
+      "description": "甘英抵达的「条支」可能在波斯湾沿岸，与后来的霍尔木兹相近"
+    },
+    {
+      "source": "gan-ying",
+      "target": "ban-chao",
+      "relation": "受命出使",
+      "relation_en": "Dispatched By"
+    },
+    {
+      "source": "silk",
+      "target": "shanshan",
+      "relation": "途经转运",
+      "relation_en": "Transshipment Point"
+    },
+    {
+      "source": "shanshan",
+      "target": "dunhuang",
+      "relation": "西域南道",
+      "relation_en": "Southern Western Regions Route"
+    },
+    {
+      "source": "shanshan",
+      "target": "khotan",
+      "relation": "西域南道",
+      "relation_en": "Southern Western Regions Route"
     }
   ],
   "routes": [

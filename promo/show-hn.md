@@ -20,7 +20,7 @@ Show HN: Silk Road Knowledge Graph — interactive map of 2,000 years of East-We
 
 备选（更短）：
 ```
-Show HN: I mapped 6 historical journeys across the Silk Road — interactive and open source
+Show HN: I mapped 8 historical journeys across the Silk Road — interactive and open source
 ```
 
 ---
@@ -43,12 +43,12 @@ When I came back, I tried to learn more. The knowledge was scattered across doze
 So I built this — a structured knowledge graph of the Silk Road, rendered as an interactive website.
 
 What it does:
-- 40 cities pinned on real coordinates across Eurasia, the Indian Ocean, and East Africa
-- 326 relationships connecting cities, figures, goods, and events
-- 6 interactive stories where the map flies from city to city as you read (Zhang Qian, Faxian, Xuanzang, Zheng He, Marco Polo, and Du Huan — a Tang dynasty war captive who became the first Chinese person to document Africa)
+- 41 cities pinned on real coordinates across Eurasia, the Indian Ocean, and East Africa
+- 341 relationships connecting cities, figures, goods, and events
+- 8 interactive stories where the map flies from city to city as you read (Zhang Qian, Ban Chao, Faxian, Xuanzang, Du Huan, Marco Polo, Wang Dayuan, and Zheng He — spanning 1,500 years from the Han dynasty to the Ming dynasty)
 - 8 animated trade routes (silk, paper, gunpowder, Buddhism, etc.) with golden dots traveling across the map
 - Bilingual Chinese/English — one-click toggle
-- Full-text search across 116 entities
+- Full-text search across 120+ entities
 
 Tech: Pure vanilla JS, zero frameworks. One JSON file (43KB) is the single source of truth. Add a city to the JSON, and it instantly appears on the map, the graph, the timeline, and the stories. Hosted on GitHub Pages at zero cost.
 
@@ -67,7 +67,7 @@ GitHub: https://github.com/ScarlettLab2026/silk-road-2026
 ## 如果有人在评论区问问题，常见回答参考
 
 **Q: Why not use a framework?**
-A: Wanted to keep the dependency count at zero and make it trivially deployable (just HTML files on GitHub Pages). The entire site is ~2,500 lines of code across 6 story files + one main page.
+A: Wanted to keep the dependency count at zero and make it trivially deployable (just HTML files on GitHub Pages). The entire site is ~3,000 lines of code across 8 story files + one main page.
 
 **Q: How did you collect the data?**
 A: Manually compiled from historical sources, academic papers, and Wikipedia. Cross-referenced Chinese and English materials. The JSON file is CC BY-SA 4.0 — anyone can use it.

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>定远侯 · 班超定西域</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<link rel="stylesheet" href="css/story-common.css" />
+<style>
+:root {
+  --bg: #12100e; --card-bg: rgba(22,20,17,0.93); --accent: #8b7355;
+  --text: #e8e4dc; --text-dim: #9a9588; --border: rgba(255,255,255,0.08);
+  --accent-r: 139; --accent-g: 115; --accent-b: 85;
+}
+</style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<div id="story-nav">
+  <a href="story.html">📖 张骞</a>
+  <a href="story8.html" class="active">⚔ 班超</a>
+  <a href="story4.html">🪷 法显</a>
+  <a href="story3.html">🧘 玄奘</a>
+  <a href="story6.html">🏜 杜环</a>
+  <a href="story5.html">🏛 马可·波罗</a>
+  <a href="story7.html">⚓ 汪大渊</a>
+  <a href="story2.html">🚢 郑和</a>
+</div>
+
+<div id="progress"></div>
+
+<a href="index.html" id="back">← 返回地图</a>
+<button id="theme-toggle" onclick="toggleTheme()">☀️</button>
+<button id="restart" onclick="restart()">🔄 重播</button>
+
+<div id="narrative" onclick="advance()">
+  <button id="toggle-card" onclick="event.stopPropagation();toggleCard()" title="收起/展开">─</button>
+  <div class="chapter-num" id="chNum"></div>
+  <h2 id="chTitle"></h2>
+  <p id="chBody"></p>
+  <div id="badges" style="margin:8px 0 0;line-height:1.8"></div>
+  <div class="hint"><span class="arrow">→</span> 点击继续</div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+const STORY_CONFIG = {
+  accent: '#8b7355',
+  accentRgb: '139,115,85',
+  mapCenter: [38, 85],
+  mapZoom: 3.5,
+  startCities: ['luoyang'],
+  restartEmoji: '⚔',
+  tileBg: '#12100e'
+};
+
+const STORY = [
+  {
+    title: '投笔从戎',
+    subtitle: '公元62年 · 东汉洛阳',
+    body: '洛阳城南宫。一个三十岁的兰台令史——国家档案馆的抄写员——每天的工作是把公文誊写一遍又一遍。他叫班超。这一天，他把毛笔扔在地上，对同僚说：「大丈夫无它志略，犹当效傅介子、张骞立功异域，以取封侯，安能久事笔研间乎？」——大丈夫活着，就该像傅介子和张骞那样，到万里之外去建功立业，怎么能一辈子泡在笔墨里？同僚们都笑了。班超也笑了，然后转身离开。他报名参加了窦固的北伐军，从抄写员变成了骑兵。这是他人生中第一次真正骑马出塞。长城外的风沙打在脸上——他说：这才对。',
+    lat: 34.68, lng: 112.46, zoom: 5,
+    route: ['luoyang'],
+    marker: null,
+    showCities: ['luoyang', 'changan', 'dunhuang'],
+    highlight: ['ban-chao', 'ban-chao-campaign', 'emperor-wu']
+  },
+  {
+    title: '鄯善夜袭',
+    subtitle: '公元73年 · 鄯善国（若羌）',
+    body: '窦固派班超出使鄯善——西域南道上的一个小王国，夹在汉朝和匈奴之间摇摆不定。鄯善王起初热情款待，几天后忽然冷淡。班超敏锐地察觉到了原因：匈奴的使者也到了。他召集36名部下喝酒，酒过三巡，突然站起来说：「诸位和我被困在万里之外，匈奴使者已经到了。如果鄯善王把我们绑了送给匈奴，我们的骨头就要喂豺狼了。」部下们齐声说：「生死听您！」班超说了一句千古名言：「不入虎穴，不得虎子。」当夜，36人顶着狂风直奔匈奴营地。班超一声令下，顺风纵火，擂鼓呐喊。匈奴使团130多人全部被斩杀。第二天一早，班超把匈奴使者的头颅摆在鄯善王面前。鄯善王吓得面如土色，当场跪地：「愿归属汉朝，永无二心。」西域南道的门户——被36个人撞开了。',
+    lat: 39.02, lng: 88.17, zoom: 5,
+    route: ['luoyang', 'dunhuang', 'shanshan'],
+    marker: 'shanshan',
+    showCities: ['shanshan', 'dunhuang', 'loulan'],
+    highlight: ['ban-chao', 'ban-chao-campaign']
+  },
+  {
+    title: '于阗降服',
+    subtitle: '公元73–74年 · 于阗（和田）',
+    body: '从鄯善继续西行，班超到达了于阗——西域南道上的大国，也是匈奴的忠实附庸。于阗王对这位汉朝使者态度傲慢。于阗的大巫师更是放话：「神灵发怒了，必须用汉使的马祭祀。」班超回答：「可以。但请巫师亲自来牵马。」巫师兴冲冲地来了。班超手起刀落——巫师的头滚在地上，鲜血溅了于阗朝堂一地。班超提着巫师的头，走到于阗王面前。他什么威胁的话都没说。于阗王早已听说鄯善那130个匈奴人的下场。他浑身发抖，立即下令杀死城中所有匈奴官员，宣布归附汉朝。消息沿西域南道飞速传播——各小国开始重新审视这个只带了36个人的汉朝使者。他不是来送礼的。他是来杀人的。',
+    lat: 37.11, lng: 79.92, zoom: 5.5,
+    route: ['luoyang', 'dunhuang', 'shanshan', 'khotan'],
+    marker: 'khotan',
+    showCities: ['khotan', 'shanshan', 'kashgar'],
+    highlight: ['ban-chao', 'khotan']
+  },
+  {
+    title: '疏勒复国',
+    subtitle: '公元74年 · 疏勒（喀什）',
+    body: '西域北道上的龟兹国倚仗匈奴撑腰，攻破疏勒，杀死疏勒王，另立了一个龟兹人兜题做傀儡国王。班超决定介入。他派部下田虑前往疏勒，只带了几十个人。见到兜题后，田虑趁其不备突然拔刀架在他脖子上——兜题的卫兵全部愣住，没有一个敢动。田虑把兜题绑回班超面前。班超没有杀他，而是召集疏勒的贵族和老臣，当众宣布：「疏勒王是你们自己的。龟兹人说了不算。」他扶立了已故疏勒王的儿子忠做新王。疏勒全城震动——班超不仅没有屠城，反而帮他们复了国。疏勒百姓自发上街高呼。一个被扶持的国王，一座被解放的城——班超的名声从南道传到了北道，传回洛阳，传到了皇帝耳朵里。',
+    lat: 39.47, lng: 75.99, zoom: 5.5,
+    route: ['luoyang', 'dunhuang', 'shanshan', 'khotan', 'kashgar'],
+    marker: 'kashgar',
+    showCities: ['kashgar', 'kucha', 'khotan'],
+    highlight: ['ban-chao', 'ban-chao-campaign']
+  },
+  {
+    title: '依汉如父母',
+    subtitle: '公元75–91年 · 疏勒 — 龟兹 — 莎车',
+    body: '公元75年，汉明帝驾崩。新皇帝下令班超撤回洛阳。班超收拾行装准备东归。疏勒人慌了。疏勒都尉黎弇拦住班超的马，哭着说：「汉使弃我，我辈必为龟兹所灭！」——说完拔刀自刎，血溅班超马前。班超震惊。走到于阗，于阗的贵族和百姓抱住他的马腿，跪在地上哭喊：「依汉使如父母，诚不可去！」班超看着脚下的血、耳边的哭声、身后的36个兄弟——他做了一个决定。他调转马头，违抗圣旨，留在了西域。这一留，就是十六年。十六年里，他平定了莎车、龟兹、姑墨、焉耆。以西域联军打西域叛军，以夷制夷，不费汉朝一兵一卒。永元三年（91年），汉和帝正式任命他为西域都护，封定远侯。西域五十余国，全部归附汉朝。一个人管着比汉朝本土还大的土地——这句话没有夸张。',
+    lat: 38.5, lng: 80.0, zoom: 4.5,
+    route: ['luoyang', 'dunhuang', 'shanshan', 'khotan', 'kashgar', 'kucha'],
+    marker: 'kucha',
+    showCities: ['kucha', 'kashgar', 'khotan', 'shanshan'],
+    highlight: ['ban-chao', 'ban-chao-campaign']
+  },
+  {
+    title: '甘英使秦',
+    subtitle: '公元97年 · 波斯湾沿岸（条支）',
+    body: '班超坐镇西域的第二十六年。他做了一个大胆的决定：派人去罗马。此时罗马帝国（大秦）正值巅峰，是汉朝只闻其名未见其面的「西方大国」。班超选了副将甘英，对他说：「去看看那个和汉朝一样大的帝国长什么样。」甘英带使团从疏勒出发，翻过葱岭，穿过贵霜帝国，进入安息（帕提亚）境内。他们一路向西，经过木鹿、赫拉特、伊斯法罕，抵达了美索不达米亚平原——从长安算起已经走了一万多里。最终，甘英站在了条支的海边（波斯湾）。对面就是罗马的叙利亚行省。安息商人告诉他：「渡海不顺风要三年，顺风也要一年多。出海的人都要带三年的粮食。」甘英犹豫了。他是陆地上的使者，从未见过如此广阔的海。他望着远方，放下了船桨，转身东归。汉朝使者离罗马最近的距离——是一道波斯湾。他没过去。但他带回了关于阿拉伯半岛、波斯湾、甚至非洲之角的珍贵情报。班超听完他的汇报，沉默了很久。然后说：够了。已经够远了。',
+    lat: 30.5, lng: 50.0, zoom: 4.5,
+    route: ['luoyang', 'dunhuang', 'kashgar', 'merv', 'isfahan', 'baghdad'],
+    marker: 'baghdad',
+    showCities: ['baghdad', 'hormuz', 'isfahan', 'merv', 'kashgar'],
+    highlight: ['gan-ying', 'gan-ying-mission']
+  },
+  {
+    title: '但愿生入玉门关',
+    subtitle: '公元102年 · 回洛阳 — 归葬故土',
+    body: '永元十四年（102年）。班超71岁，在西域已经待了整整三十一年。他的头发全白了，身体老迈。他上书汉和帝，请求回朝。奏章里有一句话，是中国历史上最令人动容的归乡之词：「臣不敢望到酒泉郡，但愿生入玉门关。」——我不敢奢望活着走到酒泉，只求能死在那道城门——玉门关——的里面。皇帝看了奏章，感动落泪，立即召他回朝。班超从疏勒出发，一路东行。他不知道的是，他走后不到二十年，西域重新陷入战乱，丝绸之路再次中断。但他一个人扛了三十一年的西域都护府，已经为汉朝留下了不可磨灭的印迹。他回到洛阳，拜射声校尉。同年九月，病逝，年七十一。葬于洛阳邙山。他投笔从戎那年三十岁。他把自己三十一年的人生留在了西域。两千多年后，站在喀什的街头，你还能听到关于一个汉朝人的传说——他们叫他班定远。',
+    lat: 34.68, lng: 112.46, zoom: 5,
+    route: ['kashgar', 'khotan', 'shanshan', 'dunhuang', 'luoyang'],
+    marker: 'luoyang',
+    showCities: ['luoyang', 'dunhuang', 'kashgar', 'khotan'],
+    highlight: ['ban-chao', 'ban-chao-campaign']
+  }
+];
+</script>
+<script src="js/story-engine.js"></script>
+</body></html>

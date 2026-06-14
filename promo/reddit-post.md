@@ -17,12 +17,12 @@
 ## Title（标题）
 
 ```
-[OC] 2,000 years of Silk Road history visualized — 40 cities, 326 connections, 6 interactive journeys
+[OC] 2,000 years of Silk Road history visualized — 41 cities, 341 connections, 8 interactive journeys
 ```
 
 备选：
 ```
-[OC] I visualized the entire Silk Road as an interactive knowledge graph — 6 travelers, 326 connections
+[OC] I visualized the entire Silk Road as an interactive knowledge graph — 8 travelers, 341 connections
 ```
 
 ---
@@ -44,7 +44,7 @@
 ## First Comment（发布后在评论区粘贴）
 
 ```
-Data source: I manually compiled a structured JSON dataset covering 40 Silk Road cities, 23 historical figures, 30 trade goods, 23 events, and 326 relationships. Cross-referenced Chinese and English historical sources.
+Data source: I manually compiled a structured JSON dataset covering 41 Silk Road cities, 23 historical figures, 30 trade goods, 23 events, and 341 relationships. Cross-referenced Chinese and English historical sources.
 
 Tools: Leaflet.js (map), D3.js (force-directed graph), Canvas (route animations), vanilla JS. Zero frameworks. Hosted on GitHub Pages.
 
@@ -53,7 +53,7 @@ The whole site is driven by a single 43KB JSON file — add one city, and it sho
 Interactive version: https://scarlettlab2026.github.io/silk-road-2026
 GitHub (open source): https://github.com/ScarlettLab2026/silk-road-2026
 
-There are 6 interactive stories where the map flies from city to city as you read. My favorite is Du Huan — a Tang dynasty soldier captured at the Battle of Talas (751 CE) who spent 11 years as a captive traveling across the Abbasid Caliphate and became the first Chinese person to document Africa and Islam. His entire book is lost except for 1,511 words preserved in another text.
+There are 8 interactive stories where the map flies from city to city as you read. My favorite is Ban Chao — a Han dynasty scribe who threw down his brush, enlisted with 36 men, and spent 31 years pacifying the Western Regions. His night raid on a Xiongnu envoy camp gave us the idiom "If you don't enter the tiger's den, how will you get the cubs?" (不入虎穴，焉得虎子). Also check out Du Huan — a Tang dynasty soldier captured at the Battle of Talas (751 CE) who spent 11 years traveling across the Abbasid Caliphate and became the first Chinese person to document Africa.
 
 Edit: Thanks for the awards! The data is CC BY-SA 4.0 if anyone wants to use it for their own projects.
 ```
