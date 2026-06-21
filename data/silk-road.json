@@ -2,8 +2,8 @@
   "meta": {
     "title": "丝绸之路知识图谱",
     "title_en": "Silk Road Knowledge Graph",
-    "version": "1.3.0",
-    "last_updated": "2026-06-14",
+    "version": "1.7.0",
+    "last_updated": "2026-06-21",
     "description": "一个关于丝绸之路的结构化开放数据集，涵盖城市、人物、物产、事件四大类实体及其关联关系。",
     "description_en": "An open structured dataset about the Silk Road, covering cities, figures, goods, and events and their interconnections."
   },
@@ -889,6 +889,46 @@
         "description": "西域三十六国之一，楼兰改名后的延续政权。扼守西域南道咽喉，是汉朝与匈奴争夺西域的前沿据点。班超在此夜袭匈奴使者，留下「不入虎穴焉得虎子」的千古名言。",
         "description_en": "One of the 36 kingdoms of the Western Regions, successor to Loulan. It guarded the strategic southern route and was a frontline state in the Han-Xiongnu rivalry. Ban Chao's legendary night raid on Xiongnu envoys took place here.",
         "significance": 4
+      },
+      {
+        "id": "maragheh",
+        "name": "马拉盖",
+        "name_en": "Maragheh",
+        "modern_name": "马拉盖",
+        "modern_name_en": "Maragheh",
+        "country": "伊朗",
+        "country_en": "Iran",
+        "lat": 37.3892,
+        "lng": 46.2393,
+        "era": "13世纪 伊儿汗国",
+        "dynasties": [
+          "伊儿汗国"
+        ],
+        "role": "伊儿汗国首都",
+        "role_en": "Ilkhanate Capital",
+        "description": "伊儿汗国前期的首都。拉班·扫马在此会见景教大总管马·登哈。从这里，他接受阿鲁浑汗的任命，出使欧洲。",
+        "description_en": "Early capital of the Ilkhanate. Rabban Bar Sauma met the Nestorian Catholicos Mar Denha here. From here, Arghun Khan commissioned him as ambassador to Europe.",
+        "significance": 3
+      },
+      {
+        "id": "paris",
+        "name": "巴黎",
+        "name_en": "Paris",
+        "modern_name": "巴黎",
+        "modern_name_en": "Paris",
+        "country": "法国",
+        "country_en": "France",
+        "lat": 48.8566,
+        "lng": 2.3522,
+        "era": "13世纪 — 今",
+        "dynasties": [
+          "卡佩"
+        ],
+        "role": "西欧都城",
+        "role_en": "Western European Capital",
+        "description": "法兰西王国首都。1287年，拉班·扫马在此觐见法王腓力四世，递交国书。这是中国使者第一次到达巴黎。",
+        "description_en": "Capital of the Kingdom of France. In 1287, Rabban Bar Sauma met King Philip IV here and presented his credentials — the first Chinese envoy ever to reach Paris.",
+        "significance": 3
       }
     ],
     "figures": [
@@ -4078,6 +4118,36 @@
       "target": "khotan",
       "relation": "西域南道",
       "relation_en": "Southern Western Regions Route"
+    },
+    {
+      "source": "rab-ban-sauma",
+      "target": "maragheh",
+      "relation": "抵达伊儿汗国",
+      "relation_en": "Arrived at Ilkhanate"
+    },
+    {
+      "source": "rab-ban-sauma",
+      "target": "paris",
+      "relation": "出使法兰西",
+      "relation_en": "Diplomatic Mission to France"
+    },
+    {
+      "source": "maragheh",
+      "target": "constantinople",
+      "relation": "东→西使节路线",
+      "relation_en": "East→West Envoy Route"
+    },
+    {
+      "source": "constantinople",
+      "target": "paris",
+      "relation": "使节路线延伸",
+      "relation_en": "Envoy Route Extension"
+    },
+    {
+      "source": "baghdad",
+      "target": "maragheh",
+      "relation": "伊儿汗国路线",
+      "relation_en": "Ilkhanate Route"
     }
   ],
   "routes": [
