@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>万里止杀 · 丘处机西行</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<link rel="stylesheet" href="css/story-common.css" />
+<style>
+:root {
+  --bg: #0c0f0d; --card-bg: rgba(90,138,106,0.93); --accent: #5a8a6a;
+  --text: #e4e8e0; --text-dim: #8a9588; --border: rgba(255,255,255,0.08);
+  --accent-r: 90; --accent-g: 138; --accent-b: 106;
+}
+</style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<div id="story-nav">
+  <a href="story.html">📖 张骞</a>
+  <a href="story8.html">⚔ 班超</a>
+  <a href="story4.html">🪷 法显</a>
+  <a href="story3.html">🧘 玄奘</a>
+  <a href="story6.html">🏜 杜环</a>
+  <a href="story5.html">🏛 马可·波罗</a>
+  <a href="story9.html">✝️ 拉班·扫马</a>
+  <a href="story7.html">⚓ 汪大渊</a>
+  <a href="story2.html">🚢 郑和</a>
+  <a href="story10.html" class="active">☯️ 丘处机</a>
+</div>
+
+<div id="progress"></div>
+
+<a href="index.html" id="back">← 返回地图</a>
+<button id="theme-toggle" onclick="toggleTheme()">☀️</button>
+<button id="restart" onclick="restart()">🔄 重播</button>
+
+<div id="narrative" onclick="advance()">
+  <button id="toggle-card" onclick="event.stopPropagation();toggleCard()" title="收起/展开">─</button>
+  <div class="chapter-num" id="chNum"></div>
+  <h2 id="chTitle"></h2>
+  <p id="chBody"></p>
+  <div id="badges" style="margin:8px 0 0;line-height:1.8"></div>
+  <div class="hint"><span class="arrow">→</span> 点击继续</div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+const STORY_CONFIG = {
+  accent: '#5a8a6a',
+  accentRgb: '90,138,106',
+  mapCenter: [42, 95],
+  mapZoom: 4.0,
+  startCities: ['laizhou'],
+  restartEmoji: '☯️',
+  tileBg: '#0c0f0d'
+};
+
+const STORY = [
+  {
+    title: '诏书东来',
+    subtitle: '1219年 · 山东莱州',
+    body: '1219年冬。山东莱州。昊天门外的海风很冷。全真教长春真人丘处机已经七十三岁了。金朝宣宗皇帝派人来请——不去。宋朝宁宗皇帝也派人来请——不去。但成吉思汗的使臣刘仲禄从蒙古高原赶来，走了整整七个月，带着虎头金牌和一封诏书。大汗要见他。丘处机做了一个让所有人意外的决定：去。他选了十八个弟子随行，其中包括赵道坚、尹志平、李志常。临行前，他在昊天观写了一首诗：「十年兵火万民愁，千万中无一二留。」一个道教师傅，万里迢迢去觐见一个以杀戮闻名的蒙古大汗——他要去做什么？弟子李志常备好了纸笔。他要记下这一路的一切。',
+    lat: 37.18, lng: 119.94, zoom: 7,
+    route: ['laizhou'],
+    marker: 'laizhou',
+    showCities: ['laizhou', 'beijing'],
+    highlight: ['qiu-chuji']
+  },
+  {
+    title: '燕京驻足',
+    subtitle: '1220年 · 燕京（北京）',
+    body: '1220年春，丘处机抵达燕京（今北京）。这座北方的巨城刚刚换了主人——成吉思汗的蒙古大军在五年前攻下了它。城中道观众多，全真教的势力在这里很大。丘处机本打算在这里等成吉思汗回师东归再见面。他上书大汗：「旅途遥远，望待回銮。」但成吉思汗的回诏从万里之外的前线送来了——口气不容商量：即刻前来。丘处机在燕京住了大半年。他不是拖延——是在等冬天过去，等西域的路可以走人。他利用这段时间讲道、收徒、安抚乱世中的百姓。全真教在战乱中的角色越来越清晰：乱世中的避难所。八月，使臣刘仲禄催促启程。丘处机向北望了一眼——前面是蒙古高原，是戈壁，是雪山。他没有犹豫。',
+    lat: 39.90, lng: 116.41, zoom: 5,
+    route: ['laizhou', 'beijing'],
+    marker: 'beijing',
+    showCities: ['laizhou', 'beijing'],
+    highlight: ['qiu-chuji']
+  },
+  {
+    title: '穿越蒙古高原',
+    subtitle: '1220–1221年 · 漠北草原',
+    body: '从燕京向北，进入茫茫草原。丘处机一行十八弟子加上蒙古护卫，穿过克鲁伦河、土拉河，朝着成吉思汗的大帐方向前进。正是深秋。草原上风如刀割。口粮不足时，蒙古骑兵打猎分食。丘处机不食肉——他以谷物和清水维生。队伍中最年轻的弟子赵道坚病倒了。高原反应加上寒冷，他没能撑过去——死在了路上。这是西行路上倒下的第一个人。丘处机没有回头。他在给燕京道友的信中只写了几个字：「我之此行，天也。汝等无忧。」李志常在日记中记下了沿途所见：蒙古包的构造、牧民的习俗、草原上成群的野马。后来这些记录成了《长春真人西游记》中最珍贵的民族志材料。1221年春，他们终于接近了成吉思汗的势力范围——但大汗本人已经率军西征，远在万里之外的西域。',
+    lat: 47.20, lng: 102.81, zoom: 5,
+    route: ['laizhou', 'beijing', 'karakorum'],
+    marker: 'karakorum',
+    showCities: ['laizhou', 'beijing', 'karakorum'],
+    highlight: ['qiu-chuji']
+  },
+  {
+    title: '西域古道',
+    subtitle: '1221年 · 西域 — 碎叶',
+    body: '穿过阿尔泰山，进入了西域。丘处机经过了别失八里（北庭故城，今新疆吉木萨尔），沿天山北麓向西行进。伊犁河谷的春天很美——雪山融水汇成溪流，草地上野花盛开。他在游记里写道：「此地水草丰美，不异中原。」然后到了碎叶城（今吉尔吉斯斯坦境内）——三百多年前，李白就出生在这里。丘处机站在碎叶城外，看这座曾经是唐朝安西四镇之一的边城。城里住着突厥诸部，用瓶取水，食黍麦。李志常一路不停地在写：山脉的走向、河流的名字、城邑的规模、民俗的细节、食物的做法。这些记录后来被丘处机本人过目，作为呈给成吉思汗的沿途报告的一部分。从中原到西域——他们已经走了一万多里。而最艰难的部分，还没有开始。',
+    lat: 42.80, lng: 75.26, zoom: 4.5,
+    route: ['laizhou', 'beijing', 'karakorum', 'suyab'],
+    marker: 'suyab',
+    showCities: ['karakorum', 'suyab', 'kashgar', 'samarkand'],
+    highlight: ['qiu-chuji']
+  },
+  {
+    title: '撒马尔罕的冬天',
+    subtitle: '1221–1222年 · 撒马尔罕',
+    body: '1221年深秋，丘处机抵达撒马尔罕——中亚最繁荣的城市。这座粟特古城在被蒙古军队攻占后，街巷间还能看到战火的痕迹。成吉思汗已经继续西征，派人传话：「在此过冬，开春来大雪山见我。」丘处机在撒马尔罕住了一个冬天。他利用这段时间安抚城中的百姓——不分种族、不辨信仰。全真教的「清静无为」在战乱中成了稀有之物。当地人把这位中国老道士传得很神——说他不食五谷，只饮清水，能在雪地里赤脚行走。丘处机听了一笑。他在撒马尔罕写了多首诗，其中一句：「我今到此无一事，但愿天下人无争。」1222年春，成吉思汗的命令终于到了：来大雪山。从撒马尔罕向南，翻越铁门关，穿过今天的阿富汗北部——前方的山，古代中国人称之为「大雪山」。',
+    lat: 39.65, lng: 66.96, zoom: 5,
+    route: ['laizhou', 'beijing', 'karakorum', 'suyab', 'samarkand'],
+    marker: 'samarkand',
+    showCities: ['suyab', 'samarkand', 'hindu-kush'],
+    highlight: ['qiu-chuji']
+  },
+  {
+    title: '大雪山觐见',
+    subtitle: '1222年 · 兴都库什山脉（今阿富汗）',
+    body: '1222年五月。兴都库什山脚下的蒙古行营。毡帐连营，旌旗蔽日。73岁的丘处机——走了三年、两万多里——终于见到了成吉思汗。大汗问的第一句话是：「真人远来，有何长生之药？」丘处机回答：「有卫生之道，而无长生之药。」他就这样开始了。不献媚，不说谎，不卖仙丹。成吉思汗没有发怒。他让丘处机坐下——这是极少有人能得到的待遇。接下来的数月里，丘处机三次与成吉思汗论道。核心只有四个字：「敬天爱民。」还有一句：「清心寡欲。」在人类历史上杀戮最盛的年代里，一个老道士面对世界上最有权势的人，反复说：停下来。少杀人。成吉思汗听进去了。他对左右说：「神仙三说养生之道，我甚入心。」虽然没有完全停止征战，但丘处机在蒙古统治核心中种下了一颗「止杀」的种子。成吉思汗封他为「神仙」，赐虎符和玺书，免除全真教道士的一切赋税和徭役。史家后来称这次觐见为——「一言止杀」。',
+    lat: 34.82, lng: 67.82, zoom: 5.5,
+    route: ['laizhou', 'beijing', 'karakorum', 'suyab', 'samarkand', 'hindu-kush'],
+    marker: 'hindu-kush',
+    showCities: ['samarkand', 'hindu-kush', 'balkh'],
+    highlight: ['qiu-chuji', 'qiu-chuji-journey']
+  },
+  {
+    title: '归去与止杀',
+    subtitle: '1223–1224年 · 兴都库什 → 燕京 — 1227年仙逝',
+    body: '1223年春，丘处机启程东归。成吉思汗派五千骑兵护送，沿原路返回。一路上，丘处机利用成吉思汗的免赋诏书，将大量在战乱中被掳为奴隶的汉人赎回自由。全真教的道观成了难民收容所。在蒙古帝国最暴烈的扩张年代，一个七十五岁的道士，用一张诏书庇护了数以万计的生命。1224年回到燕京，住持天长观（今北京白云观）。三年后——1227年七月，丘处机病逝，享年七十九岁。同年八月，成吉思汗也在征西夏途中去世。师徒二人，一东一西，几乎同时离开了这个他们曾经对峙又对话过的世界。弟子李志常将六年的西行经历整理成《长春真人西游记》——一部在分量上可以与《大唐西域记》和《马可·波罗行纪》并列的丝路经典。丘处机没有带回来珠宝、土地或盟约。他带回来的，是在一个以杀戮为荣的时代里，对生命的敬畏。',
+    lat: 37.0, lng: 100.0, zoom: 3.5,
+    route: ['laizhou', 'beijing', 'karakorum', 'suyab', 'samarkand', 'hindu-kush'],
+    marker: null,
+    showCities: ['laizhou', 'beijing', 'karakorum', 'suyab', 'samarkand', 'hindu-kush', 'kashgar', 'dunhuang'],
+    highlight: ['qiu-chuji', 'qiu-chuji-journey']
+  }
+];
+</script>
+<script src="js/story-engine.js"></script>
+</body></html>

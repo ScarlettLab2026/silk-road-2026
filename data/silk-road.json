@@ -2,8 +2,8 @@
   "meta": {
     "title": "丝绸之路知识图谱",
     "title_en": "Silk Road Knowledge Graph",
-    "version": "1.7.0",
-    "last_updated": "2026-06-21",
+    "version": "1.8.0",
+    "last_updated": "2026-06-24",
     "description": "一个关于丝绸之路的结构化开放数据集，涵盖城市、人物、物产、事件四大类实体及其关联关系。",
     "description_en": "An open structured dataset about the Silk Road, covering cities, figures, goods, and events and their interconnections."
   },
@@ -929,6 +929,60 @@
         "description": "法兰西王国首都。1287年，拉班·扫马在此觐见法王腓力四世，递交国书。这是中国使者第一次到达巴黎。",
         "description_en": "Capital of the Kingdom of France. In 1287, Rabban Bar Sauma met King Philip IV here and presented his credentials — the first Chinese envoy ever to reach Paris.",
         "significance": 3
+      },
+      {
+        "id": "laizhou",
+        "name": "莱州",
+        "name_en": "Laizhou",
+        "modern_name": "莱州",
+        "modern_name_en": "Laizhou",
+        "country": "中国",
+        "country_en": "China",
+        "lat": 37.18,
+        "lng": 119.94,
+        "era": "金 — 元",
+        "dynasties": ["金", "元"],
+        "role": "丘处机西行起点",
+        "role_en": "Qiu Chuji's Departure Point",
+        "description": "山东半岛的滨海古城，全真教长春真人丘处机的修行之地。1219年，73岁的丘处机在此接到成吉思汗的诏书，踏上了万里西行的漫漫征途。",
+        "description_en": "A coastal city on the Shandong Peninsula where the Daoist master Qiu Chuji lived in seclusion. In 1219, at age 73, he received Genghis Khan's summons here and embarked on his epic westward journey.",
+        "significance": 3
+      },
+      {
+        "id": "karakorum",
+        "name": "哈拉和林",
+        "name_en": "Karakorum",
+        "modern_name": "哈拉和林遗址",
+        "modern_name_en": "Karakorum Ruins",
+        "country": "蒙古",
+        "country_en": "Mongolia",
+        "lat": 47.20,
+        "lng": 102.81,
+        "era": "13世纪",
+        "dynasties": ["蒙古", "元"],
+        "role": "蒙古帝国首都",
+        "role_en": "Mongol Imperial Capital",
+        "description": "成吉思汗于1220年建立的蒙古帝国都城，位于鄂尔浑河谷。丘处机西行途经蒙古高原，这里汇聚了来自丝路各地的使臣、商人和工匠。",
+        "description_en": "The Mongol imperial capital founded by Genghis Khan in 1220 on the Orkhon Valley. Qiu Chuji passed through the Mongolian steppe on his westward journey. Envoys, merchants, and artisans from across the Silk Road converged here.",
+        "significance": 4
+      },
+      {
+        "id": "hindu-kush",
+        "name": "大雪山",
+        "name_en": "Hindu Kush",
+        "modern_name": "巴米扬",
+        "modern_name_en": "Bamiyan",
+        "country": "阿富汗",
+        "country_en": "Afghanistan",
+        "lat": 34.82,
+        "lng": 67.82,
+        "era": "13世纪",
+        "dynasties": ["蒙古"],
+        "role": "丘处机觐见成吉思汗之地",
+        "role_en": "Qiu Chuji's Meeting with Genghis Khan",
+        "description": "兴都库什山脉，中国古代称「大雪山」。1222年，丘处机在此觐见了正在西征的成吉思汗。他以「敬天爱民」「清心寡欲」之言劝诫大汗止杀，史称「一言止杀」。",
+        "description_en": "The Hindu Kush mountains, called 'Great Snow Mountains' in ancient Chinese texts. Here in 1222, Qiu Chuji met Genghis Khan during his western campaign and famously persuaded the Khan to refrain from excessive killing with the counsel 'revere Heaven, love the people, purify the heart, reduce desire.'",
+        "significance": 4
       }
     ],
     "figures": [
@@ -1923,6 +1977,23 @@
           "旅行家",
           "海上丝路",
           "东西交流"
+        ]
+      },
+      {
+        "id": "qiu-chuji-journey",
+        "name": "丘处机西行",
+        "name_en": "Qiu Chuji's Journey West",
+        "year": 1219,
+        "end_year": 1224,
+        "display_year": "1219 — 1224年",
+        "dynasty": "金 / 元",
+        "description": "1219年，73岁的全真教长春真人丘处机应成吉思汗之召，从山东莱州出发，经燕京、蒙古高原、西域，于1222年抵达阿富汗兴都库什山觐见。他以「敬天爱民」「止杀」之言劝诫大汗，获得「神仙」封号。1224年返回燕京，主持天长观（今北京白云观）。其弟子李志常著《长春真人西游记》，详录沿途风土人情。",
+        "description_en": "In 1219, the 73-year-old Daoist master Qiu Chuji (Master Changchun) answered Genghis Khan's summons. He departed Laizhou in Shandong and traveled via Yanjing (Beijing), the Mongol steppe, and Central Asia, reaching the Hindu Kush mountains of Afghanistan in 1222. His counsel to 'revere Heaven and love the people' and 'stop killing' earned him the title 'Immortal.' He returned to Yanjing in 1224. His disciple Li Zhichang recorded the journey in 'The Travels of Master Changchun to the West.'",
+        "significance": 4,
+        "tags": [
+          "道教",
+          "万里西行",
+          "一言止杀"
         ]
       }
     ]
@@ -4148,6 +4219,78 @@
       "target": "maragheh",
       "relation": "伊儿汗国路线",
       "relation_en": "Ilkhanate Route"
+    },
+    {
+      "source": "qiu-chuji",
+      "target": "laizhou",
+      "relation": "出发地",
+      "relation_en": "Departure Point"
+    },
+    {
+      "source": "qiu-chuji",
+      "target": "karakorum",
+      "relation": "途经蒙古高原",
+      "relation_en": "Crossed the Mongolian Steppe"
+    },
+    {
+      "source": "qiu-chuji",
+      "target": "hindu-kush",
+      "relation": "觐见成吉思汗",
+      "relation_en": "Met Genghis Khan"
+    },
+    {
+      "source": "laizhou",
+      "target": "beijing",
+      "relation": "东段旅程",
+      "relation_en": "Eastern Journey Segment"
+    },
+    {
+      "source": "beijing",
+      "target": "karakorum",
+      "relation": "北上蒙古高原",
+      "relation_en": "Northward to the Mongolian Steppe"
+    },
+    {
+      "source": "karakorum",
+      "target": "suyab",
+      "relation": "穿越西域",
+      "relation_en": "Across the Western Regions"
+    },
+    {
+      "source": "karakorum",
+      "target": "samarkand",
+      "relation": "蒙古—中亚通道",
+      "relation_en": "Mongolia–Central Asia Corridor"
+    },
+    {
+      "source": "hindu-kush",
+      "target": "balkh",
+      "relation": "兴都库什—巴里黑",
+      "relation_en": "Hindu Kush–Balkh Connection"
+    },
+    {
+      "source": "qiu-chuji-journey",
+      "target": "qiu-chuji",
+      "relation": "主角",
+      "relation_en": "Protagonist"
+    },
+    {
+      "source": "qiu-chuji-journey",
+      "target": "laizhou",
+      "relation": "出发地",
+      "relation_en": "Departure Point"
+    },
+    {
+      "source": "qiu-chuji-journey",
+      "target": "beijing",
+      "relation": "重要驻足地",
+      "relation_en": "Key Stopover"
+    },
+    {
+      "source": "qiu-chuji-journey",
+      "target": "hindu-kush",
+      "relation": "觐见地",
+      "relation_en": "Meeting Location"
     }
   ],
   "routes": [
