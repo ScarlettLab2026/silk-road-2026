@@ -312,6 +312,24 @@
         "significance": 4
       },
       {
+        "id": "zhancheng",
+        "name": "占城",
+        "name_en": "Champa",
+        "modern_name": "归仁 / 岘港",
+        "modern_name_en": "Quy Nhon / Da Nang",
+        "country": "越南",
+        "country_en": "Vietnam",
+        "lat": 16.05,
+        "lng": 108.22,
+        "era": "汉 — 明",
+        "dynasties": "汉, 唐, 宋, 元, 明",
+        "role": "中南半岛贸易枢纽",
+        "role_en": "Indochina trade hub",
+        "description": "占城位于今越南中南部，是海上丝绸之路的重要停泊港和补给站。中国商船前往东南亚和印度洋，第一站多在占城停靠补给淡水、粮食和香料。宋元时期与中国贸易频繁，以出产占城稻、沉香、乌木闻名。",
+        "description_en": "Champa, located in central-southern Vietnam, was a key port of call on the Maritime Silk Road. Chinese merchant ships heading to Southeast Asia and the Indian Ocean typically made their first stop here for fresh water, provisions, and spices. It traded extensively with China during the Song and Yuan periods, famous for Champa rice, agarwood, and ebony.",
+        "significance": 3
+      },
+      {
         "id": "beijing",
         "name": "元大都",
         "name_en": "Khanbaliq (Dadu / Beijing)",
@@ -941,7 +959,10 @@
         "lat": 37.18,
         "lng": 119.94,
         "era": "金 — 元",
-        "dynasties": ["金", "元"],
+        "dynasties": [
+          "金",
+          "元"
+        ],
         "role": "丘处机西行起点",
         "role_en": "Qiu Chuji's Departure Point",
         "description": "山东半岛的滨海古城，全真教长春真人丘处机的修行之地。1219年，73岁的丘处机在此接到成吉思汗的诏书，踏上了万里西行的漫漫征途。",
@@ -956,10 +977,13 @@
         "modern_name_en": "Karakorum Ruins",
         "country": "蒙古",
         "country_en": "Mongolia",
-        "lat": 47.20,
+        "lat": 47.2,
         "lng": 102.81,
         "era": "13世纪",
-        "dynasties": ["蒙古", "元"],
+        "dynasties": [
+          "蒙古",
+          "元"
+        ],
         "role": "蒙古帝国首都",
         "role_en": "Mongol Imperial Capital",
         "description": "成吉思汗于1220年建立的蒙古帝国都城，位于鄂尔浑河谷。丘处机西行途经蒙古高原，这里汇聚了来自丝路各地的使臣、商人和工匠。",
@@ -977,7 +1001,9 @@
         "lat": 34.82,
         "lng": 67.82,
         "era": "13世纪",
-        "dynasties": ["蒙古"],
+        "dynasties": [
+          "蒙古"
+        ],
         "role": "丘处机觐见成吉思汗之地",
         "role_en": "Qiu Chuji's Meeting with Genghis Khan",
         "description": "兴都库什山脉，中国古代称「大雪山」。1222年，丘处机在此觐见了正在西征的成吉思汗。他以「敬天爱民」「清心寡欲」之言劝诫大汗止杀，史称「一言止杀」。",
@@ -4291,6 +4317,30 @@
       "target": "hindu-kush",
       "relation": "觐见地",
       "relation_en": "Meeting Location"
+    },
+    {
+      "source": "yighmish",
+      "target": "zhancheng",
+      "relation": "途经占城补给",
+      "relation_en": "Resupplied at Champa"
+    },
+    {
+      "source": "yighmish-voyages",
+      "target": "zhancheng",
+      "relation": "中途停泊港",
+      "relation_en": "Stopover port"
+    },
+    {
+      "source": "zhancheng",
+      "target": "quanzhou",
+      "relation": "海上贸易航线",
+      "relation_en": "Maritime trade route"
+    },
+    {
+      "source": "zhancheng",
+      "target": "palembang",
+      "relation": "海上贸易航线",
+      "relation_en": "Maritime trade route"
     }
   ],
   "routes": [

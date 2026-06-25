@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>海舶西帆 · 亦黑迷失出使</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<link rel="stylesheet" href="css/story-common.css" />
+<style>
+:root {
+  --bg: #0a1414; --card-bg: rgba(13,142,142,0.90); --accent: #0d8e8e;
+  --text: #dde8e8; --text-dim: #8a9a9a; --border: rgba(255,255,255,0.08);
+  --accent-r: 13; --accent-g: 142; --accent-b: 142;
+}
+</style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<div id="story-nav">
+  <a href="story.html">📖 张骞</a>
+  <a href="story8.html">⚔ 班超</a>
+  <a href="story4.html">🪷 法显</a>
+  <a href="story3.html">🧘 玄奘</a>
+  <a href="story6.html">🏜 杜环</a>
+  <a href="story10.html">☯️ 丘处机</a>
+  <a href="story5.html">🏛 马可·波罗</a>
+  <a href="story9.html">✝️ 拉班·扫马</a>
+  <a href="story11.html" class="active">⛵ 亦黑迷失</a>
+  <a href="story7.html">⚓ 汪大渊</a>
+  <a href="story2.html">🚢 郑和</a>
+</div>
+
+<div id="progress"></div>
+
+<a href="index.html" id="back">← 返回地图</a>
+<button id="theme-toggle" onclick="toggleTheme()">☀️</button>
+<button id="restart" onclick="restart()">🔄 重播</button>
+
+<div id="narrative" onclick="advance()">
+  <button id="toggle-card" onclick="event.stopPropagation();toggleCard()" title="收起/展开">─</button>
+  <div class="chapter-num" id="chNum"></div>
+  <h2 id="chTitle"></h2>
+  <p id="chBody"></p>
+  <div id="badges" style="margin:8px 0 0;line-height:1.8"></div>
+  <div class="hint"><span class="arrow">→</span> 点击继续</div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+const STORY_CONFIG = {
+  accent: '#0d8e8e',
+  accentRgb: '13,142,142',
+  mapCenter: [20, 110],
+  mapZoom: 3.5,
+  startCities: ['beijing'],
+  restartEmoji: '⛵',
+  tileBg: '#0a1414'
+};
+
+const STORY = [
+  {
+    title: '受命大都',
+    subtitle: '1284年 · 元大都（北京）',
+    body: '至元二十一年（1284年），元大都。忽必烈汗坐在他的宫殿里，看着一张比他祖父成吉思汗打下的疆域还要广阔的地图。陆上的路已经打通了——蒙古铁骑从东海踏到多瑙河。但海上的路呢？大汗需要一个能走海路的人。他选中了一个维吾尔人——亦黑迷失。亦黑迷失出身回鹘（畏兀儿）基督徒家庭，精通多种语言：回鹘语、蒙古语、汉语、波斯语。在元朝的多元帝国里，这样的人才比黄金还珍贵。他不是蒙古贵族，不是汉人儒臣，不是穆斯林商人——他是一个基督徒维吾尔人，站在世界上最强大的皇帝的宫廷里，接下了一道命令：出海，去看看南边还有什么。忽必烈给他的任务三层：出使诸国、收集地理情报、为元朝的海上扩张铺路。亦黑迷失磕头接旨。他要去的地方，蒙古铁骑的马蹄踏不到。',
+    lat: 39.90, lng: 116.41, zoom: 5,
+    route: ['beijing'],
+    marker: 'beijing',
+    showCities: ['beijing', 'quanzhou'],
+    highlight: ['yighmish']
+  },
+  {
+    title: '刺桐扬帆',
+    subtitle: '1284年 · 泉州刺桐港',
+    body: '亦黑迷失从大都出发，沿大运河南下，抵达泉州刺桐港——当时全世界最大的港口。码头上挤满了来自世界各地的商船：阿拉伯三角帆、印度大舶、爪哇尖头船、中国福船。空气中混杂着胡椒、乳香、檀木和咸海风的气味。泉州城里住着数以万计的外国商人——阿拉伯人、波斯人、印度人、占城人。元朝的海上市舶司就设在这里，每年从海上贸易中抽取的关税数以万计。亦黑迷失在泉州集结船队、招募水手、装载货物。他的船队带着瓷器、丝绸、铜钱——还有忽必烈写给西洋诸国的国书。一个维吾尔基督徒，为蒙古皇帝服务，从中国港口出发，带着阿拉伯水手和波斯领航员——这就是元朝的全球化。亦黑迷失站在船头。前面的海，没有蒙古马跑过。',
+    lat: 24.87, lng: 118.68, zoom: 5.5,
+    route: ['beijing', 'quanzhou'],
+    marker: 'quanzhou',
+    showCities: ['beijing', 'quanzhou', 'zhancheng'],
+    highlight: ['yighmish', 'yighmish-voyages']
+  },
+  {
+    title: '占城补给',
+    subtitle: '1284–1285年 · 占城（今越南中南部）',
+    body: '船队离开泉州，乘着东北季风南下。几天后，海岸线上出现了占城——亦黑迷失南海航程的第一个外国港口。占城国位于今越南中南部，宋元时期是海上丝绸之路最重要的中途补给站之一。这里的港口盛产淡水、稻米和沉香木。中国商船远航西洋，第一站几乎必停占城——补充淡水、食物，雇佣熟悉南海的当地引水员。亦黑迷失在占城停留期间，记录了占城港的水文、当地政权的态度、物产和贸易规则。他的任务不只是出使——更是为元朝绘制一份精确的「海外情报地图」。他注意到占城王对元朝的态度友好但谨慎——愿意贸易，不愿臣服。亦黑迷失没有强求。他知道此行最大的目的不是征服，而是信息。船队补给完毕，继续南下。前方的海域，中国人叫它「千里长沙、万里石塘」——南海。',
+    lat: 16.05, lng: 108.22, zoom: 5,
+    route: ['beijing', 'quanzhou', 'zhancheng'],
+    marker: 'zhancheng',
+    showCities: ['quanzhou', 'zhancheng', 'palembang'],
+    highlight: ['yighmish', 'yighmish-voyages']
+  },
+  {
+    title: '三佛齐遗韵',
+    subtitle: '1285年 · 三佛齐（今印尼巨港）',
+    body: '穿过巽他海峡，亦黑迷失的船队抵达了三佛齐——一个曾经称霸东南亚海上贸易六百年的帝国。但到了元朝初年，三佛齐已是落日余晖。满者伯夷在东爪哇崛起，正在蚕食它的势力范围。亦黑迷失走进这座即将落幕的海上王城。他发现三佛齐虽然军事衰落，但商业网络仍在运转——中国铜钱在这里是硬通货，阿拉伯商人用乳香和没药交换中国丝绸，爪哇的丁香和豆蔻从这里转口运往西方。他详细记录了港口的商业规则和关税制度。亦黑迷失在这里做了一个重要判断——他在给忽必烈的报告里写道：三佛齐虽衰，其海上商路犹在；扶之可制爪哇，弃之则南海门户失矣。这个判断，后来影响了元朝对东南亚数十年的外交策略。一个维吾尔基督徒，在苏门答腊的湿热空气里，为蒙古大汗算计着南海的势力平衡。',
+    lat: -2.98, lng: 104.78, zoom: 4.5,
+    route: ['beijing', 'quanzhou', 'zhancheng', 'palembang'],
+    marker: 'palembang',
+    showCities: ['zhancheng', 'palembang', 'malacca', 'calicut'],
+    highlight: ['yighmish', 'yighmish-voyages']
+  },
+  {
+    title: '马八儿使命',
+    subtitle: '1285–1286年 · 马八儿（印度东海岸·科罗曼德）',
+    body: '离开三佛齐，穿越马六甲海峡，横渡孟加拉湾——这是亦黑迷失此行最远的一段航程。他在季风季节抵达了印度东海岸的马八儿国（今泰米尔纳德邦科罗曼德海岸）。马八儿是印度洋贸易的枢纽之一。这里的港口停满了来自波斯湾、红海和东非的船只。珍珠、象牙、胡椒、棉布在这里集散。亦黑迷失的任务到了最关键的一步——元朝需要和印度洋的王国建立外交关系。他代表忽必烈汗向马八儿国王递交了国书和礼物。国王的回应对元朝很有利——允许元朝商船自由通商，愿意互派使节。亦黑迷失没有就此满足。他在马八儿停留了数月，记录了印度的种姓制度、税收方法、造船技术、港口水文、季风规律。他注意到印度洋的贸易被阿拉伯和波斯商人主导，中国商船很少越过马六甲海峡——他建议忽必烈在印度东海岸设立常驻贸易代表。比郑和早一百二十年，一个维吾尔人已经在为中国的印度洋战略打前站。',
+    lat: 11.26, lng: 79.5, zoom: 4.5,
+    route: ['beijing', 'quanzhou', 'zhancheng', 'palembang', 'calicut'],
+    marker: 'calicut',
+    showCities: ['palembang', 'calicut', 'colombo'],
+    highlight: ['yighmish', 'yighmish-voyages', 'pearls', 'ivory']
+  },
+  {
+    title: '僧伽剌探秘',
+    subtitle: '1286年 · 僧伽剌（今斯里兰卡）',
+    body: '从马八儿南下，穿过保克海峡，亦黑迷失抵达了僧伽剌——今斯里兰卡。这座印度洋上的大岛是佛教南传的中心，也是东西方贸易的十字路口。罗马帝国的金币、波斯萨珊的银器、中国的丝绸、东南亚的香料——都在这里交汇。亦黑迷失登岸的那天，他看到了一个他从未见过的世界：巨大的佛塔（佛牙寺的前身）在阳光下闪耀，来自四十多个国家的商人在港口市场上用十几种语言交易，阿拉伯航海家靠着星盘在港口校准航向。他记录了僧伽剌的物产——宝石（斯里兰卡的蓝宝石和红宝石在元代中国深受喜爱）、珍珠、肉桂、象牙。他还注意到一个有趣的商业细节：僧伽剌市场上的阿拉伯商人用波斯语报价，但收钱时接受中国铜钱——元朝的铜钱已经成了印度洋的硬通货。亦黑迷失在这里会见了僧伽剌国王，完成了出使任务中最远的一站。他的航海日志上多了一条：从僧伽剌继续向西，是波斯湾和非洲——但这一次，他的船队要折返了。',
+    lat: 6.93, lng: 79.86, zoom: 5,
+    route: ['beijing', 'quanzhou', 'zhancheng', 'palembang', 'calicut', 'colombo'],
+    marker: 'colombo',
+    showCities: ['calicut', 'colombo'],
+    highlight: ['yighmish', 'yighmish-voyages', 'sappanwood', 'coral']
+  },
+  {
+    title: '海舶东归',
+    subtitle: '1286–1295年 · 归航泉州 → 元大都 · 三次出使的遗产',
+    body: '亦黑迷失带着印度洋的地理情报和外交成果，乘风返航。1286年，他回到泉州，然后北上大都，向忽必烈呈上详细的航海报告——记录了他到达的每一个港口、每一条航线、每一个国王的态度。忽必烈大喜，封他为兵部侍郎，授金虎符。但这只是开始。此后十年间（1286–1295年），亦黑迷失又至少出海了两次——每次都走得更远、记录得更细。他到达了爪哇、孟加拉、可能还有波斯湾。他的航海活动为元朝建立了一个完整的印度洋情报网络。与他同时代的杨庭璧也在执行类似的海上使命——两个「海上使节」，一个维吾尔基督徒、一个汉人官员，联手为元朝开拓了海上版图。亦黑迷失的航海报告后来被元代官方编入《经世大典·站赤》和《元史·亦黑迷失传》。他的航路图被后来的航海家使用了近百年——直到郑和的宝船沿着他开辟的航线，驶向更远的海域。一个维吾尔基督徒，为蒙古大汗出海，在中国历史上写下了最不可思议的一页。在他之后不到十年，马可·波罗从泉州登船回威尼斯——也许他踏上泉州码头的那一刻，亦黑迷失的船队正在不远处的海面上扬帆。',
+    lat: 15.0, lng: 100.0, zoom: 3,
+    route: ['beijing', 'quanzhou', 'zhancheng', 'palembang', 'calicut', 'colombo', 'quanzhou'],
+    marker: 'quanzhou',
+    showCities: ['beijing', 'quanzhou', 'zhancheng', 'palembang', 'calicut', 'colombo', 'malacca'],
+    highlight: ['yighmish', 'yighmish-voyages', 'yang-tingbi', 'maritime-trade-office']
+  }
+];
+</script>
+<script src="js/story-engine.js"></script>
+</body></html>
