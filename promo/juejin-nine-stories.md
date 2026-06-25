@@ -133,7 +133,7 @@ function drawRoute(cities) {
 
 ```json
 {
-  "meta": { "title": "丝绸之路交互知识图谱", "version": "1.7.0" },
+  "meta": { "title": "丝绸之路交互知识图谱", "version": "1.8.0" },
   "nodes": {
     "cities": [{ "id": "beijing", "name": "元大都", "lat": 39.9, … }],
     "figures": [{ "id": "rab-ban-sauma", "name": "拉班·扫马", … }],
@@ -157,7 +157,7 @@ function drawRoute(cities) {
 
 总共不到 ¥0/月。
 
-## 九个故事怎么选出来的
+## 十个故事怎么选出来的
 
 选角标准：**旅程覆盖新地理区域 + 身份类型不重复**。
 
@@ -168,6 +168,7 @@ function drawRoute(cities) {
 | 法显 | 斯里兰卡 | 老僧 |
 | 玄奘 | 那烂陀 | 名僧 |
 | 杜环 | 非洲/麦加 | 战俘 |
+| 丘处机 | 兴都库什(阿富汗) | 道教宗师 |
 | 马可波罗 | 泉州 | 商人 |
 | 拉班扫马 | 巴黎/波尔多 | 景教修士 |
 | 汪大渊 | 东非 | 民间航海家 |
