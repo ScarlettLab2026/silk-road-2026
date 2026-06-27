@@ -1009,6 +1009,47 @@
         "description": "兴都库什山脉，中国古代称「大雪山」。1222年，丘处机在此觐见了正在西征的成吉思汗。他以「敬天爱民」「清心寡欲」之言劝诫大汗止杀，史称「一言止杀」。",
         "description_en": "The Hindu Kush mountains, called 'Great Snow Mountains' in ancient Chinese texts. Here in 1222, Qiu Chuji met Genghis Khan during his western campaign and famously persuaded the Khan to refrain from excessive killing with the counsel 'revere Heaven, love the people, purify the heart, reduce desire.'",
         "significance": 4
+      },
+      {
+        "id": "wenzhou",
+        "name": "温州",
+        "name_en": "Wenzhou",
+        "modern_name": "温州",
+        "modern_name_en": "Wenzhou",
+        "country": "中国",
+        "country_en": "China",
+        "lat": 27.99,
+        "lng": 120.7,
+        "era": "南宋 — 元",
+        "dynasties": [
+          "南宋",
+          "元"
+        ],
+        "role": "海上丝路起点港",
+        "role_en": "Maritime Silk Road Port",
+        "description": "元代重要出海港口之一。1296年周达观从此出发，随使团前往真腊（今柬埔寨）。",
+        "description_en": "One of the key departure ports during the Yuan dynasty. In 1296, Zhou Daguan departed from here with a diplomatic mission to Zhenla (modern Cambodia).",
+        "significance": 2
+      },
+      {
+        "id": "angkor",
+        "name": "吴哥",
+        "name_en": "Angkor",
+        "modern_name": "暹粒",
+        "modern_name_en": "Siem Reap",
+        "country": "柬埔寨",
+        "country_en": "Cambodia",
+        "lat": 13.41,
+        "lng": 103.87,
+        "era": "9世纪 — 15世纪",
+        "dynasties": [
+          "吴哥王朝"
+        ],
+        "role": "真腊国都",
+        "role_en": "Capital of Zhenla (Khmer Empire)",
+        "description": "真腊（高棉帝国）都城，吴哥窟所在地。1296-1297年周达观在此居住一年，著《真腊风土记》详录其盛况，是研究吴哥文明的唯一第一手文字史料。",
+        "description_en": "Capital of the Khmer Empire and site of Angkor Wat. Zhou Daguan lived here for a year in 1296-1297 and wrote 'The Customs of Cambodia', the only first-hand written account of Angkor civilization at its peak.",
+        "significance": 5
       }
     ],
     "figures": [
@@ -2021,6 +2062,18 @@
           "万里西行",
           "一言止杀"
         ]
+      },
+      {
+        "id": "zhenla-fengtu-ji",
+        "name": "《真腊风土记》",
+        "name_en": "The Customs of Cambodia",
+        "type": "文献著作",
+        "type_en": "Literary Work",
+        "era": "元",
+        "era_range": "1297年成书",
+        "description": "周达观著，详细记录了13世纪末真腊（柬埔寨）吴哥王朝的政治、经济、文化、建筑、物产和风土人情。全书约8500字，分40则。是世界上唯一一部由亲历者撰写的吴哥文明第一手记录。1819年法国汉学家雷慕沙译为法文，成为欧洲人'重新发现'吴哥窟的关键线索。",
+        "description_en": "Written by Zhou Daguan, a detailed first-hand account of the Khmer Empire at Angkor in the late 13th century. The only primary source on Angkor civilization by an eyewitness. Translated into French by Abel-Rémusat in 1819, it became the key clue for Europeans to 'rediscover' Angkor Wat.",
+        "significance": 4
       }
     ]
   },
@@ -4341,6 +4394,54 @@
       "target": "palembang",
       "relation": "海上贸易航线",
       "relation_en": "Maritime trade route"
+    },
+    {
+      "source": "zhou-daguan",
+      "target": "wenzhou",
+      "relation": "出发地",
+      "relation_en": "Departure point"
+    },
+    {
+      "source": "wenzhou",
+      "target": "guangzhou",
+      "relation": "航线经停",
+      "relation_en": "Route stopover"
+    },
+    {
+      "source": "guangzhou",
+      "target": "zhancheng",
+      "relation": "航线经停",
+      "relation_en": "Route stopover"
+    },
+    {
+      "source": "zhancheng",
+      "target": "angkor",
+      "relation": "航线连接",
+      "relation_en": "Sea route"
+    },
+    {
+      "source": "zhou-daguan",
+      "target": "angkor",
+      "relation": "目的地",
+      "relation_en": "Destination"
+    },
+    {
+      "source": "zhou-daguan",
+      "target": "zhenla-fengtu-ji",
+      "relation": "著作",
+      "relation_en": "Wrote"
+    },
+    {
+      "source": "angkor",
+      "target": "zhancheng",
+      "relation": "贸易连接",
+      "relation_en": "Trade connection"
+    },
+    {
+      "source": "wenzhou",
+      "target": "quanzhou",
+      "relation": "港口网络",
+      "relation_en": "Port network"
     }
   ],
   "routes": [

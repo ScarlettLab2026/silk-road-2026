@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>真腊风土 · 周达观与吴哥</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<link rel="stylesheet" href="css/story-common.css" />
+<style>
+:root {
+  --bg: #14100a; --card-bg: rgba(184,134,11,0.90); --accent: #b8860b;
+  --text: #e8dcc8; --text-dim: #9a8a6a; --border: rgba(255,255,255,0.08);
+  --accent-r: 184; --accent-g: 134; --accent-b: 11;
+}
+</style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<div id="story-nav">
+  <a href="story.html">📖 张骞</a>
+  <a href="story8.html">⚔ 班超</a>
+  <a href="story4.html">🪷 法显</a>
+  <a href="story3.html">🧘 玄奘</a>
+  <a href="story6.html">🏜 杜环</a>
+  <a href="story10.html">☯️ 丘处机</a>
+  <a href="story5.html">🏛 马可·波罗</a>
+  <a href="story9.html">✝️ 拉班·扫马</a>
+  <a href="story11.html">⛵ 亦黑迷失</a>
+  <a href="story12.html" class="active">🛕 周达观</a>
+  <a href="story7.html">⚓ 汪大渊</a>
+  <a href="story2.html">🚢 郑和</a>
+</div>
+
+<div id="progress"></div>
+
+<a href="index.html" id="back">← 返回地图</a>
+<button id="theme-toggle" onclick="toggleTheme()">☀️</button>
+<button id="restart" onclick="restart()">🔄 重播</button>
+
+<div id="narrative" onclick="advance()">
+  <button id="toggle-card" onclick="event.stopPropagation();toggleCard()" title="收起/展开">─</button>
+  <div class="chapter-num" id="chNum"></div>
+  <h2 id="chTitle"></h2>
+  <p id="chBody"></p>
+  <div id="badges" style="margin:8px 0 0;line-height:1.8"></div>
+  <div class="hint"><span class="arrow">→</span> 点击继续</div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+const STORY_CONFIG = {
+  accent: '#b8860b',
+  accentRgb: '184,134,11',
+  mapCenter: [18, 116],
+  mapZoom: 4,
+  startCities: ['wenzhou'],
+  restartEmoji: '🛕',
+  tileBg: '#14100a'
+};
+
+const STORY = [
+  {
+    title: '温州启程',
+    subtitle: '1296年二月 · 温州港',
+    body: '元贞二年（1296年）二月，温州港。一支元朝使团正准备登船。为首者不是武将，不是高官，而是一个名不见经传的低级文官——周达观。他此行的目的地是真腊，一个中国人听说过但几乎没有人真正去过的王国。真腊，就是今天柬埔寨的吴哥王朝——它统治着整个湄公河中下游，拥有东南亚最强大的军队、最繁荣的城市、最壮观的庙宇。成宗铁穆耳想要了解这个南方王国——它的兵力如何？制度怎样？值不值得通商？他需要的不是出征的武将，而是一双会看的眼睛、一支会写的笔。周达观，就是那双眼、那支笔。他登上温州港的福船，带着国书、礼物、笔墨和一颗记录者的心。这一年他大约三十岁——从此他的人生跟这座他还没见过的石头之城绑在一起。',
+    lat: 27.99, lng: 120.70, zoom: 5.5,
+    route: ['wenzhou'],
+    marker: 'wenzhou',
+    showCities: ['wenzhou', 'quanzhou', 'guangzhou'],
+    highlight: ['zhou-daguan']
+  },
+  {
+    title: '闽粤扬帆',
+    subtitle: '1296年三月 · 福州→泉州→广州',
+    body: '船队沿中国东南海岸线南下。绕过闽江口的福州，远远望见泉州刺桐港的万国商船——这座当时世界最大港口，正处在它的黄金时代。周达观在航行中记录：同船有水手、使团成员、商人、翻译官——去真腊做生意的中国商人早已有之，但成体系的官方记录，他是第一个。船到广州，使团进行最后的补给：淡水、稻米、丝绸、瓷器——既是礼物，也是外交筹码。广州港的市舶司官员告诉周达观：从广州到真腊，顺风要两个月，逆风要半年。南中国海——中国人叫它「万里石塘」——下面埋着无数暗礁和沉船。周达观没有退缩。他在笔记里写道：「余奉命使真腊，自温州开洋，历闽、广诸海，行数十日。」语气平淡，笔下有海。船队补给完毕，季风正好。下一站：占城。',
+    lat: 23.13, lng: 113.26, zoom: 5,
+    route: ['wenzhou', 'quanzhou', 'guangzhou'],
+    marker: 'guangzhou',
+    showCities: ['wenzhou', 'quanzhou', 'guangzhou', 'zhancheng'],
+    highlight: ['zhou-daguan']
+  },
+  {
+    title: '占城问路',
+    subtitle: '1296年五–六月 · 占城（今越南中南部）',
+    body: '船队穿越南海，抵达第一个外国港口——占城。占城国是海上丝绸之路最重要的中途补给站，中国商船远航西洋第一站几乎必停于此。周达观下船补给，同时也做了一件事：问路。占城港口汇集了来自真腊、暹罗、爪哇、三佛齐的商船——这里是一个情报交换市场。周达观找到熟悉真腊航路的引水员，详细询问从占城到真腊的航线、季风规律、湄公河口水文。他还从占城商人口中得知：真腊的都城吴哥，是一座用石头建成的巨大城市，城墙高耸、庙宇如林——整个东南亚没有任何城市能与之相比。周达观把每一个细节都写进笔记。他意识到此行将看到的东西，中国没有人写过。使团在占城停留十余日，补充淡水和食物，招募了熟悉湄公河的当地引水。然后继续南下。下一段航程，是未知的河流。',
+    lat: 16.05, lng: 108.22, zoom: 5,
+    route: ['wenzhou', 'guangzhou', 'zhancheng'],
+    marker: 'zhancheng',
+    showCities: ['guangzhou', 'zhancheng', 'angkor'],
+    highlight: ['zhou-daguan']
+  },
+  {
+    title: '溯湄公河',
+    subtitle: '1296年七月 · 湄公河口 → 洞里萨湖',
+    body: '最艰难的航段来了。船队离开南海，驶入湄公河——东南亚最长的河流。从宽阔的河口进入内陆，两岸从沙滩变成雨林再变成稻田。河道越来越窄，水流越来越急。季节正好——七月是雨季，河水上涨，大船可以溯流而上。但也意味着暴雨、蚊虫和随时可能出现的鳄鱼。周达观记录湄公河两岸的风光：高大的椰子树、成群的野象、建在水上的高脚屋、划着独木舟的渔民。他从中国人的视角看这一切——陌生、奇异、令人敬畏。船行十余日，穿过洞里萨湖——东南亚最大的淡水湖。雨季的洞里萨湖涨到旱季的四倍大，湖面一望无际如同海洋。周达观写道：「自占城行，经半月，抵真腊境。有小河自海口入，行二十馀日乃至。」二十多天的内河航行之后，视野豁然开朗——远处地平线上，出现了五座莲花般的石塔剪影。吴哥窟。',
+    lat: 10.5, lng: 105.5, zoom: 5.5,
+    route: ['zhancheng', 'angkor'],
+    marker: 'angkor',
+    showCities: ['zhancheng', 'angkor'],
+    highlight: ['zhou-daguan']
+  },
+  {
+    title: '吴哥奇境',
+    subtitle: '1296年八月 · 吴哥（真腊都城）',
+    body: '1296年八月，周达观踏上了吴哥的土地。他看到的是一座他做梦都没见过的城市。吴哥——高棉帝国的首都——在13世纪末是全世界最大的城市之一，面积超过1000平方公里，人口接近一百万。作为对比，同时期的伦敦只有不到五万人。城中心是吴哥窟——一座用石头建成的巨大庙宇，五座莲花塔直指天空，回廊壁上的浮雕比十个敦煌壁画加起来还长。但吴哥窟只是冰山一角。吴哥通王城（大吴哥）的城墙周长达12公里，城中心的巴戎寺有54座四面佛塔——216张巨大的佛面从各个角度俯视着来访者。周达观写到这座城时，笔法突然变得细腻：「城之中有金塔一座，旁有石塔二十馀座。又其北有铜塔一座，比金塔更高，望之郁然。」他记录的每一座塔、每一堵墙、每一尊像——都是唯一的、不可替代的。因为在他之后，吴哥将被丛林吞没，四百多年没有人再记录它。',
+    lat: 13.41, lng: 103.87, zoom: 6,
+    route: ['wenzhou', 'guangzhou', 'zhancheng', 'angkor'],
+    marker: 'angkor',
+    showCities: ['angkor'],
+    highlight: ['zhou-daguan', 'zhenla-fengtu-ji']
+  },
+  {
+    title: '真腊一年',
+    subtitle: '1296年八月 – 1297年六月 · 吴哥',
+    body: '使团在吴哥住了一年。周达观是使团成员，但他真正的身份是一个人类学家——比「人类学」这个词诞生早六百年。他记录一切。政治制度：真腊国王出行骑大象，仪仗队有两千人，百姓见国王必须匍匐在地。经济生活：市场上有中国瓷器、暹罗锡、印度棉布——吴哥是东南亚贸易中心。更让他惊奇的是，市场交易居然用中国铜钱和白银！建筑奇观：他详细描述了吴哥窟的布局——护城河、围墙、回廊、中心塔——误差不超过十米。日常生活：真腊人吃糯米、喝棕榈酒、穿沙笼，家家户户在房前挖池塘养鱼。最让他震惊的细节：真腊女子在市场上做买卖，掌握家庭经济大权——对于元代中国文人来说，这是闻所未闻的社会形态。他还记录了洞里萨湖的「水上森林」——雨季时大树从湖水中长出来，旱季时脚下是肥沃的淤泥，可以种一季水稻。一年之内，周达观写了40则笔记，约8500字。这些文字后来成为一本书——《真腊风土记》。七百多年后，每一则都是无价之宝。',
+    lat: 13.41, lng: 103.87, zoom: 5.5,
+    route: ['wenzhou', 'guangzhou', 'zhancheng', 'angkor'],
+    marker: 'angkor',
+    showCities: ['angkor'],
+    highlight: ['zhou-daguan', 'zhenla-fengtu-ji']
+  },
+  {
+    title: '风土传世',
+    subtitle: '1297年八月 · 归航宁波 → 《真腊风土记》的千年回响',
+    body: '1297年六月，使团完成任务，启程回国。八月，周达观抵达宁波港。离开的时候是春天，回来已是秋天。他把一年的笔记整理成书——《真腊风土记》。全书40则，约8500字，涵盖城郭、宫室、服饰、官属、三教、人物、产妇、室女、奴婢、语言、野人、文字、正朔时序、争讼、病癫、死亡、耕种、山川、出产、贸易、草木、飞鸟、走兽、蔬菜、鱼龙、酝酿、盐醋酱面、蚕桑、器用、车轿、舟楫、属郡、村落、取胆、异事、澡浴、流寓、军马、国主出入。这40个条目是一个完整的文明切片——从国王的御象到百姓的池塘，从金塔的浮雕到孕妇的禁忌。周达观写完后就消失在历史中——我们不知道他后来做了什么官、活了多少岁、葬在什么地方。但他的书活了下来。1819年，法国汉学家雷慕沙将它翻译成法语。欧洲人第一次知道：东南亚的丛林中埋着一座比巴黎还大的石头之城。四十年后，法国探险家穆奥拿着《真腊风土记》的法文译本，在柬埔寨丛林深处找到了被藤蔓吞没的吴哥窟。一个中国文人的8500字笔记，让一座消失了四百年的城市重见天日。周达观没有征战、没有发现新大陆、没有翻译过一卷佛经。他只是看，然后写下来。七百年后，他写下的每一个字都成了唯一。',
+    lat: 20.0, lng: 112.0, zoom: 4,
+    route: ['wenzhou', 'guangzhou', 'zhancheng', 'angkor', 'wenzhou'],
+    marker: 'angkor',
+    showCities: ['wenzhou', 'guangzhou', 'zhancheng', 'angkor'],
+    highlight: ['zhou-daguan', 'zhenla-fengtu-ji']
+  }
+];
+</script>
+<script src="js/story-engine.js"></script>
+</body></html>
