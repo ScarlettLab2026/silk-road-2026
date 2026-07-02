@@ -465,6 +465,20 @@ function buildAllCards(DATA) {
     ]
   );
 
+  // 链8: 鸠摩罗什与译经
+  html += buildChainCard(
+    '鸠摩罗什与译经',
+    'Kumarajiva and Sutra Translation',
+    '鸠摩罗什，龟兹混血高僧，父为印度贵族，母为龟兹公主。七岁出家，日诵三万言；九岁翻葱岭至罽宾求法；十二岁在疏勒改宗大乘。前秦吕光伐龟兹，将其俘至凉州，软禁十七年，被迫破戒。后秦姚兴迎入长安，在逍遥园译场率八百僧译出《金刚经》《法华经》《维摩诘经》等74部384卷——每个中国人读到的《金刚经》都是他翻译的。圆寂火化，全身成灰，舌头完好。',
+    [
+      {id:'kumarajiva', name:'鸠摩罗什', type:'figure', icon:'👤'},
+      {id:'kucha', name:'龟兹', type:'city', icon:'🏙️'},
+      {id:'liangzhou', name:'凉州', type:'city', icon:'🏙️'},
+      {id:'changan', name:'长安', type:'city', icon:'🏙️'},
+      {id:'kumarajiva-sutra-translation', name:'鸠摩罗什译经', type:'event', icon:'⚡'},
+    ]
+  );
+
   html += '</div>';
 
   // ── Total count ──
@@ -472,12 +486,12 @@ function buildAllCards(DATA) {
   const figCount = DATA.nodes.figures.filter(f => f.significance >= 4).length;
   const goodsCount = DATA.nodes.goods.filter(g => g.significance >= 4).length;
   const eventCount = DATA.nodes.events.filter(e => e.significance >= 4).length;
-  const total = cityCount + figCount + goodsCount + eventCount + 7;
+  const total = cityCount + figCount + goodsCount + eventCount + 8;
 
   html += `<div style="text-align:center;padding:32px;color:var(--accent);font-size:0.95rem">
     ✅ ${total} 张知识卡片准备完毕<br>
     <small style="color:var(--text-dim)">
-      🏙️ ${cityCount} 城市 · 👤 ${figCount} 人物 · 📦 ${goodsCount} 物产 · ⚡ ${eventCount} 事件 · 🔗 7 关系链
+      🏙️ ${cityCount} 城市 · 👤 ${figCount} 人物 · 📦 ${goodsCount} 物产 · ⚡ ${eventCount} 事件 · 🔗 8 关系链
     </small><br>
     <small style="color:var(--text-dim);margin-top:8px;display:block">
       💡 右键每张卡片 → 复制图片/截图 → 每天发一张到小红书/知乎

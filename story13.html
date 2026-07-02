@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>译火不焚 · 鸠摩罗什</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<link rel="stylesheet" href="css/story-common.css" />
+<style>
+:root {
+  --bg: #140e0a; --card-bg: rgba(192,88,58,0.90); --accent: #c0583a;
+  --text: #e8d8cc; --text-dim: #9a7a6a; --border: rgba(255,255,255,0.08);
+  --accent-r: 192; --accent-g: 88; --accent-b: 58;
+}
+</style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<div id="story-nav">
+  <a href="story.html">📖 张骞</a>
+  <a href="story8.html">⚔ 班超</a>
+  <a href="story4.html">🪷 法显</a>
+  <a href="story13.html" class="active">🔥 鸠摩罗什</a>
+  <a href="story3.html">🧘 玄奘</a>
+  <a href="story6.html">🏜 杜环</a>
+  <a href="story10.html">☯️ 丘处机</a>
+  <a href="story5.html">🏛 马可·波罗</a>
+  <a href="story9.html">✝️ 拉班·扫马</a>
+  <a href="story11.html">⛵ 亦黑迷失</a>
+  <a href="story12.html">🛕 周达观</a>
+  <a href="story7.html">⚓ 汪大渊</a>
+  <a href="story2.html">🚢 郑和</a>
+</div>
+
+<div id="progress"></div>
+
+<a href="index.html" id="back">← 返回地图</a>
+<button id="theme-toggle" onclick="toggleTheme()">☀️</button>
+<button id="restart" onclick="restart()">🔄 重播</button>
+
+<div id="narrative" onclick="advance()">
+  <button id="toggle-card" onclick="event.stopPropagation();toggleCard()" title="收起/展开">─</button>
+  <div class="chapter-num" id="chNum"></div>
+  <h2 id="chTitle"></h2>
+  <p id="chBody"></p>
+  <div id="badges" style="margin:8px 0 0;line-height:1.8"></div>
+  <div class="hint"><span class="arrow">→</span> 点击继续</div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+const STORY_CONFIG = {
+  accent: '#c0583a',
+  accentRgb: '192,88,58',
+  mapCenter: [41.7, 83],
+  mapZoom: 4,
+  startCities: ['kucha'],
+  restartEmoji: '🔥',
+  tileBg: '#140e0a'
+};
+
+const STORY = [
+  {
+    title: '龟兹神童',
+    subtitle: '344年 · 龟兹（今新疆库车）',
+    body: '公元344年，龟兹国——塔里木盆地北缘最繁荣的绿洲王国——一位混血男婴降生了。父亲鸠摩罗炎是印度贵族，本可继承相位，却为佛法渡葱岭而来。龟兹王把妹妹耆婆嫁给了他。这个孩子，就是鸠摩罗什。他的血管里一半是印度贵族的梵文基因，一半是龟兹王室的丝路血脉。他生来就是两道文明的交汇点。七岁，母亲出家为尼，他跟着母亲走进佛寺。小小的鸠摩罗什站在佛像前，仰头望着西域石窟里的壁画——飞天、菩提、千佛——他的人生从这一眼被选定。据说他一天能背诵三万二千字的经文。不是汉字的「字」，是梵文偈颂的每一个音节。龟兹国的人开始谈论：这个小王子不是凡人，他是龟兹献给整个佛教世界的礼物。',
+    lat: 41.72, lng: 82.96, zoom: 5.5,
+    route: null,
+    marker: 'kucha',
+    showCities: ['kucha'],
+    highlight: ['kumarajiva']
+  },
+  {
+    title: '罽宾求法',
+    subtitle: '352年 · 龟兹→葱岭→罽宾（今克什米尔）',
+    body: '八岁。母亲做了一个惊人的决定：带儿子西行求法——不是去印度，而是去罽宾。罽宾，今天克什米尔的塔克西拉一带，当时是佛教说一切有部的学术中心，相当于佛教世界的「常春藤」。从龟兹到罽宾，需要翻越葱岭（帕米尔高原）——世界上最险峻的山脉之一。一个母亲带着八岁的孩子，骑着骆驼，穿过雪山、沙漠、峡谷。他们走过疏勒（喀什），在葱岭脚下仰望终年不化的雪峰。山道狭窄到只能容一匹骆驼侧身通过，脚下是万丈深渊。这个八岁的孩子在塔克西拉拜槃头达多为师，学习《杂藏》《中阿含》《长阿含》——这些经名今天依然存在于大藏经中。三年时间，一个龟兹孩子在南亚最顶尖的佛教学府里，用梵文辩论、用梵文背诵、用梵文思考。他的大脑正在被锻造成一座跨越三种语言——梵文、龟兹语、汉语——的桥梁。这座桥，将来要承载整个东亚的佛教。',
+    lat: 33.75, lng: 72.84, zoom: 5,
+    route: ['kucha', 'kashgar', 'taxila'],
+    marker: 'taxila',
+    showCities: ['kucha', 'kashgar', 'taxila'],
+    highlight: ['kumarajiva']
+  },
+  {
+    title: '疏勒悟道',
+    subtitle: '357年 · 罽宾→疏勒（今喀什）',
+    body: '十二岁。鸠摩罗什离开罽宾，归途经过疏勒——也就是今天的喀什。这一年，将改变他的一生。疏勒是塔里木盆地西端的十字路口：往西翻葱岭是印度和波斯，往东沿塔里木南缘是于阗和敦煌，往北翻天山是草原。这座城市的每一粒沙都混着梵语、波斯语、粟特语、龟兹语——它是丝路上最嘈杂也最宽容的思想熔炉。在疏勒，鸠摩罗什遇到了一位大乘佛教的大师——须利耶苏摩。此前他在罽宾学的是说一切有部，属于小乘体系。须利耶苏摩给他打开了一扇新的大门：大乘佛法。这里的核心命题颠覆了他所学的一切：不是个人涅槃，而是普度众生。小乘说「离苦」，大乘说「入苦」。十二岁的鸠摩罗什被这一思想击中。他在疏勒停留两年，系统学习了《中论》《百论》《十二门论》——大乘中观学派的根基。同时，他在疏勒的市场上，看见波斯商人用金币交易、听见粟特人用十种语言讨价还价、闻到印度檀香和中国丝绸的混合气味。他隐约意识到：佛祖说的「众生」，就是这个嘈杂、混乱、多元的世界的所有人。',
+    lat: 39.47, lng: 75.99, zoom: 5.5,
+    route: ['taxila', 'kashgar'],
+    marker: 'kashgar',
+    showCities: ['taxila', 'kashgar', 'kucha'],
+    highlight: ['kumarajiva']
+  },
+  {
+    title: '龟兹弘法',
+    subtitle: '360–383年 · 龟兹',
+    body: '二十岁，鸠摩罗什回到龟兹。国王亲自出城迎接——这个混血青年已经是西域佛教世界最耀眼的新星。他在龟兹王宫受具足戒，正式成为比丘。师父槃头达多从罽宾远道而来——当年教他的老师，现在成了他的学生。鸠摩罗什为师父讲解大乘中观，师徒辩论了一个月。最终，槃头达多说：「我是和尚的小乘师，和尚是我的大乘师。」国王在龟兹修建了雀离大寺，供养鸠摩罗什讲经。每逢讲经日，西域三十六国的僧侣、贵族、商人云集龟兹。大寺前的广场黑压压坐满了几千人——他们从疏勒、于阗、焉耆、车师赶来，只为听他用梵语和龟兹语交替宣讲《法华经》。他的名声越过葱岭，传到了印度、传到了中原。前秦皇帝苻坚在长安的宫殿里听到了同一个名字：鸠摩罗什。一个西域高僧，懂梵语、识佛法、知天下——这不正是朕需要的人吗？苻坚说了一句话，从此鸠摩罗什的人生彻底改变：「朕闻西域有鸠摩罗什，深解法相，善通经论。若获此人，当以国师待之。」一个皇帝想要一个僧人。他以为这是一道圣旨，其实这是一道催命符。',
+    lat: 41.72, lng: 82.96, zoom: 5.5,
+    route: ['kashgar', 'kucha'],
+    marker: 'kucha',
+    showCities: ['kashgar', 'kucha'],
+    highlight: ['kumarajiva']
+  },
+  {
+    title: '凉州十七年',
+    subtitle: '383–401年 · 龟兹→敦煌→凉州（今武威）',
+    body: '公元383年，苻坚派大将吕光率七万铁骑西征龟兹。目标：把鸠摩罗什带回来。吕光一月破龟兹，斩杀龟兹王。鸠摩罗什成了俘虏。吕光不知道该怎么处理这个僧人——他看不懂佛经，也不在乎佛法。但他记得苻坚的命令：「若获罗什，即驰驿送之。」于是他押着鸠摩罗什东归。走到凉州——今天的甘肃武威——消息传来：苻坚在淝水之战中惨败，前秦亡了。吕光不走了。他在凉州自己当了皇帝，建立后凉。鸠摩罗什被软禁在凉州。不是一年，不是五年——是十七年。这十七年里，吕光做了残酷的事：强迫鸠摩罗什破戒。给他灌烈酒，把龟兹公主推进他的房间。一个从小立誓不近女色的僧人，被迫娶妻生子。吕光把他当玩物——让他骑猛牛、骑烈马，看他能不能保持「高僧」的镇定。他想证明：什么佛、什么法，在本王面前都是笑话。但鸠摩罗什没有疯。凉州是河西走廊最大的城市，住着汉人、羌人、鲜卑人、粟特人。每天走在街上，他听到的都是汉语——河西土语、洛阳官话、长安方言。他在凉州的市场上跟商人聊天、跟士兵交涉、跟官员周旋。十七年过去，这个龟兹混血僧人说出了一口流利的汉语。他不知道，命运还为他准备了最后一张牌——长安在等他。',
+    lat: 37.93, lng: 102.64, zoom: 5.5,
+    route: ['kucha', 'dunhuang', 'liangzhou'],
+    marker: 'liangzhou',
+    showCities: ['kucha', 'dunhuang', 'liangzhou', 'changan'],
+    highlight: ['kumarajiva', 'lu-guang-conquers-kucha']
+  },
+  {
+    title: '长安译经',
+    subtitle: '401–413年 · 长安逍遥园译场',
+    body: '公元401年，后秦国主姚兴发兵攻灭后凉。他把鸠摩罗什迎入长安。这年鸠摩罗什五十七岁。距离他被俘，已经过去了十八年。姚兴尊他为国师，在长安逍遥园中辟出一片译场。这不是一个人的工作，而是一座翻译工厂：鸠摩罗什手持梵文贝叶经，逐句口译成汉语。八百名僧人围坐四周，一人一句地推敲——这个词能不能更精准？那个句子能不能更优美？旁边坐着朝廷的文学侍从，润色每一个字。遇上关键的义理，所有人停下来辩论，直到每一个字都无懈可击。从401年到413年，十二年间，这个译场翻译了七十四部佛经，三百八十四卷。包括——《金刚经》：「凡所有相，皆是虚妄。若见诸相非相，即见如来。」《法华经》：「三界无安，犹如火宅。」《维摩诘经》：「菩萨于生死而不舍。」《阿弥陀经》：「从是西方过十万亿佛土，有世界名曰极乐。」你读过的每一个字的《金刚经》——都是他翻译的。他之前的汉译佛经生硬晦涩、全是印度语法。鸠摩罗什做到了「曲尽梵意而文从字顺」——用最典雅的中文传达最精微的佛理。他把梵文的莲花，嫁接到了中文的池塘里，让它开出了汉语的花。',
+    lat: 34.26, lng: 108.94, zoom: 6,
+    route: ['liangzhou', 'changan'],
+    marker: 'changan',
+    showCities: ['liangzhou', 'changan'],
+    highlight: ['kumarajiva', 'kumarajiva-sutra-translation']
+  },
+  {
+    title: '舌不焦烂',
+    subtitle: '413年四月十三日 · 长安 → 译经永存',
+    body: '公元413年，鸠摩罗什感到自己时日无多了。他把弟子们叫到床前，说了一段遗言。这是他一生中最不像高僧的一段话——却也是最真实的一段：「我自暗昧，谬充传译。凡所出经论三百余卷，唯《十诵》一部未及删繁。若所传无谬，当使焚身之后，舌不燋烂。」翻译成人话：我翻译了三百多卷经书，自认为没有错误。如果我译的没错——死后火化，舌头烧不烂。一个被迫破戒的僧人，在生命最后一刻，赌上了自己舌头的命运。四月十三日，鸠摩罗什圆寂于长安大寺。弟子们依嘱在逍遥园外架起柴堆。大火烧了几个时辰。灰烬冷却之后，弟子们拨开骨灰——全身成灰，唯有舌头完好无损。这块舌头，后来被供奉在武威的罗什寺塔之下。一千六百年后，罗什寺塔依然矗立在甘肃武威。而《金刚经》《法华经》《维摩诘经》《阿弥陀经》——他译的每一部经，今天还有人在诵。他没有走到过印度——他出生就在丝路上。他没有写过一部原创著作——他只翻译。但他在龟兹学会了梵文，在罽宾学会了论辩之道，在疏勒懂得了大乘，在凉州熬炼了汉语，在长安留下了每一个中国人到今天还在念的句子。他不是取经人，他是译经人。他不走——他把整个世界带到中国来。',
+    lat: 34.26, lng: 108.94, zoom: 6.5,
+    route: ['kucha', 'taxila', 'kashgar', 'kucha', 'dunhuang', 'liangzhou', 'changan'],
+    marker: 'changan',
+    showCities: ['kucha', 'taxila', 'kashgar', 'liangzhou', 'changan'],
+    highlight: ['kumarajiva', 'kumarajiva-sutra-translation']
+  }
+];
+</script>
+<script src="js/story-engine.js"></script>
+</body></html>

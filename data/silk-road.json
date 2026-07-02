@@ -2,8 +2,8 @@
   "meta": {
     "title": "丝绸之路知识图谱",
     "title_en": "Silk Road Knowledge Graph",
-    "version": "1.8.0",
-    "last_updated": "2026-06-24",
+    "version": "1.11.0",
+    "last_updated": "2026-07-02",
     "description": "一个关于丝绸之路的结构化开放数据集，涵盖城市、人物、物产、事件四大类实体及其关联关系。",
     "description_en": "An open structured dataset about the Silk Road, covering cities, figures, goods, and events and their interconnections."
   },
@@ -1050,6 +1050,29 @@
         "description": "真腊（高棉帝国）都城，吴哥窟所在地。1296-1297年周达观在此居住一年，著《真腊风土记》详录其盛况，是研究吴哥文明的唯一第一手文字史料。",
         "description_en": "Capital of the Khmer Empire and site of Angkor Wat. Zhou Daguan lived here for a year in 1296-1297 and wrote 'The Customs of Cambodia', the only first-hand written account of Angkor civilization at its peak.",
         "significance": 5
+      },
+      {
+        "id": "liangzhou",
+        "name": "凉州",
+        "name_en": "Liangzhou",
+        "modern_name": "武威",
+        "modern_name_en": "Wuwei",
+        "country": "中国",
+        "country_en": "China",
+        "lat": 37.93,
+        "lng": 102.64,
+        "era": "汉 — 唐",
+        "dynasties": [
+          "汉",
+          "前秦",
+          "后凉",
+          "唐"
+        ],
+        "role": "河西都会",
+        "role_en": "Hexi Corridor Hub",
+        "description": "河西走廊重镇，今甘肃武威。前秦吕光俘获鸠摩罗什后在此驻留，建后凉国，软禁鸠摩罗什十七年。鸠摩罗什在此期间精通汉语，为日后长安译经奠定语言基础。",
+        "description_en": "A strategic city on the Hexi Corridor. After capturing Kumarajiva, general Lü Guang founded the Later Liang state here and detained the monk for 17 years. Kumarajiva mastered Chinese during this period, laying the foundation for his translation work in Chang'an.",
+        "significance": 4
       }
     ],
     "figures": [
@@ -2074,6 +2097,28 @@
         "description": "周达观著，详细记录了13世纪末真腊（柬埔寨）吴哥王朝的政治、经济、文化、建筑、物产和风土人情。全书约8500字，分40则。是世界上唯一一部由亲历者撰写的吴哥文明第一手记录。1819年法国汉学家雷慕沙译为法文，成为欧洲人'重新发现'吴哥窟的关键线索。",
         "description_en": "Written by Zhou Daguan, a detailed first-hand account of the Khmer Empire at Angkor in the late 13th century. The only primary source on Angkor civilization by an eyewitness. Translated into French by Abel-Rémusat in 1819, it became the key clue for Europeans to 'rediscover' Angkor Wat.",
         "significance": 4
+      },
+      {
+        "id": "lu-guang-conquers-kucha",
+        "name": "吕光伐龟兹",
+        "name_en": "Lü Guang Conquers Kucha",
+        "year": 383,
+        "display_year": "383年",
+        "dynasty": "前秦",
+        "description": "前秦将领吕光奉苻坚之命西征龟兹，大破龟兹及西域联军七十余万。苻坚曾嘱吕光：'若获罗什，即驰驿送之。'吕光俘获鸠摩罗什后，因苻坚淝水战败身亡，遂在凉州自立后凉，将鸠摩罗什软禁十七年。",
+        "description_en": "General Lü Guang of Former Qin conquered Kucha on Fu Jian's orders, capturing Kumarajiva. After Fu Jian's death at the Battle of Fei River, Lü Guang founded the Later Liang state and detained Kumarajiva for 17 years.",
+        "significance": 4
+      },
+      {
+        "id": "kumarajiva-sutra-translation",
+        "name": "鸠摩罗什译经",
+        "name_en": "Kumarajiva Sutra Translation",
+        "year": 401,
+        "display_year": "401-413年",
+        "dynasty": "后秦",
+        "description": "后秦弘始三年（401年），姚兴迎鸠摩罗什入长安，拜为国师。在逍遥园译场组织八百僧人，译出《金刚经》《法华经》《维摩诘经》《阿弥陀经》等74部384卷。译文'曲尽梵意而文从字顺'，影响中国佛教两千年。",
+        "description_en": "In 401 CE, Yao Xing of Later Qin welcomed Kumarajiva to Chang'an and appointed him State Preceptor. At the Xiaoyao Garden translation bureau, he led 800 monks to translate 74 Buddhist texts (384 volumes). His translations shaped Chinese Buddhism for two millennia.",
+        "significance": 5
       }
     ]
   },
@@ -4442,6 +4487,60 @@
       "target": "quanzhou",
       "relation": "港口网络",
       "relation_en": "Port network"
+    },
+    {
+      "source": "kumarajiva",
+      "target": "kucha",
+      "relation": "出生地",
+      "relation_en": "Birthplace"
+    },
+    {
+      "source": "kumarajiva",
+      "target": "changan",
+      "relation": "圆寂地",
+      "relation_en": "Place of death"
+    },
+    {
+      "source": "kumarajiva",
+      "target": "liangzhou",
+      "relation": "滞留地",
+      "relation_en": "Place of detention"
+    },
+    {
+      "source": "kumarajiva",
+      "target": "kashgar",
+      "relation": "停留参学",
+      "relation_en": "Studied at"
+    },
+    {
+      "source": "kumarajiva",
+      "target": "taxila",
+      "relation": "停留参学",
+      "relation_en": "Studied at"
+    },
+    {
+      "source": "kumarajiva",
+      "target": "lu-guang-conquers-kucha",
+      "relation": "主角",
+      "relation_en": "Protagonist"
+    },
+    {
+      "source": "kumarajiva",
+      "target": "kumarajiva-sutra-translation",
+      "relation": "主角",
+      "relation_en": "Protagonist"
+    },
+    {
+      "source": "kucha",
+      "target": "changan",
+      "relation": "佛教东传",
+      "relation_en": "Buddhist transmission eastward"
+    },
+    {
+      "source": "kucha",
+      "target": "liangzhou",
+      "relation": "佛教东传",
+      "relation_en": "Buddhist transmission eastward"
     }
   ],
   "routes": [
