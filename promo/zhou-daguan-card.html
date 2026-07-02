@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>周达观 · 真腊风土</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Ma+Shan+Zheng&family=ZCOOL+XiaoWei&display=swap');
+
+  :root {
+    --bg: #0d0b06;
+    --silk: #1a1610;
+    --angkor-gold: #b8860b;
+    --angkor-gold-glow: rgba(184,134,11,0.5);
+    --stone: #8a7a60;
+    --stone-dim: rgba(138,122,96,0.4);
+    --cinnabar: #b8422a;
+    --cinnabar-dim: rgba(184,66,42,0.4);
+    --jungle: #4a7a3a;
+    --parchment: #e8dcc8;
+    --ink: #e0dcd0;
+    --ink-dim: #8a8570;
+    --border: rgba(184,134,11,0.25);
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    background: #0a0a0a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+  }
+
+  /* ── Main Card ── */
+  .card {
+    width: 750px;
+    background: var(--bg);
+    background-image:
+      radial-gradient(ellipse at 20% 10%, rgba(184,134,11,0.06) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 90%, rgba(74,122,58,0.06) 0%, transparent 60%),
+      radial-gradient(ellipse at 50% 50%, rgba(184,134,11,0.03) 0%, transparent 80%),
+      url("data:image/svg+xml,%3Csvg width='200' height='200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+    box-shadow:
+      0 0 80px rgba(184,134,11,0.08),
+      0 0 200px rgba(0,0,0,0.6);
+  }
+
+  /* ── Silk Texture Overlay ── */
+  .card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.003) 2px, rgba(255,255,255,0.003) 3px),
+      repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(255,255,255,0.005) 40px, rgba(255,255,255,0.005) 41px);
+    pointer-events: none;
+    z-index: 10;
+  }
+
+  /* ── Border decoration ── */
+  .card::after {
+    content: '';
+    position: absolute;
+    inset: 8px;
+    border: 1px solid rgba(184,134,11,0.15);
+    pointer-events: none;
+    z-index: 9;
+  }
+
+  /* ── Inner content ── */
+  .inner {
+    position: relative;
+    z-index: 11;
+    padding: 36px 40px 30px;
+  }
+
+  /* ── Top decorative band ── */
+  .top-band {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .top-band .line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--stone-dim), transparent);
+  }
+  .top-band .diamond {
+    width: 8px; height: 8px;
+    background: var(--angkor-gold);
+    transform: rotate(45deg);
+    opacity: 0.7;
+    flex-shrink: 0;
+  }
+
+  /* ── Title Section ── */
+  .title-block {
+    text-align: center;
+    margin-bottom: 28px;
+    position: relative;
+  }
+  .title-dynasty {
+    font-family: 'Noto Serif SC', 'PingFang SC', serif;
+    font-size: 13px;
+    color: var(--angkor-gold);
+    letter-spacing: 0.35em;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+  }
+  .title-dynasty span {
+    display: inline-block;
+    padding: 2px 14px;
+    border: 1px solid rgba(184,134,11,0.3);
+    margin: 0 6px;
+  }
+  .title-main {
+    font-family: 'Noto Serif SC', 'PingFang SC', serif;
+    font-size: 40px;
+    font-weight: 900;
+    color: var(--ink);
+    letter-spacing: 0.12em;
+    line-height: 1.3;
+    text-shadow: 0 0 60px var(--angkor-gold-glow);
+  }
+  .title-main .hl {
+    color: var(--angkor-gold);
+  }
+  .title-sub {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 15px;
+    color: var(--ink-dim);
+    letter-spacing: 0.25em;
+    margin-top: 8px;
+  }
+
+  /* ── Route Map ── */
+  .route-section {
+    position: relative;
+    margin: 0 -10px 24px;
+    padding: 20px 10px;
+    background: rgba(184,134,11,0.04);
+    border-top: 1px solid rgba(184,134,11,0.12);
+    border-bottom: 1px solid rgba(184,134,11,0.12);
+  }
+  .route-label {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 11px;
+    color: var(--ink-dim);
+    letter-spacing: 0.3em;
+    text-align: center;
+    margin-bottom: 16px;
+  }
+  .route-map {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    padding: 0 8px;
+    min-height: 100px;
+  }
+  .route-map::before {
+    content: '';
+    position: absolute;
+    top: 35px;
+    left: 8%;
+    right: 8%;
+    height: 2px;
+    background: repeating-linear-gradient(90deg,
+      var(--angkor-gold) 0px, var(--angkor-gold) 6px,
+      transparent 6px, transparent 14px
+    );
+    opacity: 0.6;
+    z-index: 0;
+  }
+  .route-map::after {
+    content: '';
+    position: absolute;
+    top: 33px;
+    left: 8%;
+    right: 8%;
+    height: 6px;
+    background: radial-gradient(ellipse at center, rgba(184,134,11,0.15), transparent 70%);
+    z-index: 0;
+  }
+  .waypoint {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    flex: 1;
+  }
+  .waypoint .dot {
+    width: 10px; height: 10px;
+    background: var(--angkor-gold);
+    border-radius: 50%;
+    margin: 0 auto 8px;
+    box-shadow: 0 0 12px var(--angkor-gold-glow);
+    position: relative;
+  }
+  .waypoint.start .dot {
+    width: 14px; height: 14px;
+    background: var(--angkor-gold);
+    box-shadow: 0 0 16px rgba(184,134,11,0.6);
+  }
+  .waypoint.end .dot {
+    width: 14px; height: 14px;
+    background: var(--angkor-gold);
+    box-shadow: 0 0 20px var(--angkor-gold-glow);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 20px var(--angkor-gold-glow); }
+    50% { box-shadow: 0 0 35px rgba(184,134,11,0.9); }
+  }
+  .waypoint .city-name {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 12px;
+    color: var(--ink);
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+  }
+  .waypoint .city-era {
+    font-size: 9px;
+    color: var(--ink-dim);
+    display: block;
+  }
+  .waypoint.start .city-name { color: var(--angkor-gold); font-weight: 700; }
+
+  /* ── Three Pillars ── */
+  .pillars {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 6px;
+    margin-bottom: 22px;
+  }
+  .pillar {
+    text-align: center;
+    padding: 16px 10px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.05);
+    position: relative;
+  }
+  .pillar .pillar-icon {
+    font-size: 22px;
+    margin-bottom: 6px;
+  }
+  .pillar .pillar-num {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 26px;
+    font-weight: 900;
+    color: var(--angkor-gold);
+    line-height: 1;
+  }
+  .pillar .pillar-label {
+    font-size: 11px;
+    color: var(--ink-dim);
+    letter-spacing: 0.1em;
+    margin-top: 2px;
+  }
+  .pillar .pillar-sub {
+    font-size: 9px;
+    color: var(--ink-dim);
+    opacity: 0.6;
+  }
+
+  /* ── Quote Block ── */
+  .quote-block {
+    text-align: center;
+    padding: 20px 30px;
+    margin-bottom: 22px;
+    position: relative;
+    background: rgba(184,134,11,0.03);
+    border-left: 2px solid var(--stone-dim);
+    border-right: 2px solid var(--stone-dim);
+  }
+  .quote-block::before {
+    content: '『';
+    font-family: 'Noto Serif SC', serif;
+    font-size: 48px;
+    color: var(--angkor-gold);
+    opacity: 0.25;
+    position: absolute;
+    top: -8px;
+    left: 12px;
+  }
+  .quote-block::after {
+    content: '』';
+    font-family: 'Noto Serif SC', serif;
+    font-size: 48px;
+    color: var(--angkor-gold);
+    opacity: 0.25;
+    position: absolute;
+    bottom: -30px;
+    right: 12px;
+  }
+  .quote-text {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--ink);
+    letter-spacing: 0.12em;
+    line-height: 1.8;
+  }
+  .quote-text .em {
+    color: var(--angkor-gold);
+  }
+
+  /* ── Identity Badges ── */
+  .badges-row {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+  }
+  .badge {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 11px;
+    padding: 6px 16px;
+    border: 1px solid;
+    letter-spacing: 0.1em;
+    position: relative;
+  }
+  .badge.b1 { color: var(--angkor-gold); border-color: rgba(184,134,11,0.4); background: rgba(184,134,11,0.06); }
+  .badge.b2 { color: var(--stone); border-color: rgba(138,122,96,0.4); background: rgba(138,122,96,0.06); }
+  .badge.b3 { color: var(--cinnabar); border-color: rgba(184,66,42,0.4); background: rgba(184,66,42,0.05); }
+  .badge.b4 { color: var(--jungle); border-color: rgba(74,122,58,0.4); background: rgba(74,122,58,0.05); }
+
+  /* ── Story hook panel ── */
+  .hook-panel {
+    margin-bottom: 24px;
+    padding: 18px 24px;
+    background: rgba(184,134,11,0.05);
+    border: 1px solid rgba(184,134,11,0.15);
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
+  .hook-num {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 28px;
+    font-weight: 900;
+    color: var(--angkor-gold);
+    opacity: 0.5;
+    flex-shrink: 0;
+    line-height: 1;
+  }
+  .hook-content {
+    flex: 1;
+  }
+  .hook-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: 0.08em;
+    margin-bottom: 6px;
+  }
+  .hook-desc {
+    font-size: 12px;
+    color: var(--ink-dim);
+    line-height: 1.7;
+    letter-spacing: 0.05em;
+  }
+
+  /* ── Bottom info ── */
+  .bottom-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 18px;
+    border-top: 1px solid var(--border);
+  }
+  .story-link {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 11px;
+    color: var(--angkor-gold);
+    letter-spacing: 0.15em;
+    text-decoration: none;
+  }
+  .story-count {
+    font-size: 10px;
+    color: var(--ink-dim);
+    letter-spacing: 0.1em;
+  }
+
+  /* ── Seal stamp ── */
+  .seal {
+    width: 52px; height: 52px;
+    border: 2px solid var(--cinnabar);
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: rotate(-5deg);
+    flex-shrink: 0;
+    opacity: 0.75;
+  }
+  .seal-inner {
+    text-align: center;
+    line-height: 1.3;
+  }
+  .seal-inner .s1 {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 14px;
+    font-weight: 900;
+    color: var(--cinnabar);
+  }
+  .seal-inner .s2 {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 8px;
+    color: var(--cinnabar);
+  }
+
+  /* ── Wave decoration at bottom ── */
+  .wave-decor {
+    display: flex;
+    justify-content: center;
+    gap: 3px;
+    margin-top: 10px;
+    opacity: 0.25;
+  }
+  .wave-decor span {
+    font-size: 9px;
+    color: var(--angkor-gold);
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 800px) {
+    .card { width: 100%; }
+    .inner { padding: 24px 20px 20px; }
+    .title-main { font-size: 28px; }
+    .pillars { grid-template-columns: 1fr 1fr 1fr; gap: 4px; }
+    .waypoint .city-name { font-size: 10px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="card">
+  <div class="inner">
+
+    <!-- Top band -->
+    <div class="top-band">
+      <span class="line"></span>
+      <span class="diamond"></span>
+      <span class="line"></span>
+    </div>
+
+    <!-- Title -->
+    <div class="title-block">
+      <div class="title-dynasty">
+        <span>元</span> 元贞二年 ～ 大德元年 <span>1296–1297</span>
+      </div>
+      <div class="title-main">
+        他在柬埔寨<span class="hl">住了一年</span>
+      </div>
+      <div class="title-sub">8500字让法国人找到了吴哥窟 🛕</div>
+    </div>
+
+    <!-- Route Map -->
+    <div class="route-section">
+      <div class="route-label">◈ 真 腊 风 土 航 路 图 ◈</div>
+      <div class="route-map">
+        <div class="waypoint start">
+          <div class="dot"></div>
+          <span class="city-name">温州</span>
+          <span class="city-era">开洋出发</span>
+        </div>
+        <div class="waypoint">
+          <div class="dot"></div>
+          <span class="city-name">广州</span>
+          <span class="city-era">市舶补给</span>
+        </div>
+        <div class="waypoint">
+          <div class="dot"></div>
+          <span class="city-name">占城</span>
+          <span class="city-era">林邑停泊</span>
+        </div>
+        <div class="waypoint end">
+          <div class="dot"></div>
+          <span class="city-name">吴哥</span>
+          <span class="city-era">真腊国都</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Three pillars -->
+    <div class="pillars">
+      <div class="pillar">
+        <div class="pillar-icon">📜</div>
+        <div class="pillar-num">8,500</div>
+        <div class="pillar-label">字笔记</div>
+        <div class="pillar-sub">《真腊风土记》全文</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">📖</div>
+        <div class="pillar-num">40</div>
+        <div class="pillar-label">则记录</div>
+        <div class="pillar-sub">政治·建筑·经济·风俗</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">🏛</div>
+        <div class="pillar-num">100万</div>
+        <div class="pillar-label">人城市</div>
+        <div class="pillar-sub">同时期伦敦不到5万</div>
+      </div>
+    </div>
+
+    <!-- Identity badges -->
+    <div class="badges-row">
+      <span class="badge b1">元代 低级文官</span>
+      <span class="badge b2">真腊风土记 作者</span>
+      <span class="badge b3">吴哥 唯一亲历记录</span>
+      <span class="badge b4">使节 · 记录者</span>
+    </div>
+
+    <!-- Quote -->
+    <div class="quote-block">
+      <div class="quote-text">
+        不会带兵打仗<br>
+        不会翻译佛经<br>
+        他只是<span class="em">看</span>，然后<span class="em">写下来</span>
+      </div>
+    </div>
+
+    <!-- Three highlight facts -->
+    <div class="hook-panel">
+      <div class="hook-num">01</div>
+      <div class="hook-content">
+        <div class="hook-title">在吴哥住了一年，记下了一个帝国</div>
+        <div class="hook-desc">1296年随元朝使团抵达吴哥，是唯一住在高棉帝国鼎盛时期的中国记录者。他笔下的54座四面佛塔、216张石雕佛面、骑象出行的国王——700年后考古全部证实</div>
+      </div>
+    </div>
+    <div class="hook-panel">
+      <div class="hook-num">02</div>
+      <div class="hook-content">
+        <div class="hook-title">浮雕绵延六百米，比巴黎还大的石头之城</div>
+        <div class="hook-desc">他记录的吴哥城面积超1000平方公里、人口近百万，是当时世界上最大的城市之一。回廊壁上的浮雕讲述着《罗摩衍那》和《摩诃婆罗多》，都城之南矗立着五座莲花石塔</div>
+      </div>
+    </div>
+    <div class="hook-panel">
+      <div class="hook-num">03</div>
+      <div class="hook-content">
+        <div class="hook-title">五百年后，法国人拿着他的书找到了吴哥</div>
+        <div class="hook-desc">1819年法国汉学家雷慕沙将《真腊风土记》译成法文；1860年探险家穆奥持译本在柬埔寨丛林里重新发现吴哥窟。一个中国文人的8500字笔记，让一座消失的城重见天日</div>
+      </div>
+    </div>
+
+    <!-- Bottom -->
+    <div class="bottom-section">
+      <div>
+        <div class="story-link">scarlettlab2026.github.io/silk-road-2026/story12.html</div>
+        <div class="story-count" style="margin-top:4px">张骞·班超·法显·玄奘·杜环·丘处机·马可波罗·拉班扫马·汪大渊·亦黑迷失·郑和·周达观 —— 十二故事全部开源</div>
+      </div>
+      <div class="seal">
+        <div class="seal-inner">
+          <div class="s1">真腊</div>
+          <div class="s2">风土</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Wave decoration -->
+    <div class="wave-decor">
+      <span>〰</span><span>〰</span><span>〰</span><span>〰</span><span>〰</span><span>〰</span><span>〰</span><span>〰</span><span>〰</span><span>〰</span>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>

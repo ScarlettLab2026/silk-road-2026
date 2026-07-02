@@ -452,6 +452,19 @@ function buildAllCards(DATA) {
     ]
   );
 
+  // 链7: 周达观与真腊风土记
+  html += buildChainCard(
+    '周达观与真腊风土记',
+    'Zhou Daguan and The Customs of Cambodia',
+    '1296年，元朝使节周达观从温州出海，前往真腊（柬埔寨）。他在吴哥居住一年，记录了高棉帝国的都城、风俗、贸易和物产。归国后著《真腊风土记》，8500字、40则。五百年后，法国人凭这本小书在丛林中重新发现了吴哥窟——一个中国文人的笔记，成了研究吴哥文明的唯一一手史料。',
+    [
+      {id:'zhou-daguan', name:'周达观', type:'figure', icon:'👤'},
+      {id:'wenzhou', name:'温州', type:'city', icon:'🏙️'},
+      {id:'angkor', name:'吴哥', type:'city', icon:'🏙️'},
+      {id:'zhenla-fengtu-ji', name:'真腊风土记', type:'event', icon:'⚡'},
+    ]
+  );
+
   html += '</div>';
 
   // ── Total count ──
@@ -459,12 +472,12 @@ function buildAllCards(DATA) {
   const figCount = DATA.nodes.figures.filter(f => f.significance >= 4).length;
   const goodsCount = DATA.nodes.goods.filter(g => g.significance >= 4).length;
   const eventCount = DATA.nodes.events.filter(e => e.significance >= 4).length;
-  const total = cityCount + figCount + goodsCount + eventCount + 6;
+  const total = cityCount + figCount + goodsCount + eventCount + 7;
 
   html += `<div style="text-align:center;padding:32px;color:var(--accent);font-size:0.95rem">
     ✅ ${total} 张知识卡片准备完毕<br>
     <small style="color:var(--text-dim)">
-      🏙️ ${cityCount} 城市 · 👤 ${figCount} 人物 · 📦 ${goodsCount} 物产 · ⚡ ${eventCount} 事件 · 🔗 6 关系链
+      🏙️ ${cityCount} 城市 · 👤 ${figCount} 人物 · 📦 ${goodsCount} 物产 · ⚡ ${eventCount} 事件 · 🔗 7 关系链
     </small><br>
     <small style="color:var(--text-dim);margin-top:8px;display:block">
       💡 右键每张卡片 → 复制图片/截图 → 每天发一张到小红书/知乎
