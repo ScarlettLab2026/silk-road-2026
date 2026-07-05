@@ -1319,21 +1319,28 @@ function hideSearch() {
 
 // ── Visitor Location (browser Geolocation API — no third party, user consent) ──
 (function visitorLocation() {
-  const locEl = document.getElementById('visitor-location');
+  var locEl = document.getElementById('visitor-location');
   if (!navigator.geolocation) {
     locEl.textContent = '📍 丝路旅人';
     return;
   }
   navigator.geolocation.getCurrentPosition(
     function(pos) {
-      const lat = pos.coords.latitude, lng = pos.coords.longitude;
+      var lat = pos.coords.latitude, lng = pos.coords.longitude;
       locEl.textContent = '📍 已定位 · 丝路旅人';
-      // Add pulse dot on main map
-      if (typeof map !== 'undefined' && map) {
-        var icon = L.divIcon({ className: 'pulse-dot', iconSize: [12, 12], iconAnchor: [6, 6] });
-        var marker = L.marker([lat, lng], { icon: icon }).addTo(map);
-        marker.bindTooltip('📍 你的位置', { direction: 'top', offset: [0, -10] });
-      }
+      // Retry until map is ready (init is async)
+      var attempts = 0;
+      var tryAddMarker = setInterval(function() {
+        attempts++;
+        if (typeof map !== 'undefined' && map && typeof L !== 'undefined') {
+          clearInterval(tryAddMarker);
+          var icon = L.divIcon({ className: 'pulse-dot', iconSize: [12, 12], iconAnchor: [6, 6] });
+          var marker = L.marker([lat, lng], { icon: icon }).addTo(map);
+          marker.bindTooltip('📍 你的位置', { direction: 'top', offset: [0, -10] });
+        } else if (attempts > 30) {
+          clearInterval(tryAddMarker); // give up after 15s
+        }
+      }, 500);
     },
     function() { locEl.textContent = '📍 丝路旅人'; },
     { enableHighAccuracy: false, timeout: 5000, maximumAge: 300000 }
