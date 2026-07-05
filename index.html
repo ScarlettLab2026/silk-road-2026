@@ -418,11 +418,18 @@
         ╚══════════════════════════════════════╝
       -->
       <div id="visitor-globe">
+        <!--
+          安全说明:
+          - 使用 data-src 而非 src，在替换 YOUR_ID_HERE 前不会加载任何第三方资源
+          - 激活后 RevolverMaps 会在你的域名下执行 JS，属于中等风险
+          - 如需更严格隔离，激活时将 data-src 改为 src 并加 sandbox 属性
+        -->
         <iframe
           data-src="https://rf.revolvermaps.com/w/m/0/0/6.js?i=YOUR_ID_HERE&m=0&c=e63100&cr1=ffffff&f=arial&l=0&bv=70&rs=80"
           style="display:none"
           loading="lazy"
           title="访客地图"
+          sandbox="allow-scripts allow-same-origin"
           onload="this.style.display='block'"
           onerror="this.parentNode.innerHTML='<div style=display:flex;align-items:center;justify-content:center;height:100%;color:var(--text-dim);font-size:0.7rem;text-align:center;padding:16px>📡 访客地图就绪<br><small>注册 RevolverMaps 后替换 ID</small></div>'">
         </iframe>
@@ -1310,28 +1317,28 @@ function hideSearch() {
   }
 })();
 
-// ── Visitor Location (ipapi.co — free, 1k req/day) ──
-(async function visitorLocation() {
+// ── Visitor Location (browser Geolocation API — no third party, user consent) ──
+(function visitorLocation() {
   const locEl = document.getElementById('visitor-location');
-  try {
-    const resp = await fetch('https://ipapi.co/json/');
-    if (!resp.ok) throw new Error('API error');
-    const d = await resp.json();
-    if (d.city && d.country_name) {
-      locEl.textContent = '📍 来自 ' + d.city + ', ' + d.country_name + ' 的旅人';
-      if (d.latitude && d.longitude && typeof map !== 'undefined' && map) {
-        const visitorIcon = L.divIcon({
-          className: 'pulse-dot',
-          iconSize: [12, 12], iconAnchor: [6, 6]
-        });
-        const marker = L.marker([d.latitude, d.longitude], { icon: visitorIcon }).addTo(map);
-        marker.bindTooltip('📍 你的位置: ' + d.city, { direction: 'top', offset: [0, -10] });
-      }
-    } else {
-      locEl.textContent = '📍 丝路旅人';
-    }
-  } catch (e) {
+  if (!navigator.geolocation) {
     locEl.textContent = '📍 丝路旅人';
+    return;
+  }
+  navigator.geolocation.getCurrentPosition(
+    function(pos) {
+      const lat = pos.coords.latitude, lng = pos.coords.longitude;
+      locEl.textContent = '📍 已定位 · 丝路旅人';
+      // Add pulse dot on main map
+      if (typeof map !== 'undefined' && map) {
+        var icon = L.divIcon({ className: 'pulse-dot', iconSize: [12, 12], iconAnchor: [6, 6] });
+        var marker = L.marker([lat, lng], { icon: icon }).addTo(map);
+        marker.bindTooltip('📍 你的位置', { direction: 'top', offset: [0, -10] });
+      }
+    },
+    function() { locEl.textContent = '📍 丝路旅人'; },
+    { enableHighAccuracy: false, timeout: 5000, maximumAge: 300000 }
+  );
+})();
   }
 })();
 
