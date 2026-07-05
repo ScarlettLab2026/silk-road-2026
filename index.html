@@ -287,6 +287,58 @@
     100% { box-shadow: 0 0 8px var(--accent), 0 0 16px rgba(212,168,83,0.4); }
   }
 
+  /* ── Visitor Panel ── */
+  #visitor-panel {
+    padding: 14px 16px; border-top: 1px solid var(--border);
+    flex-shrink: 0; font-size: 0.78rem;
+  }
+  #visitor-panel .visitor-title {
+    font-size: 0.75rem; font-weight: 600; color: var(--text-dim);
+    margin-bottom: 10px; letter-spacing: 0.06em;
+    display: flex; align-items: center; gap: 6px;
+  }
+  #visitor-globe {
+    width: 100%; height: 160px; border-radius: 10px;
+    background: rgba(0,0,0,0.3); overflow: hidden;
+    margin-bottom: 10px; border: 1px solid var(--border);
+  }
+  #visitor-globe iframe { width: 100%; height: 100%; border: none; }
+  #visitor-stats {
+    display: flex; gap: 16px; align-items: center;
+    color: var(--text-dim); font-size: 0.73rem;
+  }
+  #visitor-stats .stat-num {
+    font-weight: 700; color: var(--accent); font-size: 0.95rem;
+  }
+  #visitor-location {
+    color: var(--text-dim); font-size: 0.72rem;
+    margin-top: 6px; font-style: italic;
+  }
+  /* Pulse for visitor location marker */
+  .pulse-dot {
+    width: 12px; height: 12px; border-radius: 50%;
+    background: #4fc3f7; border: 2px solid #fff;
+    box-shadow: 0 0 0 0 rgba(79,195,247,0.7);
+    animation: pulse-ring 2s infinite;
+  }
+  @keyframes pulse-ring {
+    0% { box-shadow: 0 0 0 0 rgba(79,195,247,0.7); }
+    70% { box-shadow: 0 0 0 18px rgba(79,195,247,0); }
+    100% { box-shadow: 0 0 0 0 rgba(79,195,247,0); }
+  }
+  /* Sponsor button */
+  #sponsor-btn {
+    background: linear-gradient(135deg, #d4a853, #c08830);
+    color: #111; border: none; padding: 5px 16px;
+    border-radius: 16px; cursor: pointer; font-size: 0.82rem;
+    font-weight: 700; transition: all 0.2s;
+    text-decoration: none; letter-spacing: 0.02em;
+  }
+  #sponsor-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 16px rgba(212,168,83,0.4);
+  }
+
   /* ── Responsive ── */
   @media (max-width: 768px) {
     main { flex-direction: column; }
@@ -334,6 +386,7 @@
     <button class="lang-toggle" onclick="toggleRouteAnim()" id="routeBtn" style="background:rgba(199,91,58,0.15);border-color:var(--event)">🎬 传播</button>
     <button class="lang-toggle" onclick="toggleLang()" id="langBtn">English</button>
     <button id="theme-toggle" onclick="toggleTheme()">☀️</button>
+    <a href="sponsor.html" id="sponsor-btn" title="支持项目">☕ 支持</a>
   </div>
 </header>
 
@@ -350,6 +403,39 @@
     </div>
     <div class="list-panel" id="listPanel"></div>
     <div class="detail-panel" id="detailPanel"></div>
+    <!-- 🌍 访客足迹面板 -->
+    <div id="visitor-panel">
+      <div class="visitor-title">🌍 丝路旅人足迹</div>
+      <!--
+        ╔══════════════════════════════════════╗
+        ║  RevolverMaps 免费注册 (30秒)       ║
+        ║  1. 访问 revolvermaps.com           ║
+        ║  2. 输入: scarlettlab2026.github    ║
+        ║        .io/silk-road-2026           ║
+        ║  3. 选 "2D Map" 样式               ║
+        ║  4. 复制代码中 i= 后面的 ID         ║
+        ║  5. 替换下方 data-i 属性值          ║
+        ╚══════════════════════════════════════╝
+      -->
+      <div id="visitor-globe">
+        <iframe
+          data-src="https://rf.revolvermaps.com/w/m/0/0/6.js?i=YOUR_ID_HERE&m=0&c=e63100&cr1=ffffff&f=arial&l=0&bv=70&rs=80"
+          style="display:none"
+          loading="lazy"
+          title="访客地图"
+          onload="this.style.display='block'"
+          onerror="this.parentNode.innerHTML='<div style=display:flex;align-items:center;justify-content:center;height:100%;color:var(--text-dim);font-size:0.7rem;text-align:center;padding:16px>📡 访客地图就绪<br><small>注册 RevolverMaps 后替换 ID</small></div>'">
+        </iframe>
+        <div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--text-dim);font-size:0.7rem;text-align:center;padding:16px;flex-direction:column">
+          🌐 访客地球仪<br><small style="opacity:0.6">注册后显示全球访客位置</small>
+        </div>
+      </div>
+      <div id="visitor-stats">
+        <span>👁 <span class="stat-num" id="visit-count">—</span> 访客</span>
+        <span style="opacity:0.5">|</span>
+        <span id="visitor-location">正在定位...</span>
+      </div>
+    </div>
   </aside>
 </main>
 <div id="timeline-bar"></div>
@@ -1210,6 +1296,44 @@ function searchSelect(id, type) {
 function hideSearch() {
   document.getElementById('searchResults').style.display = 'none';
 }
+
+// ── Visitor Counter (CountAPI — free, no registration) ──
+(async function visitorCounter() {
+  try {
+    const resp = await fetch('https://api.countapi.xyz/hit/scarlettlab-silk-road/visits');
+    if (resp.ok) {
+      const data = await resp.json();
+      document.getElementById('visit-count').textContent = data.value.toLocaleString();
+    }
+  } catch (e) {
+    document.getElementById('visit-count').textContent = '···';
+  }
+})();
+
+// ── Visitor Location (ipapi.co — free, 1k req/day) ──
+(async function visitorLocation() {
+  const locEl = document.getElementById('visitor-location');
+  try {
+    const resp = await fetch('https://ipapi.co/json/');
+    if (!resp.ok) throw new Error('API error');
+    const d = await resp.json();
+    if (d.city && d.country_name) {
+      locEl.textContent = '📍 来自 ' + d.city + ', ' + d.country_name + ' 的旅人';
+      if (d.latitude && d.longitude && typeof map !== 'undefined' && map) {
+        const visitorIcon = L.divIcon({
+          className: 'pulse-dot',
+          iconSize: [12, 12], iconAnchor: [6, 6]
+        });
+        const marker = L.marker([d.latitude, d.longitude], { icon: visitorIcon }).addTo(map);
+        marker.bindTooltip('📍 你的位置: ' + d.city, { direction: 'top', offset: [0, -10] });
+      }
+    } else {
+      locEl.textContent = '📍 丝路旅人';
+    }
+  } catch (e) {
+    locEl.textContent = '📍 丝路旅人';
+  }
+})();
 
 // Restore theme on load
 (function() {

@@ -111,16 +111,27 @@ body { background: #000; font-family: -apple-system, "PingFang SC", "Noto Serif 
 }
 #theme-toggle:hover { background: rgba(255,255,255,0.12); color: #fff; }
 
+/* ── Sponsor Button ── */
+#sponsor-btn {
+  position: fixed; top: 24px; right: 185px; z-index: 10;
+  background: linear-gradient(135deg, #d4a853, #c08830);
+  color: #111; border: none; padding: 8px 14px; border-radius: 20px;
+  font-size: 0.78rem; font-weight: 700; cursor: pointer;
+  text-decoration: none; letter-spacing: 0.02em; transition: all 0.3s;
+}
+#sponsor-btn:hover { transform: scale(1.05); box-shadow: 0 4px 16px rgba(212,168,83,0.5); }
+
 /* ── Mobile: 640px ── */
 @media (max-width: 640px) {
   #narrative { bottom: 16px; padding: 24px 20px 20px; border-radius: 16px; }
   #narrative h2 { font-size: 1.2rem; }
   #narrative p { font-size: 0.9rem; }
   #story-nav a { padding: 3px 7px; font-size: 0.64rem; }
-  #restart, #back, #theme-toggle { top: 12px; padding: 6px 10px; font-size: 0.7rem; }
+  #restart, #back, #theme-toggle, #sponsor-btn { top: 12px; padding: 6px 10px; font-size: 0.7rem; }
   #back { left: 8px; }
   #restart { right: 8px; }
   #theme-toggle { right: 80px; }
+  #sponsor-btn { right: 155px; }
 }
 
 /* ── Mobile: 600px ── */
