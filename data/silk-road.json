@@ -2,8 +2,8 @@
   "meta": {
     "title": "丝绸之路知识图谱",
     "title_en": "Silk Road Knowledge Graph",
-    "version": "1.11.0",
-    "last_updated": "2026-07-02",
+    "version": "v1.12.0",
+    "last_updated": "2026-07-05",
     "description": "一个关于丝绸之路的结构化开放数据集，涵盖城市、人物、物产、事件四大类实体及其关联关系。",
     "description_en": "An open structured dataset about the Silk Road, covering cities, figures, goods, and events and their interconnections."
   },
@@ -1073,6 +1073,42 @@
         "description": "河西走廊重镇，今甘肃武威。前秦吕光俘获鸠摩罗什后在此驻留，建后凉国，软禁鸠摩罗什十七年。鸠摩罗什在此期间精通汉语，为日后长安译经奠定语言基础。",
         "description_en": "A strategic city on the Hexi Corridor. After capturing Kumarajiva, general Lü Guang founded the Later Liang state here and detained the monk for 17 years. Kumarajiva mastered Chinese during this period, laying the foundation for his translation work in Chang'an.",
         "significance": 4
+      },
+      {
+        "id": "tangier",
+        "name": "丹吉尔",
+        "name_en": "Tangier",
+        "lat": 35.76,
+        "lng": -5.83,
+        "region": "北非",
+        "region_en": "North Africa",
+        "era": "元",
+        "description": "摩洛哥北部港口城市，伊本·白图泰的故乡。位于直布罗陀海峡南岸，是连接非洲与欧洲的门户。",
+        "description_en": "Moroccan port city, hometown of Ibn Battuta. Located on the southern shore of the Strait of Gibraltar, gateway between Africa and Europe."
+      },
+      {
+        "id": "delhi",
+        "name": "德里",
+        "name_en": "Delhi",
+        "lat": 28.61,
+        "lng": 77.23,
+        "region": "南亚",
+        "region_en": "South Asia",
+        "era": "元",
+        "description": "印度北部古都，德里苏丹国都城。伊本·白图泰在此担任法官八年。",
+        "description_en": "Ancient capital of northern India, seat of the Delhi Sultanate. Ibn Battuta served as qadi here for eight years."
+      },
+      {
+        "id": "fez",
+        "name": "菲斯",
+        "name_en": "Fez",
+        "lat": 34.03,
+        "lng": -4.99,
+        "region": "北非",
+        "region_en": "North Africa",
+        "era": "元",
+        "description": "摩洛哥文化古都，伊本·白图泰在此口述《游记》（Rihla），由伊本·朱扎整理成书。",
+        "description_en": "Cultural capital of Morocco, where Ibn Battuta dictated his Rihla (Travels) to scribe Ibn Juzayy."
       }
     ],
     "figures": [
@@ -2119,6 +2155,22 @@
         "description": "后秦弘始三年（401年），姚兴迎鸠摩罗什入长安，拜为国师。在逍遥园译场组织八百僧人，译出《金刚经》《法华经》《维摩诘经》《阿弥陀经》等74部384卷。译文'曲尽梵意而文从字顺'，影响中国佛教两千年。",
         "description_en": "In 401 CE, Yao Xing of Later Qin welcomed Kumarajiva to Chang'an and appointed him State Preceptor. At the Xiaoyao Garden translation bureau, he led 800 monks to translate 74 Buddhist texts (384 volumes). His translations shaped Chinese Buddhism for two millennia.",
         "significance": 5
+      },
+      {
+        "id": "ibn-battuta-hajj",
+        "name": "伊本·白图泰朝觐",
+        "name_en": "Ibn Battuta's Hajj",
+        "year": 1325,
+        "description": "21岁的伊本·白图泰从丹吉尔出发前往麦加朝觐，开始了长达30年的环球旅行。",
+        "description_en": "At age 21, Ibn Battuta departed Tangier for the Hajj to Mecca, beginning a 30-year journey around the known world."
+      },
+      {
+        "id": "ibn-battuta-delhi-qadi",
+        "name": "伊本·白图泰任德里法官",
+        "name_en": "Ibn Battuta as Qadi of Delhi",
+        "year": 1333,
+        "description": "伊本·白图泰被德里苏丹穆罕默德·图格鲁克任命为法官（卡迪），在德里任职八年。",
+        "description_en": "Ibn Battuta was appointed qadi (judge) by Sultan Muhammad bin Tughluq of Delhi, serving for eight years."
       }
     ]
   },
@@ -4541,6 +4593,84 @@
       "target": "liangzhou",
       "relation": "佛教东传",
       "relation_en": "Buddhist transmission eastward"
+    },
+    {
+      "source": "ibn-battuta",
+      "target": "tangier",
+      "relation": "出生地",
+      "relation_en": "birthplace"
+    },
+    {
+      "source": "ibn-battuta",
+      "target": "mecca",
+      "relation": "朝觐",
+      "relation_en": "pilgrimage to"
+    },
+    {
+      "source": "ibn-battuta",
+      "target": "delhi",
+      "relation": "任法官",
+      "relation_en": "served as qadi in"
+    },
+    {
+      "source": "ibn-battuta-hajj",
+      "target": "ibn-battuta",
+      "relation": "主角",
+      "relation_en": "protagonist"
+    },
+    {
+      "source": "ibn-battuta-delhi-qadi",
+      "target": "ibn-battuta",
+      "relation": "主角",
+      "relation_en": "protagonist"
+    },
+    {
+      "source": "ibn-battuta",
+      "target": "hangzhou",
+      "relation": "游历赞誉",
+      "relation_en": "visited and praised"
+    },
+    {
+      "source": "ibn-battuta",
+      "target": "guangzhou",
+      "relation": "游历",
+      "relation_en": "visited"
+    },
+    {
+      "source": "ibn-battuta",
+      "target": "alexandria",
+      "relation": "游历",
+      "relation_en": "visited"
+    },
+    {
+      "source": "ibn-battuta",
+      "target": "damascus",
+      "relation": "游历",
+      "relation_en": "visited"
+    },
+    {
+      "source": "ibn-battuta",
+      "target": "baghdad",
+      "relation": "游历",
+      "relation_en": "visited"
+    },
+    {
+      "source": "ibn-battuta",
+      "target": "isfahan",
+      "relation": "游历",
+      "relation_en": "visited"
+    },
+    {
+      "source": "ibn-battuta",
+      "target": "fez",
+      "relation": "口述游记",
+      "relation_en": "dictated Rihla in"
+    },
+    {
+      "source": "ibn-battuta-journey",
+      "target": "ibn-battuta",
+      "relation": "主角",
+      "relation_en": "protagonist"
     }
   ],
   "routes": [

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>万里行尘 · 伊本·白图泰</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<link rel="stylesheet" href="css/story-common.css" />
+<style>
+:root {
+  --bg: #0f0b06; --card-bg: rgba(192,135,48,0.90); --accent: #C08730;
+  --text: #e8d8c0; --text-dim: #9a7a50; --border: rgba(255,255,255,0.08);
+  --accent-r: 192; --accent-g: 135; --accent-b: 48;
+}
+</style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<div id="story-nav">
+  <a href="story.html">📖 张骞</a>
+  <a href="story8.html">⚔ 班超</a>
+  <a href="story4.html">🪷 法显</a>
+  <a href="story13.html">🔥 鸠摩罗什</a>
+  <a href="story3.html">🧘 玄奘</a>
+  <a href="story6.html">🏜 杜环</a>
+  <a href="story10.html">☯️ 丘处机</a>
+  <a href="story5.html">🏛 马可·波罗</a>
+  <a href="story9.html">✝️ 拉班·扫马</a>
+  <a href="story11.html">⛵ 亦黑迷失</a>
+  <a href="story12.html">🛕 周达观</a>
+  <a href="story7.html">⚓ 汪大渊</a>
+  <a href="story14.html" class="active">🌍 白图泰</a>
+  <a href="story2.html">🚢 郑和</a>
+</div>
+
+<div id="progress"></div>
+
+<a href="index.html" id="back">← 返回地图</a>
+<button id="theme-toggle" onclick="toggleTheme()">☀️</button>
+<button id="restart" onclick="restart()">🔄 重播</button>
+
+<div id="narrative" onclick="advance()">
+  <button id="toggle-card" onclick="event.stopPropagation();toggleCard()" title="收起/展开">─</button>
+  <div class="chapter-num" id="chNum"></div>
+  <h2 id="chTitle"></h2>
+  <p id="chBody"></p>
+  <div id="badges" style="margin:8px 0 0;line-height:1.8"></div>
+  <div class="hint"><span class="arrow">→</span> 点击继续</div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+const STORY_CONFIG = {
+  accent: '#C08730',
+  accentRgb: '192,135,48',
+  mapCenter: [30, 30],
+  mapZoom: 2.5,
+  startCities: ['tangier'],
+  restartEmoji: '🌍',
+  tileBg: '#0f0b06'
+};
+
+const STORY = [
+  {
+    title: '丹吉尔少年',
+    subtitle: '1325年 · 摩洛哥丹吉尔',
+    body: '公元1325年六月，摩洛哥丹吉尔——直布罗陀海峡南岸一座白色的港口城市。一个二十一岁的柏柏尔青年跨上一匹驴子，独自向东出发。他的名字叫伊本·白图泰。他的目的地是麦加，一千五百公里之外。这是他第一次离开家乡。母亲在门口流泪，父亲沉默不语。白图泰后来在游记里只写了一句话：「我告别了双亲，如飞鸟离巢。」他不知道自己这一走，将走三十年、十二万公里——比马可波罗远五倍，比哥伦布远十倍。此时的他只带了一本书、一把剑、一包干粮。穿过北非海岸——突尼斯、的黎波里、亚历山大港。他在的黎波里感染了疟疾，发着高烧穿越利比亚沙漠。在亚历山大，他见到了传说中法老时代的灯塔废墟。在开罗，尼罗河的宽度让他震惊：「这条河比世界上任何河流都美。」但他没有停留。麦加在召唤。他不知道的是——做完这次朝觐，他不会回家。他会继续往东，再往东，一直到世界的尽头。',
+    lat: 35.76, lng: -5.83, zoom: 5,
+    route: null,
+    marker: 'tangier',
+    showCities: ['tangier'],
+    highlight: ['ibn-battuta']
+  },
+  {
+    title: '漫漫东行路',
+    subtitle: '1325–1333年 · 北非→麦加→波斯→中亚→印度',
+    body: '麦加朝觐完成。按常理，朝圣者应该回家了。但伊本·白图泰站在克尔白天房前，做了一个改变他一生的决定：继续往东。这个决定没有任何规划。他身上只有朝圣剩下的旅费、一封推荐信、和一种无法解释的冲动——他想看看更远的地方。他去巴格达。蒙古人毁灭巴格达才七十年，但这座城市正在复兴。他去大不里士——当时蒙古伊尔汗国的商业中心。他去伊斯法罕——「伊斯法罕半天下」，蓝色清真寺的马赛克穹顶让他目瞪口呆。在波斯，他第一次结婚——然后离婚。第二次结婚——然后离婚。（「旅人不宜久恋一处，」他后来写道。）他穿过阿富汗的山口，被强盗洗劫；在信德渡过印度河，差点被鳄鱼拖走。但他一直在往东走。八年后，1333年——他终于跨过了印度河的桥头。德里在前方。这一年，他二十九岁。他已经走过了几乎整个伊斯兰世界，比同时代任何人走得都远。而这，只是他旅途的上半场。',
+    lat: 30.0, lng: 50.0, zoom: 3.5,
+    route: ['tangier', 'alexandria', 'mecca', 'damascus', 'baghdad', 'isfahan', 'delhi'],
+    marker: 'delhi',
+    showCities: ['tangier', 'mecca', 'baghdad', 'isfahan', 'delhi'],
+    highlight: ['ibn-battuta', 'ibn-battuta-hajj']
+  },
+  {
+    title: '德里八年',
+    subtitle: '1333–1341年 · 印度德里',
+    body: '德里。十四世纪的德里苏丹国——伊斯兰世界最东端的巨大王朝，统治着几乎整个印度北部。苏丹穆罕默德·本·图格鲁克坐在孔雀宝座上。他是当时世界上最博学的君主之一——精通波斯语、阿拉伯语、突厥语，能写一手漂亮的书法，讨论哲学时比任何学者都敏锐。但他是历史上最不可预测的统治者。他会在早朝上给一个陌生人赏赐一整座城市的税收——然后在午朝后把另一个官员腰斩。伊本·白图泰抵达德里的第一天，苏丹给了他两万第纳尔银币、一座豪宅、一个法官职位。他成了德里苏丹国的卡迪（大法官）。但每一天都像在走钢丝。苏丹有一次怀疑他结交异己，派了四个刺客日夜监视他的住处。另一次，苏丹请他进后宫讨论教法——白图泰知道这意味着什么：如果一句话让苏丹不满意，他再也走不出这道门。白图泰在德里熬了八年。他的秘诀是：永远保持沉默、永远表示服从、永远不显露任何野心。第八年——奇迹发生了：苏丹没有杀他，而是派他出使中国。带着十五艘船、数百名随从、丝绸、瓷器、宝剑、骏马——一支给元朝皇帝的外交使团。伊本·白图泰踏上了去中国的路。但命运还没放过他。',
+    lat: 28.61, lng: 77.23, zoom: 5.5,
+    route: ['isfahan', 'delhi'],
+    marker: 'delhi',
+    showCities: ['delhi'],
+    highlight: ['ibn-battuta', 'ibn-battuta-delhi-qadi']
+  },
+  {
+    title: '风暴与重生',
+    subtitle: '1341–1345年 · 德里→卡利卡特→马尔代夫',
+    body: '从德里南下，穿过信德和古吉拉特。白图泰押送着给元朝皇帝的厚礼来到了印度西南海岸的卡利卡特——当时世界上最繁忙的香料港。阿拉伯单桅帆船、中国远洋船、印度商船挤满了海港。他向当地港督租了三艘中国式帆船，装载了瓷器、丝绸、胡椒、宝石。他登上了最大的那艘船。然后——风暴来了。那天夜里海面还在平静地反射着月光。午夜过后，一阵狂风毫无征兆地撞进港口。白图泰在岸上看着他的船在巨浪中粉碎。丝绸沉向海底，瓷器碎成粉末，随从溺死在船舱里。十五艘船，只剩几艘残骸。他失去了全部国书：给元朝皇帝的外交文书沉进了阿拉伯海。这意味着——他没有资格再代表德里苏丹出使中国。他不敢回德里。苏丹对失败的使者只有一个处理方式。白图泰逃到了马尔代夫。在这个只有珊瑚礁和椰子树的小岛上——他待了十八个月。岛上的君主让他当法官，娶了他的女儿。但他待不住。他要的从来不是安稳。他要去中国。即便没有国书、没有礼物、没有身份。他就是一个游客——但他还是要去看一眼中国。',
+    lat: 11.25, lng: 75.77, zoom: 4.5,
+    route: ['delhi', 'calicut'],
+    marker: 'calicut',
+    showCities: ['delhi', 'calicut'],
+    highlight: ['ibn-battuta']
+  },
+  {
+    title: '抵达刺桐',
+    subtitle: '1346年 · 泉州（刺桐港）',
+    body: '1346年的一个清晨。一艘阿拉伯商船缓缓驶入泉州湾。甲板上站着一个四十二岁的中年人——皮肤被印度洋的太阳晒成了古铜色，胡子里掺着灰白。他已经在路上走了二十一年。港口的水面上，数百艘船密密匝匝地排列着：中国远洋帆船、阿拉伯三角帆、爪哇商船。岸上堆着瓷器山、丝绸垛、香料包。刺桐港——今天的福建泉州——是当时全世界最大的港口。马可波罗从这里出海；汪大渊从这里出发。伊本·白图泰后来写道：「刺桐港，是我在地球上见过最伟大的港口。我真的见过。」泉州城里，他看到了泉州清净寺——一座纯石砌的清真寺，由阿拉伯商人建造。他在寺里遇到了从波斯、摩洛哥、也门来的穆斯林商人。他们告诉他：继续走，去杭州。杭州比这儿还要壮丽百倍。白图泰没有片刻犹豫。他沿着中国的海岸线，继续往北。',
+    lat: 24.91, lng: 118.58, zoom: 5.5,
+    route: ['calicut', 'quanzhou'],
+    marker: 'quanzhou',
+    showCities: ['calicut', 'quanzhou'],
+    highlight: ['ibn-battuta', 'ibn-battuta-journey']
+  },
+  {
+    title: '中华风华',
+    subtitle: '1346–1347年 · 广州→杭州→元大都',
+    body: '从泉州出发，白图泰沿着中国东海岸北上。在广州，他看到了珠江上数以千计的花船——每一条船都像一个漂浮的宫殿，雕梁画栋、丝帘垂挂。中国的港口管理让他印象深刻：每一条船进出港口都要登记在册，港口官员比世界上任何地方都更井井有条。但他一路上最期待的——是杭州。当他终于站在西湖边，看着雷峰塔的倒影在水中荡漾——这个走过了四十四国的旅人找不到足够的词汇。「杭州是我在地球上见过的最美丽的城市，」他写道，「城里有一片湖，湖的周长有半天路程。湖边种满了柳树和桃树，花开时节，整座城市仿佛漂浮在花瓣之间。」他注意到中国的一切都超前于他见过的任何文明：纸币代替了金银——「用一张纸就能买东西，连乡下农夫都接受」；公鸡比任何国家的都大三倍；城市里的每条街道都有公共浴室。他一路向北抵达元大都（北京）。虽然他没有见到元顺帝——他的非正式身份有限——他仍然记下了元大都的宫殿群：「宫墙高大、金碧辉煌，超出一切想象。」离开中国时，白图泰写道：「中国是旅行者最安全、最舒适的国家。一个人带着钱独自走九个月的路，完全不用担心被抢。」十四世纪，一个摩洛哥人，给中国写了一封穿越时空的情书。',
+    lat: 30.25, lng: 118.0, zoom: 4.5,
+    route: ['quanzhou', 'guangzhou', 'hangzhou', 'beijing'],
+    marker: 'hangzhou',
+    showCities: ['quanzhou', 'guangzhou', 'hangzhou', 'beijing'],
+    highlight: ['ibn-battuta']
+  },
+  {
+    title: '归乡与游记',
+    subtitle: '1349–1369年 · 返回摩洛哥→菲斯→永载史册',
+    body: '白图泰终于踏上归途。穿过阿拉伯半岛、埃及、突尼斯——这一次他走的是往西的路。经过大马士革时，他听说了横扫欧亚的黑死病。回到摩洛哥，他才得知：瘟疫已经夺走了他母亲的性命。那个在丹吉尔门口流泪送他的女人——没能等到儿子回来。他离开时二十一岁。他回来时四十五岁。他出发时是个法学生。他回来时，是人类历史上走得最远的人。摩洛哥苏丹阿布·伊南听说这个传奇旅人回到了菲斯，召他入宫。苏丹命令他口述全部旅行经历，派了一位书记官——伊本·朱扎——逐字记录。接下来的两年里，白图泰在菲斯宫廷里，对着书记官口述了三十年的跋涉。伊本·朱扎把这些记忆整理成了阿拉伯语写成的《游记》——全名是：《献给那些思索城市奇观与旅行奇迹的礼物》。西方史学界后来叫它《Rihla》（الرحلة），阿拉伯语中「旅程」的意思。这本书留下了太多「第一」：第一个记载马尔代夫社会制度的记录；第一个关于东非斯瓦希里海岸的详细描述；十四世纪中国最完整的穆斯林视角观察。白图泰自己的一句评价最诚实：「我一生走遍世界，最大的遗憾是——我每到一座好城市，就娶一个妻子。这让我几乎破产。」这不是圣人传。他是一个真实的人——好奇、虚荣、贪恋美食、偶尔胆怯、有无穷的脚力——他走了十二万公里。横跨今天四十四个国家的疆界。在没有任何机械动力的十四世纪，他用双脚、驴子、骆驼和帆船，走过三个大陆。他的《游记》没有写一个字——他口述了全部。但六百年后，这本书还在。没有人能超越他走过的里程。',
+    lat: 34.03, lng: -4.99, zoom: 4,
+    route: ['beijing', 'quanzhou', 'calicut', 'mecca', 'damascus', 'alexandria', 'tangier', 'fez'],
+    marker: 'fez',
+    showCities: ['tangier', 'mecca', 'delhi', 'calicut', 'quanzhou', 'hangzhou', 'beijing', 'fez'],
+    highlight: ['ibn-battuta', 'ibn-battuta-journey']
+  }
+];
+</script>
+<script src="js/story-engine.js"></script>
+</body></html>

@@ -479,6 +479,20 @@ function buildAllCards(DATA) {
     ]
   );
 
+  // 链9: 伊本·白图泰游记
+  html += buildChainCard(
+    '伊本·白图泰游记',
+    'Ibn Battuta\'s Rihla',
+    '1325年，21岁的摩洛哥人伊本·白图泰从丹吉尔出发前往麦加朝觐，没想到这一走就是30年、12万公里。他从北非走到中东，从波斯走到印度（担任德里大法官八年），又从印度经海路抵达中国。他称泉州是「地球上最伟大的港口」、杭州是「地球上最美的城市」。归国后口述《游记》（Rihla），记录了14世纪欧亚非三大洲的珍贵见闻——他比马可波罗走得更远五倍。',
+    [
+      {id:'ibn-battuta', name:'伊本·白图泰', type:'figure', icon:'👤'},
+      {id:'tangier', name:'丹吉尔', type:'city', icon:'🏙️'},
+      {id:'mecca', name:'麦加', type:'city', icon:'🏙️'},
+      {id:'delhi', name:'德里', type:'city', icon:'🏙️'},
+      {id:'hangzhou', name:'杭州', type:'city', icon:'🏙️'},
+    ]
+  );
+
   html += '</div>';
 
   // ── Total count ──
@@ -486,12 +500,12 @@ function buildAllCards(DATA) {
   const figCount = DATA.nodes.figures.filter(f => f.significance >= 4).length;
   const goodsCount = DATA.nodes.goods.filter(g => g.significance >= 4).length;
   const eventCount = DATA.nodes.events.filter(e => e.significance >= 4).length;
-  const total = cityCount + figCount + goodsCount + eventCount + 8;
+  const total = cityCount + figCount + goodsCount + eventCount + 9;
 
   html += `<div style="text-align:center;padding:32px;color:var(--accent);font-size:0.95rem">
     ✅ ${total} 张知识卡片准备完毕<br>
     <small style="color:var(--text-dim)">
-      🏙️ ${cityCount} 城市 · 👤 ${figCount} 人物 · 📦 ${goodsCount} 物产 · ⚡ ${eventCount} 事件 · 🔗 8 关系链
+      🏙️ ${cityCount} 城市 · 👤 ${figCount} 人物 · 📦 ${goodsCount} 物产 · ⚡ ${eventCount} 事件 · 🔗 9 关系链
     </small><br>
     <small style="color:var(--text-dim);margin-top:8px;display:block">
       💡 右键每张卡片 → 复制图片/截图 → 每天发一张到小红书/知乎
