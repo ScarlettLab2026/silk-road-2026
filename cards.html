@@ -493,6 +493,20 @@ function buildAllCards(DATA) {
     ]
   );
 
+  // 链10: 义净南海求法（三大求法僧）
+  html += buildChainCard(
+    '义净南海求法',
+    'Yijing\'s Maritime Pilgrimage',
+    '671年，36岁的义净从广州乘波斯商船出发，经室利佛逝（苏门答腊）抵达印度那烂陀寺求学十年。他与法显、玄奘并称「三大求法僧」——法显陆去海归，玄奘陆去陆归，义净海去海归，三人走完了丝路的全部可能。义净带回梵经四百余部，译出五十六部，著《南海寄归内法传》和《大唐西域求法高僧传》，是研究七世纪印度和南海的第一手史料。',
+    [
+      {id:'yijing', name:'义净', type:'figure', icon:'👤'},
+      {id:'guangzhou', name:'广州', type:'city', icon:'🏙️'},
+      {id:'palembang', name:'巨港（三佛齐）', type:'city', icon:'🏙️'},
+      {id:'nalanda', name:'那烂陀', type:'city', icon:'🏙️'},
+      {id:'changan', name:'长安', type:'city', icon:'🏙️'},
+    ]
+  );
+
   html += '</div>';
 
   // ── Total count ──
@@ -500,12 +514,12 @@ function buildAllCards(DATA) {
   const figCount = DATA.nodes.figures.filter(f => f.significance >= 4).length;
   const goodsCount = DATA.nodes.goods.filter(g => g.significance >= 4).length;
   const eventCount = DATA.nodes.events.filter(e => e.significance >= 4).length;
-  const total = cityCount + figCount + goodsCount + eventCount + 9;
+  const total = cityCount + figCount + goodsCount + eventCount + 10;
 
   html += `<div style="text-align:center;padding:32px;color:var(--accent);font-size:0.95rem">
     ✅ ${total} 张知识卡片准备完毕<br>
     <small style="color:var(--text-dim)">
-      🏙️ ${cityCount} 城市 · 👤 ${figCount} 人物 · 📦 ${goodsCount} 物产 · ⚡ ${eventCount} 事件 · 🔗 9 关系链
+      🏙️ ${cityCount} 城市 · 👤 ${figCount} 人物 · 📦 ${goodsCount} 物产 · ⚡ ${eventCount} 事件 · 🔗 10 关系链
     </small><br>
     <small style="color:var(--text-dim);margin-top:8px;display:block">
       💡 右键每张卡片 → 复制图片/截图 → 每天发一张到小红书/知乎

@@ -2,8 +2,8 @@
   "meta": {
     "title": "丝绸之路知识图谱",
     "title_en": "Silk Road Knowledge Graph",
-    "version": "v1.12.0",
-    "last_updated": "2026-07-05",
+    "version": "v1.13.0",
+    "last_updated": "2026-07-08",
     "description": "一个关于丝绸之路的结构化开放数据集，涵盖城市、人物、物产、事件四大类实体及其关联关系。",
     "description_en": "An open structured dataset about the Silk Road, covering cities, figures, goods, and events and their interconnections."
   },
@@ -1109,6 +1109,43 @@
         "era": "元",
         "description": "摩洛哥文化古都，伊本·白图泰在此口述《游记》（Rihla），由伊本·朱扎整理成书。",
         "description_en": "Cultural capital of Morocco, where Ibn Battuta dictated his Rihla (Travels) to scribe Ibn Juzayy."
+      },
+      {
+        "id": "nalanda",
+        "name": "那烂陀",
+        "name_en": "Nalanda",
+        "lat": 25.14,
+        "lng": 85.44,
+        "region": "南亚",
+        "region_en": "South Asia",
+        "era": "唐",
+        "dynasties": [
+          "唐"
+        ],
+        "role": "佛学圣地",
+        "role_en": "Buddhist Holy Site",
+        "description": "古印度佛教最高学府那烂陀寺所在地，公元5-12世纪的世界佛学中心。玄奘在此求学五年，义净在此求学十年。寺中常驻僧众逾万，藏书九百万卷，是古代世界最大的学术机构之一。",
+        "description_en": "Site of Nalanda Mahavihara, the supreme Buddhist university of ancient India and the world's center of Buddhist learning from the 5th to 12th centuries. Xuanzang studied here for five years, Yijing for ten. With over 10,000 resident monks and a library of nine million manuscripts, it was one of the ancient world's largest academic institutions.",
+        "significance": 5
+      },
+      {
+        "id": "tamralipti",
+        "name": "耽摩栗底",
+        "name_en": "Tamralipti (Tamluk)",
+        "lat": 22.29,
+        "lng": 87.92,
+        "region": "南亚",
+        "region_en": "South Asia",
+        "era": "汉—唐",
+        "dynasties": [
+          "汉",
+          "唐"
+        ],
+        "role": "印度东海岸门户",
+        "role_en": "East India Gateway",
+        "description": "古印度孟加拉湾最重要的贸易港口，位于恒河三角洲。法显从此乘商船前往斯里兰卡，义净从此登陆印度前往那烂陀。是海上丝路连接东南亚与印度的关键枢纽。",
+        "description_en": "The most important trading port on the Bay of Bengal in ancient India, located on the Ganges delta. Faxian departed from here by merchant ship for Sri Lanka; Yijing landed here en route to Nalanda. A key maritime Silk Road hub linking Southeast Asia with India.",
+        "significance": 4
       }
     ],
     "figures": [
@@ -2171,6 +2208,18 @@
         "year": 1333,
         "description": "伊本·白图泰被德里苏丹穆罕默德·图格鲁克任命为法官（卡迪），在德里任职八年。",
         "description_en": "Ibn Battuta was appointed qadi (judge) by Sultan Muhammad bin Tughluq of Delhi, serving for eight years."
+      },
+      {
+        "id": "yijing-translation",
+        "name": "义净译经",
+        "name_en": "Yijing's Sutra Translation",
+        "type": "佛教 / 文化",
+        "type_en": "Buddhism / Culture",
+        "era": "唐",
+        "era_range": "695-713",
+        "description": "义净归国后，在洛阳和长安主持译经，共译出佛经56部230卷。与鸠摩罗什、真谛、玄奘并称四大译经师。玄宗皇帝亲自为他的译经作序。",
+        "description_en": "After returning to China, Yijing led the translation of 56 Buddhist texts (230 fascicles) in Luoyang and Chang'an. He is honored as one of the Four Great Sutra Translators alongside Kumarajiva, Paramartha, and Xuanzang. Emperor Xuanzong personally wrote a preface for his translations.",
+        "significance": 4
       }
     ]
   },
@@ -4671,6 +4720,156 @@
       "target": "ibn-battuta",
       "relation": "主角",
       "relation_en": "protagonist"
+    },
+    {
+      "source": "yijing",
+      "target": "guangzhou",
+      "relation": "出发地",
+      "relation_en": "Departure point"
+    },
+    {
+      "source": "yijing",
+      "target": "palembang",
+      "relation": "停留学习梵文",
+      "relation_en": "Stayed and studied Sanskrit"
+    },
+    {
+      "source": "yijing",
+      "target": "nalanda",
+      "relation": "求学十年",
+      "relation_en": "Studied for ten years"
+    },
+    {
+      "source": "yijing",
+      "target": "tamralipti",
+      "relation": "登陆印度",
+      "relation_en": "Landed in India"
+    },
+    {
+      "source": "yijing",
+      "target": "changan",
+      "relation": "归国译经",
+      "relation_en": "Returned and translated sutras"
+    },
+    {
+      "source": "yijing",
+      "target": "luoyang",
+      "relation": "译经地",
+      "relation_en": "Translation site"
+    },
+    {
+      "source": "yijing-journey",
+      "target": "yijing",
+      "relation": "主角",
+      "relation_en": "Protagonist"
+    },
+    {
+      "source": "yijing-journey",
+      "target": "guangzhou",
+      "relation": "出发港",
+      "relation_en": "Departure port"
+    },
+    {
+      "source": "yijing-journey",
+      "target": "palembang",
+      "relation": "南海航线",
+      "relation_en": "South Sea route"
+    },
+    {
+      "source": "yijing-journey",
+      "target": "nalanda",
+      "relation": "目的地",
+      "relation_en": "Destination"
+    },
+    {
+      "source": "yijing-journey",
+      "target": "tamralipti",
+      "relation": "航线经停",
+      "relation_en": "Route stop"
+    },
+    {
+      "source": "yijing-journey",
+      "target": "buddhism",
+      "relation": "求法取经",
+      "relation_en": "Pilgrimage for scriptures"
+    },
+    {
+      "source": "yijing-translation",
+      "target": "yijing",
+      "relation": "主角",
+      "relation_en": "Protagonist"
+    },
+    {
+      "source": "yijing-translation",
+      "target": "changan",
+      "relation": "主要译经地",
+      "relation_en": "Primary translation site"
+    },
+    {
+      "source": "yijing-translation",
+      "target": "luoyang",
+      "relation": "译经地",
+      "relation_en": "Translation site"
+    },
+    {
+      "source": "nalanda",
+      "target": "buddhism",
+      "relation": "佛学中心",
+      "relation_en": "Buddhist center"
+    },
+    {
+      "source": "xuanzang",
+      "target": "nalanda",
+      "relation": "求学五年",
+      "relation_en": "Studied for five years"
+    },
+    {
+      "source": "faxian",
+      "target": "nalanda",
+      "relation": "参学",
+      "relation_en": "Visited and studied"
+    },
+    {
+      "source": "tamralipti",
+      "target": "guangzhou",
+      "relation": "海上贸易航线",
+      "relation_en": "Maritime trade route"
+    },
+    {
+      "source": "tamralipti",
+      "target": "palembang",
+      "relation": "孟加拉湾-南海航线",
+      "relation_en": "Bay of Bengal-South China Sea route"
+    },
+    {
+      "source": "tamralipti",
+      "target": "colombo",
+      "relation": "印度洋航线",
+      "relation_en": "Indian Ocean route"
+    },
+    {
+      "source": "faxian",
+      "target": "tamralipti",
+      "relation": "归途启航",
+      "relation_en": "Return departure"
+    },
+    {
+      "source": "faxian",
+      "target": "xuanzang",
+      "relation": "先驱先导",
+      "relation_en": "Pioneer and guide"
+    },
+    {
+      "source": "xuanzang",
+      "target": "yijing",
+      "relation": "前后求法僧",
+      "relation_en": "Fellow pilgrim monks"
+    },
+    {
+      "source": "guangzhou",
+      "target": "palembang",
+      "relation": "南海丝路航线",
+      "relation_en": "South Sea Silk Road route"
     }
   ],
   "routes": [

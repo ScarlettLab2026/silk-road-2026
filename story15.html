@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>南海寄归 · 义净求法</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<link rel="stylesheet" href="css/story-common.css" />
+<style>
+:root {
+  --bg: #050e0e; --card-bg: rgba(13,123,126,0.92); --accent: #0d7b7e;
+  --text: #d0ece8; --text-dim: #6b9a96; --border: rgba(255,255,255,0.08);
+  --accent-r: 13; --accent-g: 123; --accent-b: 126;
+}
+</style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<div id="story-nav">
+  <a href="story.html">📖 张骞</a>
+  <a href="story8.html">⚔ 班超</a>
+  <a href="story4.html">🪷 法显</a>
+  <a href="story13.html">🔥 鸠摩罗什</a>
+  <a href="story3.html">🧘 玄奘</a>
+  <a href="story15.html" class="active">🌊 义净</a>
+  <a href="story6.html">🏜 杜环</a>
+  <a href="story10.html">☯️ 丘处机</a>
+  <a href="story5.html">🏛 马可·波罗</a>
+  <a href="story9.html">✝️ 拉班·扫马</a>
+  <a href="story11.html">⛵ 亦黑迷失</a>
+  <a href="story12.html">🛕 周达观</a>
+  <a href="story7.html">⚓ 汪大渊</a>
+  <a href="story14.html">🌍 白图泰</a>
+  <a href="story2.html">🚢 郑和</a>
+</div>
+
+<div id="progress"></div>
+
+<a href="index.html" id="back">← 返回地图</a>
+<button id="theme-toggle" onclick="toggleTheme()">☀️</button>
+<a href="sponsor.html" id="sponsor-btn" title="支持项目">☕ 支持</a>
+<button id="restart" onclick="restart()">🔄 重播</button>
+
+<div id="narrative" onclick="advance()">
+  <button id="toggle-card" onclick="event.stopPropagation();toggleCard()" title="收起/展开">─</button>
+  <div class="chapter-num" id="chNum"></div>
+  <h2 id="chTitle"></h2>
+  <p id="chBody"></p>
+  <div id="badges" style="margin:8px 0 0;line-height:1.8"></div>
+  <div class="hint"><span class="arrow">→</span> 点击继续</div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+const STORY_CONFIG = {
+  accent: '#0d7b7e',
+  accentRgb: '13,123,126',
+  mapCenter: [15, 100],
+  mapZoom: 3.5,
+  startCities: ["guangzhou", "changan"],
+  restartEmoji: '🌊',
+  tileBg: '#050e0e'
+};
+
+const STORY = [
+  {
+    title: '广州渡海',
+    subtitle: '公元671年 · 广州',
+    body: '咸亨二年，三十六岁的义净站在广州港的码头上。面前是一艘波斯商船——船身漆着深蓝，桅杆高耸入云，船主是位来自设拉子的胡商。义净深吸一口气，踏上了舷梯。他并非第一个去天竺求法的汉僧——两百多年前，法显从陆路出发时已是花甲之年；四十年前，玄奘偷渡玉门关，孤身穿越八百里流沙。两位大师都已作古，而义净选择了另一条路：大海。从广州乘番舶出发，穿过南海，进入印度洋——这条航线，唐人称为「广州通海夷道」。义净的行李里有一件特殊的东西：法显的《佛国记》和玄奘的《大唐西域记》手抄本。一个甲子前玄奘在长安译经时读到了法显的《佛国记》——那本薄薄的小书，是玄奘出发的西行地图。如今义净带着两位大师的文字，踏上了第三条求法路。法显陆去海归，玄奘陆去陆归，义净海去海归——三大求法僧，走完了丝路的全部可能。',
+    lat: 22.0, lng: 112.0, zoom: 5,
+    route: ['guangzhou'],
+    marker: 'guangzhou',
+    showCities: ['guangzhou', 'changan', 'luoyang'],
+    highlight: ['yijing', 'yijing-journey', 'buddhism', 'faxian', 'xuanzang']
+  },
+  {
+    title: '室利佛逝',
+    subtitle: '南海佛国 · 苏门答腊',
+    body: '波斯商船顺东北季风南下，穿过涨海（南海），航行不到二十日，望见一片翠绿的岛屿——室利佛逝（今苏门答腊巨港）。这里是七世纪南海最强大的海上帝国，控制着马六甲海峡的咽喉。义净下船时惊讶地发现：这座热带港城里竟有佛寺千余所，僧侣过万，佛法之盛不亚于中原。国王以佛教立国，梵文是官方语言之一。义净决定在此停留。「欲往天竺，先习梵语。」他在室利佛逝住了六个月，每日随当地高僧学习梵文语法和佛经诵读。热带暴雨打在棕榈叶上，梵音在椰风海韵中回荡——这是义净求法路上第一个转折点：他不仅学到了梵语，更看到了佛教在南海传播的完整生态。这段经历日后让他意识到，中印之间不只是地理通道，更是一条信仰的长河——沿途每一个港口，都是佛法东传的接力站。',
+    lat: 2.0, lng: 106.0, zoom: 5,
+    route: ['guangzhou', 'palembang'],
+    marker: 'palembang',
+    showCities: ['guangzhou', 'palembang'],
+    highlight: ['yijing', 'palembang', 'buddhism']
+  },
+  {
+    title: '渡越孟加拉',
+    subtitle: '裸人国 · 耽摩栗底',
+    body: '离开室利佛逝，义净沿苏门答腊海岸北上，经末罗游（占碑），过羯荼（吉打），进入安达曼海。下一站是「裸人国」——今尼科巴群岛。岛上居民「不衣不褐」，以椰子、鱼类为食，见到商船便划独木舟靠近，用椰子和海贝换取布匹和铁器。义净在笔记中写道：「其国无佛法，亦无国王。人皆赤体，以树叶略遮。」商船不敢久留——继续向西北穿过孟加拉湾。风浪变得狂野。印度洋的季风将船抛上浪尖又摔入谷底，义净紧抱经卷，日夜诵经。十余日后，地平线上出现了恒河三角洲的泥色海岸——耽摩栗底（今塔姆鲁克）。这里是印度东海岸最大的商港，来自东南亚、锡兰、波斯的船帆挤满港口。义净踏上印度大地的那一刻，距离他离开广州，已过去整整两年。',
+    lat: 10.0, lng: 90.0, zoom: 4.5,
+    route: ['guangzhou', 'palembang', 'tamralipti'],
+    marker: 'tamralipti',
+    showCities: ['guangzhou', 'palembang', 'tamralipti'],
+    highlight: ['yijing', 'tamralipti']
+  },
+  {
+    title: '那烂陀十年',
+    subtitle: '公元675-685年 · 摩揭陀',
+    body: '从耽摩栗底向西北步行数月，穿过恒河平原的稻田和芒果林，义净终于望见了那烂陀寺的尖塔——在阳光下如金山闪耀。这是公元七世纪全世界最伟大的学术机构。寺院占地数平方公里，红墙金顶，殿堂楼阁层层叠叠。常住僧众逾万人，来自印度、中亚、中国、朝鲜、日本、爪哇的求法者汇聚于此。图书馆「法海院」收藏写本九百万卷，分藏于三座九层楼阁之中。课程涵盖佛学、因明、声明（语言学）、医方明（医学）、工巧明（工艺）——是古代世界的综合性大学。玄奘三十年前在此求学五年，如今义净来了，他在这里待的时间比玄奘还长：整整十年。每日清晨四点起床，诵经、听课、抄写、辩论，直至深夜。他系统学习了梵文、戒律、中观、瑜伽行派——尤其专精于「律藏」，这正是法显西行最初要寻找的东西。三位求法僧，一根线：法显求戒律，玄奘求唯识，义净求律藏与实修——佛法如海，各取一瓢。十年间，义净抄写了超过四百部梵文经典。他还抽空遍访了佛陀诞生地蓝毗尼、成道处菩提伽耶、初转法轮处鹿野苑、涅槃地拘尸那迦——走完了玄奘走过的每一处圣迹。',
+    lat: 25.14, lng: 85.44, zoom: 5.5,
+    route: ['guangzhou', 'palembang', 'tamralipti', 'nalanda'],
+    marker: 'nalanda',
+    showCities: ['tamralipti', 'nalanda'],
+    highlight: ['yijing', 'nalanda', 'buddhism', 'xuanzang']
+  },
+  {
+    title: '求法僧列传',
+    subtitle: '那烂陀 · 著书立说',
+    body: '在那烂陀的第十年，义净做了一个决定。他不仅要带回经文——还要记录下所有来印度求法的汉僧故事。他写信回国，托商人带回中原，开始搜集资料。从东晋到唐初，至少五十六位汉僧曾踏上西行之路。有的死在沙漠里，有的老于异乡，有的不知所终。法显的同伴慧景死在葱岭雪山上，玄奘的弟子辩机被处死于长安。求法之路，白骨累累。义净一一记录他们的名字、出发年份、路线、遭遇、结局——这就是后来的《大唐西域求法高僧传》。这是全世界第一部求法僧群体传记。他还撰写了《南海寄归内法传》，详细记录印度和南海佛教寺院的日常戒律、仪轨、医疗、饮食——是他那烂陀十年僧侣生活的完整实录。书中甚至记载了印度人如何清洁牙齿、如何熬制草药汤剂、如何分类饮水（净水、浊水、疑水）——细节之精微，令人惊叹。今天的学者仍然通过义净的这两本书复原七世纪印度社会的真实样貌。',
+    lat: 24.0, lng: 84.0, zoom: 5,
+    route: ['guangzhou', 'palembang', 'tamralipti', 'nalanda'],
+    marker: null,
+    showCities: ['nalanda', 'tamralipti'],
+    highlight: ['yijing', 'nalanda', 'buddhism', 'faxian', 'xuanzang']
+  },
+  {
+    title: '携经归唐',
+    subtitle: '公元685-695年 · 海路东归',
+    body: '685年，五十岁的义净告别那烂陀。他雇了几个帮手，将四百余部梵文写本打包——棕榈叶写经，扎成一捆一捆，装满数只大木箱。从耽摩栗底重新登船，沿来路东返。但归途并不比来路顺利。船到室利佛逝，义净决定再停——这一次，他停留了将近十年。他需要时间整理笔记、翻译部分经文、撰写《南海寄归内法传》和《求法高僧传》。热带雨林边，椰子树下，这位年过半百的汉僧日复一日地校对梵文、推敲译文。其间他曾短暂回广州一次——募集纸墨、雇了四位抄手——又返回室利佛逝继续工作。直到长寿三年（694年），一部完整的《南海寄归内法传》和《求法高僧传》终于脱稿。695年夏天，六十一岁的义净分乘数艘商船，带着全部经卷和文稿，浩浩荡荡回到广州。此时距他出发，已过去二十四年——比法显十五年、玄奘十七年都要长。从三十六岁到六十一岁，一个人的一生，最精华的时间全部给了求法。',
+    lat: 10.0, lng: 106.0, zoom: 4,
+    route: ['guangzhou', 'palembang', 'tamralipti', 'nalanda', 'tamralipti', 'palembang', 'guangzhou'],
+    marker: 'guangzhou',
+    showCities: ['guangzhou', 'palembang', 'tamralipti', 'nalanda'],
+    highlight: ['yijing', 'yijing-journey', 'guangzhou', 'palembang']
+  },
+  {
+    title: '译经传灯',
+    subtitle: '公元695-713年 · 洛阳 · 长安',
+    body: '义净归国的消息传到洛阳，武则天亲自出城迎接。女皇率百官在上东门外设仪仗——旌旗蔽日，梵香盈道。这是唐朝给予一位僧人的最高礼遇。义净被迎入佛授记寺，与于阗高僧实叉难陀共译《华严经》（八十卷本）。此后十八年，他先后在洛阳大遍空寺和长安荐福寺主持译场。共译出佛经五十六部、二百三十卷——涵盖律、经、论三藏。他确立了严格的译经制度：译主（义净本人）、证义、证文、书手、笔受、缀文、参译、刊定、润文——九道工序，层层把关。玄宗皇帝亲自为他的译经作序，称他为「法门之龙象」。713年，七十九岁的义净在长安荐福寺安详示寂。葬于洛阳龙门，与玄奘的墓隔山相望。他留下的不仅是四百部梵经和五十六部汉译——还有《南海寄归内法传》和《求法高僧传》两部无价之书。法显的《佛国记》照亮了玄奘的路，玄奘的《大唐西域记》照亮了义净的路——而义净的《南海寄归内法传》，在中国求法史上画上了一个句号。三位大师，从陆路、海路、再到海陆循环——一千年佛教东传，至此圆满。一灯传一灯，法显传到玄奘，玄奘传至义净——三盏灯照亮了整条丝路。',
+    lat: 34.0, lng: 110.0, zoom: 4,
+    route: ['guangzhou', 'palembang', 'tamralipti', 'nalanda', 'tamralipti', 'palembang', 'guangzhou', 'luoyang', 'changan'],
+    marker: 'changan',
+    showCities: ['guangzhou', 'palembang', 'tamralipti', 'nalanda', 'luoyang', 'changan'],
+    highlight: ['yijing', 'yijing-translation', 'changan', 'luoyang', 'buddhism', 'faxian', 'xuanzang']
+  }
+];
+</script>
+<script src="js/story-engine.js"></script>
+</body></html>
