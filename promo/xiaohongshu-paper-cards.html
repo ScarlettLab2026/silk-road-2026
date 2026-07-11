@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>纸传天下 · 小红书卡片</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: #0a0a0f;
+  font-family: -apple-system, "PingFang SC", "Noto Serif SC", "Noto Sans SC", "Microsoft YaHei", serif;
+  display: flex; flex-direction: column; align-items: center;
+  gap: 4px; padding: 4px;
+}
+
+.card {
+  width: 1080px; max-width: 100vw;
+  aspect-ratio: 9 / 16; max-height: 100vh;
+  position: relative; overflow: hidden;
+  background: #0d0a05;
+  color: #e8dcc8;
+}
+
+/* ── Shared ── */
+.card .bg-texture {
+  position: absolute; inset: 0; opacity: 0.04;
+  background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(196,163,90,0.3) 3px, rgba(196,163,90,0.3) 4px),
+              repeating-linear-gradient(90deg, transparent, transparent 80px, rgba(196,163,90,0.1) 80px, rgba(196,163,90,0.1) 81px);
+}
+.card .card-num {
+  position: absolute; top: 48px; right: 56px;
+  font-size: 0.85rem; color: rgba(255,255,255,0.2); letter-spacing: 0.15em;
+}
+.card .card-footer {
+  position: absolute; bottom: 56px; left: 0; right: 0; text-align: center;
+  font-size: 0.72rem; color: rgba(255,255,255,0.14); letter-spacing: 0.1em;
+}
+
+/* ── Card 1: Cover ── */
+.card-1 .paper-sheet {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-3deg);
+  width: 520px; height: 620px;
+  background: linear-gradient(135deg, #e8d5a3 0%, #d4bc7a 30%, #c4a35a 60%, #b8923a 100%);
+  border-radius: 4px; box-shadow: 0 20px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.1);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+}
+.card-1 .paper-sheet::before {
+  content: ''; position: absolute; inset: 8px;
+  border: 1px solid rgba(180,140,60,0.3); border-radius: 1px;
+}
+.card-1 .paper-title {
+  font-size: 4rem; font-weight: 900; color: #3d2a0a;
+  letter-spacing: 0.12em; font-family: "Noto Serif SC", "STSong", serif;
+  position: relative; z-index: 1;
+}
+.card-1 .paper-sub {
+  font-size: 1.1rem; color: rgba(60,30,5,0.55); letter-spacing: 0.15em;
+  margin-top: 12px; position: relative; z-index: 1;
+}
+.card-1 .paper-fiber {
+  position: absolute; inset: 0; opacity: 0.25;
+  background: repeating-linear-gradient(2deg, transparent, transparent 2px, rgba(139,100,43,0.5) 2px, rgba(139,100,43,0.5) 3px),
+              repeating-linear-gradient(92deg, transparent, transparent 6px, rgba(160,120,50,0.3) 6px, rgba(160,120,50,0.3) 7px);
+}
+.card-1 .hook-line {
+  position: absolute; bottom: 160px; left: 50%; transform: translateX(-50%);
+  font-size: 1.2rem; color: rgba(255,255,255,0.5); letter-spacing: 0.06em;
+  text-align: center;
+}
+.card-1 .hook-line strong { color: #c4a35a; }
+.card-1 .timeline-hint {
+  position: absolute; bottom: 200px; left: 50%; transform: translateX(-50%);
+  font-size: 0.85rem; color: rgba(255,255,255,0.25); letter-spacing: 0.1em;
+}
+
+/* ── Card 2: Talas ── */
+.card-2 .battle-year {
+  position: absolute; top: 100px; left: 50%; transform: translateX(-50%);
+  font-size: 7rem; font-weight: 900; color: rgba(199,91,58,0.08);
+  letter-spacing: -0.02em; font-family: "Georgia", serif;
+}
+.card-2 .battle-title {
+  position: absolute; top: 170px; left: 50%; transform: translateX(-50%);
+  font-size: 1.8rem; font-weight: 700; color: #c75b3a; letter-spacing: 0.08em;
+}
+.card-2 .battle-sub {
+  position: absolute; top: 225px; left: 50%; transform: translateX(-50%);
+  font-size: 0.95rem; color: rgba(255,255,255,0.35); letter-spacing: 0.08em;
+}
+.card-2 .forces {
+  position: absolute; top: 290px; left: 60px; right: 60px;
+  display: flex; gap: 30px; justify-content: center;
+}
+.card-2 .force {
+  flex: 1; max-width: 280px; padding: 30px 24px; border-radius: 16px;
+  text-align: center;
+  background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04);
+}
+.card-2 .force .f-icon { font-size: 2.8rem; margin-bottom: 10px; }
+.card-2 .force .f-name { font-size: 1.2rem; font-weight: 700; margin-bottom: 6px; }
+.card-2 .force .f-desc { font-size: 0.78rem; color: rgba(255,255,255,0.35); line-height: 1.5; }
+.card-2 .force.left .f-name { color: #5b9bd5; }
+.card-2 .force.right .f-name { color: #6aad6a; }
+.card-2 .vs { font-size: 2rem; color: rgba(255,255,255,0.15); align-self: center; font-weight: 900; }
+.card-2 .reveal {
+  position: absolute; bottom: 160px; left: 50%; transform: translateX(-50%);
+  font-size: 1.05rem; color: rgba(255,255,255,0.45); letter-spacing: 0.05em;
+  text-align: center; line-height: 1.7;
+}
+.card-2 .reveal em { font-style: normal; color: #c4a35a; font-weight: 600; }
+
+/* ── Card 3: Samarkand ── */
+.card-3 .mill-title {
+  position: absolute; top: 110px; left: 50%; transform: translateX(-50%);
+  font-size: 2rem; font-weight: 700; color: #c4a35a; letter-spacing: 0.08em;
+}
+.card-3 .mill-sub {
+  position: absolute; top: 170px; left: 50%; transform: translateX(-50%);
+  font-size: 1rem; color: rgba(255,255,255,0.35); letter-spacing: 0.08em;
+}
+.card-3 .process {
+  position: absolute; top: 250px; left: 80px; right: 80px; bottom: 180px;
+  display: flex; flex-direction: column; gap: 20px; justify-content: center;
+}
+.card-3 .step {
+  display: flex; align-items: center; gap: 24px;
+  padding: 16px 24px; border-radius: 14px;
+  background: rgba(255,255,255,0.015); border: 1px solid rgba(255,255,255,0.03);
+}
+.card-3 .step .s-num {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: rgba(196,163,90,0.1); border: 1px solid rgba(196,163,90,0.3);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.9rem; font-weight: 700; color: #c4a35a; flex-shrink: 0;
+}
+.card-3 .step .s-title { font-size: 1.05rem; font-weight: 600; color: #e8dcc8; margin-bottom: 2px; }
+.card-3 .step .s-desc { font-size: 0.78rem; color: rgba(255,255,255,0.35); }
+.card-3 .kaghad-box {
+  position: absolute; bottom: 120px; left: 50%; transform: translateX(-50%);
+  padding: 14px 28px; border-radius: 20px;
+  background: rgba(196,163,90,0.05); border: 1px solid rgba(196,163,90,0.12);
+  font-size: 0.85rem; color: rgba(255,255,255,0.4);
+}
+.card-3 .kaghad-box strong { color: #c4a35a; }
+
+/* ── Card 4: Baghdad ── */
+.card-4 .hikma-title {
+  position: absolute; top: 110px; left: 50%; transform: translateX(-50%);
+  font-size: 2.2rem; font-weight: 700; color: #5b9bd5; letter-spacing: 0.08em;
+}
+.card-4 .hikma-year {
+  position: absolute; top: 175px; left: 50%; transform: translateX(-50%);
+  font-size: 1rem; color: rgba(255,255,255,0.3);
+}
+.card-4 .knowledge-grid {
+  position: absolute; top: 250px; left: 70px; right: 70px; bottom: 180px;
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr; gap: 16px;
+}
+.card-4 .k-item {
+  border-radius: 16px; padding: 24px 20px; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; text-align: center;
+  background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04);
+}
+.card-4 .k-item .k-emoji { font-size: 2.2rem; margin-bottom: 8px; }
+.card-4 .k-item .k-label { font-size: 0.85rem; color: rgba(255,255,255,0.45); }
+.card-4 .impact {
+  position: absolute; bottom: 120px; left: 50%; transform: translateX(-50%);
+  font-size: 1rem; color: rgba(255,255,255,0.4); letter-spacing: 0.05em;
+  text-align: center;
+}
+
+/* ── Card 5: Journey Map ── */
+.card-5 .map-title {
+  position: absolute; top: 90px; left: 50%; transform: translateX(-50%);
+  font-size: 1.3rem; color: rgba(255,255,255,0.35); letter-spacing: 0.12em;
+}
+.card-5 .map-years {
+  position: absolute; top: 140px; left: 50%; transform: translateX(-50%);
+  font-size: 4.5rem; font-weight: 900; color: rgba(196,163,90,0.06);
+  letter-spacing: 0.06em; font-family: "Georgia", serif;
+}
+.card-5 .route-viz {
+  position: absolute; top: 260px; left: 60px; right: 60px; bottom: 120px;
+}
+.card-5 .route-stop {
+  display: flex; align-items: center; margin-bottom: 10px; position: relative;
+  padding-left: 60px;
+}
+.card-5 .route-stop .year-dot {
+  position: absolute; left: 18px; width: 12px; height: 12px; border-radius: 50%;
+  background: #c4a35a; border: 2px solid rgba(196,163,90,0.3);
+}
+.card-5 .route-stop .year-dot.start { width: 16px; height: 16px; left: 16px; background: #d4a853; }
+.card-5 .route-stop .year-dot.end { width: 16px; height: 16px; left: 16px; background: #fff; border-color: rgba(255,255,255,0.4); }
+.card-5 .route-stop .stop-year {
+  position: absolute; left: 0; font-size: 0.7rem; color: rgba(196,163,90,0.6);
+  width: 50px; text-align: right; font-weight: 600;
+}
+.card-5 .route-stop .stop-name {
+  font-size: 1.15rem; font-weight: 600; color: #e8dcc8; letter-spacing: 0.04em;
+}
+.card-5 .route-stop .stop-desc {
+  font-size: 0.72rem; color: rgba(255,255,255,0.3); margin-left: 12px;
+}
+.card-5 .route-stop .line {
+  position: absolute; left: 23px; top: 20px; width: 1px; height: 26px;
+  background: rgba(196,163,90,0.2);
+}
+.card-5 .route-total {
+  position: absolute; bottom: 80px; left: 50%; transform: translateX(-50%);
+  font-size: 0.95rem; color: rgba(255,255,255,0.35); letter-spacing: 0.06em;
+}
+
+/* ── Card 6: Cairo ── */
+.card-6 .versus-viz {
+  position: absolute; top: 120px; left: 60px; right: 60px; bottom: 200px;
+  display: flex; gap: 30px;
+}
+.card-6 .vs-item {
+  flex: 1; border-radius: 20px; padding: 36px 24px;
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+}
+.card-6 .vs-item.old {
+  background: rgba(139,115,85,0.04); border: 1px solid rgba(139,115,85,0.1);
+}
+.card-6 .vs-item.new {
+  background: rgba(196,163,90,0.04); border: 1px solid rgba(196,163,90,0.15);
+}
+.card-6 .vs-item .vs-emoji { font-size: 3.5rem; margin-bottom: 16px; }
+.card-6 .vs-item .vs-name { font-size: 1.4rem; font-weight: 700; margin-bottom: 10px; }
+.card-6 .vs-item.old .vs-name { color: #8b7355; }
+.card-6 .vs-item.new .vs-name { color: #c4a35a; }
+.card-6 .vs-item .vs-stat { font-size: 0.85rem; color: rgba(255,255,255,0.3); line-height: 1.6; }
+.card-6 .vs-vs {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  width: 50px; height: 50px; border-radius: 50%;
+  background: #c75b3a; color: #fff; display: flex; align-items: center;
+  justify-content: center; font-weight: 900; font-size: 1rem;
+  box-shadow: 0 0 30px rgba(199,91,58,0.4); z-index: 2;
+}
+.card-6 .verdict {
+  position: absolute; bottom: 130px; left: 50%; transform: translateX(-50%);
+  font-size: 1.15rem; color: rgba(255,255,255,0.45); letter-spacing: 0.05em;
+}
+
+/* ── Card 7: Gutenberg ── */
+.card-7 .press-year {
+  position: absolute; top: 100px; left: 50%; transform: translateX(-50%);
+  font-size: 7rem; font-weight: 900; color: rgba(196,163,90,0.05);
+  letter-spacing: -0.02em; font-family: "Georgia", serif;
+}
+.card-7 .press-title {
+  position: absolute; top: 170px; left: 50%; transform: translateX(-50%);
+  font-size: 1.8rem; font-weight: 700; color: #e8dcc8; letter-spacing: 0.06em;
+}
+.card-7 .math-box {
+  position: absolute; top: 270px; left: 100px; right: 100px;
+  display: flex; gap: 20px; align-items: center; justify-content: center;
+}
+.card-7 .math-item {
+  text-align: center; padding: 30px 24px; border-radius: 16px;
+  background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04);
+  flex: 1; max-width: 220px;
+}
+.card-7 .math-item .m-num {
+  font-size: 3rem; font-weight: 900; color: #c4a35a; letter-spacing: -0.02em;
+  line-height: 1;
+}
+.card-7 .math-item .m-label {
+  font-size: 0.8rem; color: rgba(255,255,255,0.35); margin-top: 8px;
+}
+.card-7 .math-op {
+  font-size: 2rem; color: rgba(255,255,255,0.15);
+}
+.card-7 .math-result {
+  margin-top: 20px; text-align: center; font-size: 1.1rem; color: rgba(255,255,255,0.5);
+}
+.card-7 .math-result strong { color: #c75b3a; }
+.card-7 .conclusion {
+  position: absolute; bottom: 130px; left: 60px; right: 60px; text-align: center;
+  font-size: 1rem; color: rgba(255,255,255,0.4); line-height: 1.6;
+}
+
+/* ── Card 8: CTA ── */
+.card-8 .cta-frame {
+  position: absolute; top: 120px; left: 60px; right: 60px; bottom: 180px;
+  background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 24px; display: flex; flex-direction: column; align-items: center;
+  justify-content: center; padding: 40px;
+}
+.card-8 .cta-frame .logo { font-size: 3rem; margin-bottom: 20px; }
+.card-8 .cta-frame .cta-title {
+  font-size: 1.6rem; font-weight: 700; color: #c4a35a;
+  letter-spacing: 0.06em; margin-bottom: 10px; text-align: center;
+}
+.card-8 .cta-frame .cta-desc {
+  font-size: 0.95rem; color: rgba(255,255,255,0.35);
+  letter-spacing: 0.04em; text-align: center; line-height: 1.6;
+}
+.card-8 .cta-frame .cta-desc em { font-style: normal; color: #c4a35a; }
+.card-8 .cta-frame .url-box {
+  margin-top: 24px; padding: 12px 24px; border-radius: 24px;
+  background: rgba(196,163,90,0.06); border: 1px solid rgba(196,163,90,0.15);
+  font-size: 0.8rem; color: #c4a35a; letter-spacing: 0.04em;
+  font-family: "SF Mono", "Menlo", monospace;
+}
+.card-8 .tag-cloud {
+  position: absolute; bottom: 120px; left: 60px; right: 60px;
+  display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;
+}
+.card-8 .tag {
+  font-size: 0.72rem; padding: 5px 12px; border-radius: 12px;
+  background: rgba(255,255,255,0.02); color: rgba(255,255,255,0.35);
+}
+
+/* ── Toolbar ── */
+.toolbar {
+  position: fixed; top: 10px; left: 50%; transform: translateX(-50%);
+  z-index: 9999; display: flex; gap: 6px; flex-wrap: wrap; justify-content: center;
+  background: rgba(0,0,0,0.82); padding: 8px 14px; border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.toolbar button {
+  padding: 5px 10px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.04); color: #aaa; cursor: pointer;
+  font-size: 0.68rem; transition: all 0.2s; font-family: inherit;
+}
+.toolbar button:hover { background: rgba(196,163,90,0.15); border-color: #c4a35a; color: #c4a35a; }
+.toolbar button.active { background: #c4a35a; color: #0d0a05; border-color: #c4a35a; font-weight: 600; }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <button onclick="scrollToCard(0)">1</button>
+  <button onclick="scrollToCard(1)">2·怛罗斯</button>
+  <button onclick="scrollToCard(2)">3·撒马尔罕</button>
+  <button onclick="scrollToCard(3)">4·智慧宫</button>
+  <button onclick="scrollToCard(4)">5·700年地图</button>
+  <button onclick="scrollToCard(5)">6·莎草纸vs纸</button>
+  <button onclick="scrollToCard(6)">7·古腾堡</button>
+  <button onclick="scrollToCard(7)">8·CTA</button>
+</div>
+
+<!-- ═══ 1: Cover ═══ -->
+<div class="card card-1">
+  <div class="bg-texture"></div>
+  <div class="card-num">1 / 8</div>
+  <div class="paper-sheet">
+    <div class="paper-fiber"></div>
+    <div class="paper-title">纸传天下</div>
+    <div class="paper-sub">PAPER TRANSFORMS THE WORLD</div>
+  </div>
+  <div class="timeline-hint">751 — 1450 · 七百年旅程</div>
+  <div class="hook-line">
+    中国最伟大的技术输出<br>
+    始于<strong>一场败仗</strong>
+  </div>
+  <div class="card-footer">丝绸之路交互知识图谱 · 第16篇</div>
+</div>
+
+<!-- ═══ 2: Talas ═══ -->
+<div class="card card-2">
+  <div class="bg-texture"></div>
+  <div class="card-num">2 / 8</div>
+  <div class="battle-year">751</div>
+  <div class="battle-title">怛罗斯之战</div>
+  <div class="battle-sub">唐 · 天宝十年七月</div>
+
+  <div class="forces">
+    <div class="force left">
+      <div class="f-icon">🏯</div>
+      <div class="f-name">唐安西军</div>
+      <div class="f-desc">主帅高仙芝<br>三万步骑 · 葛逻禄盟军</div>
+    </div>
+    <div class="vs">VS</div>
+    <div class="force right">
+      <div class="f-icon">🕌</div>
+      <div class="f-name">阿拔斯王朝</div>
+      <div class="f-desc">主帅齐亚德·噶利<br>大食精锐 · 吐蕃盟军</div>
+    </div>
+  </div>
+
+  <div class="reveal">
+    鏖战五日。第六天，葛逻禄<em>倒戈</em><br>
+    唐军大败 · 两万战俘押往撒马尔罕<br>
+    <em>其中有几个造纸匠人</em>
+  </div>
+  <div class="card-footer">波斯学者萨阿利比《稀世珍宝录》记载此事</div>
+</div>
+
+<!-- ═══ 3: Samarkand Mill ═══ -->
+<div class="card card-3">
+  <div class="bg-texture"></div>
+  <div class="card-num">3 / 8</div>
+  <div class="mill-title">撒马尔罕 · 第一座纸坊</div>
+  <div class="mill-sub">中国境外第一座造纸工场</div>
+
+  <div class="process">
+    <div class="step">
+      <div class="s-num">浸</div>
+      <div>
+        <div class="s-title">浸泡</div>
+        <div class="s-desc">亚麻破布和麻绳头在水中浸泡数日，纤维软化</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="s-num">舂</div>
+      <div>
+        <div class="s-title">舂捣</div>
+        <div class="s-desc">石臼反复舂捣成浆——比中原多加一道工序，适应粗纤维</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="s-num">抄</div>
+      <div>
+        <div class="s-title">抄纸</div>
+        <div class="s-desc">竹帘从浆槽中捞出一层薄膜——整张纸的雏形</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="s-num">晾</div>
+      <div>
+        <div class="s-title">晾干 & 砑光</div>
+        <div class="s-desc">墙上晾干后用光滑石块砑光——纸面平整如镜</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="kaghad-box">
+    阿拉伯语「纸」= <strong>kāghad</strong> ← 粟特语 ← 汉语「楮纸」
+  </div>
+  <div class="card-footer">比鲁尼《印度志》：「造纸始于中国」</div>
+</div>
+
+<!-- ═══ 4: Baghdad House of Wisdom ═══ -->
+<div class="card card-4">
+  <div class="bg-texture"></div>
+  <div class="card-num">4 / 8</div>
+  <div class="hikma-title">智慧宫</div>
+  <div class="hikma-year">巴格达 · 794年第二座纸坊 → 830年智慧宫落成</div>
+
+  <div class="knowledge-grid">
+    <div class="k-item">
+      <div class="k-emoji">🏛️</div>
+      <div class="k-label">希腊哲学</div>
+    </div>
+    <div class="k-item">
+      <div class="k-emoji">🏥</div>
+      <div class="k-label">波斯医学</div>
+    </div>
+    <div class="k-item">
+      <div class="k-emoji">🔢</div>
+      <div class="k-label">印度数学</div>
+    </div>
+    <div class="k-item">
+      <div class="k-emoji">🌟</div>
+      <div class="k-label">天文学</div>
+    </div>
+    <div class="k-item">
+      <div class="k-emoji">🧪</div>
+      <div class="k-label">炼金术/化学</div>
+    </div>
+    <div class="k-item">
+      <div class="k-emoji">📐</div>
+      <div class="k-label">几何学</div>
+    </div>
+  </div>
+
+  <div class="impact">
+    宰相下令：<strong style="color:#5b9bd5">政府公文一律用纸</strong><br>
+    纸上的字无法无损擦除——天然的防伪材料
+  </div>
+  <div class="card-footer">花拉子密在纸上推演代数 · 肯迪在纸上论证哲学</div>
+</div>
+
+<!-- ═══ 5: Journey Map ═══ -->
+<div class="card card-5">
+  <div class="bg-texture"></div>
+  <div class="card-num">5 / 8</div>
+  <div class="map-title">THE 700-YEAR JOURNEY</div>
+  <div class="map-years">700</div>
+
+  <div class="route-viz">
+    <div class="route-stop">
+      <div class="stop-year">751</div>
+      <div class="year-dot start"></div>
+      <span class="stop-name">长安 → 怛罗斯</span>
+      <span class="stop-desc">战败 · 造纸匠被俘</span>
+    </div>
+    <div class="route-stop">
+      <div class="line"></div>
+      <div class="stop-year">751</div>
+      <div class="year-dot"></div>
+      <span class="stop-name">撒马尔罕</span>
+      <span class="stop-desc">第一座境外纸坊</span>
+    </div>
+    <div class="route-stop">
+      <div class="line"></div>
+      <div class="stop-year">794</div>
+      <div class="year-dot"></div>
+      <span class="stop-name">巴格达</span>
+      <span class="stop-desc">智慧宫 · 百年翻译运动</span>
+    </div>
+    <div class="route-stop">
+      <div class="line"></div>
+      <div class="stop-year">~900</div>
+      <div class="year-dot"></div>
+      <span class="stop-name">大马士革 → 开罗</span>
+      <span class="stop-desc">莎草纸退出历史</span>
+    </div>
+    <div class="route-stop">
+      <div class="line"></div>
+      <div class="stop-year">~1100</div>
+      <div class="year-dot"></div>
+      <span class="stop-name">菲兹（摩洛哥）</span>
+      <span class="stop-desc">造纸术跨过北非</span>
+    </div>
+    <div class="route-stop">
+      <div class="line"></div>
+      <div class="stop-year">~1150</div>
+      <div class="year-dot"></div>
+      <span class="stop-name">哈提瓦（西班牙）</span>
+      <span class="stop-desc">🇪🇺 欧洲第一座纸坊</span>
+    </div>
+    <div class="route-stop">
+      <div class="line"></div>
+      <div class="stop-year">~1264</div>
+      <div class="year-dot"></div>
+      <span class="stop-name">法布里亚诺（意大利）</span>
+      <span class="stop-desc">水印技术 · 动物胶施胶</span>
+    </div>
+    <div class="route-stop">
+      <div class="line"></div>
+      <div class="stop-year">~1450</div>
+      <div class="year-dot end"></div>
+      <span class="stop-name">古腾堡印刷机</span>
+      <span class="stop-desc">纸 + 印刷 = 知识爆炸</span>
+    </div>
+  </div>
+
+  <div class="route-total">长安 → 欧洲：700年 · 一场败仗开始的接力</div>
+  <div class="card-footer">每一步，纸都在改变它到达的文明</div>
+</div>
+
+<!-- ═══ 6: Paper vs Papyrus ═══ -->
+<div class="card card-6">
+  <div class="bg-texture"></div>
+  <div class="card-num">6 / 8</div>
+
+  <div class="versus-viz" style="position:relative">
+    <div class="vs-item old">
+      <div class="vs-emoji">📜</div>
+      <div class="vs-name">莎草纸</div>
+      <div class="vs-stat">
+        只用一面写<br>
+        易碎、怕潮<br>
+        原料：尼罗河莎草<br>
+        <strong style="color:#8b7355">用了三千年</strong>
+      </div>
+    </div>
+    <div class="vs-vs">VS</div>
+    <div class="vs-item new">
+      <div class="vs-emoji">📄</div>
+      <div class="vs-name">纸</div>
+      <div class="vs-stat">
+        正反两面写<br>
+        可折叠、不易碎<br>
+        原料：破布麻绳<br>
+        <strong style="color:#c4a35a">便宜十倍</strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="verdict">
+    开罗 · 约900年<br>
+    纸到来的<strong style="color:#c75b3a">一个世纪内</strong>，莎草纸退出历史舞台
+  </div>
+  <div class="card-footer">埃及人种了三千年纸莎草，不如一张纸</div>
+</div>
+
+<!-- ═══ 7: Gutenberg ═══ -->
+<div class="card card-7">
+  <div class="bg-texture"></div>
+  <div class="card-num">7 / 8</div>
+  <div class="press-year">1450</div>
+  <div class="press-title">古腾堡遇见纸</div>
+
+  <div class="math-box">
+    <div class="math-item">
+      <div class="m-num">300</div>
+      <div class="m-label">张羊皮<br>一本手抄《圣经》</div>
+    </div>
+    <div class="math-op">→</div>
+    <div class="math-item">
+      <div class="m-num">1</div>
+      <div class="m-label">只羊的价钱<br>一本印刷《圣经》</div>
+    </div>
+  </div>
+
+  <div class="math-result">
+    活字印刷 + 纸 = <strong>知识不再是特权</strong>
+  </div>
+
+  <div class="conclusion">
+    宗教改革 · 科学革命 · 启蒙运动<br>
+    三个改变人类走向的巨变<br>
+    都建立在<strong style="color:#c4a35a">同一片薄薄的纤维毡</strong>之上
+  </div>
+  <div class="card-footer">那几个怛罗斯造纸匠的名字无人知晓 · 他们的手艺覆盖了地球</div>
+</div>
+
+<!-- ═══ 8: CTA ═══ -->
+<div class="card card-8">
+  <div class="bg-texture"></div>
+  <div class="card-num">8 / 8</div>
+
+  <div class="cta-frame">
+    <div class="logo">📜</div>
+    <div class="cta-title">纸传天下 · 交互故事已上线</div>
+    <div class="cta-desc">
+      5章交互叙事 · 从怛罗斯到古腾堡<br>
+      地图跟随章节飞行 · <em>读到哪里，飞到哪里</em>
+    </div>
+    <div class="url-box">
+      scarlettlab2026.github.io/silk-road-2026/story16.html
+    </div>
+  </div>
+
+  <div class="tag-cloud">
+    <span class="tag">#丝绸之路</span>
+    <span class="tag">#造纸术</span>
+    <span class="tag">#四大发明</span>
+    <span class="tag">#怛罗斯之战</span>
+    <span class="tag">#冷门历史</span>
+    <span class="tag">#交互地图</span>
+    <span class="tag">#撒马尔罕</span>
+    <span class="tag">#知识可视化</span>
+  </div>
+  <div class="card-footer">全站 16篇故事 · 61座古城 · 免费开放</div>
+</div>
+
+<script>
+function scrollToCard(idx) {
+  const cards = document.querySelectorAll('.card');
+  if (cards[idx]) cards[idx].scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const idx = Array.from(document.querySelectorAll('.card')).indexOf(entry.target);
+      document.querySelectorAll('.toolbar button').forEach((btn, i) => {
+        btn.classList.toggle('active', i === idx);
+      });
+    }
+  });
+}, { threshold: 0.6 });
+document.querySelectorAll('.card').forEach(card => observer.observe(card));
+</script>
+</body>
+</html>
