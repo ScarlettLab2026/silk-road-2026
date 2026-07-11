@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>纸传天下 · 造纸术的西行之路</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<link rel="stylesheet" href="css/story-common.css" />
+<style>
+:root {
+  --bg: #0d0a05; --card-bg: rgba(196,163,90,0.92); --accent: #c4a35a;
+  --text: #e8dcc8; --text-dim: #9a8a60; --border: rgba(255,255,255,0.08);
+  --accent-r: 196; --accent-g: 163; --accent-b: 90;
+}
+</style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<div id="story-nav">
+  <a href="story.html">📖 张骞</a>
+  <a href="story8.html">⚔ 班超</a>
+  <a href="story4.html">🪷 法显</a>
+  <a href="story13.html">🔥 鸠摩罗什</a>
+  <a href="story3.html">🧘 玄奘</a>
+  <a href="story15.html">🌊 义净</a>
+  <a href="story16.html" class="active">📜 纸传天下</a>
+  <a href="story6.html">🏜 杜环</a>
+  <a href="story10.html">☯️ 丘处机</a>
+  <a href="story5.html">🏛 马可·波罗</a>
+  <a href="story9.html">✝️ 拉班·扫马</a>
+  <a href="story11.html">⛵ 亦黑迷失</a>
+  <a href="story12.html">🛕 周达观</a>
+  <a href="story7.html">⚓ 汪大渊</a>
+  <a href="story14.html">🌍 白图泰</a>
+  <a href="story2.html">🚢 郑和</a>
+</div>
+
+<div id="progress"></div>
+
+<a href="index.html" id="back">← 返回地图</a>
+<button id="theme-toggle" onclick="toggleTheme()">☀️</button>
+<a href="sponsor.html" id="sponsor-btn" title="支持项目">☕ 支持</a>
+<button id="restart" onclick="restart()">🔄 重播</button>
+
+<div id="narrative" onclick="advance()">
+  <button id="toggle-card" onclick="event.stopPropagation();toggleCard()" title="收起/展开">─</button>
+  <div class="chapter-num" id="chNum"></div>
+  <h2 id="chTitle"></h2>
+  <p id="chBody"></p>
+  <div id="badges" style="margin:8px 0 0;line-height:1.8"></div>
+  <div class="hint"><span class="arrow">→</span> 点击继续</div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+const STORY_CONFIG = {
+  accent: '#c4a35a',
+  accentRgb: '196,163,90',
+  mapCenter: [36, 50],
+  mapZoom: 3.5,
+  startCities: ['changan'],
+  restartEmoji: '📜',
+  tileBg: '#0d0a05'
+};
+
+const STORY = [
+  {
+    title: '怛罗斯',
+    subtitle: '公元751年 · 怛罗斯河畔',
+    body: '天宝十年七月，安西节度使高仙芝率三万唐军深入中亚，在怛罗斯河畔与阿拔斯王朝大军相遇。高仙芝——高句丽裔的大唐名将，曾率军横越帕米尔高原、远征小勃律，威震西域。但这一次，他的对手是齐亚德·噶利率领的大食精锐。双方鏖战五日，不分胜负。第六天，唐军阵营中的葛逻禄雇佣兵突然倒戈，从背后发起冲锋。唐军阵脚大乱，全线溃败。高仙芝率数千残兵突围东归——但超过两万唐军被俘，押往撒马尔罕。俘虏中有铁匠、织工、画师、金银匠……还有几个身份特殊的匠人。他们造的东西洁白、轻薄、双面可写——阿拉伯人从未见过这种东西。十一世纪的波斯学者萨阿利比在《稀世珍宝录》中记载此事：俘虏中有一人通晓造纸之术，他将此艺传授给了撒马尔罕人。杜环——另一位被俘的唐军书记官，十一年后从海路回到中国，在他的《经行记》中留下了对阿拉伯世界的珍贵记录。没人知道那几个造纸匠的名字。但他们手中传下去的，是未来一千年里最强大的知识载体。',
+    lat: 42.9, lng: 71.37, zoom: 5,
+    route: ['changan', 'dunhuang', 'kashgar', 'talas'],
+    marker: 'talas',
+    showCities: ['changan', 'talas', 'samarkand'],
+    highlight: ['battle-of-talas', 'paper', 'gao-xianzhi', 'du-huan']
+  },
+  {
+    title: '撒马尔罕的纸',
+    subtitle: '8世纪下半叶 · 撒马尔罕',
+    body: '撒马尔罕——粟特人的千年商都，丝路最富庶的十字路口。被俘的中国工匠在这里建起了中国境外的第一座造纸坊。原料就地取材：中原用楮树皮、麻头和破布，这里改用当地遍地的亚麻和棉花。但工艺一脉相承——浸泡、切割、舂捣、制浆、抄纸、晾干、砑光。撒马尔罕纸比埃及莎草纸更光滑，怎么折也不碎，正反两面都能写。更重要的是，原料取之不尽——破布和麻绳头，哪座城没有？不出三十年，撒马尔罕纸行销整个阿拉伯世界，成为最紧俏的商品。阿拉伯语中的「纸」叫kāghad——这个词借自粟特语k\'γδ\'，粟特语又来自汉语「楮纸」的古音。一个词的旅行，本身就是一条微缩的丝路。大科学家比鲁尼在《印度志》中确认了这一事实：「造纸始于中国……中国战俘把造纸法输入撒马尔罕，从那以后许多地方都造起纸来。」撒马尔罕的纸，是技术传播史上的第一个海外据点。而它只是起点。',
+    lat: 39.66, lng: 66.96, zoom: 5,
+    route: ['talas', 'samarkand'],
+    marker: 'samarkand',
+    showCities: ['samarkand', 'talas', 'baghdad', 'changan'],
+    highlight: ['paper', 'paper-spread-west', 'du-huan-travels']
+  },
+  {
+    title: '智慧宫的纸',
+    subtitle: '794年 · 巴格达',
+    body: '794年，怛罗斯之战四十三年后，阿拔斯王朝在首都巴格达建立了第二座造纸工场。这一次，不再是俘虏的被动传授——是哈里发哈伦·拉希德主动从撒马尔罕请来了中国造纸匠人。宰相贾法尔随即下令：政府公文一律用纸书写，不再使用昂贵的羊皮纸和脆弱的莎草纸。为什么选纸？因为写在纸上的字无法无损擦除——对防伪来说，这是革命性的安全特性。纸取代了羊皮纸和莎草纸。三十年后，哈里发马蒙在巴格达创办智慧宫——集图书馆、翻译院、天文台于一体的学术殿堂。数百名学者在这里将希腊哲学、波斯医学、印度数学翻译成阿拉伯文。柏拉图和亚里士多德、托勒密和盖伦、婆罗门笈多和遮罗迦——全世界的智慧被誊写在纸上。花拉子密在纸上推演代数方程；肯迪在纸上论证哲学命题；拉齐兹在纸上记录临床观察。没有纸，就没有翻译运动。没有翻译运动，欧洲就无法通过阿拉伯中介重新发现希腊——也就没有后来的文艺复兴。一张纸，托起了一个黄金时代。',
+    lat: 33.32, lng: 44.42, zoom: 5,
+    route: ['samarkand', 'baghdad'],
+    marker: 'baghdad',
+    showCities: ['baghdad', 'samarkand', 'damascus', 'mecca'],
+    highlight: ['paper-spread-west', 'al-khwarizmi']
+  },
+  {
+    title: '纸过地中海',
+    subtitle: '9 — 12世纪 · 大马士革 → 开罗 → 菲兹 → 哈提瓦',
+    body: '从巴格达出发，造纸术沿着地中海的南岸一路向西。大马士革在九世纪建立了规模宏大的造纸工场——「大马士革纸」成为欧洲用纸的主要供应源，沿威尼斯商船航线运往基督教世界。约900年，法蒂玛王朝首都开罗建起非洲第一座纸坊。在这里，纸完成了对莎草纸的最后一击。埃及人种了三千年的纸莎草，在纸到来的一个世纪内彻底退出了书写舞台。这不是巧合——纸可以双面书写，可以折叠成册，原料在城市里随处可见，成本不到莎草纸的十分之一。从开罗出发，造纸术沿北非海岸继续西进——约1100年到达摩洛哥的菲兹。但最关键的一步还在前面。1150年前后，后倭马亚王朝统治下的伊斯兰西班牙——哈提瓦，建立了欧洲大陆的第一座造纸工场。纸，第一次踏上了欧洲的土地。它从撒马尔罕走到这里，用了整整四百年。',
+    lat: 38.99, lng: -0.52, zoom: 5.5,
+    route: ['baghdad', 'damascus', 'cairo', 'fez', 'xativa'],
+    marker: 'xativa',
+    showCities: ['damascus', 'cairo', 'fez', 'xativa', 'venice'],
+    highlight: ['paper-spread-west']
+  },
+  {
+    title: '纸的时代',
+    subtitle: '12 — 15世纪 · 从哈提瓦到整个欧洲',
+    body: '从哈提瓦出发，造纸术进入基督教欧洲。意大利的法布里亚诺（约1264年）建立了意大利第一座纸坊，并做出了关键创新——水印技术（防伪标识）和动物胶表面施胶（让纸更耐墨水渗透）。此后一百年，造纸工场如雨后春笋：法国（1348）、德国纽伦堡（1390）、英国（1494）。而德国人古腾堡在1450年前后发明的活字印刷机，恰好等到了纸。纸和印刷术的结合——这是人类传播史上最猛烈的一次相变。在纸之前，一本手抄《圣经》需要三百张羊皮。在纸和印刷术之后，一本《圣经》的成本降到一只羊的价钱。知识从此不再是贵族和教士的专利。宗教改革、科学革命、启蒙运动——这三个改变人类走向的巨变，都建立在同一片薄薄的纤维毡之上。从长安到哈提瓦：七百年。从哈提瓦到古腾堡：三百年。一张由破布和麻绳头变成的纸，走了一千年，走到了每一个能写字的人手中。而那几位在怛罗斯被俘的造纸匠人——没有人知道他们的名字。但他们的手艺，覆盖了整个地球。',
+    lat: 43.33, lng: 12.90, zoom: 5.5,
+    route: ['xativa', 'venice'],
+    marker: null,
+    showCities: ['xativa', 'venice', 'paris', 'changan'],
+    highlight: ['paper', 'paper-spread-west']
+  }
+];
+</script>
+<script src="js/story-engine.js"></script>
+</body>
+</html>

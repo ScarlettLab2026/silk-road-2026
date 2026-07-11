@@ -2,8 +2,8 @@
   "meta": {
     "title": "丝绸之路知识图谱",
     "title_en": "Silk Road Knowledge Graph",
-    "version": "v1.13.0",
-    "last_updated": "2026-07-08",
+    "version": "v1.14.1",
+    "last_updated": "2026-07-11",
     "description": "一个关于丝绸之路的结构化开放数据集，涵盖城市、人物、物产、事件四大类实体及其关联关系。",
     "description_en": "An open structured dataset about the Silk Road, covering cities, figures, goods, and events and their interconnections."
   },
@@ -1146,6 +1146,132 @@
         "description": "古印度孟加拉湾最重要的贸易港口，位于恒河三角洲。法显从此乘商船前往斯里兰卡，义净从此登陆印度前往那烂陀。是海上丝路连接东南亚与印度的关键枢纽。",
         "description_en": "The most important trading port on the Bay of Bengal in ancient India, located on the Ganges delta. Faxian departed from here by merchant ship for Sri Lanka; Yijing landed here en route to Nalanda. A key maritime Silk Road hub linking Southeast Asia with India.",
         "significance": 4
+      },
+      {
+        "id": "talas",
+        "name": "怛罗斯",
+        "name_en": "Talas",
+        "modern_name": "塔拉兹",
+        "modern_name_en": "Taraz",
+        "country": "哈萨克斯坦",
+        "country_en": "Kazakhstan",
+        "lat": 42.9,
+        "lng": 71.37,
+        "era": "唐",
+        "dynasties": [
+          "唐"
+        ],
+        "role": "古战场",
+        "role_en": "Ancient Battlefield",
+        "description": "751年唐军与大食在此交战。战后被俘的唐军造纸工匠将造纸术传入撒马尔罕，技术从此西传。",
+        "description_en": "Site of the 751 CE battle between Tang China and the Abbasid Caliphate. Captured Tang papermakers brought papermaking to Samarkand, launching the technology's westward spread.",
+        "significance": 4
+      },
+      {
+        "id": "cairo",
+        "name": "开罗",
+        "name_en": "Cairo",
+        "modern_name": "开罗",
+        "modern_name_en": "Cairo",
+        "country": "埃及",
+        "country_en": "Egypt",
+        "lat": 30.04,
+        "lng": 31.24,
+        "era": "7世纪 — 今",
+        "dynasties": [
+          "法蒂玛",
+          "阿尤布",
+          "马穆鲁克"
+        ],
+        "role": "非洲造纸中心",
+        "role_en": "African Paper Center",
+        "description": "法蒂玛王朝首都，约900年建立非洲第一座造纸工场。纸在这里最终取代了延续三千年的莎草纸，成为地中海世界的书写材料。",
+        "description_en": "Fatimid capital where Africa's first paper mill was established around 900 CE. Paper finally supplanted papyrus here after three millennia, becoming the writing material of the Mediterranean world.",
+        "significance": 4
+      },
+      {
+        "id": "xativa",
+        "name": "哈提瓦",
+        "name_en": "Xàtiva",
+        "modern_name": "哈提瓦",
+        "modern_name_en": "Xàtiva",
+        "country": "西班牙",
+        "country_en": "Spain",
+        "lat": 38.99,
+        "lng": -0.52,
+        "era": "12世纪",
+        "dynasties": [
+          "后倭马亚"
+        ],
+        "role": "欧洲第一个造纸中心",
+        "role_en": "First European Paper Center",
+        "description": "后倭马亚王朝统治下的伊斯兰西班牙城市，约1150年建立了欧洲第一座造纸工场。造纸术由此传入基督教欧洲，改变了整个大陆的书写文明。",
+        "description_en": "A city in Islamic Spain where Europe's first paper mill was established around 1150 CE. Papermaking crossed into Christian Europe from here, transforming the continent's written culture.",
+        "significance": 4
+      },
+      {
+        "id": "cordoba",
+        "name": "科尔多瓦",
+        "name_en": "Cordoba",
+        "modern_name": "科尔多瓦",
+        "modern_name_en": "Cordoba",
+        "country": "西班牙",
+        "country_en": "Spain",
+        "lat": 37.88,
+        "lng": -4.78,
+        "era": "8 — 13世纪",
+        "dynasties": [
+          "后倭马亚"
+        ],
+        "role": "安达卢斯文化中心",
+        "role_en": "Al-Andalus Cultural Center",
+        "description": "后倭马亚王朝在伊比利亚半岛的首都，10世纪时与巴格达、君士坦丁堡并列为欧洲—伊斯兰世界的文化中心。拥有当时欧洲最大的图书馆（藏书40万册），造纸术经此传入西欧。",
+        "description_en": "Capital of the Umayyad Caliphate in Iberia. In the 10th century it rivaled Baghdad and Constantinople as a cultural center. It housed Europe's largest library (400,000 volumes), and papermaking technology entered Western Europe through here.",
+        "significance": 5
+      },
+      {
+        "id": "tabriz",
+        "name": "大不里士",
+        "name_en": "Tabriz",
+        "modern_name": "大不里士",
+        "modern_name_en": "Tabriz",
+        "country": "伊朗",
+        "country_en": "Iran",
+        "lat": 38.08,
+        "lng": 46.29,
+        "era": "13 — 15世纪",
+        "dynasties": [
+          "伊尔汗国",
+          "萨法维"
+        ],
+        "role": "伊尔汗国贸易中心",
+        "role_en": "Ilkhanate Trade Hub",
+        "description": "蒙古伊尔汗国的首都及近东最大的贸易枢纽之一。丝路商人从中国、印度、波斯和欧洲在此交汇，马可·波罗和伊本·白图泰均途经此城。",
+        "description_en": "Capital of the Mongol Ilkhanate and one of the Near East's greatest trading hubs. Merchants from China, India, Persia and Europe converged here; both Marco Polo and Ibn Battuta passed through.",
+        "significance": 4
+      },
+      {
+        "id": "aleppo",
+        "name": "阿勒颇",
+        "name_en": "Aleppo",
+        "modern_name": "阿勒颇",
+        "modern_name_en": "Aleppo",
+        "country": "叙利亚",
+        "country_en": "Syria",
+        "lat": 36.2,
+        "lng": 37.16,
+        "era": "公元前 — 今",
+        "dynasties": [
+          "罗马",
+          "倭马亚",
+          "阿拔斯",
+          "奥斯曼"
+        ],
+        "role": "地中海东岸贸易枢纽",
+        "role_en": "Eastern Mediterranean Trade Hub",
+        "description": "人类最古老的持续居住城市之一。位于丝路西段的十字路口，连接巴格达、大马士革和地中海港口，是中世纪近东最重要的商队集散地之一。",
+        "description_en": "One of the oldest continuously inhabited cities. Located at the crossroads of the western Silk Road, connecting Baghdad, Damascus, and Mediterranean ports, it was a major caravan entrepot in the medieval Near East.",
+        "significance": 4
       }
     ],
     "figures": [
@@ -1419,6 +1545,17 @@
         "description": "元朝海上使节，多次奉命出使南海和印度洋。到达过马八儿（科罗曼德海岸）、俱蓝（奎隆）、苏门答腊等地，为元朝与印度洋诸国建立了外交联系，促进了海上丝路的官方往来。",
         "description_en": "Yuan dynasty maritime envoy who traveled repeatedly to Southeast Asia and the Indian Ocean. Reached Coromandel, Quilon, and Sumatra, establishing diplomatic ties between Yuan China and Indian Ocean kingdoms.",
         "significance": 3
+      },
+      {
+        "id": "gao-xianzhi",
+        "name": "高仙芝",
+        "name_en": "Gao Xianzhi",
+        "type": "唐安西节度使",
+        "era": "唐",
+        "era_range": "? — 756",
+        "description": "唐朝名将，高句丽裔。任安西节度使期间远征小勃律、横越帕米尔高原，威震中亚。751年率唐军与大食交战于怛罗斯，虽败，被俘唐军造纸工匠却将造纸术传入中亚——一场败仗意外开启了改变世界的技术传播。756年因安史之乱中被诬陷处死。",
+        "description_en": "Tang dynasty general of Goguryeo descent. As Protector-General of the Western Regions, he crossed the Pamirs to conquer Baltistan. In 751 he led Tang forces at the Battle of Talas against the Abbasids — though defeated, his captured papermakers brought papermaking to Central Asia, accidentally launching a world-changing technology transfer. Executed in 756 after being framed during the An Lushan Rebellion.",
+        "significance": 4
       }
     ],
     "goods": [
@@ -4870,6 +5007,258 @@
       "target": "palembang",
       "relation": "南海丝路航线",
       "relation_en": "South Sea Silk Road route"
+    },
+    {
+      "source": "talas",
+      "target": "samarkand",
+      "relation": "战俘押送路线",
+      "relation_en": "prisoner transport route"
+    },
+    {
+      "source": "talas",
+      "target": "suyab",
+      "relation": "中亚邻近城市",
+      "relation_en": "nearby Central Asian cities"
+    },
+    {
+      "source": "talas",
+      "target": "kashgar",
+      "relation": "丝路北道节点",
+      "relation_en": "Northern Silk Road node"
+    },
+    {
+      "source": "talas",
+      "target": "changan",
+      "relation": "唐军出发地",
+      "relation_en": "Tang army origin"
+    },
+    {
+      "source": "cairo",
+      "target": "damascus",
+      "relation": "造纸术传播路线",
+      "relation_en": "papermaking spread route"
+    },
+    {
+      "source": "cairo",
+      "target": "alexandria",
+      "relation": "地中海贸易枢纽",
+      "relation_en": "Mediterranean trade hub"
+    },
+    {
+      "source": "cairo",
+      "target": "fez",
+      "relation": "造纸术西传路线",
+      "relation_en": "paper spread route to the west"
+    },
+    {
+      "source": "cairo",
+      "target": "mecca",
+      "relation": "朝圣与贸易路线",
+      "relation_en": "pilgrimage and trade route"
+    },
+    {
+      "source": "xativa",
+      "target": "fez",
+      "relation": "造纸术传入路线",
+      "relation_en": "papermaking introduction route"
+    },
+    {
+      "source": "xativa",
+      "target": "cordoba",
+      "relation": "安达卢斯文化圈",
+      "relation_en": "Al-Andalus cultural sphere"
+    },
+    {
+      "source": "gao-xianzhi",
+      "target": "changan",
+      "relation": "任职地",
+      "relation_en": "posted at"
+    },
+    {
+      "source": "gao-xianzhi",
+      "target": "talas",
+      "relation": "征战地",
+      "relation_en": "battlefield"
+    },
+    {
+      "source": "gao-xianzhi",
+      "target": "battle-of-talas",
+      "relation": "唐军主帅",
+      "relation_en": "Tang commander"
+    },
+    {
+      "source": "battle-of-talas",
+      "target": "gao-xianzhi",
+      "relation": "唐军主帅",
+      "relation_en": "Tang commander"
+    },
+    {
+      "source": "paper-spread-west",
+      "target": "talas",
+      "relation": "发生地",
+      "relation_en": "location"
+    },
+    {
+      "source": "paper-spread-west",
+      "target": "cairo",
+      "relation": "传播节点",
+      "relation_en": "spread node"
+    },
+    {
+      "source": "paper-spread-west",
+      "target": "xativa",
+      "relation": "欧洲首个节点",
+      "relation_en": "first European node"
+    },
+    {
+      "source": "paper-spread-west",
+      "target": "fez",
+      "relation": "北非传播节点",
+      "relation_en": "North African spread node"
+    },
+    {
+      "source": "paper",
+      "target": "talas",
+      "relation": "技术外传起点",
+      "relation_en": "technology transfer origin"
+    },
+    {
+      "source": "paper",
+      "target": "cairo",
+      "relation": "技术传播地",
+      "relation_en": "technology spread location"
+    },
+    {
+      "source": "paper",
+      "target": "xativa",
+      "relation": "欧洲传入地",
+      "relation_en": "European entry point"
+    },
+    {
+      "source": "gao-xianzhi",
+      "target": "battle-of-talas",
+      "relation": "唐军主帅",
+      "relation_en": "Tang commander"
+    },
+    {
+      "source": "battle-of-talas",
+      "target": "samarkand",
+      "relation": "战后造纸术传入地",
+      "relation_en": "post-battle papermaking destination"
+    },
+    {
+      "source": "cairo",
+      "target": "baghdad",
+      "relation": "伊斯兰文化轴心",
+      "relation_en": "Islamic cultural axis"
+    },
+    {
+      "source": "cairo",
+      "target": "venice",
+      "relation": "地中海贸易",
+      "relation_en": "Mediterranean trade"
+    },
+    {
+      "source": "xativa",
+      "target": "venice",
+      "relation": "造纸术传入意大利路线",
+      "relation_en": "paper route to Italy"
+    },
+    {
+      "source": "cordoba",
+      "target": "fez",
+      "relation": "造纸术传入路线",
+      "relation_en": "papermaking introduction route"
+    },
+    {
+      "source": "cordoba",
+      "target": "xativa",
+      "relation": "安达卢斯造纸网络",
+      "relation_en": "Al-Andalus paper network"
+    },
+    {
+      "source": "cordoba",
+      "target": "damascus",
+      "relation": "倭马亚文化纽带",
+      "relation_en": "Umayyad cultural link"
+    },
+    {
+      "source": "cordoba",
+      "target": "baghdad",
+      "relation": "伊斯兰学术双城",
+      "relation_en": "Islamic intellectual twin cities"
+    },
+    {
+      "source": "cordoba",
+      "target": "constantinople",
+      "relation": "地中海文化两极",
+      "relation_en": "Mediterranean cultural poles"
+    },
+    {
+      "source": "tabriz",
+      "target": "samarkand",
+      "relation": "丝路主干道",
+      "relation_en": "main Silk Road artery"
+    },
+    {
+      "source": "tabriz",
+      "target": "baghdad",
+      "relation": "贸易路线",
+      "relation_en": "trade route"
+    },
+    {
+      "source": "tabriz",
+      "target": "constantinople",
+      "relation": "东西贸易通道",
+      "relation_en": "East-West trade corridor"
+    },
+    {
+      "source": "tabriz",
+      "target": "marco-polo",
+      "relation": "途经地",
+      "relation_en": "passed through"
+    },
+    {
+      "source": "tabriz",
+      "target": "ibn-battuta",
+      "relation": "游历地",
+      "relation_en": "visited"
+    },
+    {
+      "source": "aleppo",
+      "target": "damascus",
+      "relation": "叙利亚贸易走廊",
+      "relation_en": "Syrian trade corridor"
+    },
+    {
+      "source": "aleppo",
+      "target": "baghdad",
+      "relation": "商队路线",
+      "relation_en": "caravan route"
+    },
+    {
+      "source": "aleppo",
+      "target": "constantinople",
+      "relation": "地中海岸贸易线",
+      "relation_en": "Mediterranean coastal trade line"
+    },
+    {
+      "source": "aleppo",
+      "target": "venice",
+      "relation": "地中海东岸—欧洲贸易",
+      "relation_en": "Levant-Europe trade"
+    },
+    {
+      "source": "paper",
+      "target": "cordoba",
+      "relation": "技术传播节点",
+      "relation_en": "technology spread node"
+    },
+    {
+      "source": "paper-spread-west",
+      "target": "cordoba",
+      "relation": "传播节点",
+      "relation_en": "spread node"
     }
   ],
   "routes": [
@@ -4926,8 +5315,8 @@
     },
     {
       "id": "paper-westward",
-      "name": "造纸术西传之路",
-      "name_en": "Paper Travels West",
+      "name": "造纸术西传之路（完整版）",
+      "name_en": "Paper Westward — Complete Route",
       "goods_id": "paper",
       "goods_name": "造纸术",
       "description": "公元751年怛罗斯之战，唐军造纸工匠被俘至撒马尔罕，造纸术由此传入阿拉伯世界，经巴格达、大马士革，最终在12世纪抵达欧洲，改变了人类文明的进程。",
@@ -4936,9 +5325,14 @@
       "direction_en": "East → West",
       "nodes": [
         "changan",
+        "dunhuang",
+        "talas",
         "samarkand",
         "baghdad",
-        "constantinople"
+        "damascus",
+        "cairo",
+        "fez",
+        "xativa"
       ],
       "segments": [
         {
