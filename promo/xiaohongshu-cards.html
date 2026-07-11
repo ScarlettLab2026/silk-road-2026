@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>丝绸之路知识图谱 · 小红书卡片</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: #0a0a0f;
+  font-family: -apple-system, "PingFang SC", "Noto Serif SC", "Noto Sans SC", "Microsoft YaHei", serif;
+  display: flex; flex-direction: column; align-items: center;
+  gap: 4px; padding: 4px;
+}
+
+.card {
+  width: 1080px; max-width: 100vw;
+  aspect-ratio: 9 / 16; max-height: 100vh;
+  position: relative; overflow: hidden;
+  background: #111118;
+  color: #e0ddd5;
+}
+
+/* ── Shared elements ── */
+.card .bg-dots {
+  position: absolute; inset: 0; opacity: 0.06;
+  background: radial-gradient(circle at 20% 30%, #d4a853 1px, transparent 1px),
+              radial-gradient(circle at 60% 70%, #d4a853 1px, transparent 1px),
+              radial-gradient(circle at 80% 20%, #d4a853 1.5px, transparent 1.5px),
+              radial-gradient(circle at 40% 85%, #5b9bd5 1px, transparent 1px),
+              radial-gradient(circle at 90% 60%, #c75b3a 1px, transparent 1px);
+  background-size: 120px 120px, 180px 180px, 100px 100px, 140px 140px, 160px 160px;
+}
+
+.card .accent-line {
+  position: absolute; left: 50%; transform: translateX(-50%);
+  width: 60px; height: 3px; background: #d4a853; border-radius: 2px;
+}
+
+.card .card-num {
+  position: absolute; top: 48px; right: 56px;
+  font-size: 0.85rem; color: rgba(255,255,255,0.25); letter-spacing: 0.15em;
+}
+
+.card .card-footer {
+  position: absolute; bottom: 56px; left: 0; right: 0; text-align: center;
+  font-size: 0.78rem; color: rgba(255,255,255,0.18); letter-spacing: 0.12em;
+}
+
+/* ── Card 1: Cover ── */
+.card-1 .big-num {
+  position: absolute; top: 160px; left: 50%; transform: translateX(-50%);
+  font-size: 16rem; font-weight: 900; color: rgba(212,168,83,0.06);
+  letter-spacing: -0.04em; line-height: 1;
+  font-family: "Georgia", "Noto Serif SC", serif;
+}
+.card-1 .title-line1 {
+  position: absolute; top: 320px; left: 50%; transform: translateX(-50%);
+  font-size: 2.8rem; font-weight: 700; color: #d4a853;
+  letter-spacing: 0.06em; text-align: center; white-space: nowrap;
+}
+.card-1 .title-line2 {
+  position: absolute; top: 390px; left: 50%; transform: translateX(-50%);
+  font-size: 1.5rem; font-weight: 400; color: #9a9790;
+  letter-spacing: 0.08em; text-align: center; white-space: nowrap;
+}
+.card-1 .subtitle {
+  position: absolute; top: 470px; left: 50%; transform: translateX(-50%);
+  font-size: 1.1rem; color: rgba(255,255,255,0.4); letter-spacing: 0.1em;
+  text-align: center;
+}
+.card-1 .hook {
+  position: absolute; bottom: 160px; left: 50%; transform: translateX(-50%);
+  font-size: 1.6rem; font-weight: 600; color: #e0ddd5;
+  text-align: center; letter-spacing: 0.04em; line-height: 1.6;
+  width: 80%;
+}
+.card-1 .hook em {
+  font-style: normal; color: #d4a853; border-bottom: 2px solid rgba(212,168,83,0.4);
+}
+.card-1 .map-glow {
+  position: absolute; top: 55%; left: 50%; transform: translate(-50%, -50%);
+  width: 500px; height: 500px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(212,168,83,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+.card-1 .dot-cluster {
+  position: absolute; top: 48%; left: 50%; transform: translate(-50%, -50%);
+  width: 400px; height: 400px;
+  background: radial-gradient(circle at 30% 20%, #d4a853 2px, transparent 2px),
+              radial-gradient(circle at 70% 30%, #d4a853 1.5px, transparent 1.5px),
+              radial-gradient(circle at 50% 50%, #d4a853 2.5px, transparent 2.5px),
+              radial-gradient(circle at 20% 70%, #c75b3a 1.5px, transparent 1.5px),
+              radial-gradient(circle at 80% 60%, #5b9bd5 1.5px, transparent 1.5px),
+              radial-gradient(circle at 60% 80%, #6aad6a 1px, transparent 1px),
+              radial-gradient(circle at 40% 40%, #d4a853 1px, transparent 1px),
+              radial-gradient(circle at 55% 25%, #d4a853 1.5px, transparent 1.5px);
+  background-size: 100px 100px, 80px 80px, 60px 60px, 120px 120px, 90px 90px, 110px 110px, 70px 70px, 95px 95px;
+  opacity: 0.7;
+}
+
+/* ── Card 2: Three Pilgrims ── */
+.card-2 .section-title {
+  position: absolute; top: 100px; left: 50%; transform: translateX(-50%);
+  font-size: 1.3rem; color: rgba(255,255,255,0.35); letter-spacing: 0.15em;
+}
+.card-2 .three-col {
+  position: absolute; top: 170px; left: 60px; right: 60px; bottom: 180px;
+  display: flex; gap: 40px; align-items: stretch;
+}
+.card-2 .col {
+  flex: 1; display: flex; flex-direction: column; align-items: center;
+  padding: 40px 20px; border-radius: 20px;
+  background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05);
+  position: relative;
+}
+.card-2 .col .emoji { font-size: 3.5rem; margin-bottom: 20px; }
+.card-2 .col .name {
+  font-size: 1.6rem; font-weight: 700; letter-spacing: 0.06em; margin-bottom: 8px;
+}
+.card-2 .col .years { font-size: 0.85rem; color: var(--text-dim); margin-bottom: 16px; }
+.card-2 .col .route {
+  font-size: 1.5rem; letter-spacing: 0.04em; margin-bottom: 12px;
+}
+.card-2 .col .route-desc {
+  font-size: 0.85rem; color: rgba(255,255,255,0.4); letter-spacing: 0.06em;
+}
+.card-2 .col:nth-child(1) { --accent-c: #5d8a7c; --text-dim: #7a9a8e; }
+.card-2 .col:nth-child(1) .name { color: #5d8a7c; }
+.card-2 .col:nth-child(1) { border-color: rgba(93,138,124,0.15); background: rgba(93,138,124,0.04); }
+
+.card-2 .col:nth-child(2) { --accent-c: #c47a38; --text-dim: #b08050; }
+.card-2 .col:nth-child(2) .name { color: #c47a38; }
+.card-2 .col:nth-child(2) { border-color: rgba(196,122,56,0.15); background: rgba(196,122,56,0.04); }
+
+.card-2 .col:nth-child(3) { --accent-c: #0d7b7e; --text-dim: #5a8a8c; }
+.card-2 .col:nth-child(3) .name { color: #0d7b7e; }
+.card-2 .col:nth-child(3) { border-color: rgba(13,123,126,0.15); background: rgba(13,123,126,0.04); }
+
+.card-2 .col .divider {
+  width: 30px; height: 1px; background: var(--accent-c); opacity: 0.5;
+  margin: 16px 0;
+}
+.card-2 .arrow-connect {
+  position: absolute; top: 50%; font-size: 1.2rem; color: rgba(255,255,255,0.2);
+}
+.card-2 .hook-line {
+  position: absolute; bottom: 100px; left: 50%; transform: translateX(-50%);
+  font-size: 1.3rem; color: #d4a853; font-weight: 600;
+  letter-spacing: 0.06em; text-align: center;
+}
+
+/* ── Card 3: Talas Ripple ── */
+.card-3 .battle-badge {
+  position: absolute; top: 140px; left: 50%; transform: translateX(-50%);
+  padding: 16px 40px; border: 2px solid #c75b3a; border-radius: 40px;
+  text-align: center;
+}
+.card-3 .battle-badge .year {
+  font-size: 3rem; font-weight: 900; color: #c75b3a; letter-spacing: 0.02em;
+  line-height: 1;
+}
+.card-3 .battle-badge .name {
+  font-size: 1rem; color: rgba(255,255,255,0.5); margin-top: 6px; letter-spacing: 0.1em;
+}
+.card-3 .split-viz {
+  position: absolute; top: 340px; left: 60px; right: 60px; bottom: 160px;
+}
+.card-3 .split-line {
+  position: absolute; top: 0; left: 50%;
+  width: 1px; height: 100%;
+  background: linear-gradient(to bottom, #c75b3a, rgba(199,91,58,0.1));
+}
+.card-3 .split-line::before {
+  content: ''; position: absolute; top: -8px; left: -5px;
+  width: 11px; height: 11px; border-radius: 50%; background: #c75b3a;
+}
+.card-3 .branch {
+  position: absolute; top: 30px; width: 42%;
+  padding: 30px; border-radius: 16px;
+  background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05);
+}
+.card-3 .branch.left { left: 0; text-align: right; }
+.card-3 .branch.right { right: 0; }
+
+.card-3 .branch .b-icon { font-size: 2.5rem; margin-bottom: 12px; display: block; }
+.card-3 .branch.left .b-icon { color: #b08040; }
+.card-3 .branch.right .b-icon { color: #c4a35a; }
+
+.card-3 .branch .b-name {
+  font-size: 1.4rem; font-weight: 700; margin-bottom: 8px; letter-spacing: 0.04em;
+}
+.card-3 .branch.left .b-name { color: #b08040; }
+.card-3 .branch.right .b-name { color: #c4a35a; }
+
+.card-3 .branch .b-desc {
+  font-size: 0.9rem; color: rgba(255,255,255,0.45); line-height: 1.6;
+}
+.card-3 .impact-line {
+  position: absolute; bottom: 100px; left: 50%; transform: translateX(-50%);
+  font-size: 1.15rem; color: rgba(255,255,255,0.5); letter-spacing: 0.06em;
+  text-align: center;
+}
+.card-3 .impact-line strong { color: #d4a853; font-weight: 600; }
+
+/* ── Card 4: Six in One Century ── */
+.card-4 .century-badge {
+  position: absolute; top: 100px; left: 50%; transform: translateX(-50%);
+  font-size: 1rem; color: rgba(255,255,255,0.35); letter-spacing: 0.15em;
+}
+.card-4 .century-big {
+  position: absolute; top: 140px; left: 50%; transform: translateX(-50%);
+  font-size: 5rem; font-weight: 900; color: rgba(212,168,83,0.06);
+  letter-spacing: 0.04em; font-family: "Georgia", serif;
+}
+.card-4 .traveler-grid {
+  position: absolute; top: 290px; left: 60px; right: 60px; bottom: 120px;
+  display: flex; flex-wrap: wrap; gap: 16px; align-content: start; justify-content: center;
+}
+.card-4 .traveler {
+  width: calc(33.33% - 12px); min-width: 220px;
+  padding: 24px 20px; border-radius: 16px;
+  background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04);
+  display: flex; align-items: center; gap: 16px;
+}
+.card-4 .traveler .t-emoji { font-size: 2.2rem; flex-shrink: 0; }
+.card-4 .traveler .t-info { min-width: 0; }
+.card-4 .traveler .t-name {
+  font-size: 1.05rem; font-weight: 700; color: #e0ddd5; margin-bottom: 4px;
+}
+.card-4 .traveler .t-route {
+  font-size: 0.72rem; color: rgba(255,255,255,0.35); letter-spacing: 0.04em;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.card-4 .conclusion {
+  position: absolute; bottom: 80px; left: 50%; transform: translateX(-50%);
+  font-size: 1.1rem; color: rgba(255,255,255,0.5); letter-spacing: 0.06em;
+}
+
+/* ── Card 5: Data Web ── */
+.card-5 .stats-hero {
+  position: absolute; top: 120px; left: 50%; transform: translateX(-50%);
+  display: flex; gap: 40px;
+}
+.card-5 .stat-item { text-align: center; }
+.card-5 .stat-item .num {
+  font-size: 4rem; font-weight: 900; letter-spacing: -0.02em;
+  background: linear-gradient(180deg, #d4a853 0%, rgba(212,168,83,0.5) 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  line-height: 1;
+}
+.card-5 .stat-item .label {
+  font-size: 0.8rem; color: rgba(255,255,255,0.35); margin-top: 8px; letter-spacing: 0.08em;
+}
+.card-5 .web-viz {
+  position: absolute; top: 360px; left: 60px; right: 60px; bottom: 200px;
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
+  gap: 20px;
+}
+.card-5 .node-group { text-align: center; }
+.card-5 .node-group .n-dot {
+  display: inline-block; width: 12px; height: 12px; border-radius: 50%; margin-bottom: 6px;
+}
+.card-5 .node-group .n-label {
+  font-size: 0.75rem; color: rgba(255,255,255,0.4); letter-spacing: 0.06em;
+}
+.card-5 .node-group .n-count {
+  font-size: 1.6rem; font-weight: 700; color: #e0ddd5;
+}
+.card-5 .feature-box {
+  position: absolute; bottom: 120px; left: 60px; right: 60px;
+  display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+}
+.card-5 .feature-tag {
+  padding: 10px 20px; border-radius: 20px; font-size: 0.8rem;
+  background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.55); letter-spacing: 0.04em;
+}
+.card-5 .feature-tag.highlight { border-color: #d4a853; color: #d4a853; }
+
+/* ── Card 6: CTA ── */
+.card-6 .cta-frame {
+  position: absolute; top: 100px; left: 60px; right: 60px; bottom: 200px;
+  background: rgba(255,255,255,0.015); border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 24px; display: flex; flex-direction: column; align-items: center;
+  justify-content: center; padding: 40px;
+}
+.card-6 .cta-frame .logo {
+  font-size: 3rem; margin-bottom: 20px;
+}
+.card-6 .cta-frame .site-name {
+  font-size: 2rem; font-weight: 700; color: #d4a853;
+  letter-spacing: 0.06em; margin-bottom: 12px; text-align: center;
+}
+.card-6 .cta-frame .site-desc {
+  font-size: 1.05rem; color: rgba(255,255,255,0.4);
+  letter-spacing: 0.04em; text-align: center; line-height: 1.6;
+  max-width: 600px;
+}
+.card-6 .cta-frame .url-box {
+  margin-top: 30px; padding: 14px 30px; border-radius: 30px;
+  background: rgba(212,168,83,0.08); border: 1px solid rgba(212,168,83,0.2);
+  font-size: 0.9rem; color: #d4a853; letter-spacing: 0.04em;
+  font-family: "SF Mono", "Menlo", monospace;
+}
+.card-6 .tag-cloud {
+  position: absolute; bottom: 130px; left: 60px; right: 60px;
+  display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;
+}
+.card-6 .tag {
+  font-size: 0.75rem; padding: 6px 14px; border-radius: 14px;
+  background: rgba(255,255,255,0.03); color: rgba(255,255,255,0.4);
+}
+.card-6 .emoji-row {
+  position: absolute; bottom: 60px; left: 50%; transform: translateX(-50%);
+  font-size: 1.5rem; letter-spacing: 0.2em; opacity: 0.4;
+}
+
+/* ── Print helper ── */
+@media print {
+  body { background: #111118; gap: 0; padding: 0; }
+  .card { page-break-after: always; max-width: 100%; max-height: 100%; }
+}
+
+/* ── Screenshot helper bar ── */
+.toolbar {
+  position: fixed; top: 10px; left: 50%; transform: translateX(-50%);
+  z-index: 9999; display: flex; gap: 8px; flex-wrap: wrap; justify-content: center;
+  background: rgba(0,0,0,0.8); padding: 8px 16px; border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.toolbar button {
+  padding: 6px 14px; border-radius: 14px; border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.05); color: #ccc; cursor: pointer;
+  font-size: 0.73rem; transition: all 0.2s; font-family: inherit;
+}
+.toolbar button:hover { background: rgba(212,168,83,0.2); border-color: #d4a853; color: #d4a853; }
+.toolbar button.active { background: #d4a853; color: #111; border-color: #d4a853; }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <button onclick="scrollToCard(0)">1·封面</button>
+  <button onclick="scrollToCard(1)">2·三人三路</button>
+  <button onclick="scrollToCard(2)">3·蝴蝶效应</button>
+  <button onclick="scrollToCard(3)">4·六人局</button>
+  <button onclick="scrollToCard(4)">5·数据网</button>
+  <button onclick="scrollToCard(5)">6·CTA</button>
+  <span style="color:rgba(255,255,255,0.3);font-size:0.7rem;margin-left:8px">点击跳转 · 截图即用</span>
+</div>
+
+<!-- ═══════ Card 1: Cover ═══════ -->
+<div class="card card-1">
+  <div class="bg-dots"></div>
+  <div class="map-glow"></div>
+  <div class="dot-cluster"></div>
+  <div class="big-num">16</div>
+  <div class="card-num">1 / 6</div>
+  <div class="title-line1">丝绸之路 · 交互知识图谱</div>
+  <div class="title-line2">SILK ROAD KNOWLEDGE GRAPH</div>
+  <div class="subtitle">开放数据 · 交互地图 · 开源免费</div>
+  <div class="hook">
+    16篇交互故事 × <em>61座古城</em><br>
+    这不是历史课，这是一张你可以<em>点</em>的地图
+  </div>
+  <div class="accent-line" style="bottom: 240px;"></div>
+  <div class="card-footer">scarlettlab2026.github.io/silk-road-2026</div>
+</div>
+
+<!-- ═══════ Card 2: Three Pilgrims ═══════ -->
+<div class="card card-2">
+  <div class="bg-dots"></div>
+  <div class="card-num">2 / 6</div>
+  <div class="section-title">三百年 · 三人 · 三条路</div>
+
+  <div class="three-col">
+    <div class="col">
+      <div class="emoji">🪷</div>
+      <div class="name">法显</div>
+      <div class="years">399—414 · 62岁启程</div>
+      <div class="divider"></div>
+      <div class="route">🏔️ → 🌊</div>
+      <div class="route-desc">陆去 · 海归</div>
+      <div style="margin-top:20px;font-size:0.75rem;color:rgba(255,255,255,0.3);line-height:1.6;text-align:center">
+        穿越流沙大漠<br>从斯里兰卡乘商船<br>经爪哇回到山东
+      </div>
+    </div>
+    <div class="col">
+      <div class="emoji">🧘</div>
+      <div class="name">玄奘</div>
+      <div class="years">629—645 · 27岁偷渡</div>
+      <div class="divider"></div>
+      <div class="route">🏔️ → 🏔️</div>
+      <div class="route-desc">陆去 · 陆归</div>
+      <div style="margin-top:20px;font-size:0.75rem;color:rgba(255,255,255,0.3);line-height:1.6;text-align:center">
+        孤身穿越八百里流沙<br>那烂陀寺五年辩经<br>带回657部梵文经书
+      </div>
+    </div>
+    <div class="col">
+      <div class="emoji">🌊</div>
+      <div class="name">义净</div>
+      <div class="years">671—695 · 36岁登船</div>
+      <div class="divider"></div>
+      <div class="route">🌊 → 🌊</div>
+      <div class="route-desc">海去 · 海归</div>
+      <div style="margin-top:20px;font-size:0.75rem;color:rgba(255,255,255,0.3);line-height:1.6;text-align:center">
+        广州乘波斯商船出发<br>经苏门答腊到那烂陀<br>十年求学·海上24年
+      </div>
+    </div>
+  </div>
+
+  <div class="hook-line">三个人，走完了丝路的全部可能</div>
+  <div class="accent-line" style="bottom: 150px;"></div>
+  <div class="card-footer">法显《佛国记》→ 玄奘《大唐西域记》→ 义净《南海寄归内法传》</div>
+</div>
+
+<!-- ═══════ Card 3: Talas Ripple Effect ═══════ -->
+<div class="card card-3">
+  <div class="bg-dots"></div>
+  <div class="card-num">3 / 6</div>
+
+  <div class="battle-badge">
+    <div class="year">751</div>
+    <div class="name">怛 罗 斯 之 战</div>
+  </div>
+
+  <div class="split-viz">
+    <div class="split-line"></div>
+    <div class="branch left">
+      <span class="b-icon">🏜</span>
+      <div class="b-name">杜环 · 万里俘踪</div>
+      <div class="b-desc">
+        唐军书记官被俘<br>
+        随大食军队游历中亚、西亚、北非<br>
+        11年后从海路回到广州<br>
+        <strong style="color:#b08040">第一个到达非洲的中国人</strong>
+      </div>
+    </div>
+    <div class="branch right">
+      <span class="b-icon">📜</span>
+      <div class="b-name">纸传天下</div>
+      <div class="b-desc">
+        被俘的唐军造纸匠人<br>
+        在撒马尔罕建起第一座境外纸坊<br>
+        794年传到巴格达<br>
+        <strong style="color:#c4a35a">700年后，纸覆盖了整个地球</strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="impact-line">
+    同一场败仗 → <strong>两条故事线</strong><br>
+    751年之后，世界不一样了
+  </div>
+  <div class="accent-line" style="bottom: 140px;"></div>
+  <div class="card-footer">一场战役的蝴蝶效应 · 改变了世界书写材料</div>
+</div>
+
+<!-- ═══════ Card 4: Six Travelers ═══════ -->
+<div class="card card-4">
+  <div class="bg-dots"></div>
+  <div class="card-num">4 / 6</div>
+
+  <div class="century-badge">THE PAX MONGOLICA ERA</div>
+  <div class="century-big">13TH</div>
+
+  <div class="traveler-grid">
+    <div class="traveler">
+      <div class="t-emoji">☯️</div>
+      <div class="t-info">
+        <div class="t-name">丘处机</div>
+        <div class="t-route">山东 → 阿富汗 · 73岁西行</div>
+      </div>
+    </div>
+    <div class="traveler">
+      <div class="t-emoji">🏛</div>
+      <div class="t-info">
+        <div class="t-name">马可·波罗</div>
+        <div class="t-route">威尼斯 → 北京 · 17岁出发</div>
+      </div>
+    </div>
+    <div class="traveler">
+      <div class="t-emoji">✝️</div>
+      <div class="t-info">
+        <div class="t-name">拉班·扫马</div>
+        <div class="t-route">北京 → 巴黎 · 景教僧侣使欧</div>
+      </div>
+    </div>
+    <div class="traveler">
+      <div class="t-emoji">⛵</div>
+      <div class="t-info">
+        <div class="t-name">亦黑迷失</div>
+        <div class="t-route">北京 → 印度洋 · 五度出使</div>
+      </div>
+    </div>
+    <div class="traveler">
+      <div class="t-emoji">🛕</div>
+      <div class="t-info">
+        <div class="t-name">周达观</div>
+        <div class="t-route">温州 → 吴哥 · 唯一目击者</div>
+      </div>
+    </div>
+    <div class="traveler">
+      <div class="t-emoji">⚓</div>
+      <div class="t-info">
+        <div class="t-name">汪大渊</div>
+        <div class="t-route">泉州 → 东非 · 20岁背包客</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="conclusion">
+    蒙古人把欧亚连成一片 → <strong style="color:#d4a853">六个人在同一世纪出发</strong>
+  </div>
+  <div class="accent-line" style="bottom: 120px;"></div>
+  <div class="card-footer">同一条丝路，不同的方向</div>
+</div>
+
+<!-- ═══════ Card 5: Data Web ═══════ -->
+<div class="card card-5">
+  <div class="bg-dots"></div>
+  <div class="card-num">5 / 6</div>
+
+  <div class="stats-hero">
+    <div class="stat-item">
+      <div class="num">61</div>
+      <div class="label">座古城</div>
+    </div>
+    <div class="stat-item">
+      <div class="num">24</div>
+      <div class="label">位人物</div>
+    </div>
+    <div class="stat-item">
+      <div class="num">30</div>
+      <div class="label">种物产</div>
+    </div>
+    <div class="stat-item">
+      <div class="num">459</div>
+      <div class="label">条连线</div>
+    </div>
+  </div>
+
+  <div class="web-viz">
+    <div class="node-group">
+      <div class="n-dot" style="background:#d4a853"></div>
+      <div class="n-label">城市</div>
+      <div class="n-count">61</div>
+    </div>
+    <div class="node-group">
+      <div class="n-dot" style="background:#5b9bd5"></div>
+      <div class="n-label">人物</div>
+      <div class="n-count">24</div>
+    </div>
+    <div class="node-group">
+      <div class="n-dot" style="background:#6aad6a"></div>
+      <div class="n-label">物产</div>
+      <div class="n-count">30</div>
+    </div>
+    <div class="node-group">
+      <div class="n-dot" style="background:#c75b3a"></div>
+      <div class="n-label">事件</div>
+      <div class="n-count">30</div>
+    </div>
+  </div>
+
+  <div class="feature-box">
+    <div class="feature-tag highlight">🔍 拼音首字母搜索</div>
+    <div class="feature-tag">📜 8条路线动画回放</div>
+    <div class="feature-tag">🌙 夜间/日间双主题</div>
+    <div class="feature-tag">🕸 力导向关系图</div>
+    <div class="feature-tag">📱 手机端适配</div>
+    <div class="feature-tag">🌐 中英双语</div>
+  </div>
+
+  <div class="accent-line" style="bottom: 160px;"></div>
+  <div class="card-footer">一张地图，织起两千年东西交流史</div>
+</div>
+
+<!-- ═══════ Card 6: CTA ═══════ -->
+<div class="card card-6">
+  <div class="bg-dots"></div>
+  <div class="card-num">6 / 6</div>
+
+  <div class="cta-frame">
+    <div class="logo">🗺️</div>
+    <div class="site-name">丝绸之路 · 交互知识图谱</div>
+    <div class="site-desc">
+      每篇故事都是地图上的超链接<br>
+      点进去，地图会飞到你读到的那座城
+    </div>
+    <div class="url-box">
+      scarlettlab2026.github.io/silk-road-2026
+    </div>
+  </div>
+
+  <div class="tag-cloud">
+    <span class="tag">#丝绸之路</span>
+    <span class="tag">#交互地图</span>
+    <span class="tag">#知识图谱</span>
+    <span class="tag">#冷门历史</span>
+    <span class="tag">#数据可视化</span>
+    <span class="tag">#法显</span>
+    <span class="tag">#玄奘</span>
+    <span class="tag">#义净</span>
+    <span class="tag">#造纸术</span>
+    <span class="tag">#开源项目</span>
+  </div>
+
+  <div class="emoji-row">🏔️ 🐫 🌊 🚢 📜 🗺️</div>
+  <div class="card-footer">全站免费开放 · 持续更新中</div>
+</div>
+
+<script>
+function scrollToCard(idx) {
+  const cards = document.querySelectorAll('.card');
+  if (cards[idx]) {
+    cards[idx].scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
+// Highlight current card on scroll
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const idx = Array.from(document.querySelectorAll('.card')).indexOf(entry.target);
+      document.querySelectorAll('.toolbar button').forEach((btn, i) => {
+        btn.classList.toggle('active', i === idx);
+      });
+    }
+  });
+}, { threshold: 0.6 });
+document.querySelectorAll('.card').forEach(card => observer.observe(card));
+</script>
+
+</body>
+</html>
