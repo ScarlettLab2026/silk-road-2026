@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>宁胡阏氏 · 王昭君与丝绸之路</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<link rel="stylesheet" href="css/story-common.css" />
+<style>
+:root {
+  --bg: #1a0f0d; --card-bg: rgba(192,69,90,0.92); --accent: #c0455a;
+  --text: #f0e8d8; --text-dim: #b89090; --border: rgba(255,255,255,0.08);
+  --accent-r: 192; --accent-g: 69; --accent-b: 90;
+}
+</style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<div id="story-nav">
+  <a href="story.html">📖 张骞</a>
+  <a href="story8.html">⚔ 班超</a>
+  <a href="story4.html">🪷 法显</a>
+  <a href="story13.html">🔥 鸠摩罗什</a>
+  <a href="story3.html">🧘 玄奘</a>
+  <a href="story15.html">🌊 义净</a>
+  <a href="story16.html">📜 纸传天下</a>
+  <a href="story17.html" class="active">🎀 王昭君</a>
+  <a href="story6.html">🏜 杜环</a>
+  <a href="story10.html">☯️ 丘处机</a>
+  <a href="story5.html">🏛 马可·波罗</a>
+  <a href="story9.html">✝️ 拉班·扫马</a>
+  <a href="story11.html">⛵ 亦黑迷失</a>
+  <a href="story12.html">🛕 周达观</a>
+  <a href="story7.html">⚓ 汪大渊</a>
+  <a href="story14.html">🌍 白图泰</a>
+  <a href="story2.html">🚢 郑和</a>
+</div>
+
+<div id="progress"></div>
+
+<a href="index.html" id="back">← 返回地图</a>
+<button id="theme-toggle" onclick="toggleTheme()">☀️</button>
+<a href="sponsor.html" id="sponsor-btn" title="支持项目">☕ 支持</a>
+<button id="restart" onclick="restart()">🔄 重播</button>
+
+<div id="narrative" onclick="advance()">
+  <button id="toggle-card" onclick="event.stopPropagation();toggleCard()" title="收起/展开">─</button>
+  <div class="chapter-num" id="chNum"></div>
+  <h2 id="chTitle"></h2>
+  <p id="chBody"></p>
+  <div id="badges" style="margin:8px 0 0;line-height:1.8"></div>
+  <div class="hint"><span class="arrow">→</span> 点击继续</div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+const STORY_CONFIG = {
+  accent: '#c0455a',
+  accentRgb: '192,69,90',
+  mapCenter: [37, 108],
+  mapZoom: 4.5,
+  startCities: ['changan'],
+  restartEmoji: '🎀',
+  tileBg: '#1a0f0d'
+};
+
+const STORY = [
+  {
+    title: '汉宫请行',
+    subtitle: '公元前33年 · 长安未央宫',
+    body: '汉元帝竟宁元年正月，长安未央宫。匈奴呼韩邪单于第三次来朝——这一次，他是来求娶汉家公主的。和亲，是汉匈之间反复上演的外交仪式。但这一次不太一样：呼韩邪是真心臣服。元帝决定从宫女中选一位，赐公主名号出嫁。消息传到后宫的深巷里，宫女们议论纷纷。去匈奴？那是苦寒之地，茹毛饮血，父死妻其后母——前两位远嫁匈奴的宗室女一去便再无音信。没有人愿意。但有一个宫女站了出来。她叫王嫱，字昭君，南郡秭归人。入宫多年，从未被皇帝召幸。史书上写她「入宫数岁，不得见御，积悲怨」。但她的站出不是绝望——是选择。《后汉书·南匈奴传》记载了那一刻：「昭君丰容靓饰，光明汉宫，顾景裴回，竦动左右。帝见大惊，意欲留之，而难于失信。」满朝文武都愣住了。汉元帝平生第一次见到这个宫女——已经来不及了。一个从未上过朝堂的宫女，在决定自己命运的那一刻，照亮了整座汉宫。',
+    lat: 34.3, lng: 108.9, zoom: 5.5,
+    route: ['changan'],
+    marker: 'changan',
+    showCities: ['changan', 'luoyang'],
+    highlight: ['wang-zhaojun', 'zhaojun-marriage']
+  },
+  {
+    title: '出塞',
+    subtitle: '公元前33年 · 长安 → 雁门关 → 匈奴龙庭',
+    body: '车队出了长安，一路向北。随行队伍谈不上浩浩荡荡——不是帝国舰队的出征，不是高僧取经的仪仗，只是一支和亲的车队：几辆马车，一队护卫，陪嫁的丝绸、漆器、铜镜和药材。汉元帝把年号从「建昭」改为「竟宁」——意为边境从此安宁。一个和亲的宫女，改变了一个帝国的年号。马车渡过黄河，穿行在鄂尔多斯高原的草原与沙地之间。北方的风已经带着寒意——这是公元前33年的深秋。出了雁门关，就是匈奴的地界。雁门关——后来的长城的关口，此刻还只是夯土垒成的要塞。传说在关外，王昭君在马上弹起了琵琶。琵琶声在草原的风中飘散。天上有大雁飞过——南飞，去往中原过冬。雁阵听见了琵琶声。传说领头的那只忘了扇翅膀，从天上掉了下来。从此，「落雁」二字跟了她两千年。她成了中国历史上唯一一个因为弹琵琶而出名的和亲公主。昭君的琵琶曲没有谱子留下来。但一千多年后，唐代的杜甫为她写了一首诗：「千载琵琶作胡语，分明怨恨曲中论。」宋代王安石不同意：「汉恩自浅胡自深，人生乐在相知心。」一个宫女的选择，让后世争论了两千年。但她没有哭哭啼啼。如果她不愿意，她就不会在殿上站出来了。',
+    lat: 38.5, lng: 111.0, zoom: 5.5,
+    route: ['changan'],
+    marker: null,
+    showCities: ['changan', 'liangzhou'],
+    highlight: ['zhaojun-marriage']
+  },
+  {
+    title: '宁胡阏氏',
+    subtitle: '公元前33年冬 · 匈奴龙庭',
+    body: '龙庭——匈奴单于的王帐所在地，在今天蒙古高原的腹地。没有城墙，没有宫殿，只有连绵的穹庐毡帐和成群的牛羊。呼韩邪单于以盛大的仪式迎接了她。他封她为「宁胡阏氏」——阏氏，是匈奴单于正妻的称号，相当于王后。「宁胡」的意思是：使胡人安宁。这个名字不是对她美貌的赞美——虽然她确实美。这个名字是一场外交承认：匈奴承认了一个汉族女子的地位，承认了与汉朝和平共处的承诺。呼韩邪是第一个臣服于汉朝的匈奴单于。他见识过汉朝的富庶和武力——在汉朝支持下，他打败了自己的兄长郅支单于，重新统一了匈奴。他知道，与汉朝和平是他政权存续的唯一保证。王昭君，就是这个保证的化身。在龙庭的第一个冬天，她换上了匈奴阏氏的盛装——汉代曲裾深衣融合了匈奴皮草和金饰。她学着喝奶茶，学着适应穹庐中的生活。匈奴贵族们献上贺礼：大宛的皮毛、乌孙的马具、中原运来的丝绸和漆器——她的婚礼本身就是一场丝路物产的汇展。呼韩邪的宫廷里已经有一位颛渠阏氏——大阏氏，地位最高。宁胡阏氏排在第二。但她带来的和平，排在第一。',
+    lat: 41.0, lng: 111.5, zoom: 5.5,
+    route: ['changan', 'liangzhou'],
+    marker: null,
+    showCities: ['changan', 'liangzhou', 'luoyang'],
+    highlight: ['wang-zhaojun', 'zhaojun-marriage']
+  },
+  {
+    title: '和平走廊',
+    subtitle: '公元前1世纪 · 汉匈边境',
+    body: '宁胡阏氏在位的几十年，汉匈边境出现了前所未有的局面——无大战。对于当时的人来说，这几乎是不可想象的。从汉高祖白登之围（前200年）到汉武帝发动漠北大战（前119年），汉匈之间打了将近一百年。汉武帝耗尽了文景之治积累的国库，才把匈奴赶回漠北。但战争从来不是丝路的常态。丝路需要和平。在宁胡阏氏的时代，汉匈边境的榷场（互市）终日不息。匈奴牧民赶着骏马、牛羊、皮毛南下。汉族商人带着丝绸、漆器、铁器北上。西域的胡商——粟特人、大宛人——也加入了这条北方贸易线。他们带着和田玉、中亚青金石、费尔干纳的良种马，在汉匈之间穿针引线。这是一条靠婚姻维持的丝绸之路——没有长城上的烽燧，没有边塞的骑兵巡逻，只有穹庐中一位汉族女子的存在，让两边都愿意放下刀剑。呼韩邪单于在公元前31年去世——昭君嫁给他两年后。按照匈奴「父死妻其后母」的收继婚习俗，她必须嫁给呼韩邪的儿子复株累单于。对一个从小读《礼记》的汉族女子来说，这是巨大的文化冲击。她曾上书汉成帝，请求归汉。汉成帝回了三个字：「从胡俗。」她留在了草原上。但她没有消沉。在复株累的时代，她继续充当汉匈之间的纽带。她生儿育女——和呼韩邪生了一个儿子，和复株累生了两个女儿。她的孩子们在草原上长大，会说汉语也会说匈奴语，成为了汉匈之间最早的「文化翻译者」。',
+    lat: 39.5, lng: 110.5, zoom: 5.5,
+    route: ['changan', 'liangzhou'],
+    marker: null,
+    showCities: ['changan', 'liangzhou', 'luoyang'],
+    highlight: ['wang-zhaojun']
+  },
+  {
+    title: '青冢长青',
+    subtitle: '公元前1世纪 · 大青山南麓',
+    body: '王昭君的卒年没有确切记载——大约在复株累单于去世（前20年）前后。她葬在大青山南麓，在今天内蒙古呼和浩特市南郊。她的墓冢叫「青冢」——因为墓上的草四季常青，在周围枯黄的草原上格外显眼。一座草原上的孤坟，因为青草不愿枯黄，被记住了两千年。唐代诗人杜甫在《咏怀古迹》中写道：「一去紫台连朔漠，独留青冢向黄昏。」白居易也写过：「满面胡沙满鬓风，眉销残黛脸销红。」但最懂她的可能是王安石：「汉恩自浅胡自深，人生乐在相知心。可怜青冢已芜没，尚有哀弦留至今。」——汉朝待你不深，匈奴待你不浅。人生贵在相知相惜。昭君的故事在不同的时代被反复讲述：在汉代的史书里她是外交工具，在唐代的诗歌里她是悲情美人，在元代的杂剧《汉宫秋》里她变成了在匈奴自尽的烈女——但这从来不是历史，是文学想象。真实的王昭君，是一个选择留在草原上的女人。她不是被动牺牲的「礼物」，而是一个主动走上大殿、穿越雁门、在穹庐中养儿育女、最终埋骨草原的人。从长安到龙庭的路，将军们用刀剑走了一百年也没走通。一个宫女用婚姻走通了。六十年没有战火。六十年商旅不绝。一条没有长城的丝绸之路——靠的不是将军和军队，是一个抱着琵琶的宫女。张骞凿空了西域的地理，班超平定了西域的秩序。而王昭君开辟的，是丝路之上最脆弱也最坚韧的一种联系——人与人的联系、家与家的联系。她是丝路上唯一一位以「和亲」方式参与历史的女性。她证明了丝路不只是一条商贸之路、军事之路、宗教之路——也是一条婚姻之路、家庭之路、和平之路。',
+    lat: 40.8, lng: 111.7, zoom: 6,
+    route: ['changan', 'liangzhou'],
+    marker: null,
+    showCities: ['changan', 'liangzhou', 'luoyang'],
+    highlight: ['wang-zhaojun', 'zhaojun-marriage']
+  }
+];
+</script>
+<script src="js/story-engine.js"></script>
+</body>
+</html>

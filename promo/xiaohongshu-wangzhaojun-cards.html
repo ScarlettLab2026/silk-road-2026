@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>王昭君 · 宁胡阏氏 · 小红书卡片</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: #e8d8d2;
+  font-family: -apple-system, "PingFang SC", "Noto Serif SC", "Noto Sans SC", "Microsoft YaHei", serif;
+  display: flex; flex-direction: column; align-items: center;
+  gap: 4px; padding: 4px;
+}
+
+.card {
+  width: 1080px; max-width: 100vw;
+  aspect-ratio: 9 / 16; max-height: 100vh;
+  position: relative; overflow: hidden;
+  background: #faf3f0;
+  color: #2c1816;
+}
+
+/* ── Shared ── */
+.card .card-num {
+  position: absolute; top: 48px; right: 56px; z-index: 10;
+  font-size: 0.85rem; color: rgba(44,24,22,0.18); letter-spacing: 0.15em;
+}
+.card .card-footer {
+  position: absolute; bottom: 48px; left: 0; right: 0; text-align: center; z-index: 10;
+  font-size: 0.68rem; color: rgba(44,24,22,0.14); letter-spacing: 0.1em;
+}
+
+/* ══════════════════════════════════════════ */
+/* Card 1 · 封面 — 胭脂红 + 草原绿对撞 */
+/* ══════════════════════════════════════════ */
+.card-1 {
+  background: linear-gradient(180deg, #faf3f0 0%, #f5e8e0 15%, #e8c8c0 35%, #c0455a 42%, #c0455a 58%, #5a8a4c 65%, #4a7a3c 80%, #3a2a20 100%);
+}
+.card-1 .split-detail {
+  position: absolute; top: 40%; left: 0; right: 0; height: 12%;
+  background: linear-gradient(180deg, rgba(192,69,90,0.4) 0%, rgba(255,255,255,0.05) 50%, rgba(90,138,76,0.4) 100%);
+  backdrop-filter: blur(2px);
+}
+.card-1 .hero-silhouette {
+  position: absolute; top: 20%; left: 50%; transform: translateX(-50%);
+  width: 130px; height: 240px;
+  background: rgba(44,24,22,0.78);
+  clip-path: polygon(38% 0, 62% 0, 64% 8%, 68% 12%, 70% 18%, 72% 24%, 70% 30%, 65% 38%, 60% 42%, 55% 48%, 58% 55%, 56% 62%, 50% 68%, 48% 75%, 52% 82%, 50% 88%, 46% 92%, 40% 88%, 42% 82%, 44% 75%, 38% 68%, 32% 62%, 34% 55%, 38% 48%, 32% 42%, 28% 38%, 24% 30%, 22% 24%, 24% 18%, 26% 12%, 28% 8%);
+  z-index: 2;
+}
+.card-1 .pipa-shape {
+  position: absolute; top: 30%; left: 35%;
+  width: 20px; height: 180px;
+  background: rgba(44,24,22,0.55);
+  border-radius: 5px 5px 10px 10px;
+  transform: rotate(-15deg);
+  z-index: 3;
+}
+.card-1 .pipa-shape::after {
+  content: ''; position: absolute; top: -20px; left: -8px;
+  width: 36px; height: 50px;
+  background: rgba(44,24,22,0.45);
+  border-radius: 40% 40% 10% 10%;
+}
+.card-1 .cloak-blown {
+  position: absolute; top: 28%; right: 25%;
+  width: 60px; height: 120px;
+  background: rgba(44,24,22,0.15);
+  clip-path: polygon(0 0, 100% 10%, 80% 100%, 0 90%);
+  z-index: 1;
+}
+.card-1 .left-pillar {
+  position: absolute; top: 8%; left: 8%; width: 6px; height: 140px;
+  background: rgba(192,69,90,0.25);
+  border-radius: 3px;
+}
+.card-1 .left-pillar::before {
+  content: ''; position: absolute; top: 0; left: -6px; width: 18px; height: 6px;
+  background: rgba(192,69,90,0.2); border-radius: 2px;
+}
+.card-1 .right-yurt {
+  position: absolute; bottom: 22%; right: 12%;
+  width: 100px; height: 70px;
+  background: rgba(240,232,216,0.3);
+  border-radius: 50% 50% 10% 10%;
+  border: 1px solid rgba(240,232,216,0.15);
+}
+.card-1 .cover-title-block {
+  position: absolute; bottom: 10%; left: 50%; transform: translateX(-50%);
+  text-align: center; z-index: 4;
+}
+.card-1 .cover-title-block .ct-name {
+  font-size: 2.6rem; font-weight: 900; color: #f0e8d8;
+  letter-spacing: 0.15em; font-family: "Noto Serif SC", serif;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+}
+.card-1 .cover-title-block .ct-sub {
+  font-size: 1.05rem; color: rgba(240,232,216,0.7);
+  letter-spacing: 0.1em; margin-top: 8px;
+}
+.card-1 .geese-dots {
+  position: absolute; top: 55%; right: 18%;
+  display: flex; gap: 8px; z-index: 2;
+}
+.card-1 .geese-dots span {
+  color: rgba(240,232,216,0.4); font-size: 0.5rem;
+}
+
+/* ══════════════════════════════════════════ */
+/* Card 2 · 汉宫请行 — 自愿站出来的宫女 */
+/* ══════════════════════════════════════════ */
+.card-2 {
+  background: linear-gradient(180deg, #faf3f0 0%, #f5e8e0 30%, #f0d8d0 70%, #e8c8c0 100%);
+}
+.card-2 .palace-arch {
+  position: absolute; top: 40px; left: 60px; right: 60px; height: 260px;
+  background: linear-gradient(180deg, rgba(192,69,90,0.06) 0%, rgba(192,69,90,0.02) 100%);
+  border: 1px solid rgba(192,69,90,0.1);
+  border-radius: 8px 8px 0 0;
+  clip-path: polygon(0 0, 100% 0, 95% 100%, 5% 100%);
+}
+.card-2 .roof-beam {
+  position: absolute; top: 40px; left: 50%; transform: translateX(-50%);
+  width: 200px; height: 80px;
+  background: linear-gradient(180deg, rgba(192,69,90,0.08) 0%, transparent 100%);
+  clip-path: polygon(30% 0, 70% 0, 90% 100%, 10% 100%);
+}
+.card-2 .light-shaft {
+  position: absolute; top: 100px; left: 50%; transform: translateX(-50%);
+  width: 120px; height: 320px;
+  background: linear-gradient(180deg, rgba(255,240,220,0.5) 0%, rgba(255,240,220,0.15) 70%, transparent 100%);
+  z-index: 2;
+}
+.card-2 .figure-center {
+  position: absolute; top: 180px; left: 50%; transform: translateX(-50%);
+  width: 50px; height: 120px;
+  background: rgba(192,69,90,0.55);
+  clip-path: polygon(25% 0, 75% 0, 80% 12%, 85% 22%, 80% 30%, 82% 40%, 78% 50%, 60% 60%, 55% 70%, 58% 82%, 50% 90%, 42% 82%, 45% 70%, 40% 60%, 22% 50%, 18% 40%, 20% 30%, 15% 22%, 20% 12%);
+  z-index: 3;
+}
+.card-2 .court-officials {
+  position: absolute; top: 220px; left: 12%; right: 12%;
+  display: flex; justify-content: space-around;
+}
+.card-2 .court-officials div {
+  width: 14px; height: 40px;
+  background: rgba(44,24,22,0.1);
+  border-radius: 2px;
+}
+.card-2 .court-officials div:nth-child(odd) { height: 50px; }
+.card-2 .court-officials div:nth-child(3n) { background: rgba(44,24,22,0.18); }
+.card-2 .three-chars {
+  position: absolute; top: 340px; left: 50%; transform: translateX(-50%);
+  font-size: 4rem; font-weight: 900; color: #c0455a;
+  letter-spacing: 0.2em; font-family: "Noto Serif SC", serif;
+  text-align: center; z-index: 3;
+}
+.card-2 .volunteer-detail {
+  position: absolute; bottom: 150px; left: 70px; right: 70px;
+  text-align: center; font-size: 0.95rem; color: rgba(44,24,22,0.62);
+  letter-spacing: 0.05em; line-height: 1.8;
+}
+.card-2 .volunteer-detail strong { color: #c0455a; }
+.card-2 .emperor-hint {
+  position: absolute; bottom: 110px; left: 80px; right: 80px;
+  text-align: center; font-size: 0.78rem; color: rgba(44,24,22,0.35);
+  letter-spacing: 0.05em; font-style: italic;
+}
+
+/* ══════════════════════════════════════════ */
+/* Card 3 · 出塞 — 雁门关外，琵琶落雁 */
+/* ══════════════════════════════════════════ */
+.card-3 {
+  background: linear-gradient(180deg, #d8c8b8 0%, #c8b090 20%, #b8a080 40%, #a89070 55%, #8a7a60 70%, #6a8a5a 85%, #5a8a4c 100%);
+}
+.card-3 .yanmen-gate {
+  position: absolute; top: 8%; right: 8%;
+  width: 140px; height: 120px;
+  background: rgba(44,24,22,0.2);
+  clip-path: polygon(5% 100%, 5% 35%, 35% 10%, 65% 10%, 95% 35%, 95% 100%);
+}
+.card-3 .carriage {
+  position: absolute; top: 48%; left: 30%;
+  width: 80px; height: 50px;
+  background: rgba(44,24,22,0.2);
+  border-radius: 8px 8px 4px 4px;
+}
+.card-3 .carriage::after {
+  content: ''; position: absolute; top: 10px; left: 20px;
+  width: 28px; height: 32px;
+  background: rgba(192,69,90,0.3);
+  border-radius: 4px;
+}
+.carriage-wheel {
+  position: absolute; top: 48%; left: 28%;
+  width: 24px; height: 24px;
+  border: 3px solid rgba(44,24,22,0.2);
+  border-radius: 50%;
+}
+.carriage-wheel2 {
+  position: absolute; top: 48%; left: 37%;
+  width: 24px; height: 24px;
+  border: 3px solid rgba(44,24,22,0.2);
+  border-radius: 50%;
+}
+.card-3 .flying-geese {
+  position: absolute; top: 25%; right: 18%;
+  font-size: 1rem; letter-spacing: 8px;
+  color: rgba(44,24,22,0.2);
+}
+.card-3 .falling-goose {
+  position: absolute; top: 32%; right: 22%;
+  font-size: 0.8rem; color: rgba(44,24,22,0.25);
+  transform: rotate(30deg);
+}
+.card-3 .luoyan-quote {
+  position: absolute; top: 38%; left: 50%; transform: translateX(-50%);
+  font-size: 3rem; font-weight: 900; color: rgba(240,232,216,0.8);
+  letter-spacing: 0.2em; font-family: "Noto Serif SC", serif;
+  text-align: center; z-index: 3;
+  text-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+.card-3 .journey-detail {
+  position: absolute; bottom: 20%; left: 60px; right: 60px;
+  text-align: center; font-size: 0.95rem; color: rgba(240,232,216,0.85);
+  letter-spacing: 0.05em; line-height: 1.8;
+}
+.card-3 .journey-route {
+  position: absolute; bottom: 10%; left: 50%; transform: translateX(-50%);
+  display: flex; align-items: center; gap: 10px;
+  font-size: 0.72rem; color: rgba(240,232,216,0.5); letter-spacing: 0.05em;
+}
+
+/* ══════════════════════════════════════════ */
+/* Card 4 · 龙庭新妇 — 宁胡阏氏 */
+/* ══════════════════════════════════════════ */
+.card-4 {
+  background: linear-gradient(180deg, #3a2a1a 0%, #4a3828 20%, #5a4030 45%, #6a4838 70%, #faf3f0 100%);
+}
+.card-4 .yurt-interior {
+  position: absolute; top: 60px; left: 50px; right: 50px; height: 380px;
+  background: linear-gradient(180deg, rgba(240,232,216,0.08) 0%, rgba(240,232,216,0.04) 100%);
+  border-radius: 55% 55% 35% 35%;
+  border: 1px solid rgba(240,232,216,0.1);
+}
+.card-4 .fire-glow {
+  position: absolute; top: 320px; left: 50%; transform: translateX(-50%);
+  width: 180px; height: 180px;
+  background: radial-gradient(circle, rgba(255,160,80,0.35) 0%, rgba(255,140,60,0.12) 50%, transparent 70%);
+}
+.card-4 .fire-pit {
+  position: absolute; top: 360px; left: 50%; transform: translateX(-50%);
+  width: 60px; height: 30px;
+  background: rgba(255,140,60,0.3);
+  border-radius: 50%;
+}
+.card-4 .bride-figure {
+  position: absolute; top: 140px; left: 50%; transform: translateX(-50%);
+  width: 60px; height: 140px;
+  background: rgba(240,232,216,0.5);
+  clip-path: polygon(20% 0, 80% 0, 85% 10%, 88% 20%, 90% 28%, 85% 36%, 82% 45%, 75% 50%, 72% 58%, 70% 65%, 68% 72%, 55% 80%, 45% 80%, 32% 72%, 30% 65%, 28% 58%, 25% 50%, 18% 45%, 15% 36%, 10% 28%, 12% 20%, 15% 10%);
+  z-index: 2;
+}
+.card-4 .chanyu-figure {
+  position: absolute; top: 155px; left: 38%;
+  width: 40px; height: 110px;
+  background: rgba(196,149,90,0.4);
+  clip-path: polygon(25% 0, 75% 0, 78% 10%, 82% 20%, 80% 30%, 85% 40%, 80% 50%, 65% 60%, 60% 70%, 62% 82%, 50% 90%, 38% 82%, 40% 70%, 35% 60%, 20% 50%, 15% 40%, 20% 30%, 18% 20%, 22% 10%);
+}
+.card-4 .ninghu-title {
+  position: absolute; top: 350px; left: 50%; transform: translateX(-50%);
+  font-size: 2.8rem; font-weight: 900; color: #f0e8d8;
+  letter-spacing: 0.15em; font-family: "Noto Serif SC", serif;
+  text-align: center; z-index: 3;
+  text-shadow: 0 2px 16px rgba(0,0,0,0.3);
+}
+.card-4 .ninghu-meaning {
+  position: absolute; bottom: 140px; left: 70px; right: 70px;
+  text-align: center; font-size: 0.95rem; color: rgba(240,232,216,0.7);
+  letter-spacing: 0.05em; line-height: 1.8;
+}
+.card-4 .ninghu-meaning strong { color: #c4955a; }
+
+/* ══════════════════════════════════════════ */
+/* Card 5 · 和平走廊 — 边境互市 */
+/* ══════════════════════════════════════════ */
+.card-5 {
+  background: linear-gradient(180deg, #faf3f0 0%, #f5e8d8 20%, #e8d8b8 45%, #d4c498 65%, #c0b080 80%, #b0a878 100%);
+}
+.card-5 .steppe-sky {
+  position: absolute; top: 0; left: 0; right: 0; height: 60%;
+  background: linear-gradient(180deg, rgba(90,138,76,0.08) 0%, rgba(196,149,90,0.06) 40%, rgba(196,149,90,0.02) 100%);
+}
+.card-5 .market-tents {
+  position: absolute; top: 12%; left: 8%; right: 8%;
+  display: flex; justify-content: space-around; align-items: flex-end;
+}
+.card-5 .market-tent {
+  width: 90px; height: 80px;
+  background: rgba(240,232,216,0.5);
+  border-radius: 50% 50% 5% 5%;
+  border: 1px solid rgba(139,115,85,0.1);
+}
+.card-5 .market-tent.silk { background: rgba(192,69,90,0.12); }
+.card-5 .market-tent.horse { background: rgba(196,149,90,0.15); }
+.card-5 .market-tent.jade { background: rgba(90,138,76,0.1); }
+.card-5 .trader-dots {
+  position: absolute; top: 22%; left: 10%; right: 10%;
+  display: flex; justify-content: space-around;
+}
+.card-5 .trader-dots span {
+  width: 8px; height: 20px; background: rgba(44,24,22,0.12); border-radius: 3px;
+}
+.card-5 .trader-dots span:nth-child(odd) { height: 24px; background: rgba(44,24,22,0.18); }
+.card-5 .peace-corridor {
+  position: absolute; top: 48%; left: 50%; transform: translateX(-50%);
+  text-align: center; z-index: 3;
+}
+.card-5 .peace-corridor .pc-big {
+  font-size: 2.4rem; font-weight: 900; color: #2c1816;
+  letter-spacing: 0.1em; font-family: "Noto Serif SC", serif;
+}
+.card-5 .peace-corridor .pc-sub {
+  font-size: 1rem; color: rgba(44,24,22,0.5); letter-spacing: 0.08em; margin-top: 6px;
+}
+.card-5 .zhaojun-watch {
+  position: absolute; top: 8%; right: 15%;
+  font-size: 0.6rem; color: rgba(44,24,22,0.25);
+  letter-spacing: 0.1em;
+}
+.card-5 .market-detail {
+  position: absolute; bottom: 130px; left: 70px; right: 70px;
+  text-align: center; font-size: 0.95rem; color: rgba(44,24,22,0.62);
+  letter-spacing: 0.05em; line-height: 1.8;
+}
+.card-5 .market-detail strong { color: #5a8a4c; }
+
+/* ══════════════════════════════════════════ */
+/* Card 6 · 从胡俗 — 留在草原上 */
+/* ══════════════════════════════════════════ */
+.card-6 {
+  background: linear-gradient(180deg, #f5e8d8 0%, #f0dcc8 30%, #e8d0b8 60%, #dcc4a8 100%);
+}
+.card-6 .yurt-outside {
+  position: absolute; top: 80px; left: 50%; transform: translateX(-50%);
+  width: 280px; height: 180px;
+  background: rgba(240,232,216,0.4);
+  border-radius: 55% 55% 10% 10%;
+  border: 1px solid rgba(196,149,90,0.1);
+}
+.card-6 .writing-scene {
+  position: absolute; top: 130px; left: 50%; transform: translateX(-50%);
+  display: flex; align-items: center; gap: 30px;
+  z-index: 2;
+}
+.card-6 .writing-scene .mother-figure {
+  width: 30px; height: 80px;
+  background: rgba(192,69,90,0.25);
+  border-radius: 8px 8px 2px 2px;
+}
+.card-6 .writing-scene .child-figures {
+  display: flex; gap: 10px;
+}
+.card-6 .writing-scene .child-figures div {
+  width: 14px; height: 40px;
+  background: rgba(44,24,22,0.1);
+  border-radius: 4px;
+}
+.card-6 .writing-scene .child-figures div:nth-child(2) { height: 34px; }
+.card-6 .ink-and-tea {
+  position: absolute; top: 240px; left: 50%; transform: translateX(-50%);
+  display: flex; gap: 40px; z-index: 2;
+  font-size: 1.6rem;
+}
+.card-6 .three-words {
+  position: absolute; top: 310px; left: 50%; transform: translateX(-50%);
+  font-size: 3.2rem; font-weight: 900; color: #c0455a;
+  letter-spacing: 0.2em; font-family: "Noto Serif SC", serif;
+  text-align: center; z-index: 3;
+}
+.card-6 .husu-detail {
+  position: absolute; bottom: 140px; left: 70px; right: 70px;
+  text-align: center; font-size: 0.95rem; color: rgba(44,24,22,0.62);
+  letter-spacing: 0.05em; line-height: 1.8;
+}
+.card-6 .husu-detail strong { color: #2c1816; }
+
+/* ══════════════════════════════════════════ */
+/* Card 7 · 青冢长青 — 四季常青的墓 */
+/* ══════════════════════════════════════════ */
+.card-7 {
+  background: linear-gradient(180deg, #d8d0c0 0%, #c8b898 15%, #b8a878 30%, #a89868 50%, #8a7a50 65%, #6a5a3a 80%, #4a3a28 100%);
+}
+.card-7 .distant-mountains {
+  position: absolute; top: 12%; left: 0; right: 0; height: 25%;
+  background: linear-gradient(180deg, rgba(180,190,200,0.4) 0%, rgba(160,170,180,0.3) 30%, rgba(140,150,160,0.15) 100%);
+  clip-path: polygon(0 100%, 10% 40%, 25% 60%, 38% 30%, 50% 55%, 62% 20%, 75% 45%, 88% 15%, 100% 50%, 100% 100%);
+}
+.card-7 .snow-caps {
+  position: absolute; top: 12%; left: 35%; width: 30%; height: 10%;
+  background: rgba(255,255,255,0.3);
+  clip-path: polygon(0 100%, 20% 10%, 40% 30%, 60% 5%, 80% 25%, 100% 60%, 100% 100%);
+}
+.card-7 .tomb-mound {
+  position: absolute; top: 38%; left: 50%; transform: translateX(-50%);
+  width: 120px; height: 60px;
+  background: rgba(90,138,76,0.35);
+  border-radius: 50% 50% 20% 20%;
+  z-index: 2;
+}
+.card-7 .green-spot {
+  position: absolute; top: 36%; left: 50%; transform: translateX(-50%);
+  width: 80px; height: 40px;
+  background: rgba(90,138,76,0.5);
+  border-radius: 50%;
+  z-index: 3;
+}
+.card-7 .light-beam {
+  position: absolute; top: 20%; left: 50%; transform: translateX(-50%);
+  width: 80px; height: 180px;
+  background: linear-gradient(180deg, rgba(255,220,150,0.3) 0%, rgba(255,200,120,0.12) 60%, transparent 100%);
+  z-index: 4;
+}
+.card-7 .sixty-years {
+  position: absolute; top: 52%; left: 50%; transform: translateX(-50%);
+  text-align: center; z-index: 5;
+}
+.card-7 .sixty-years .sy-num {
+  font-size: 5rem; font-weight: 900; color: #f0e8d8;
+  font-family: "Georgia", serif; letter-spacing: -0.03em; line-height: 1;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.2);
+}
+.card-7 .sixty-years .sy-label {
+  font-size: 0.9rem; color: rgba(240,232,216,0.6);
+  letter-spacing: 0.1em; margin-top: 6px;
+}
+.card-7 .verdict-line {
+  position: absolute; bottom: 16%; left: 50%; transform: translateX(-50%);
+  font-size: 1.05rem; color: rgba(240,232,216,0.75);
+  letter-spacing: 0.08em; text-align: center; z-index: 2;
+  line-height: 1.7;
+}
+.card-7 .verdict-line strong { color: #5a8a4c; font-size: 1.2rem; }
+
+/* ══════════════════════════════════════════ */
+/* Card 8 · CTA 导流 */
+/* ══════════════════════════════════════════ */
+.card-8 {
+  background: linear-gradient(180deg, #faf3f0 0%, #f5e8e0 60%, #f0dcd4 100%);
+}
+.card-8 .cta-frame {
+  position: absolute; top: 90px; left: 60px; right: 60px; bottom: 200px;
+  background: rgba(255,255,255,0.85); border: 1px solid rgba(192,69,90,0.12);
+  border-radius: 24px; display: flex; flex-direction: column; align-items: center;
+  justify-content: center; padding: 40px;
+  box-shadow: 0 12px 50px rgba(44,24,22,0.05);
+}
+.card-8 .cta-frame .cta-emoji { font-size: 3.5rem; margin-bottom: 20px; }
+.card-8 .cta-frame .cta-title {
+  font-size: 1.6rem; font-weight: 800; color: #c0455a;
+  letter-spacing: 0.08em; margin-bottom: 12px; text-align: center;
+  font-family: "Noto Serif SC", serif;
+}
+.card-8 .cta-frame .cta-desc {
+  font-size: 0.9rem; color: rgba(44,24,22,0.6);
+  letter-spacing: 0.04em; text-align: center; line-height: 1.8;
+}
+.card-8 .cta-frame .url-box {
+  margin-top: 20px; padding: 12px 24px; border-radius: 24px;
+  background: rgba(192,69,90,0.04); border: 1px solid rgba(192,69,90,0.12);
+  font-size: 0.78rem; color: #c0455a; letter-spacing: 0.04em;
+  font-family: "SF Mono", "Menlo", monospace;
+}
+.card-8 .tag-cloud {
+  position: absolute; bottom: 120px; left: 60px; right: 60px;
+  display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;
+}
+.card-8 .tag {
+  font-size: 0.72rem; padding: 5px 12px; border-radius: 12px;
+  background: rgba(255,255,255,0.7); color: rgba(44,24,22,0.6);
+  border: 1px solid rgba(192,69,90,0.06);
+}
+
+/* ── Toolbar ── */
+.toolbar {
+  position: fixed; top: 10px; left: 50%; transform: translateX(-50%);
+  z-index: 9999; display: flex; gap: 6px; flex-wrap: wrap; justify-content: center;
+  background: rgba(250,243,240,0.94); padding: 8px 14px; border-radius: 20px;
+  border: 1px solid rgba(192,69,90,0.12);
+}
+.toolbar button {
+  padding: 5px 10px; border-radius: 12px; border: 1px solid rgba(192,69,90,0.1);
+  background: rgba(255,255,255,0.85); color: #5c2020; cursor: pointer;
+  font-size: 0.68rem; transition: all 0.2s; font-family: inherit;
+}
+.toolbar button:hover { background: rgba(192,69,90,0.08); border-color: #c0455a; color: #c0455a; }
+.toolbar button.active { background: #c0455a; color: #faf3f0; border-color: #c0455a; font-weight: 600; }
+
+@media (max-width: 700px) {
+  .card-1 .cover-title-block .ct-name { font-size: 2rem; }
+  .card-2 .three-chars { font-size: 2.8rem; }
+  .card-3 .luoyan-quote { font-size: 2.2rem; }
+  .card-4 .ninghu-title { font-size: 2rem; }
+  .card-5 .peace-corridor .pc-big { font-size: 1.8rem; }
+  .card-6 .three-words { font-size: 2.4rem; }
+  .card-7 .sixty-years .sy-num { font-size: 3.5rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <button onclick="scrollToCard(0)">1·封面</button>
+  <button onclick="scrollToCard(1)">2·请行</button>
+  <button onclick="scrollToCard(2)">3·出塞</button>
+  <button onclick="scrollToCard(3)">4·龙庭</button>
+  <button onclick="scrollToCard(4)">5·互市</button>
+  <button onclick="scrollToCard(5)">6·从胡俗</button>
+  <button onclick="scrollToCard(6)">7·青冢</button>
+  <button onclick="scrollToCard(7)">8·CTA</button>
+</div>
+
+<!-- ═══ 1 · 封面 — 胭脂红 + 草原绿对撞 ═══ -->
+<div class="card card-1">
+  <div class="card-num">1 / 8</div>
+  <div class="left-pillar"></div>
+  <div class="right-yurt"></div>
+  <div class="hero-silhouette"></div>
+  <div class="pipa-shape"></div>
+  <div class="cloak-blown"></div>
+  <div class="split-detail"></div>
+  <div class="geese-dots"><span>︽</span><span>︽</span><span>︽</span></div>
+  <div class="cover-title-block">
+    <div class="ct-name">王昭君</div>
+    <div class="ct-sub">🎀 第一个走过丝路的和亲公主</div>
+  </div>
+  <div class="card-footer">丝绸之路交互知识图谱 · 第17篇</div>
+</div>
+
+<!-- ═══ 2 · 汉宫请行 — 我去 ═══ -->
+<div class="card card-2">
+  <div class="card-num">2 / 8</div>
+  <div class="palace-arch"></div>
+  <div class="roof-beam"></div>
+  <div class="light-shaft"></div>
+  <div class="figure-center"></div>
+  <div class="court-officials">
+    <div></div><div></div><div></div><div></div><div></div>
+    <div></div><div></div><div></div><div></div><div></div>
+  </div>
+  <div class="three-chars">我 去</div>
+  <div class="volunteer-detail">
+    公元前33年。匈奴单于来长安求娶汉家公主<br>
+    一个入宫多年<strong>从未见过皇帝</strong>的宫女<br>
+    站了出来
+  </div>
+  <div class="emperor-hint">
+    《后汉书》：「昭君丰容靓饰，光明汉宫……帝大惊」
+  </div>
+  <div class="card-footer">汉元帝竟宁元年 · 未央宫大殿</div>
+</div>
+
+<!-- ═══ 3 · 出塞 — 雁门关外，琵琶落雁 ═══ -->
+<div class="card card-3">
+  <div class="card-num">3 / 8</div>
+  <div class="yanmen-gate"></div>
+  <div class="flying-geese">︽ ︽ ︽ ︽</div>
+  <div class="falling-goose">︾</div>
+  <div class="luoyan-quote">落 雁</div>
+  <div class="carriage"></div>
+  <div class="carriage-wheel"></div>
+  <div class="carriage-wheel2"></div>
+  <div class="journey-detail">
+    从长安出发，渡黄河，穿鄂尔多斯，一路向北<br>
+    雁门关外，她弹起琵琶。天上的大雁听见<br>
+    忘了扇翅膀，掉了下来
+  </div>
+  <div class="journey-route">
+    <span>🏯 长安</span> → <span>🏔 雁门关</span> → <span>🏕 匈奴龙庭</span>
+  </div>
+  <div class="card-footer">昭君出塞 · 西汉竟宁元年（前33年）</div>
+</div>
+
+<!-- ═══ 4 · 龙庭新妇 — 宁胡阏氏 ═══ -->
+<div class="card card-4">
+  <div class="card-num">4 / 8</div>
+  <div class="yurt-interior"></div>
+  <div class="chanyu-figure"></div>
+  <div class="bride-figure"></div>
+  <div class="fire-glow"></div>
+  <div class="fire-pit"></div>
+  <div class="ninghu-title">宁胡阏氏</div>
+  <div class="ninghu-meaning">
+    呼韩邪单于给她的封号<br>
+    <strong>「宁胡」—— 能带来安宁的妻子</strong><br>
+    她没有辜负这个名字
+  </div>
+  <div class="card-footer">匈奴龙庭 · 穹庐毡帐 · 各族朝贺</div>
+</div>
+
+<!-- ═══ 5 · 和平走廊 — 边境互市 ═══ -->
+<div class="card card-5">
+  <div class="card-num">5 / 8</div>
+  <div class="steppe-sky"></div>
+  <div class="market-tents">
+    <div class="market-tent silk"></div>
+    <div class="market-tent horse"></div>
+    <div class="market-tent jade"></div>
+    <div class="market-tent silk"></div>
+    <div class="market-tent horse"></div>
+  </div>
+  <div class="trader-dots">
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+  </div>
+  <div class="zhaojun-watch">👁 昭君在高台上远眺</div>
+  <div class="peace-corridor">
+    <div class="pc-big">和平走廊</div>
+    <div class="pc-sub">汉匈边境 · 榷场互市</div>
+  </div>
+  <div class="market-detail">
+    她在位的几十年，汉匈边境<strong>无大战</strong><br>
+    草原骏马和中原丝绸在这条「和平走廊」上自由流动<br>
+    <strong>一条没有长城的丝绸之路</strong>
+  </div>
+  <div class="card-footer">宁胡阏氏在位期间 · 汉匈六十年和平</div>
+</div>
+
+<!-- ═══ 6 · 从胡俗 — 留在草原上 ═══ -->
+<div class="card card-6">
+  <div class="card-num">6 / 8</div>
+  <div class="yurt-outside"></div>
+  <div class="writing-scene">
+    <div class="mother-figure"></div>
+    <div class="child-figures">
+      <div></div><div></div><div></div>
+    </div>
+  </div>
+  <div class="ink-and-tea">🖌 &nbsp;&nbsp; 🍵</div>
+  <div class="three-words">从 胡 俗</div>
+  <div class="husu-detail">
+    呼韩邪死后，按匈奴「父死妻其后母」的习俗<br>
+    她嫁给了继子。曾上书请求归汉<br>
+    汉成帝回了三个字：<strong>「从胡俗」</strong><br>
+    她留在了草原，教孩子们用汉字拼写匈奴语
+  </div>
+  <div class="card-footer">汉成帝年间 · 再嫁呼韩邪之子复株累单于</div>
+</div>
+
+<!-- ═══ 7 · 青冢长青 — 六十年 ═══ -->
+<div class="card card-7">
+  <div class="card-num">7 / 8</div>
+  <div class="distant-mountains"></div>
+  <div class="snow-caps"></div>
+  <div class="tomb-mound"></div>
+  <div class="green-spot"></div>
+  <div class="light-beam"></div>
+  <div class="sixty-years">
+    <div class="sy-num">60 <small style="font-size:1.2rem">年</small></div>
+    <div class="sy-label">没有战火</div>
+  </div>
+  <div class="verdict-line">
+    她葬在大青山南麓。墓上的草<br>
+    <strong>四季常青</strong>，塞北人称「青冢」<br>
+    她不是将军、不是使臣<br>
+    但那条路，六十年没有战火
+  </div>
+  <div class="card-footer">大青山南麓 · 青冢 · 今内蒙古呼和浩特</div>
+</div>
+
+<!-- ═══ 8 · CTA ═══ -->
+<div class="card card-8">
+  <div class="card-num">8 / 8</div>
+  <div class="cta-frame">
+    <div class="cta-emoji">🎀</div>
+    <div class="cta-title">王昭君 · 宁胡阏氏</div>
+    <div class="cta-desc">
+      一个宫女的自愿和亲<br>
+      换来汉匈六十年的和平走廊<br>
+      <strong>丝路不只是商贸和求法——还有婚姻和外交</strong><br>
+      交互故事已上线
+    </div>
+    <div class="url-box">scarlettlab2026.github.io/silk-road-2026</div>
+  </div>
+  <div class="tag-cloud">
+    <span class="tag">#丝绸之路</span><span class="tag">#王昭君</span>
+    <span class="tag">#昭君出塞</span><span class="tag">#和亲</span>
+    <span class="tag">#四大美女</span><span class="tag">#汉朝</span>
+    <span class="tag">#匈奴</span><span class="tag">#宁胡阏氏</span>
+    <span class="tag">#冷门历史</span><span class="tag">#一人一个冷知识</span>
+    <span class="tag">#青冢</span><span class="tag">#落雁</span>
+  </div>
+  <div class="card-footer">全站 17篇故事 · 61座古城 · 免费开放</div>
+</div>
+
+<script>
+function scrollToCard(idx) {
+  const cards = document.querySelectorAll('.card');
+  if (cards[idx]) cards[idx].scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const idx = Array.from(document.querySelectorAll('.card')).indexOf(entry.target);
+      document.querySelectorAll('.toolbar button').forEach((btn, i) => {
+        btn.classList.toggle('active', i === idx);
+      });
+    }
+  });
+}, { threshold: 0.6 });
+document.querySelectorAll('.card').forEach(card => observer.observe(card));
+</script>
+</body>
+</html>

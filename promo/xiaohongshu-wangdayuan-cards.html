@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>汪大渊 · 岛夷志略 · 小红书卡片</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: #d4e0e8;
+  font-family: -apple-system, "PingFang SC", "Noto Serif SC", "Noto Sans SC", "Microsoft YaHei", serif;
+  display: flex; flex-direction: column; align-items: center;
+  gap: 4px; padding: 4px;
+}
+
+.card {
+  width: 1080px; max-width: 100vw;
+  aspect-ratio: 9 / 16; max-height: 100vh;
+  position: relative; overflow: hidden;
+  background: #f0f4f6;
+  color: #1a2a30;
+}
+
+/* ── Shared ── */
+.card .card-num {
+  position: absolute; top: 48px; right: 56px; z-index: 10;
+  font-size: 0.85rem; color: rgba(26,42,48,0.18); letter-spacing: 0.15em;
+}
+.card .card-footer {
+  position: absolute; bottom: 48px; left: 0; right: 0; text-align: center; z-index: 10;
+  font-size: 0.68rem; color: rgba(26,42,48,0.14); letter-spacing: 0.1em;
+}
+
+/* ══════════════════════════════════════════ */
+/* Card 1 · 封面 — 泉州港的19岁 */
+/* ══════════════════════════════════════════ */
+.card-1 {
+  background: linear-gradient(180deg, #f5e8d0 0%, #e8d4b0 10%, #d4c8a0 20%, #b0c8d4 38%, #5a8a9a 55%, #2c5a7a 72%, #1a3a50 100%);
+}
+.card-1 .morning-sky {
+  position: absolute; top: 5%; left: 20%; right: 20%; height: 30%;
+  background: radial-gradient(ellipse at 50% 70%, rgba(255,240,210,0.5) 0%, rgba(240,220,180,0.2) 50%, transparent 75%);
+}
+.card-1 .sun-rising {
+  position: absolute; top: 22%; left: 50%; transform: translateX(-50%);
+  width: 100px; height: 100px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,240,200,0.8) 0%, rgba(255,210,140,0.3) 50%, transparent 70%);
+}
+.card-1 .sea-horizon {
+  position: absolute; top: 45%; left: 0; right: 0; height: 1px;
+  background: rgba(255,255,255,0.2);
+}
+.card-1 .ocean {
+  position: absolute; bottom: 0; left: 0; right: 0; height: 55%;
+  background: linear-gradient(180deg,
+    rgba(90,138,154,0.4) 0%, rgba(44,90,122,0.7) 12%,
+    rgba(26,58,80,0.9) 35%, rgba(13,36,50,1) 100%);
+}
+.card-1 .pier {
+  position: absolute; top: 42%; left: 15%; right: 15%; height: 6px;
+  background: rgba(44,36,22,0.4);
+  border-radius: 3px 3px 0 0;
+}
+.card-1 .figure-young {
+  position: absolute; top: 25%; left: 50%; transform: translateX(-50%);
+  width: 50px; height: 130px;
+  background: rgba(44,36,22,0.65);
+  clip-path: polygon(35% 0, 65% 0, 68% 5%, 62% 8%, 64% 18%, 58% 22%, 60% 35%, 56% 42%, 58% 62%, 50% 72%, 50% 72%, 42% 62%, 44% 42%, 40% 35%, 42% 22%, 36% 18%, 38% 8%, 32% 5%);
+}
+.card-1 .backpack-hint {
+  position: absolute; top: 28%; left: 53%;
+  width: 16px; height: 20px;
+  background: rgba(44,36,22,0.5);
+  border-radius: 4px;
+}
+.card-1 .dhow-silhouette {
+  position: absolute; top: 38%; right: 12%;
+  font-size: 1.8rem; opacity: 0.3;
+}
+.card-1 .cover-title {
+  position: absolute; bottom: 22%; left: 50%; transform: translateX(-50%);
+  text-align: center; z-index: 2;
+}
+.card-1 .cover-title .big-age {
+  font-size: 6rem; font-weight: 900; color: #faf6ed;
+  letter-spacing: -0.03em; font-family: "Georgia", "Noto Serif SC", serif;
+  line-height: 1; text-shadow: 0 2px 30px rgba(0,0,0,0.3);
+}
+.card-1 .cover-title .big-age small { font-size: 2rem; font-weight: 400; }
+.card-1 .cover-title .hook {
+  font-size: 1.2rem; color: rgba(250,246,237,0.65); letter-spacing: 0.08em;
+  margin-top: 10px;
+}
+.card-1 .cover-title .hook strong { color: #c8a45a; }
+.card-1 .tag-row {
+  position: absolute; bottom: 14%; left: 50%; transform: translateX(-50%);
+  display: flex; gap: 10px; z-index: 2;
+}
+.card-1 .tag-row span {
+  padding: 5px 14px; border-radius: 12px;
+  font-size: 0.7rem; letter-spacing: 0.04em;
+  border: 1px solid rgba(250,246,237,0.2);
+  color: rgba(250,246,237,0.55);
+}
+
+/* ══════════════════════════════════════════ */
+/* Card 2 · 搭便船 — 背包客 */
+/* ══════════════════════════════════════════ */
+.card-2 {
+  background: linear-gradient(180deg, #e8eef2 0%, #dce6ec 30%, #d0dce4 60%, #f0f4f6 100%);
+}
+.card-2 .deck-frame {
+  position: absolute; top: 80px; left: 50px; right: 50px; bottom: 180px;
+  background: linear-gradient(180deg, rgba(200,180,150,0.15) 0%, rgba(180,160,130,0.2) 50%, rgba(160,140,110,0.25) 100%);
+  border-radius: 20px; border: 1px solid rgba(139,115,85,0.12);
+  overflow: hidden;
+}
+.card-2 .sail-shape {
+  position: absolute; top: 0; right: 10%; width: 160px; height: 280px;
+  background: rgba(240,244,246,0.6);
+  clip-path: polygon(0 0, 60% 5%, 100% 30%, 95% 80%, 80% 95%, 50% 100%, 0 100%);
+}
+.card-2 .cargo-area {
+  position: absolute; bottom: 30px; left: 20px; right: 20px;
+  display: flex; gap: 10px; justify-content: center;
+}
+.card-2 .cargo {
+  width: 50px; height: 40px; border-radius: 4px;
+  background: rgba(139,115,85,0.1); border: 1px solid rgba(139,115,85,0.08);
+}
+.card-2 .cargo:nth-child(2) { height: 50px; }
+.card-2 .cargo:nth-child(4) { height: 35px; width: 60px; }
+.card-2 .writer-corner {
+  position: absolute; bottom: 50px; left: 40px;
+  display: flex; align-items: flex-end; gap: 6px;
+}
+.card-2 .writer-corner .fig {
+  width: 8px; height: 40px; background: rgba(44,36,22,0.25); border-radius: 2px 2px 0 0;
+}
+.card-2 .writer-corner .paper {
+  width: 30px; height: 22px; background: rgba(250,246,237,0.5);
+  border-radius: 1px; border: 1px solid rgba(44,36,22,0.08);
+}
+.card-2 .contrast-badge {
+  position: absolute; top: 55%; left: 50%; transform: translateX(-50%);
+  padding: 8px 18px; border-radius: 999px;
+  background: rgba(255,255,255,0.7); border: 1px solid rgba(44,90,122,0.12);
+  font-size: 0.75rem; color: #2c5a7a; letter-spacing: 0.06em; z-index: 2;
+}
+.card-2 .contrast-note {
+  position: absolute; bottom: 130px; left: 60px; right: 60px;
+  text-align: center; font-size: 0.9rem; color: rgba(26,42,48,0.55);
+  letter-spacing: 0.05em; line-height: 1.7;
+}
+.card-2 .contrast-note strong { color: #2c5a7a; }
+
+/* ══════════════════════════════════════════ */
+/* Card 3 · 航线地图 */
+/* ══════════════════════════════════════════ */
+.card-3 {
+  background: linear-gradient(180deg, #f5f0e4 0%, #efe8d4 50%, #e8dcc0 100%);
+}
+.card-3 .map-parchment {
+  position: absolute; top: 70px; left: 35px; right: 35px; bottom: 190px;
+  background: linear-gradient(180deg, #faf6ed 0%, #f2ead6 40%, #e8dcc0 80%, #e0d0b0 100%);
+  border-radius: 8px; border: 1px solid rgba(139,115,85,0.2);
+  box-shadow: 0 10px 40px rgba(44,32,22,0.1);
+}
+.card-3 .compass-rose {
+  position: absolute; bottom: 30px; right: 30px; z-index: 2;
+  font-size: 2.5rem; opacity: 0.25;
+}
+.card-3 .route-dots {
+  position: absolute; top: 110px; left: 25px; right: 25px;
+  display: flex; justify-content: space-between; align-items: center;
+  z-index: 2;
+}
+.card-3 .stop {
+  display: flex; flex-direction: column; align-items: center; gap: 5px;
+}
+.card-3 .stop .dot {
+  width: 9px; height: 9px; border-radius: 50%;
+  background: #2c5a7a; box-shadow: 0 0 10px rgba(44,90,122,0.35);
+}
+.card-3 .stop .dot.highlight {
+  width: 11px; height: 11px; background: #c8a45a;
+  box-shadow: 0 0 14px rgba(200,164,90,0.5);
+}
+.card-3 .stop .label {
+  font-size: 0.55rem; color: rgba(44,36,22,0.45); letter-spacing: 0.04em;
+  text-align: center; max-width: 55px; line-height: 1.3;
+}
+.card-3 .dashed-route {
+  position: absolute; top: 136px; left: 38px; right: 38px;
+  height: 0; border-top: 2px dashed rgba(44,90,122,0.4); z-index: 1;
+}
+.card-3 .ship-icon {
+  position: absolute; top: 124px; left: 48%;
+  font-size: 1rem; z-index: 3; transform: rotate(-10deg);
+}
+.card-3 .map-story {
+  position: absolute; bottom: 120px; left: 55px; right: 55px;
+  text-align: center; font-size: 0.9rem; color: rgba(44,36,22,0.55);
+  letter-spacing: 0.05em; line-height: 1.7;
+}
+.card-3 .map-story strong { color: #2c5a7a; }
+
+/* ══════════════════════════════════════════ */
+/* Card 4 · 三佛齐市场 */
+/* ══════════════════════════════════════════ */
+.card-4 {
+  background: linear-gradient(180deg, #faf3e0 0%, #f5e8c8 40%, #edd8b0 100%);
+}
+.card-4 .market-scene {
+  position: absolute; top: 80px; left: 40px; right: 40px; bottom: 200px;
+  background: linear-gradient(180deg, rgba(210,180,140,0.15) 0%, rgba(190,160,120,0.2) 100%);
+  border-radius: 16px; border: 1px solid rgba(176,144,96,0.12);
+  display: flex; flex-direction: column; align-items: center; padding: 20px;
+}
+.card-4 .stall-row {
+  display: flex; gap: 10px; margin: 10px 0; justify-content: center;
+}
+.card-4 .stall {
+  width: 90px; padding: 14px 10px; border-radius: 12px;
+  background: rgba(255,255,255,0.7); border: 1px solid rgba(139,115,85,0.1);
+  text-align: center;
+}
+.card-4 .stall .st-emoji { font-size: 1.8rem; margin-bottom: 4px; }
+.card-4 .stall .st-name { font-size: 0.7rem; font-weight: 600; color: #2c2016; letter-spacing: 0.03em; }
+.card-4 .stall .st-note { font-size: 0.58rem; color: rgba(44,32,22,0.35); margin-top: 2px; }
+.card-4 .observer {
+  position: absolute; bottom: 30px; right: 40px;
+  display: flex; align-items: center; gap: 4px;
+}
+.card-4 .observer .obs-fig {
+  width: 6px; height: 28px; background: rgba(44,90,122,0.3); border-radius: 2px;
+}
+.card-4 .observer .obs-pen {
+  width: 12px; height: 3px; background: rgba(44,36,22,0.3); border-radius: 1px;
+}
+.card-4 .market-quote {
+  position: absolute; bottom: 120px; left: 55px; right: 55px;
+  text-align: center; font-size: 0.95rem; color: rgba(44,32,22,0.6);
+  letter-spacing: 0.05em; line-height: 1.8;
+}
+.card-4 .market-quote strong { color: #2c5a7a; font-size: 1.1rem; }
+
+/* ══════════════════════════════════════════ */
+/* Card 5 · 卡利卡特胡椒之都 */
+/* ══════════════════════════════════════════ */
+.card-5 {
+  background: linear-gradient(180deg, #f0e4c8 0%, #e8d4a8 35%, #d4b878 70%, #f0f4f6 100%);
+}
+.card-5 .pepper-mountain {
+  position: absolute; top: 15%; left: 25%; right: 25%; height: 30%;
+  background:
+    radial-gradient(ellipse at 30% 60%, rgba(120,80,40,0.15) 0, transparent 50%),
+    radial-gradient(ellipse at 60% 50%, rgba(120,80,40,0.2) 0, transparent 45%),
+    radial-gradient(ellipse at 50% 70%, rgba(120,80,40,0.12) 0, transparent 55%);
+}
+.card-5 .pepper-label {
+  position: absolute; top: 42%; left: 50%; transform: translateX(-50%);
+  font-size: 0.75rem; color: rgba(120,80,40,0.5); letter-spacing: 0.08em;
+}
+.card-5 .currency-row {
+  position: absolute; top: 50%; left: 40px; right: 40px;
+  display: flex; gap: 12px; justify-content: center;
+}
+.card-5 .currency {
+  flex: 1; padding: 16px 10px; border-radius: 12px;
+  background: rgba(255,255,255,0.75); border: 1px solid rgba(139,115,85,0.1);
+  text-align: center; max-width: 130px;
+}
+.card-5 .currency .cu-emoji { font-size: 1.8rem; margin-bottom: 4px; }
+.card-5 .currency .cu-name { font-size: 0.72rem; font-weight: 600; color: #2c2016; letter-spacing: 0.03em; }
+.card-5 .currency .cu-from { font-size: 0.58rem; color: rgba(44,32,22,0.35); margin-top: 2px; }
+.card-5 .market-detail {
+  position: absolute; bottom: 130px; left: 55px; right: 55px;
+  text-align: center; font-size: 0.9rem; color: rgba(44,32,22,0.6);
+  letter-spacing: 0.05em; line-height: 1.8;
+}
+.card-5 .market-detail strong { color: #b07040; }
+
+/* ══════════════════════════════════════════ */
+/* Card 6 · 东非蒙巴萨 */
+/* ══════════════════════════════════════════ */
+.card-6 {
+  background: linear-gradient(180deg, #d8e8f0 0%, #c8dce8 25%, #b8d0e0 45%, #e0d8c0 65%, #f0e8d0 100%);
+}
+.card-6 .ocean-band {
+  position: absolute; top: 0; left: 0; right: 0; height: 50%;
+  background: linear-gradient(180deg, #8ab8cc 0%, #6aa4b8 25%, #4a90a8 50%, #c8d0b8 80%, #e0d8c0 100%);
+}
+.card-6 .beach {
+  position: absolute; top: 45%; left: 0; right: 0; height: 15%;
+  background: linear-gradient(180deg, #e8dcc0 0%, #f0e4cc 50%, #f5ecd8 100%);
+  border-radius: 40% 60% 0 0 / 100% 100% 0 0;
+}
+.card-6 .figures-beach {
+  position: absolute; top: 38%; left: 20%; right: 20%;
+  display: flex; justify-content: center; gap: 40px; align-items: flex-end;
+}
+.card-6 .figures-beach .f-left {
+  display: flex; gap: 6px;
+}
+.card-6 .figures-beach .f-left span {
+  width: 5px; background: rgba(44,36,22,0.2); border-radius: 2px 2px 0 0;
+}
+.card-6 .figures-beach .f-center {
+  width: 7px; height: 45px; background: rgba(44,90,122,0.35); border-radius: 2px 2px 0 0;
+}
+.card-6 .sunset-disc {
+  position: absolute; top: 12%; right: 20%;
+  width: 80px; height: 80px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,200,120,0.6) 0%, rgba(255,160,80,0.2) 60%, transparent 100%);
+}
+.card-6 .quote-eight {
+  position: absolute; top: 55%; left: 50%; transform: translateX(-50%);
+  font-size: 1.6rem; font-weight: 700; color: #2c5a7a;
+  letter-spacing: 0.12em; font-family: "Noto Serif SC", serif;
+  text-align: center; z-index: 2;
+}
+.card-6 .africa-detail {
+  position: absolute; bottom: 130px; left: 55px; right: 55px;
+  text-align: center; font-size: 0.9rem; color: rgba(26,42,48,0.58);
+  letter-spacing: 0.05em; line-height: 1.8;
+}
+.card-6 .africa-detail strong { color: #2c5a7a; }
+
+/* ══════════════════════════════════════════ */
+/* Card 7 · 三大游记 */
+/* ══════════════════════════════════════════ */
+.card-7 {
+  background: linear-gradient(180deg, #e8e0d4 0%, #f0e8dc 40%, #f4f0ea 70%, #f0f4f6 100%);
+}
+.card-7 .three-books {
+  position: absolute; top: 20%; left: 50%; transform: translateX(-50%);
+  display: flex; gap: 24px; align-items: flex-end; z-index: 2;
+}
+.card-7 .book-v {
+  width: 110px; border-radius: 3px 6px 6px 3px;
+  box-shadow: 4px 6px 25px rgba(44,32,22,0.12);
+  position: relative; display: flex; flex-direction: column;
+  align-items: center; justify-content: flex-start;
+  padding-top: 22px;
+}
+.card-7 .book-v::before {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
+  border-radius: 1px 0 0 1px;
+}
+.card-7 .book-v.marco {
+  height: 220px; background: linear-gradient(180deg, #faf6ed 0%, #f0e0d4 60%, #d4b8a0 100%);
+}
+.card-7 .book-v.marco::before { background: rgba(160,60,40,0.4); }
+.card-7 .book-v.battuta {
+  height: 200px; background: linear-gradient(180deg, #faf6ed 0%, #e8ecd4 60%, #c8d4a8 100%);
+}
+.card-7 .book-v.battuta::before { background: rgba(80,120,60,0.4); }
+.card-7 .book-v.dayuan {
+  height: 175px; background: linear-gradient(180deg, #faf6ed 0%, #e0e8f0 60%, #c0d0e0 100%);
+  border: 1.5px solid rgba(44,90,122,0.25);
+  box-shadow: 4px 6px 30px rgba(44,90,122,0.2), 0 0 0 4px rgba(44,90,122,0.06);
+}
+.card-7 .book-v.dayuan::before { background: rgba(44,90,122,0.5); }
+.card-7 .book-v .bv-title {
+  font-size: 0.6rem; font-weight: 700; color: #2c2016;
+  letter-spacing: 0.03em; text-align: center; line-height: 1.3; padding: 0 8px;
+}
+.card-7 .book-v .bv-author {
+  font-size: 0.5rem; color: rgba(44,32,22,0.35); margin-top: 4px;
+}
+.card-7 .book-v.dayuan .spotlight {
+  position: absolute; top: -30px;
+  width: 60px; height: 30px;
+  background: radial-gradient(ellipse at 50% 100%, rgba(200,164,90,0.3) 0%, transparent 70%);
+}
+.card-7 .century-label {
+  position: absolute; top: 14%; left: 50%; transform: translateX(-50%);
+  font-size: 0.75rem; color: rgba(44,32,22,0.35); letter-spacing: 0.1em; z-index: 2;
+}
+.card-7 .verdict {
+  position: absolute; bottom: 130px; left: 55px; right: 55px;
+  text-align: center; font-size: 0.95rem; color: rgba(44,32,22,0.6);
+  letter-spacing: 0.05em; line-height: 1.8; z-index: 2;
+}
+.card-7 .verdict strong { color: #2c5a7a; }
+
+/* ══════════════════════════════════════════ */
+/* Card 8 · CTA 导流 */
+/* ══════════════════════════════════════════ */
+.card-8 {
+  background: linear-gradient(180deg, #f0f4f6 0%, #e8eef2 50%, #dce6ec 100%);
+}
+.card-8 .cta-frame {
+  position: absolute; top: 90px; left: 60px; right: 60px; bottom: 200px;
+  background: rgba(255,255,255,0.88); border: 1px solid rgba(44,90,122,0.15);
+  border-radius: 24px; display: flex; flex-direction: column; align-items: center;
+  justify-content: center; padding: 40px;
+  box-shadow: 0 12px 50px rgba(26,42,48,0.06);
+}
+.card-8 .cta-emoji { font-size: 3.5rem; margin-bottom: 20px; }
+.card-8 .cta-title {
+  font-size: 1.6rem; font-weight: 800; color: #2c5a7a;
+  letter-spacing: 0.08em; margin-bottom: 12px; text-align: center;
+  font-family: "Noto Serif SC", serif;
+}
+.card-8 .cta-desc {
+  font-size: 0.9rem; color: rgba(26,42,48,0.58);
+  letter-spacing: 0.04em; text-align: center; line-height: 1.8;
+}
+.card-8 .url-box {
+  margin-top: 20px; padding: 12px 24px; border-radius: 24px;
+  background: rgba(44,90,122,0.06); border: 1px solid rgba(44,90,122,0.15);
+  font-size: 0.78rem; color: #2c5a7a; letter-spacing: 0.04em;
+  font-family: "SF Mono", "Menlo", monospace;
+}
+.card-8 .tag-cloud {
+  position: absolute; bottom: 120px; left: 60px; right: 60px;
+  display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;
+}
+.card-8 .tag {
+  font-size: 0.72rem; padding: 5px 12px; border-radius: 12px;
+  background: rgba(255,255,255,0.7); color: rgba(26,42,48,0.55);
+  border: 1px solid rgba(44,90,122,0.08);
+}
+
+/* ── Toolbar ── */
+.toolbar {
+  position: fixed; top: 10px; left: 50%; transform: translateX(-50%);
+  z-index: 9999; display: flex; gap: 6px; flex-wrap: wrap; justify-content: center;
+  background: rgba(240,244,246,0.94); padding: 8px 14px; border-radius: 20px;
+  border: 1px solid rgba(44,90,122,0.12);
+}
+.toolbar button {
+  padding: 5px 10px; border-radius: 12px; border: 1px solid rgba(44,90,122,0.12);
+  background: rgba(255,255,255,0.88); color: #1a3a50; cursor: pointer;
+  font-size: 0.68rem; transition: all 0.2s; font-family: inherit;
+}
+.toolbar button:hover { background: rgba(44,90,122,0.06); border-color: #2c5a7a; }
+.toolbar button.active { background: #2c5a7a; color: #f0f4f6; border-color: #2c5a7a; font-weight: 600; }
+
+@media (max-width: 700px) {
+  .card-1 .cover-title .big-age { font-size: 4rem; }
+  .card-6 .quote-eight { font-size: 1.2rem; }
+  .card-7 .book-v { width: 85px; }
+  .card-7 .book-v.marco { height: 180px; }
+  .card-7 .book-v.battuta { height: 160px; }
+  .card-7 .book-v.dayuan { height: 140px; }
+}
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <button onclick="scrollToCard(0)">1·封面</button>
+  <button onclick="scrollToCard(1)">2·便船</button>
+  <button onclick="scrollToCard(2)">3·航线</button>
+  <button onclick="scrollToCard(3)">4·三佛齐</button>
+  <button onclick="scrollToCard(4)">5·卡利卡特</button>
+  <button onclick="scrollToCard(5)">6·蒙巴萨</button>
+  <button onclick="scrollToCard(6)">7·三大游记</button>
+  <button onclick="scrollToCard(7)">8·CTA</button>
+</div>
+
+<!-- ═══ 1 · 封面 — 泉州港的19岁 ═══ -->
+<div class="card card-1">
+  <div class="card-num">1 / 8</div>
+  <div class="morning-sky"></div>
+  <div class="sun-rising"></div>
+  <div class="sea-horizon"></div>
+  <div class="ocean"></div>
+  <div class="pier"></div>
+  <div class="figure-young"></div>
+  <div class="backpack-hint"></div>
+  <div class="dhow-silhouette">⛵</div>
+  <div class="cover-title">
+    <div class="big-age">19 <small>岁</small></div>
+    <div class="hook">没钱，没船，没任务。<br><strong>环游半个地球</strong></div>
+  </div>
+  <div class="tag-row">
+    <span>⛵ 搭便船</span><span>📝 做记录</span><span>📖 写本书</span>
+  </div>
+  <div class="card-footer">丝绸之路交互知识图谱 · 第7篇</div>
+</div>
+
+<!-- ═══ 2 · 搭便船 — 史上第一个背包客 ═══ -->
+<div class="card card-2">
+  <div class="card-num">2 / 8</div>
+  <div class="deck-frame">
+    <div class="sail-shape"></div>
+    <div class="cargo-area">
+      <div class="cargo"></div><div class="cargo"></div><div class="cargo"></div>
+      <div class="cargo"></div><div class="cargo"></div><div class="cargo"></div>
+    </div>
+    <div class="writer-corner">
+      <div class="fig"></div>
+      <div class="paper"></div>
+      <div class="obs-pen"></div>
+    </div>
+  </div>
+  <div class="contrast-badge">🚫 宝船 &nbsp;🚫 舰队 &nbsp;🚫 圣旨</div>
+  <div class="contrast-note">
+    没有郑和的两百艘宝船<br>
+    没有张骞的汉节和使团<br>
+    <strong>他只是走到泉州港，跳上一艘阿拉伯商船</strong><br>
+    两次出海，十年漂泊，220多个地方
+  </div>
+  <div class="card-footer">史上第一个「背包客」· 1330年</div>
+</div>
+
+<!-- ═══ 3 · 航线地图 ═══ -->
+<div class="card card-3">
+  <div class="card-num">3 / 8</div>
+  <div class="map-parchment">
+    <div class="compass-rose">🧭</div>
+    <div class="dashed-route"></div>
+    <div class="ship-icon">⛵</div>
+    <div class="route-dots">
+      <div class="stop"><div class="dot highlight"></div><div class="label">泉州</div></div>
+      <div class="stop"><div class="dot"></div><div class="label">占城</div></div>
+      <div class="stop"><div class="dot"></div><div class="label">三佛齐<br><small>巨港</small></div></div>
+      <div class="stop"><div class="dot highlight"></div><div class="label">满剌加<br><small>马六甲</small></div></div>
+      <div class="stop"><div class="dot"></div><div class="label">卡利卡特<br><small>印度</small></div></div>
+      <div class="stop"><div class="dot"></div><div class="label">霍尔木兹<br><small>波斯湾</small></div></div>
+      <div class="stop"><div class="dot highlight"></div><div class="label">蒙巴萨<br><small>东非</small></div></div>
+    </div>
+  </div>
+  <div class="map-story">
+    <strong>泉州 → 东非蒙巴萨</strong><br>
+    搭阿拉伯商船，一站一站换乘<br>
+    沿途记录每一个港口的风物和商情
+  </div>
+  <div class="card-footer">汪大渊远航图 · 两次出海 · 十年漂泊</div>
+</div>
+
+<!-- ═══ 4 · 三佛齐市场 ═══ -->
+<div class="card card-4">
+  <div class="card-num">4 / 8</div>
+  <div class="market-scene">
+    <div class="stall-row">
+      <div class="stall"><div class="st-emoji">🫒</div><div class="st-name">乳香</div><div class="st-note">阿拉伯</div></div>
+      <div class="stall"><div class="st-emoji">🧵</div><div class="st-name">丝绸</div><div class="st-note">中国</div></div>
+      <div class="stall"><div class="st-emoji">🌶️</div><div class="st-name">胡椒</div><div class="st-note">爪哇</div></div>
+    </div>
+    <div class="stall-row">
+      <div class="stall"><div class="st-emoji">🪵</div><div class="st-name">檀香</div><div class="st-note">帝汶</div></div>
+      <div class="stall"><div class="st-emoji">🪨</div><div class="st-name">珍珠</div><div class="st-note">波斯湾</div></div>
+    </div>
+    <div class="observer">
+      <div class="obs-fig"></div>
+      <div class="obs-pen"></div>
+    </div>
+  </div>
+  <div class="market-quote">
+    阿拉伯乳香泡水增重<br>
+    中国丝绸从不缺斤少两<br>
+    <strong>「番人重信」</strong><br>
+    四个字，一针见血
+  </div>
+  <div class="card-footer">三佛齐 · 巨港 · 南洋贸易中心</div>
+</div>
+
+<!-- ═══ 5 · 卡利卡特 — 胡椒之都 ═══ -->
+<div class="card card-5">
+  <div class="card-num">5 / 8</div>
+  <div class="pepper-mountain"></div>
+  <div class="pepper-label">🌶️ 胡椒 · 堆积如山</div>
+  <div class="currency-row">
+    <div class="currency">
+      <div class="cu-emoji">🫘</div>
+      <div class="cu-name">胡椒粒</div>
+      <div class="cu-from">小额交易</div>
+    </div>
+    <div class="currency">
+      <div class="cu-emoji">⚖️</div>
+      <div class="cu-name">砝码</div>
+      <div class="cu-from">中等交易</div>
+    </div>
+    <div class="currency">
+      <div class="cu-emoji">🪙</div>
+      <div class="cu-name">铜钱</div>
+      <div class="cu-from">大宗交易</div>
+    </div>
+  </div>
+  <div class="market-detail">
+    全世界最大的胡椒市场<br>
+    <strong>「居人肩摩，市不易价」</strong><br>
+    人多得肩膀碰肩膀，价格从不坑人<br>
+    十四世纪的国际自由港
+  </div>
+  <div class="card-footer">卡利卡特 · 印度西海岸 · 东西方交汇点</div>
+</div>
+
+<!-- ═══ 6 · 东非蒙巴萨 ═══ -->
+<div class="card card-6">
+  <div class="card-num">6 / 8</div>
+  <div class="ocean-band"></div>
+  <div class="beach"></div>
+  <div class="sunset-disc"></div>
+  <div class="figures-beach">
+    <div class="f-left">
+      <span style="height:40px"></span><span style="height:48px"></span><span style="height:36px"></span>
+    </div>
+    <div class="f-center"></div>
+    <div class="f-left">
+      <span style="height:44px"></span><span style="height:34px"></span><span style="height:50px"></span>
+    </div>
+  </div>
+  <div class="quote-eight">面黑如漆<br>齿白如银</div>
+  <div class="africa-detail">
+    到了东非蒙巴萨<br>
+    八个字写完一个民族<br>
+    <strong>没有猎奇，没有歧视</strong><br>
+    纯粹的观察者目光 👀
+  </div>
+  <div class="card-footer">蒙巴萨 · 东非 · 印度洋彼岸</div>
+</div>
+
+<!-- ═══ 7 · 三大游记 ═══ -->
+<div class="card card-7">
+  <div class="card-num">7 / 8</div>
+  <div class="century-label">十四世纪 · 三大世界游记</div>
+  <div class="three-books">
+    <div class="book-v marco">
+      <div class="bv-title">马可·波罗<br>行纪</div>
+      <div class="bv-author">威尼斯</div>
+    </div>
+    <div class="book-v dayuan">
+      <div class="spotlight"></div>
+      <div class="bv-title">岛夷志略</div>
+      <div class="bv-author">中国 · 汪大渊</div>
+    </div>
+    <div class="book-v battuta">
+      <div class="bv-title">伊本·白图泰<br>游记</div>
+      <div class="bv-author">摩洛哥</div>
+    </div>
+  </div>
+  <div class="verdict">
+    前两位全世界都知道<br>
+    <strong>第三位呢？</strong><br>
+    搭便船的19岁中国青年<br>
+    写完一本书，成了郑和舰队的导航图
+  </div>
+  <div class="card-footer">《岛夷志略》· 99国 · 一手记录</div>
+</div>
+
+<!-- ═══ 8 · CTA ═══ -->
+<div class="card card-8">
+  <div class="card-num">8 / 8</div>
+  <div class="cta-frame">
+    <div class="cta-emoji">⛵</div>
+    <div class="cta-title">汪大渊 · 岛夷志略</div>
+    <div class="cta-desc">
+      19岁搭便船环游半个地球<br>
+      220+港口 · 99国 · 十年漂泊<br>
+      <strong>交互故事已上线</strong>
+    </div>
+    <div class="url-box">scarlettlab2026.github.io/silk-road-2026</div>
+  </div>
+  <div class="tag-cloud">
+    <span class="tag">#丝绸之路</span><span class="tag">#汪大渊</span>
+    <span class="tag">#岛夷志略</span><span class="tag">#背包客</span>
+    <span class="tag">#冷门历史</span><span class="tag">#航海</span>
+    <span class="tag">#元代</span><span class="tag">#泉州</span>
+    <span class="tag">#一人一个冷知识</span><span class="tag">#世界游记</span>
+  </div>
+  <div class="card-footer">全站 17篇故事 · 61座古城 · 免费开放</div>
+</div>
+
+<script>
+function scrollToCard(idx) {
+  const cards = document.querySelectorAll('.card');
+  if (cards[idx]) cards[idx].scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const idx = Array.from(document.querySelectorAll('.card')).indexOf(entry.target);
+      document.querySelectorAll('.toolbar button').forEach((btn, i) => {
+        btn.classList.toggle('active', i === idx);
+      });
+    }
+  });
+}, { threshold: 0.6 });
+document.querySelectorAll('.card').forEach(card => observer.observe(card));
+</script>
+</body>
+</html>

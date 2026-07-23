@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>义净 · 南海寄归 · 小红书卡片</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: #d8e4ea;
+  font-family: -apple-system, "PingFang SC", "Noto Serif SC", "Noto Sans SC", "Microsoft YaHei", serif;
+  display: flex; flex-direction: column; align-items: center;
+  gap: 4px; padding: 4px;
+}
+
+.card {
+  width: 1080px; max-width: 100vw;
+  aspect-ratio: 9 / 16; max-height: 100vh;
+  position: relative; overflow: hidden;
+  background: #f0f4f6;
+  color: #1a2a30;
+}
+
+/* ── Shared ── */
+.card .card-num {
+  position: absolute; top: 48px; right: 56px; z-index: 10;
+  font-size: 0.85rem; color: rgba(26,42,48,0.18); letter-spacing: 0.15em;
+}
+.card .card-footer {
+  position: absolute; bottom: 48px; left: 0; right: 0; text-align: center; z-index: 10;
+  font-size: 0.68rem; color: rgba(26,42,48,0.14); letter-spacing: 0.1em;
+}
+
+/* ══════════════════════════════════════════ */
+/* Card 1 · 封面 — 义净出海 */
+/* ══════════════════════════════════════════ */
+.card-1 {
+  background: linear-gradient(180deg, #c8a45a 0%, #d4b870 8%, #e0c890 15%, #8aacb8 30%, #3a6a7a 52%, #1a3a4a 75%, #0d2430 100%);
+}
+.card-1 .sunset-glow {
+  position: absolute; top: 8%; left: 50%; transform: translateX(-50%);
+  width: 320px; height: 320px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,230,170,0.6) 0%, rgba(240,200,130,0.2) 50%, transparent 70%);
+}
+.card-1 .horizon-line {
+  position: absolute; top: 42%; left: 0; right: 0; height: 1px;
+  background: rgba(255,255,255,0.15);
+}
+.card-1 .ocean-layer {
+  position: absolute; bottom: 0; left: 0; right: 0; height: 58%;
+  background: linear-gradient(180deg,
+    rgba(26,58,74,0.6) 0%, rgba(20,50,64,0.85) 15%,
+    rgba(13,36,48,0.95) 40%, rgba(8,24,32,1) 100%);
+}
+.card-1 .wave-line {
+  position: absolute; top: 53%; left: -5%; right: -5%; height: 3px;
+  background: rgba(200,164,90,0.25);
+  border-radius: 50%;
+  transform: rotate(-1deg);
+}
+.card-1 .ship-figure {
+  position: absolute; top: 30%; left: 50%; transform: translateX(-50%);
+  width: 80px; height: 150px;
+  background: rgba(26,42,48,0.7);
+  clip-path: polygon(38% 0, 62% 0, 65% 8%, 70% 12%, 58% 18%, 62% 30%, 72% 35%, 66% 55%, 60% 58%, 52% 72%, 48% 72%, 40% 58%, 34% 55%, 28% 35%, 38% 30%, 42% 18%, 30% 12%, 35% 8%);
+}
+.card-1 .staff-vertical {
+  position: absolute; top: 9%; left: 52%;
+  width: 2px; height: 300px;
+  background: rgba(200,164,90,0.5);
+  transform: rotate(3deg);
+}
+.card-1 .staff-ring {
+  position: absolute; top: 8.5%; left: 50.5%;
+  width: 18px; height: 18px; border-radius: 50%;
+  border: 1.5px solid rgba(200,164,90,0.45);
+  transform: rotate(3deg);
+}
+.card-1 .guangzhou-hint {
+  position: absolute; top: 46%; right: 15%;
+  font-size: 0.7rem; color: rgba(255,255,255,0.35); letter-spacing: 0.12em;
+  text-align: right; line-height: 1.5;
+}
+.card-1 .main-title {
+  position: absolute; bottom: 22%; left: 50%; transform: translateX(-50%);
+  text-align: center; z-index: 2;
+}
+.card-1 .main-title .big {
+  font-size: 3.5rem; font-weight: 900; color: #faf6ed;
+  letter-spacing: 0.15em; font-family: "Noto Serif SC", serif;
+  text-shadow: 0 2px 30px rgba(0,0,0,0.3);
+}
+.card-1 .main-title .sub {
+  font-size: 1.1rem; color: rgba(250,246,237,0.6); letter-spacing: 0.1em;
+  margin-top: 12px;
+}
+.card-1 .three-label {
+  position: absolute; bottom: 14%; left: 50%; transform: translateX(-50%);
+  font-size: 0.95rem; color: rgba(200,164,90,0.7); letter-spacing: 0.08em;
+  z-index: 2;
+}
+
+/* ══════════════════════════════════════════ */
+/* Card 2 · 三大求法僧对比 */
+/* ══════════════════════════════════════════ */
+.card-2 {
+  background: linear-gradient(180deg, #f0f4f6 0%, #e8eef2 40%, #dce6ec 100%);
+}
+.card-2 .trio-title {
+  position: absolute; top: 90px; left: 50%; transform: translateX(-50%);
+  font-size: 1.4rem; font-weight: 800; color: #1a2a30;
+  letter-spacing: 0.1em; font-family: "Noto Serif SC", serif;
+}
+.card-2 .trio-container {
+  position: absolute; top: 170px; left: 50px; right: 50px; bottom: 180px;
+  display: flex; gap: 12px; justify-content: center;
+}
+.card-2 .monk-card {
+  flex: 1; border-radius: 16px; padding: 24px 16px 20px;
+  display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
+  position: relative;
+}
+.card-2 .monk-card.faxian {
+  background: linear-gradient(180deg, rgba(90,110,100,0.08) 0%, rgba(90,110,100,0.15) 100%);
+  border: 1px solid rgba(90,110,100,0.15);
+}
+.card-2 .monk-card.xuanzang {
+  background: linear-gradient(180deg, rgba(180,134,11,0.08) 0%, rgba(180,134,11,0.15) 100%);
+  border: 1px solid rgba(180,134,11,0.15);
+}
+.card-2 .monk-card.yijing-highlight {
+  background: linear-gradient(180deg, rgba(42,110,130,0.08) 0%, rgba(42,110,130,0.18) 100%);
+  border: 1.5px solid rgba(42,110,130,0.3);
+  box-shadow: 0 8px 30px rgba(42,110,130,0.1);
+}
+.card-2 .monk-emoji { font-size: 2.8rem; margin-bottom: 10px; }
+.card-2 .monk-name {
+  font-size: 1.1rem; font-weight: 700; color: #1a2a30;
+  letter-spacing: 0.06em; margin-bottom: 4px;
+}
+.card-2 .monk-age {
+  font-size: 0.7rem; color: rgba(26,42,48,0.4); letter-spacing: 0.04em;
+}
+.card-2 .monk-route {
+  margin-top: 12px; font-size: 0.72rem; color: rgba(26,42,48,0.55);
+  letter-spacing: 0.04em; text-align: center; line-height: 1.6;
+}
+.card-2 .monk-route .ri { font-size: 0.85rem; }
+.card-2 .route-icon-row {
+  display: flex; gap: 6px; margin-top: 8px; font-size: 1.2rem;
+}
+.card-2 .trio-arrow {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  font-size: 1.5rem; color: rgba(26,42,48,0.2); z-index: 2;
+}
+.card-2 .trio-bottom {
+  position: absolute; bottom: 110px; left: 60px; right: 60px;
+  text-align: center; font-size: 0.9rem; color: rgba(26,42,48,0.55);
+  letter-spacing: 0.05em; line-height: 1.7;
+}
+.card-2 .trio-bottom strong { color: #2a6e82; }
+
+/* ══════════════════════════════════════════ */
+/* Card 3 · 航线地图 */
+/* ══════════════════════════════════════════ */
+.card-3 {
+  background: linear-gradient(180deg, #f5f0e4 0%, #efe8d4 50%, #e8dcc0 100%);
+}
+.card-3 .map-frame {
+  position: absolute; top: 70px; left: 40px; right: 40px; bottom: 200px;
+  background: linear-gradient(180deg, #faf6ed 0%, #f2ead6 50%, #e8dcc0 100%);
+  border-radius: 12px; border: 1px solid rgba(139,115,85,0.2);
+  box-shadow: 0 8px 40px rgba(44,32,22,0.08);
+  overflow: hidden;
+}
+.card-3 .coast-outline {
+  position: absolute; top: 60px; left: 30px; right: 30px; bottom: 50px;
+  background:
+    radial-gradient(ellipse at 20% 25%, rgba(180,160,120,0.2) 0, transparent 40%),
+    radial-gradient(ellipse at 75% 60%, rgba(180,160,120,0.25) 0, transparent 35%),
+    radial-gradient(ellipse at 50% 35%, rgba(139,115,85,0.1) 0, transparent 50%);
+}
+.card-3 .route-dots {
+  position: absolute; top: 100px; left: 40px; right: 40px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.card-3 .stop {
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+}
+.card-3 .stop .dot {
+  width: 10px; height: 10px; border-radius: 50%;
+  background: #c8a45a; box-shadow: 0 0 12px rgba(200,164,90,0.4);
+}
+.card-3 .stop .label {
+  font-size: 0.6rem; color: rgba(44,36,22,0.5); letter-spacing: 0.05em;
+  text-align: center; max-width: 70px; line-height: 1.3;
+}
+.card-3 .dashed-route {
+  position: absolute; top: 127px; left: 55px; right: 55px;
+  height: 0; border-top: 2px dashed rgba(200,164,90,0.45);
+}
+.card-3 .map-label {
+  position: absolute; top: 170px; left: 50%; transform: translateX(-50%);
+  font-size: 0.7rem; color: rgba(180,80,50,0.4); letter-spacing: 0.06em;
+  padding: 4px 12px; border-radius: 8px;
+  background: rgba(220,100,60,0.06); border: 1px solid rgba(220,100,60,0.1);
+}
+.card-3 .ship-icon {
+  position: absolute; top: 115px; left: 38%;
+  font-size: 1.2rem; transform: rotate(-15deg);
+}
+.card-3 .map-story {
+  position: absolute; bottom: 130px; left: 60px; right: 60px;
+  text-align: center; font-size: 0.9rem; color: rgba(44,36,22,0.55);
+  letter-spacing: 0.05em; line-height: 1.7;
+}
+.card-3 .map-story strong { color: #2a6e82; }
+
+/* ══════════════════════════════════════════ */
+/* Card 4 · 那烂陀寺 */
+/* ══════════════════════════════════════════ */
+.card-4 {
+  background: linear-gradient(180deg, #e8d4b0 0%, #d4b890 20%, #c49a60 45%, #b07040 70%, #f0f4f6 100%);
+}
+.card-4 .nalanda-sky {
+  position: absolute; top: 0; left: 0; right: 0; height: 55%;
+  background: linear-gradient(180deg, #d4c8a0 0%, #e0cc98 30%, #ecd4a0 60%, #f0dcc0 100%);
+}
+.card-4 .nalanda-buildings {
+  position: absolute; top: 22%; left: 8%; right: 8%; height: 35%;
+  display: flex; gap: 12px; justify-content: center; align-items: flex-end;
+}
+.card-4 .n-building {
+  flex: 1; background: rgba(160,80,40,0.7);
+  border-radius: 4px 4px 2px 2px;
+  position: relative;
+}
+.card-4 .n-building::after {
+  content: ''; position: absolute; top: -8px; left: 15%; right: 15%; height: 3px;
+  background: rgba(200,140,80,0.5); border-radius: 1px;
+}
+.card-4 .n-building:nth-child(1) { height: 80%; max-width: 80px; }
+.card-4 .n-building:nth-child(2) { height: 95%; max-width: 120px; background: rgba(170,85,42,0.75); }
+.card-4 .n-building:nth-child(3) { height: 100%; max-width: 100px; background: rgba(180,90,45,0.8); }
+.card-4 .n-building:nth-child(4) { height: 85%; max-width: 90px; }
+.card-4 .n-building:nth-child(5) { height: 70%; max-width: 70px; background: rgba(150,75,38,0.65); }
+.card-4 .monk-dots {
+  position: absolute; top: 52%; left: 10%; right: 10%;
+  display: flex; justify-content: space-around;
+}
+.card-4 .monk-dots span {
+  width: 3px; height: 8px; background: rgba(160,60,30,0.3); border-radius: 2px;
+}
+.card-4 .nalanda-title {
+  position: absolute; top: 57%; left: 50%; transform: translateX(-50%);
+  font-size: 2rem; font-weight: 900; color: #1a2a30;
+  letter-spacing: 0.12em; font-family: "Noto Serif SC", serif;
+  z-index: 2;
+}
+.card-4 .nalanda-sub {
+  position: absolute; top: 63%; left: 50%; transform: translateX(-50%);
+  font-size: 0.9rem; color: rgba(26,42,48,0.5); letter-spacing: 0.08em;
+  z-index: 2;
+}
+.card-4 .nalanda-detail {
+  position: absolute; bottom: 130px; left: 70px; right: 70px;
+  text-align: center; font-size: 0.95rem; color: rgba(26,42,48,0.6);
+  letter-spacing: 0.05em; line-height: 1.8;
+}
+.card-4 .nalanda-detail strong { color: #1a3a4a; }
+
+/* ══════════════════════════════════════════ */
+/* Card 5 · 古代印度生活 */
+/* ══════════════════════════════════════════ */
+.card-5 {
+  background: linear-gradient(180deg, #faf3e8 0%, #f5e8d4 50%, #eddcc0 100%);
+}
+.card-5 .life-grid {
+  position: absolute; top: 100px; left: 50px; right: 50px; bottom: 200px;
+  display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr;
+  gap: 12px;
+}
+.card-5 .life-item {
+  background: rgba(255,255,255,0.7); border-radius: 16px;
+  border: 1px solid rgba(139,115,85,0.1);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 16px; gap: 8px;
+  box-shadow: 0 4px 16px rgba(44,32,22,0.04);
+}
+.card-5 .life-item .li-emoji { font-size: 2.2rem; }
+.card-5 .life-item .li-label {
+  font-size: 0.78rem; color: #2c2016; font-weight: 600;
+  letter-spacing: 0.04em; text-align: center; line-height: 1.4;
+}
+.card-5 .life-item .li-desc {
+  font-size: 0.65rem; color: rgba(44,32,22,0.4); letter-spacing: 0.03em;
+  text-align: center; line-height: 1.3;
+}
+.card-5 .life-hook {
+  position: absolute; bottom: 130px; left: 60px; right: 60px;
+  text-align: center; font-size: 0.95rem; color: rgba(44,32,22,0.6);
+  letter-spacing: 0.05em; line-height: 1.8;
+}
+.card-5 .life-hook strong { color: #b07040; }
+.card-5 .life-title {
+  position: absolute; top: 70px; left: 50%; transform: translateX(-50%);
+  font-size: 1.1rem; font-weight: 700; color: rgba(44,32,22,0.5);
+  letter-spacing: 0.08em;
+}
+
+/* ══════════════════════════════════════════ */
+/* Card 6 · 古代打工人 — 项目经理 */
+/* ══════════════════════════════════════════ */
+.card-6 {
+  background: linear-gradient(180deg, #f4f0ea 0%, #ece6da 50%, #e4dcc8 100%);
+}
+.card-6 .gantt-frame {
+  position: absolute; top: 80px; left: 40px; right: 40px; bottom: 190px;
+  background: rgba(255,255,255,0.85); border-radius: 16px;
+  border: 1px solid rgba(139,115,85,0.15);
+  box-shadow: 0 8px 30px rgba(44,32,22,0.06);
+  padding: 28px 30px;
+  overflow: hidden;
+}
+.card-6 .gantt-title {
+  font-size: 0.85rem; font-weight: 700; color: #1a2a30;
+  letter-spacing: 0.06em; margin-bottom: 16px;
+  display: flex; align-items: center; gap: 8px;
+}
+.card-6 .gantt-title .badge {
+  padding: 3px 10px; border-radius: 8px;
+  background: rgba(42,110,130,0.1); border: 1px solid rgba(42,110,130,0.2);
+  font-size: 0.65rem; color: #2a6e82; letter-spacing: 0.04em;
+}
+.card-6 .gantt-bar {
+  height: 8px; border-radius: 4px; margin-bottom: 14px;
+  position: relative;
+}
+.card-6 .gantt-bar.travel { width: 85%; background: linear-gradient(90deg, rgba(42,110,130,0.25), rgba(42,110,130,0.5)); }
+.card-6 .gantt-bar.study { width: 48%; background: linear-gradient(90deg, rgba(180,134,11,0.25), rgba(180,134,11,0.5)); }
+.card-6 .gantt-bar.write { width: 42%; background: linear-gradient(90deg, rgba(91,122,76,0.25), rgba(91,122,76,0.5)); }
+.card-6 .gantt-bar::after {
+  content: attr(data-label);
+  position: absolute; right: -60px; top: -4px;
+  font-size: 0.55rem; color: rgba(26,42,48,0.4); letter-spacing: 0.03em;
+  white-space: nowrap;
+}
+.card-6 .gantt-label {
+  font-size: 0.7rem; color: rgba(26,42,48,0.5); letter-spacing: 0.04em;
+  margin-bottom: 18px;
+}
+.card-6 .kpi-row {
+  display: flex; gap: 10px; margin-top: 20px;
+}
+.card-6 .kpi-item {
+  flex: 1; padding: 14px 10px; border-radius: 12px;
+  background: rgba(26,42,48,0.03); border: 1px solid rgba(26,42,48,0.06);
+  text-align: center;
+}
+.card-6 .kpi-item .ki-num {
+  font-size: 1.6rem; font-weight: 900; color: #2a6e82;
+  font-family: "Georgia", serif; letter-spacing: -0.03em;
+}
+.card-6 .kpi-item .ki-label {
+  font-size: 0.6rem; color: rgba(26,42,48,0.4); letter-spacing: 0.03em;
+  margin-top: 2px; line-height: 1.3;
+}
+.card-6 .punchline {
+  position: absolute; bottom: 120px; left: 60px; right: 60px;
+  text-align: center; font-size: 0.95rem; color: rgba(26,42,48,0.62);
+  letter-spacing: 0.05em; line-height: 1.7;
+}
+.card-6 .punchline strong { color: #2a6e82; }
+
+/* ══════════════════════════════════════════ */
+/* Card 7 · 两本著作 + 56僧 */
+/* ══════════════════════════════════════════ */
+.card-7 {
+  background: linear-gradient(180deg, #e8e0d4 0%, #f0e8dc 30%, #f4f0ea 60%, #f0f4f6 100%);
+}
+.card-7 .book-pair {
+  position: absolute; top: 25%; left: 50%; transform: translateX(-50%);
+  display: flex; gap: 30px; z-index: 2;
+}
+.card-7 .book {
+  width: 150px; height: 200px;
+  background: linear-gradient(180deg, #faf6ed 0%, #f0e8d4 60%, #e0d0b0 100%);
+  border-radius: 3px 8px 8px 3px;
+  box-shadow: 6px 8px 30px rgba(44,32,22,0.15);
+  border: 1px solid rgba(139,115,85,0.15);
+  display: flex; flex-direction: column; align-items: center;
+  padding-top: 28px;
+  position: relative;
+}
+.card-7 .book::before {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 6px;
+  background: linear-gradient(180deg, rgba(139,115,85,0.4), rgba(139,115,85,0.2));
+  border-radius: 1px 0 0 1px;
+}
+.card-7 .book .bk-title {
+  font-size: 0.75rem; font-weight: 700; color: #2c2016;
+  letter-spacing: 0.05em; text-align: center; line-height: 1.3;
+  padding: 0 12px;
+}
+.card-7 .book .bk-sub {
+  font-size: 0.55rem; color: rgba(44,32,22,0.4); letter-spacing: 0.04em;
+  margin-top: 8px;
+}
+.card-7 .silhouettes {
+  position: absolute; bottom: 12%; left: 5%; right: 5%; height: 35%;
+  display: flex; flex-wrap: wrap; gap: 4px; justify-content: center;
+  align-items: flex-end; z-index: 1;
+}
+.card-7 .silhouettes span {
+  width: 5px; background: rgba(44,32,22,0.08); border-radius: 2px 2px 0 0;
+}
+.card-7 .fade-row { opacity: 0.6; }
+.card-7 .fade-row-more { opacity: 0.35; }
+.card-7 .fade-row-most { opacity: 0.15; }
+.card-7 .verdict-text {
+  position: absolute; bottom: 150px; left: 60px; right: 60px;
+  text-align: center; font-size: 0.95rem; color: rgba(44,32,22,0.6);
+  letter-spacing: 0.05em; line-height: 1.8; z-index: 2;
+}
+.card-7 .verdict-text strong { color: #1a3a4a; }
+
+/* ══════════════════════════════════════════ */
+/* Card 8 · CTA 导流 */
+/* ══════════════════════════════════════════ */
+.card-8 {
+  background: linear-gradient(180deg, #f0f4f6 0%, #e8eef2 50%, #dce6ec 100%);
+}
+.card-8 .cta-frame {
+  position: absolute; top: 90px; left: 60px; right: 60px; bottom: 200px;
+  background: rgba(255,255,255,0.88); border: 1px solid rgba(42,110,130,0.15);
+  border-radius: 24px; display: flex; flex-direction: column; align-items: center;
+  justify-content: center; padding: 40px;
+  box-shadow: 0 12px 50px rgba(26,42,48,0.06);
+}
+.card-8 .cta-emoji { font-size: 3.5rem; margin-bottom: 20px; }
+.card-8 .cta-title {
+  font-size: 1.6rem; font-weight: 800; color: #2a6e82;
+  letter-spacing: 0.08em; margin-bottom: 12px; text-align: center;
+  font-family: "Noto Serif SC", serif;
+}
+.card-8 .cta-desc {
+  font-size: 0.9rem; color: rgba(26,42,48,0.58);
+  letter-spacing: 0.04em; text-align: center; line-height: 1.8;
+}
+.card-8 .url-box {
+  margin-top: 20px; padding: 12px 24px; border-radius: 24px;
+  background: rgba(42,110,130,0.06); border: 1px solid rgba(42,110,130,0.15);
+  font-size: 0.78rem; color: #2a6e82; letter-spacing: 0.04em;
+  font-family: "SF Mono", "Menlo", monospace;
+}
+.card-8 .tag-cloud {
+  position: absolute; bottom: 120px; left: 60px; right: 60px;
+  display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;
+}
+.card-8 .tag {
+  font-size: 0.72rem; padding: 5px 12px; border-radius: 12px;
+  background: rgba(255,255,255,0.7); color: rgba(26,42,48,0.55);
+  border: 1px solid rgba(42,110,130,0.08);
+}
+
+/* ── Toolbar ── */
+.toolbar {
+  position: fixed; top: 10px; left: 50%; transform: translateX(-50%);
+  z-index: 9999; display: flex; gap: 6px; flex-wrap: wrap; justify-content: center;
+  background: rgba(240,244,246,0.94); padding: 8px 14px; border-radius: 20px;
+  border: 1px solid rgba(42,110,130,0.12);
+}
+.toolbar button {
+  padding: 5px 10px; border-radius: 12px; border: 1px solid rgba(42,110,130,0.12);
+  background: rgba(255,255,255,0.88); color: #1a3a4a; cursor: pointer;
+  font-size: 0.68rem; transition: all 0.2s; font-family: inherit;
+}
+.toolbar button:hover { background: rgba(42,110,130,0.06); border-color: #2a6e82; }
+.toolbar button.active { background: #2a6e82; color: #f0f4f6; border-color: #2a6e82; font-weight: 600; }
+
+@media (max-width: 700px) {
+  .card-1 .main-title .big { font-size: 2.2rem; }
+  .card-2 .monk-emoji { font-size: 2rem; }
+  .card-2 .monk-name { font-size: 0.9rem; }
+  .card-4 .nalanda-title { font-size: 1.4rem; }
+  .card-7 .book { width: 120px; height: 160px; }
+}
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <button onclick="scrollToCard(0)">1·封面</button>
+  <button onclick="scrollToCard(1)">2·三人</button>
+  <button onclick="scrollToCard(2)">3·航线</button>
+  <button onclick="scrollToCard(3)">4·那烂陀</button>
+  <button onclick="scrollToCard(4)">5·生活</button>
+  <button onclick="scrollToCard(5)">6·打工人</button>
+  <button onclick="scrollToCard(6)">7·著作</button>
+  <button onclick="scrollToCard(7)">8·CTA</button>
+</div>
+
+<!-- ═══ 1 · 封面 — 义净出海 ═══ -->
+<div class="card card-1">
+  <div class="card-num">1 / 8</div>
+  <div class="sunset-glow"></div>
+  <div class="horizon-line"></div>
+  <div class="ocean-layer"></div>
+  <div class="wave-line"></div>
+  <div class="ship-figure"></div>
+  <div class="staff-vertical"></div>
+  <div class="staff-ring"></div>
+  <div class="guangzhou-hint">
+    671年 · 广州港<br>波斯商船
+  </div>
+  <div class="main-title">
+    <div class="big">南海寄归</div>
+    <div class="sub">义净 · 海上求法二十四年</div>
+  </div>
+  <div class="three-label">法显和玄奘你都知道。第三个人——</div>
+  <div class="card-footer">丝绸之路交互知识图谱 · 第15篇</div>
+</div>
+
+<!-- ═══ 2 · 三大求法僧 ═══ -->
+<div class="card card-2">
+  <div class="card-num">2 / 8</div>
+  <div class="trio-title">三大求法僧 · 三条路线</div>
+  <div class="trio-container">
+    <div class="monk-card faxian">
+      <div class="monk-emoji">🏔️</div>
+      <div class="monk-name">法显</div>
+      <div class="monk-age">东晋 · 62岁启程</div>
+      <div class="monk-route">
+        <span class="ri">🏔️→🌊</span><br>
+        陆路去 · 海路归<br>
+        <strong>15年</strong>
+      </div>
+    </div>
+    <div class="monk-card xuanzang">
+      <div class="monk-emoji">🐫</div>
+      <div class="monk-name">玄奘</div>
+      <div class="monk-age">唐 · 27岁偷渡</div>
+      <div class="monk-route">
+        <span class="ri">🏔️→🏔️</span><br>
+        陆路去 · 陆路归<br>
+        <strong>17年</strong>
+      </div>
+    </div>
+    <div class="monk-card yijing-highlight">
+      <div class="monk-emoji">⛵</div>
+      <div class="monk-name">义净</div>
+      <div class="monk-age">唐 · 36岁登船</div>
+      <div class="monk-route">
+        <span class="ri">🌊→🌊</span><br>
+        海路去 · 海路归<br>
+        <strong>24年</strong>
+      </div>
+    </div>
+  </div>
+  <div class="trio-bottom">
+    法显留下了《佛国记》<br>
+    玄奘留下了《大唐西域记》<br>
+    义净——<strong>比他们走得都远，写得更细</strong>
+  </div>
+  <div class="card-footer">求法三贤 · 跨越三百年的接力</div>
+</div>
+
+<!-- ═══ 3 · 航线地图 ═══ -->
+<div class="card card-3">
+  <div class="card-num">3 / 8</div>
+  <div class="map-frame">
+    <div class="coast-outline"></div>
+    <div class="dashed-route"></div>
+    <div class="ship-icon">⛵</div>
+    <div class="route-dots">
+      <div class="stop"><div class="dot"></div><div class="label">广州</div></div>
+      <div class="stop"><div class="dot" style="background:#2a6e82;box-shadow:0 0 12px rgba(42,110,130,0.3)"></div><div class="label">室利佛逝<br><small>学梵文6月</small></div></div>
+      <div class="stop"><div class="dot"></div><div class="label">孟加拉湾<br><small>⚡风浪区</small></div></div>
+      <div class="stop"><div class="dot" style="background:#b07040;box-shadow:0 0 14px rgba(176,112,64,0.3)"></div><div class="label">耽摩栗底</div></div>
+      <div class="stop"><div class="dot" style="background:#c8a45a;box-shadow:0 0 16px rgba(200,164,90,0.5)"></div><div class="label">那烂陀</div></div>
+    </div>
+    <div class="map-label">⚡ 孟加拉湾风浪 · 差点翻船</div>
+  </div>
+  <div class="map-story">
+    671年，广州港。36岁的义净选了<strong>第三条路</strong>：大海<br>
+    行李里有两本书：法显《佛国记》、玄奘《大唐西域记》<br>
+    两位大师已经作古。现在轮到他了
+  </div>
+  <div class="card-footer">海上丝路 · 广州 → 那烂陀</div>
+</div>
+
+<!-- ═══ 4 · 那烂陀寺 ═══ -->
+<div class="card card-4">
+  <div class="card-num">4 / 8</div>
+  <div class="nalanda-sky"></div>
+  <div class="nalanda-buildings">
+    <div class="n-building"></div>
+    <div class="n-building"></div>
+    <div class="n-building"></div>
+    <div class="n-building"></div>
+    <div class="n-building"></div>
+  </div>
+  <div class="monk-dots">
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span>
+  </div>
+  <div class="nalanda-title">那烂陀寺</div>
+  <div class="nalanda-sub">7 世纪 · 世界最牛大学</div>
+  <div class="nalanda-detail">
+    红色砖墙 · 多层楼阁 · 万僧经行<br>
+    常驻僧人<strong>一万人</strong>，藏书冠绝当世<br>
+    玄奘在这里学了五年<br>
+    <strong>义净学了十年</strong>
+  </div>
+  <div class="card-footer">古印度 · 那烂陀 · 学术之都</div>
+</div>
+
+<!-- ═══ 5 · 古代印度生活 ═══ -->
+<div class="card card-5">
+  <div class="card-num">5 / 8</div>
+  <div class="life-title">7 世纪印度 · 生活实录</div>
+  <div class="life-grid">
+    <div class="life-item">
+      <div class="li-emoji">🪥</div>
+      <div class="li-label">嫩树枝刷牙</div>
+      <div class="li-desc">「齿木」洁齿 · 每日清晨</div>
+    </div>
+    <div class="life-item">
+      <div class="li-emoji">💧</div>
+      <div class="li-label">滤网滤水</div>
+      <div class="li-desc">净水与浊水 · 严格分开</div>
+    </div>
+    <div class="life-item">
+      <div class="li-emoji">🍚</div>
+      <div class="li-label">过午不食</div>
+      <div class="li-desc">一日一餐 · 托钵乞食</div>
+    </div>
+    <div class="life-item">
+      <div class="li-emoji">🌿</div>
+      <div class="li-label">香料市场</div>
+      <div class="li-desc">胡椒 · 豆蔻 · 丁香 · 檀香</div>
+    </div>
+  </div>
+  <div class="life-hook">
+    但他最珍贵的记录不是佛经——<br>
+    而是这些<strong>生活细节</strong><br>
+    比美食博主的探店报告还细 📝
+  </div>
+  <div class="card-footer">《南海寄归内法传》· 古代印度 Vlog</div>
+</div>
+
+<!-- ═══ 6 · 古代打工人 ═══ -->
+<div class="card card-6">
+  <div class="card-num">6 / 8</div>
+  <div class="gantt-frame">
+    <div class="gantt-title">
+      📋 义净 · 项目时间线
+      <span class="badge">PM 古代版</span>
+    </div>
+    <div class="gantt-label">🎯 出差 24 年 · 671—695</div>
+    <div class="gantt-bar travel" data-label="671→673"></div>
+    <div class="gantt-label">🚢 广州 → 那烂陀（海上航行+中转）</div>
+    <div class="gantt-bar study" data-label="675→685"></div>
+    <div class="gantt-label">📚 那烂陀求学（10年）</div>
+    <div class="gantt-bar write" data-label="685→695"></div>
+    <div class="gantt-label">✍️ 室利佛逝整理翻译（10年）</div>
+    <div class="kpi-row">
+      <div class="kpi-item">
+        <div class="ki-num">400+</div>
+        <div class="ki-label">梵文写经<br>带回</div>
+      </div>
+      <div class="kpi-item">
+        <div class="ki-num">2</div>
+        <div class="ki-label">行业白皮书<br>著作</div>
+      </div>
+      <div class="kpi-item">
+        <div class="ki-num">56</div>
+        <div class="ki-label">同事传记<br>收录</div>
+      </div>
+      <div class="kpi-item">
+        <div class="ki-num">24</div>
+        <div class="ki-label">年海外<br>出差</div>
+      </div>
+    </div>
+  </div>
+  <div class="punchline">
+    古代最卷打工人<br>
+    老板<strong>武则天</strong>亲自到洛阳城门迎接 🫅
+  </div>
+  <div class="card-footer">翻译一下：这就是唐代的海外项目经理</div>
+</div>
+
+<!-- ═══ 7 · 两本著作 + 56僧 ═══ -->
+<div class="card card-7">
+  <div class="card-num">7 / 8</div>
+  <div class="book-pair">
+    <div class="book">
+      <div class="bk-title">南海寄归<br>内法传</div>
+      <div class="bk-sub">印度&南海<br>佛教实录</div>
+    </div>
+    <div class="book">
+      <div class="bk-title">大唐西域<br>求法高僧传</div>
+      <div class="bk-sub">56位西行<br>汉僧传记</div>
+    </div>
+  </div>
+  <div class="silhouettes">
+    <!-- 56 monk silhouettes in fading rows -->
+    <span style="height:40px"></span><span style="height:48px"></span><span style="height:36px"></span>
+    <span style="height:52px"></span><span style="height:30px"></span><span style="height:44px"></span>
+    <span style="height:50px"></span><span style="height:34px"></span><span style="height:42px"></span>
+    <span style="height:46px"></span><span style="height:38px"></span><span style="height:54px"></span>
+    <span style="height:28px"></span><span style="height:40px"></span>
+    <!-- fading -->
+    <span style="height:36px;opacity:0.6"></span><span style="height:44px;opacity:0.6"></span>
+    <span style="height:50px;opacity:0.5"></span><span style="height:32px;opacity:0.5"></span>
+    <span style="height:48px;opacity:0.4"></span><span style="height:38px;opacity:0.4"></span>
+    <span style="height:42px;opacity:0.35"></span><span style="height:30px;opacity:0.35"></span>
+    <span style="height:45px;opacity:0.3"></span><span style="height:34px;opacity:0.3"></span>
+    <!-- more fading -->
+    <span style="height:40px;opacity:0.25"></span><span style="height:48px;opacity:0.22"></span>
+    <span style="height:28px;opacity:0.2"></span><span style="height:36px;opacity:0.18"></span>
+    <span style="height:50px;opacity:0.15"></span><span style="height:32px;opacity:0.13"></span>
+    <span style="height:44px;opacity:0.1"></span><span style="height:38px;opacity:0.08"></span>
+    <span style="height:30px;opacity:0.06"></span><span style="height:42px;opacity:0.04"></span>
+    <!-- disappearing -->
+    <span style="height:35px;opacity:0.03"></span><span style="height:46px;opacity:0.02"></span>
+    <span style="height:32px;opacity:0.01"></span>
+  </div>
+  <div class="verdict-text">
+    56位同行求法僧<br>
+    很多人的结局只有一个字：<strong>「卒于道」</strong><br>
+    三个人，走完了丝路的全部可能
+  </div>
+  <div class="card-footer">一千年佛教东传 · 至义净而圆满</div>
+</div>
+
+<!-- ═══ 8 · CTA ═══ -->
+<div class="card card-8">
+  <div class="card-num">8 / 8</div>
+  <div class="cta-frame">
+    <div class="cta-emoji">🌊</div>
+    <div class="cta-title">义净 · 南海寄归</div>
+    <div class="cta-desc">
+      三大求法僧最后一人，海去海归 24 年<br>
+      7 世纪印度的生活细节，他写得比谁都细<br>
+      <strong>交互故事已上线</strong>
+    </div>
+    <div class="url-box">scarlettlab2026.github.io/silk-road-2026</div>
+  </div>
+  <div class="tag-cloud">
+    <span class="tag">#丝绸之路</span><span class="tag">#义净</span>
+    <span class="tag">#海上丝路</span><span class="tag">#求法僧</span>
+    <span class="tag">#那烂陀</span><span class="tag">#法显</span>
+    <span class="tag">#玄奘</span><span class="tag">#大唐西域记</span>
+    <span class="tag">#冷门历史</span><span class="tag">#一人一个冷知识</span>
+  </div>
+  <div class="card-footer">全站 17篇故事 · 61座古城 · 免费开放</div>
+</div>
+
+<script>
+function scrollToCard(idx) {
+  const cards = document.querySelectorAll('.card');
+  if (cards[idx]) cards[idx].scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const idx = Array.from(document.querySelectorAll('.card')).indexOf(entry.target);
+      document.querySelectorAll('.toolbar button').forEach((btn, i) => {
+        btn.classList.toggle('active', i === idx);
+      });
+    }
+  });
+}, { threshold: 0.6 });
+document.querySelectorAll('.card').forEach(card => observer.observe(card));
+</script>
+</body>
+</html>

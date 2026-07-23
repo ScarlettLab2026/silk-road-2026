@@ -506,6 +506,34 @@ function buildAllCards(DATA) {
       {id:'changan', name:'长安', type:'city', icon:'🏙️'},
     ]
   );
+  // 链11: 纸传天下（造纸术西传）
+  html += buildChainCard(
+    '纸传天下',
+    'Paper's Journey West',
+    '751年怛罗斯之战，被俘的唐军造纸工匠将造纸术传入撒马尔罕。此后一千年，造纸术一路向西：从撒马尔罕到巴格达智慧宫，从大马士革到开罗，从菲兹到西班牙哈提瓦——最终覆盖了整个欧洲。一张由破布和麻绳头变出的纸，托起了阿拉伯翻译运动、欧洲文艺复兴、宗教改革和科学革命。',
+    [
+      {id:'paper', name:'纸', type:'goods', icon:'📦'},
+      {id:'talas', name:'怛罗斯', type:'city', icon:'🏙️'},
+      {id:'samarkand', name:'撒马尔罕', type:'city', icon:'🏙️'},
+      {id:'baghdad', name:'巴格达', type:'city', icon:'🏙️'},
+      {id:'xativa', name:'哈提瓦', type:'city', icon:'🏙️'},
+    ]
+  );
+
+  // 链12: 王昭君出塞（和亲之路）
+  html += buildChainCard(
+    '王昭君出塞',
+    'Wang Zhaojun's Journey Beyond the Pass',
+    '公元前33年，宫女王昭君自请出嫁匈奴呼韩邪单于。从长安出发，经雁门关北上，抵达匈奴龙庭，被封为宁胡阏氏（使胡人安宁的王后）。此后汉匈边境六十余年无大战，商路畅通。她不是将军、使臣或商人——却用和亲走通了丝路上最脆弱也最坚韧的一条和平走廊。',
+    [
+      {id:'wang-zhaojun', name:'王昭君', type:'figure', icon:'👤'},
+      {id:'changan', name:'长安', type:'city', icon:'🏙️'},
+      {id:'yanmenguan', name:'雁门关', type:'city', icon:'🏙️'},
+      {id:'longting', name:'匈奴龙庭', type:'city', icon:'🏙️'},
+      {id:'hohhot', name:'青冢（呼和浩特）', type:'city', icon:'🏙️'},
+    ]
+  );
+
 
   html += '</div>';
 
@@ -514,12 +542,12 @@ function buildAllCards(DATA) {
   const figCount = DATA.nodes.figures.filter(f => f.significance >= 4).length;
   const goodsCount = DATA.nodes.goods.filter(g => g.significance >= 4).length;
   const eventCount = DATA.nodes.events.filter(e => e.significance >= 4).length;
-  const total = cityCount + figCount + goodsCount + eventCount + 10;
+  const total = cityCount + figCount + goodsCount + eventCount + 12;
 
   html += `<div style="text-align:center;padding:32px;color:var(--accent);font-size:0.95rem">
     ✅ ${total} 张知识卡片准备完毕<br>
     <small style="color:var(--text-dim)">
-      🏙️ ${cityCount} 城市 · 👤 ${figCount} 人物 · 📦 ${goodsCount} 物产 · ⚡ ${eventCount} 事件 · 🔗 10 关系链
+      🏙️ ${cityCount} 城市 · 👤 ${figCount} 人物 · 📦 ${goodsCount} 物产 · ⚡ ${eventCount} 事件 · 🔗 12 关系链
     </small><br>
     <small style="color:var(--text-dim);margin-top:8px;display:block">
       💡 右键每张卡片 → 复制图片/截图 → 每天发一张到小红书/知乎

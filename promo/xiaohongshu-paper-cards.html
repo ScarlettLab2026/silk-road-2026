@@ -8,7 +8,7 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
-  background: #0a0a0f;
+  background: #f6efe2;
   font-family: -apple-system, "PingFang SC", "Noto Serif SC", "Noto Sans SC", "Microsoft YaHei", serif;
   display: flex; flex-direction: column; align-items: center;
   gap: 4px; padding: 4px;
@@ -18,23 +18,23 @@ body {
   width: 1080px; max-width: 100vw;
   aspect-ratio: 9 / 16; max-height: 100vh;
   position: relative; overflow: hidden;
-  background: #0d0a05;
-  color: #e8dcc8;
+  background: #f8f1e7;
+  color: #3d2a0a;
 }
 
 /* ── Shared ── */
 .card .bg-texture {
-  position: absolute; inset: 0; opacity: 0.04;
-  background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(196,163,90,0.3) 3px, rgba(196,163,90,0.3) 4px),
-              repeating-linear-gradient(90deg, transparent, transparent 80px, rgba(196,163,90,0.1) 80px, rgba(196,163,90,0.1) 81px);
+  position: absolute; inset: 0; opacity: 0.08;
+  background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(117,85,55,0.16) 3px, rgba(117,85,55,0.16) 4px),
+              repeating-linear-gradient(90deg, transparent, transparent 80px, rgba(117,85,55,0.08) 80px, rgba(117,85,55,0.08) 81px);
 }
 .card .card-num {
   position: absolute; top: 48px; right: 56px;
-  font-size: 0.85rem; color: rgba(255,255,255,0.2); letter-spacing: 0.15em;
+  font-size: 0.85rem; color: rgba(0,0,0,0.24); letter-spacing: 0.15em;
 }
 .card .card-footer {
   position: absolute; bottom: 56px; left: 0; right: 0; text-align: center;
-  font-size: 0.72rem; color: rgba(255,255,255,0.14); letter-spacing: 0.1em;
+  font-size: 0.72rem; color: rgba(0,0,0,0.24); letter-spacing: 0.1em;
 }
 
 /* ── Card 1: Cover ── */
@@ -95,13 +95,13 @@ body {
 .card-2 .force {
   flex: 1; max-width: 280px; padding: 30px 24px; border-radius: 16px;
   text-align: center;
-  background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04);
+  background: rgba(255,255,255,0.72); border: 1px solid rgba(84,60,33,0.16);
 }
 .card-2 .force .f-icon { font-size: 2.8rem; margin-bottom: 10px; }
-.card-2 .force .f-name { font-size: 1.2rem; font-weight: 700; margin-bottom: 6px; }
-.card-2 .force .f-desc { font-size: 0.78rem; color: rgba(255,255,255,0.35); line-height: 1.5; }
-.card-2 .force.left .f-name { color: #5b9bd5; }
-.card-2 .force.right .f-name { color: #6aad6a; }
+.card-2 .force .f-name { font-size: 1.2rem; font-weight: 700; margin-bottom: 6px; color: #3d2a0a; }
+.card-2 .force .f-desc { font-size: 0.78rem; color: rgba(61,42,10,0.75); line-height: 1.5; }
+.card-2 .force.left .f-name { color: #7a5d3d; }
+.card-2 .force.right .f-name { color: #7a5d3d; }
 .card-2 .vs { font-size: 2rem; color: rgba(255,255,255,0.15); align-self: center; font-weight: 900; }
 .card-2 .reveal {
   position: absolute; bottom: 160px; left: 50%; transform: translateX(-50%);
@@ -126,23 +126,23 @@ body {
 .card-3 .step {
   display: flex; align-items: center; gap: 24px;
   padding: 16px 24px; border-radius: 14px;
-  background: rgba(255,255,255,0.015); border: 1px solid rgba(255,255,255,0.03);
+  background: rgba(255,255,255,0.88); border: 1px solid rgba(84,60,33,0.12);
 }
 .card-3 .step .s-num {
   width: 36px; height: 36px; border-radius: 50%;
-  background: rgba(196,163,90,0.1); border: 1px solid rgba(196,163,90,0.3);
+  background: rgba(196,163,90,0.2); border: 1px solid rgba(196,163,90,0.3);
   display: flex; align-items: center; justify-content: center;
-  font-size: 0.9rem; font-weight: 700; color: #c4a35a; flex-shrink: 0;
+  font-size: 0.9rem; font-weight: 700; color: #5c3f20; flex-shrink: 0;
 }
-.card-3 .step .s-title { font-size: 1.05rem; font-weight: 600; color: #e8dcc8; margin-bottom: 2px; }
-.card-3 .step .s-desc { font-size: 0.78rem; color: rgba(255,255,255,0.35); }
+.card-3 .step .s-title { font-size: 1.05rem; font-weight: 600; color: #3d2a0a; margin-bottom: 2px; }
+.card-3 .step .s-desc { font-size: 0.78rem; color: rgba(61,42,10,0.75); }
 .card-3 .kaghad-box {
   position: absolute; bottom: 120px; left: 50%; transform: translateX(-50%);
   padding: 14px 28px; border-radius: 20px;
-  background: rgba(196,163,90,0.05); border: 1px solid rgba(196,163,90,0.12);
-  font-size: 0.85rem; color: rgba(255,255,255,0.4);
+  background: rgba(196,163,90,0.12); border: 1px solid rgba(196,163,90,0.2);
+  font-size: 0.85rem; color: rgba(61,42,10,0.75);
 }
-.card-3 .kaghad-box strong { color: #c4a35a; }
+.card-3 .kaghad-box strong { color: #5c3f20; }
 
 /* ── Card 4: Baghdad ── */
 .card-4 .hikma-title {
@@ -161,24 +161,24 @@ body {
 .card-4 .k-item {
   border-radius: 16px; padding: 24px 20px; display: flex; flex-direction: column;
   align-items: center; justify-content: center; text-align: center;
-  background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04);
+  background: rgba(255,255,255,0.9); border: 1px solid rgba(84,60,33,0.12);
 }
 .card-4 .k-item .k-emoji { font-size: 2.2rem; margin-bottom: 8px; }
-.card-4 .k-item .k-label { font-size: 0.85rem; color: rgba(255,255,255,0.45); }
+.card-4 .k-item .k-label { font-size: 0.85rem; color: rgba(61,42,10,0.75); }
 .card-4 .impact {
   position: absolute; bottom: 120px; left: 50%; transform: translateX(-50%);
-  font-size: 1rem; color: rgba(255,255,255,0.4); letter-spacing: 0.05em;
+  font-size: 1rem; color: rgba(61,42,10,0.65); letter-spacing: 0.05em;
   text-align: center;
 }
 
 /* ── Card 5: Journey Map ── */
 .card-5 .map-title {
   position: absolute; top: 90px; left: 50%; transform: translateX(-50%);
-  font-size: 1.3rem; color: rgba(255,255,255,0.35); letter-spacing: 0.12em;
+  font-size: 1.3rem; color: rgba(61,42,10,0.85); letter-spacing: 0.12em;
 }
 .card-5 .map-years {
   position: absolute; top: 140px; left: 50%; transform: translateX(-50%);
-  font-size: 4.5rem; font-weight: 900; color: rgba(196,163,90,0.06);
+  font-size: 4.5rem; font-weight: 900; color: rgba(117,85,55,0.18);
   letter-spacing: 0.06em; font-family: "Georgia", serif;
 }
 .card-5 .route-viz {
@@ -199,10 +199,10 @@ body {
   width: 50px; text-align: right; font-weight: 600;
 }
 .card-5 .route-stop .stop-name {
-  font-size: 1.15rem; font-weight: 600; color: #e8dcc8; letter-spacing: 0.04em;
+  font-size: 1.15rem; font-weight: 600; color: rgba(61,42,10,0.92); letter-spacing: 0.04em;
 }
 .card-5 .route-stop .stop-desc {
-  font-size: 0.72rem; color: rgba(255,255,255,0.3); margin-left: 12px;
+  font-size: 0.72rem; color: rgba(61,42,10,0.7); margin-left: 12px;
 }
 .card-5 .route-stop .line {
   position: absolute; left: 23px; top: 20px; width: 1px; height: 26px;
@@ -210,7 +210,7 @@ body {
 }
 .card-5 .route-total {
   position: absolute; bottom: 80px; left: 50%; transform: translateX(-50%);
-  font-size: 0.95rem; color: rgba(255,255,255,0.35); letter-spacing: 0.06em;
+  font-size: 0.95rem; color: rgba(61,42,10,0.75); letter-spacing: 0.06em;
 }
 
 /* ── Card 6: Cairo ── */
@@ -232,7 +232,7 @@ body {
 .card-6 .vs-item .vs-name { font-size: 1.4rem; font-weight: 700; margin-bottom: 10px; }
 .card-6 .vs-item.old .vs-name { color: #8b7355; }
 .card-6 .vs-item.new .vs-name { color: #c4a35a; }
-.card-6 .vs-item .vs-stat { font-size: 0.85rem; color: rgba(255,255,255,0.3); line-height: 1.6; }
+.card-6 .vs-item .vs-stat { font-size: 0.85rem; color: rgba(61,42,10,0.78); line-height: 1.6; }
 .card-6 .vs-vs {
   position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
   width: 50px; height: 50px; border-radius: 50%;
@@ -242,18 +242,18 @@ body {
 }
 .card-6 .verdict {
   position: absolute; bottom: 130px; left: 50%; transform: translateX(-50%);
-  font-size: 1.15rem; color: rgba(255,255,255,0.45); letter-spacing: 0.05em;
+  font-size: 1.15rem; color: rgba(61,42,10,0.82); letter-spacing: 0.05em;
 }
 
 /* ── Card 7: Gutenberg ── */
 .card-7 .press-year {
   position: absolute; top: 100px; left: 50%; transform: translateX(-50%);
-  font-size: 7rem; font-weight: 900; color: rgba(196,163,90,0.05);
+  font-size: 7rem; font-weight: 900; color: rgba(117,85,55,0.22);
   letter-spacing: -0.02em; font-family: "Georgia", serif;
 }
 .card-7 .press-title {
   position: absolute; top: 170px; left: 50%; transform: translateX(-50%);
-  font-size: 1.8rem; font-weight: 700; color: #e8dcc8; letter-spacing: 0.06em;
+  font-size: 1.8rem; font-weight: 700; color: rgba(61,42,10,0.88); letter-spacing: 0.06em;
 }
 .card-7 .math-box {
   position: absolute; top: 270px; left: 100px; right: 100px;
@@ -261,7 +261,7 @@ body {
 }
 .card-7 .math-item {
   text-align: center; padding: 30px 24px; border-radius: 16px;
-  background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04);
+  background: rgba(255,255,255,0.88); border: 1px solid rgba(84,60,33,0.12);
   flex: 1; max-width: 220px;
 }
 .card-7 .math-item .m-num {
@@ -269,41 +269,41 @@ body {
   line-height: 1;
 }
 .card-7 .math-item .m-label {
-  font-size: 0.8rem; color: rgba(255,255,255,0.35); margin-top: 8px;
+  font-size: 0.8rem; color: rgba(61,42,10,0.75); margin-top: 8px;
 }
 .card-7 .math-op {
-  font-size: 2rem; color: rgba(255,255,255,0.15);
+  font-size: 2rem; color: rgba(61,42,10,0.8);
 }
 .card-7 .math-result {
-  margin-top: 20px; text-align: center; font-size: 1.1rem; color: rgba(255,255,255,0.5);
+  margin-top: 20px; text-align: center; font-size: 1.1rem; color: rgba(61,42,10,0.82);
 }
 .card-7 .math-result strong { color: #c75b3a; }
 .card-7 .conclusion {
   position: absolute; bottom: 130px; left: 60px; right: 60px; text-align: center;
-  font-size: 1rem; color: rgba(255,255,255,0.4); line-height: 1.6;
+  font-size: 1rem; color: rgba(61,42,10,0.78); line-height: 1.6;
 }
 
 /* ── Card 8: CTA ── */
 .card-8 .cta-frame {
   position: absolute; top: 120px; left: 60px; right: 60px; bottom: 180px;
-  background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.05);
+  background: rgba(255,255,255,0.96); border: 1px solid rgba(84,60,33,0.12);
   border-radius: 24px; display: flex; flex-direction: column; align-items: center;
   justify-content: center; padding: 40px;
 }
-.card-8 .cta-frame .logo { font-size: 3rem; margin-bottom: 20px; }
+.card-8 .cta-frame .logo { font-size: 3rem; margin-bottom: 20px; color: #5c3f20; }
 .card-8 .cta-frame .cta-title {
-  font-size: 1.6rem; font-weight: 700; color: #c4a35a;
+  font-size: 1.6rem; font-weight: 700; color: #7a5d3d;
   letter-spacing: 0.06em; margin-bottom: 10px; text-align: center;
 }
 .card-8 .cta-frame .cta-desc {
-  font-size: 0.95rem; color: rgba(255,255,255,0.35);
+  font-size: 0.95rem; color: rgba(61,42,10,0.75);
   letter-spacing: 0.04em; text-align: center; line-height: 1.6;
 }
-.card-8 .cta-frame .cta-desc em { font-style: normal; color: #c4a35a; }
+.card-8 .cta-frame .cta-desc em { font-style: normal; color: #7a5d3d; }
 .card-8 .cta-frame .url-box {
   margin-top: 24px; padding: 12px 24px; border-radius: 24px;
-  background: rgba(196,163,90,0.06); border: 1px solid rgba(196,163,90,0.15);
-  font-size: 0.8rem; color: #c4a35a; letter-spacing: 0.04em;
+  background: rgba(196,163,90,0.16); border: 1px solid rgba(196,163,90,0.25);
+  font-size: 0.8rem; color: #5c3f20; letter-spacing: 0.04em;
   font-family: "SF Mono", "Menlo", monospace;
 }
 .card-8 .tag-cloud {
@@ -312,23 +312,23 @@ body {
 }
 .card-8 .tag {
   font-size: 0.72rem; padding: 5px 12px; border-radius: 12px;
-  background: rgba(255,255,255,0.02); color: rgba(255,255,255,0.35);
+  background: rgba(255,255,255,0.72); color: rgba(61,42,10,0.75);
 }
 
 /* ── Toolbar ── */
 .toolbar {
   position: fixed; top: 10px; left: 50%; transform: translateX(-50%);
   z-index: 9999; display: flex; gap: 6px; flex-wrap: wrap; justify-content: center;
-  background: rgba(0,0,0,0.82); padding: 8px 14px; border-radius: 20px;
-  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.92); padding: 8px 14px; border-radius: 20px;
+  border: 1px solid rgba(84,60,33,0.12);
 }
 .toolbar button {
-  padding: 5px 10px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1);
-  background: rgba(255,255,255,0.04); color: #aaa; cursor: pointer;
+  padding: 5px 10px; border-radius: 12px; border: 1px solid rgba(84,60,33,0.12);
+  background: rgba(255,255,255,0.88); color: #5c3f20; cursor: pointer;
   font-size: 0.68rem; transition: all 0.2s; font-family: inherit;
 }
-.toolbar button:hover { background: rgba(196,163,90,0.15); border-color: #c4a35a; color: #c4a35a; }
-.toolbar button.active { background: #c4a35a; color: #0d0a05; border-color: #c4a35a; font-weight: 600; }
+.toolbar button:hover { background: rgba(196,163,90,0.24); border-color: #7a5d3d; color: #7a5d3d; }
+.toolbar button.active { background: #7a5d3d; color: #f8f1e7; border-color: #7a5d3d; font-weight: 600; }
 </style>
 </head>
 <body>

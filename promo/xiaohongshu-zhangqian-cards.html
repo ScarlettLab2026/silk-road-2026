@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>张骞 · 凿空西域 · 小红书卡片</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: #efe8db;
+  font-family: -apple-system, "PingFang SC", "Noto Serif SC", "Noto Sans SC", "Microsoft YaHei", serif;
+  display: flex; flex-direction: column; align-items: center;
+  gap: 4px; padding: 4px;
+}
+
+.card {
+  width: 1080px; max-width: 100vw;
+  aspect-ratio: 9 / 16; max-height: 100vh;
+  position: relative; overflow: hidden;
+  background: #faf6ed;
+  color: #2c2016;
+}
+
+/* ── Shared ── */
+.card .card-num {
+  position: absolute; top: 48px; right: 56px; z-index: 10;
+  font-size: 0.85rem; color: rgba(44,32,22,0.18); letter-spacing: 0.15em;
+}
+.card .card-footer {
+  position: absolute; bottom: 48px; left: 0; right: 0; text-align: center; z-index: 10;
+  font-size: 0.68rem; color: rgba(44,32,22,0.14); letter-spacing: 0.1em;
+}
+
+/* ══════════════════════════════════════════ */
+/* Card 1 · 封面 */
+/* ══════════════════════════════════════════ */
+.card-1 {
+  background: linear-gradient(180deg, #e8c890 0%, #d4a060 15%, #c08040 35%, #b06830 50%, #c08040 65%, #d4a868 80%, #faf6ed 100%);
+}
+.card-1 .sky-stars {
+  position: absolute; top: 8%; left: 10%; right: 10%;
+  display: flex; justify-content: space-around; opacity: 0.3;
+}
+.card-1 .sky-stars span { color: #faf6ed; font-size: 0.5rem; }
+.card-1 .sun-glow {
+  position: absolute; top: 18%; left: 50%; transform: translateX(-50%);
+  width: 280px; height: 280px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,240,200,0.7) 0%, rgba(240,200,140,0.25) 50%, transparent 70%);
+}
+.card-1 .hero-silhouette {
+  position: absolute; top: 22%; left: 50%; transform: translateX(-50%);
+  width: 120px; height: 200px;
+  background: rgba(44,32,22,0.82);
+  clip-path: polygon(35% 0, 65% 0, 68% 10%, 72% 15%, 60% 20%, 65% 35%, 75% 40%, 68% 60%, 64% 65%, 55% 80%, 45% 80%, 36% 65%, 32% 60%, 25% 40%, 35% 35%, 40% 20%, 28% 15%, 32% 10%);
+}
+.card-1 .staff-line {
+  position: absolute; top: 10%; left: 51.5%;
+  width: 3px; height: 320px;
+  background: rgba(44,32,22,0.7);
+  transform: rotate(4deg);
+}
+.card-1 .staff-tassel {
+  position: absolute; top: 9%; left: 49%;
+  width: 36px; height: 70px;
+  background: rgba(44,32,22,0.3);
+  border-radius: 0 0 50% 30%;
+  transform: rotate(4deg);
+}
+.card-1 .dune-ridge {
+  position: absolute; bottom: 38%; left: 0; right: 0; height: 120px;
+  background: linear-gradient(180deg, transparent 0%, rgba(196,149,106,0.3) 30%, rgba(180,134,11,0.15) 60%, transparent 100%);
+  clip-path: polygon(0 80%, 15% 40%, 30% 70%, 50% 30%, 70% 65%, 85% 35%, 100% 70%, 100% 100%, 0 100%);
+}
+.card-1 .caravan-dots {
+  position: absolute; bottom: 42%; left: 20%; right: 20%;
+  display: flex; align-items: flex-end; gap: 20px; justify-content: center;
+}
+.card-1 .caravan-dots .c-dot {
+  width: 3px; background: rgba(44,32,22,0.15); border-radius: 2px;
+}
+.card-1 .main-stat {
+  position: absolute; bottom: 24%; left: 50%; transform: translateX(-50%);
+  text-align: center; z-index: 2;
+}
+.card-1 .main-stat .big-num {
+  font-size: 5rem; font-weight: 900; color: #2c2016;
+  letter-spacing: -0.03em; font-family: "Georgia", "Noto Serif SC", serif;
+  line-height: 1;
+}
+.card-1 .main-stat .big-num small { font-size: 2rem; font-weight: 400; }
+.card-1 .main-stat .stat-label {
+  font-size: 1.2rem; color: rgba(44,32,22,0.65); letter-spacing: 0.1em;
+  margin-top: 8px;
+}
+.card-1 .cover-title {
+  position: absolute; bottom: 14%; left: 50%; transform: translateX(-50%);
+  font-size: 1.1rem; color: rgba(44,32,22,0.5); letter-spacing: 0.12em;
+  text-align: center; z-index: 2; line-height: 1.8;
+}
+.card-1 .cover-title strong { color: #b8860b; font-size: 1.3rem; }
+
+/* ══════════════════════════════════════════ */
+/* Card 2 · 出使 — 送死的任务 */
+/* ══════════════════════════════════════════ */
+.card-2 {
+  background: linear-gradient(180deg, #faf6ed 0%, #f5eed8 50%, #ede0c0 100%);
+}
+.card-2 .danger-zone {
+  position: absolute; top: 100px; left: 70px; right: 70px;
+  padding: 60px 40px; border-radius: 24px;
+  background: rgba(200,80,50,0.04); border: 2px dashed rgba(200,80,50,0.15);
+  text-align: center;
+}
+.card-2 .danger-zone .dz-emoji { font-size: 3rem; margin-bottom: 16px; }
+.card-2 .danger-zone .dz-title {
+  font-size: 2rem; font-weight: 800; color: #2c2016;
+  letter-spacing: 0.08em; font-family: "Noto Serif SC", serif;
+}
+.card-2 .danger-zone .dz-sub {
+  font-size: 1rem; color: rgba(44,32,22,0.55); letter-spacing: 0.06em; margin-top: 10px;
+}
+.card-2 .route-hint {
+  position: absolute; top: 410px; left: 50%; transform: translateX(-50%);
+  display: flex; align-items: center; gap: 20px;
+}
+.card-2 .route-hint .rh-city {
+  padding: 10px 20px; border-radius: 12px;
+  font-size: 0.9rem; font-weight: 600; letter-spacing: 0.06em;
+}
+.card-2 .route-hint .rh-city.from { background: rgba(180,134,11,0.12); color: #8b6914; }
+.card-2 .route-hint .rh-city.to { background: rgba(44,32,22,0.04); color: rgba(44,32,22,0.4); border: 1px dashed rgba(44,32,22,0.1); }
+.card-2 .route-hint .rh-arrow { font-size: 1.5rem; color: rgba(200,80,50,0.3); }
+.card-2 .route-hint .rh-danger {
+  padding: 6px 14px; border-radius: 999px;
+  background: rgba(200,80,50,0.1); color: rgba(200,80,50,0.7);
+  font-size: 0.7rem; letter-spacing: 0.06em;
+}
+.card-2 .emperor-note {
+  position: absolute; bottom: 160px; left: 80px; right: 80px;
+  text-align: center; font-size: 0.95rem; color: rgba(44,32,22,0.6);
+  letter-spacing: 0.05em; line-height: 1.8;
+}
+.card-2 .emperor-note strong { color: #b8860b; }
+
+/* ══════════════════════════════════════════ */
+/* Card 3 · 十年囚徒 */
+/* ══════════════════════════════════════════ */
+.card-3 {
+  background: linear-gradient(180deg, #e8e0d8 0%, #f0e8dc 30%, #faf6ed 100%);
+}
+.card-3 .snow-overlay {
+  position: absolute; top: 0; left: 0; right: 0; height: 40%;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(255,255,255,0.5) 0, transparent 30%),
+    radial-gradient(circle at 60% 20%, rgba(255,255,255,0.3) 0, transparent 25%),
+    radial-gradient(circle at 80% 40%, rgba(255,255,255,0.4) 0, transparent 35%);
+}
+.card-3 .yurt-frame {
+  position: absolute; top: 60px; left: 70px; right: 70px; bottom: 200px;
+  border-radius: 55% 55% 30% 30%;
+  background: rgba(196,149,106,0.06); border: 1px solid rgba(139,115,85,0.1);
+}
+.card-3 .yurt-beam {
+  position: absolute; top: 100px; left: 50%; transform: translateX(-50%);
+  width: 100px; height: 400px;
+  background: linear-gradient(180deg, rgba(250,246,237,0.5) 0%, rgba(250,246,237,0.1) 50%, transparent 100%);
+  clip-path: polygon(35% 0, 65% 0, 85% 100%, 15% 100%);
+}
+.card-3 .jie-visual {
+  position: absolute; top: 200px; left: 50%; transform: translateX(-50%) rotate(12deg);
+  width: 3px; height: 260px; background: rgba(44,32,22,0.55); z-index: 2;
+}
+.card-3 .jie-visual::after {
+  content: ''; position: absolute; top: -30px; left: -16px;
+  width: 36px; height: 60px;
+  background: rgba(44,32,22,0.22);
+  border-radius: 45% 45% 35% 35%;
+}
+.card-3 .quote-massive {
+  position: absolute; top: 300px; left: 50%; transform: translateX(-50%);
+  font-size: 3.2rem; font-weight: 900; color: #b8860b;
+  letter-spacing: 0.15em; font-family: "Noto Serif SC", serif;
+  text-align: center; z-index: 3; white-space: nowrap;
+}
+.card-3 .ten-years {
+  position: absolute; top: 380px; left: 50%; transform: translateX(-50%);
+  font-size: 5rem; font-weight: 900; color: rgba(44,32,22,0.06);
+  letter-spacing: 0.1em; font-family: "Georgia", serif; z-index: 1;
+}
+.card-3 .captive-detail {
+  position: absolute; bottom: 140px; left: 80px; right: 80px;
+  text-align: center; font-size: 0.9rem; color: rgba(44,32,22,0.55);
+  letter-spacing: 0.05em; line-height: 1.8;
+}
+
+/* ══════════════════════════════════════════ */
+/* Card 4 · 一路向西 — 没有回头 */
+/* ══════════════════════════════════════════ */
+.card-4 {
+  background: linear-gradient(180deg, #d0dce2 0%, #dce4e8 30%, #eaf0f2 60%, #faf6ed 100%);
+}
+.card-4 .peak {
+  position: absolute; top: 15%; left: 10%; right: 10%; height: 35%;
+  background: linear-gradient(175deg, #e8eef2 0%, #d0d8de 25%, #c5d0d6 40%, #d8e0e5 60%, #e2e8ec 80%, #c0ccd4 100%);
+  clip-path: polygon(0 100%, 5% 50%, 20% 25%, 35% 55%, 45% 15%, 55% 40%, 65% 10%, 75% 35%, 85% 20%, 95% 50%, 100% 100%);
+}
+.card-4 .peak-snow {
+  position: absolute; top: 15%; left: 35%; width: 200px; height: 50px;
+  background: rgba(255,255,255,0.8);
+  clip-path: polygon(0 100%, 15% 20%, 35% 5%, 55% 30%, 75% 10%, 100% 70%, 100% 100%);
+}
+.card-4 .tiny-traveler {
+  position: absolute; top: 42%; left: 44%;
+  font-size: 0.7rem; color: rgba(44,32,22,0.4); letter-spacing: 0.2em;
+}
+.card-4 .no-turn-back {
+  position: absolute; top: 48%; left: 50%; transform: translateX(-50%);
+  text-align: center; z-index: 2;
+}
+.card-4 .no-turn-back .ntb-big {
+  font-size: 2.6rem; font-weight: 900; color: #2c2016;
+  letter-spacing: 0.1em; font-family: "Noto Serif SC", serif;
+}
+.card-4 .no-turn-back .ntb-sub {
+  font-size: 1rem; color: rgba(44,32,22,0.5); letter-spacing: 0.08em; margin-top: 8px;
+}
+.card-4 .altitude-badge {
+  position: absolute; top: 38%; left: 50%; transform: translateX(-50%);
+  padding: 8px 18px; border-radius: 999px;
+  background: rgba(255,255,255,0.85); border: 1px solid rgba(44,32,22,0.08);
+  font-size: 0.75rem; color: rgba(44,32,22,0.45); letter-spacing: 0.06em;
+}
+.card-4 .west-text {
+  position: absolute; bottom: 140px; left: 70px; right: 70px;
+  text-align: center; font-size: 0.95rem; color: rgba(44,32,22,0.6);
+  letter-spacing: 0.05em; line-height: 1.8;
+}
+.card-4 .west-text strong { color: #4a7c5c; }
+
+/* ══════════════════════════════════════════ */
+/* Card 5 · 汗血宝马 */
+/* ══════════════════════════════════════════ */
+.card-5 {
+  background: linear-gradient(180deg, #f5e0b0 0%, #e8c880 25%, #d4a050 55%, #a09050 80%, #faf6ed 100%);
+}
+.card-5 .sunset-mountains {
+  position: absolute; top: 35%; left: 0; right: 0; height: 25%;
+  background: linear-gradient(180deg, rgba(139,115,85,0.25) 0%, rgba(139,115,85,0.08) 100%);
+  clip-path: polygon(0 100%, 8% 30%, 22% 55%, 38% 20%, 52% 50%, 65% 25%, 80% 45%, 92% 15%, 100% 40%, 100% 100%);
+}
+.card-5 .horse-display {
+  position: absolute; top: 10%; left: 50%; transform: translateX(-50%);
+  font-size: 10rem; line-height: 1; filter: drop-shadow(0 10px 30px rgba(44,32,22,0.25));
+}
+.card-5 .pasture-ground {
+  position: absolute; bottom: 0; left: 0; right: 0; height: 35%;
+  background: linear-gradient(180deg, #b8b068 0%, #a09850 40%, #8a8438 100%);
+  border-top: 2px solid rgba(74,124,92,0.3);
+}
+.card-5 .horse-name-card {
+  position: absolute; top: 42%; left: 50%; transform: translateX(-50%);
+  text-align: center; z-index: 2;
+}
+.card-5 .horse-name-card .hn-big {
+  font-size: 2.8rem; font-weight: 900; color: #2c2016;
+  letter-spacing: 0.12em; font-family: "Noto Serif SC", serif;
+}
+.card-5 .horse-name-card .hn-sub {
+  font-size: 1rem; color: rgba(44,32,22,0.5); letter-spacing: 0.1em; margin-top: 6px;
+}
+.card-5 .horse-detail {
+  position: absolute; bottom: 130px; left: 70px; right: 70px;
+  text-align: center; font-size: 0.95rem; color: rgba(44,32,22,0.62);
+  letter-spacing: 0.05em; line-height: 1.8;
+}
+.card-5 .horse-detail strong { color: #b8860b; }
+
+/* ══════════════════════════════════════════ */
+/* Card 6 · 西域报告 */
+/* ══════════════════════════════════════════ */
+.card-6 {
+  background: linear-gradient(180deg, #faf6ed 0%, #f5eed8 40%, #ede0c0 100%);
+}
+.card-6 .bamboo-scroll {
+  position: absolute; top: 70px; left: 50px; right: 50px; bottom: 200px;
+  background: linear-gradient(180deg, #f8f2e0 0%, #f0e8cc 30%, #e8dbb8 70%, #e0d0a8 100%);
+  border-radius: 6px; border: 1px solid rgba(139,115,85,0.18);
+  box-shadow: 0 10px 50px rgba(44,32,22,0.08);
+  padding: 36px 40px;
+}
+.card-6 .slip-lines {
+  display: flex; flex-direction: column; gap: 10px;
+}
+.card-6 .slip {
+  height: 2px; background: rgba(139,115,85,0.12); border-radius: 1px;
+}
+.card-6 .slip:nth-child(even) { margin-left: 24px; margin-right: 8px; }
+.card-6 .slip:nth-child(3n) { margin-right: 20px; }
+.card-6 .region-chips {
+  display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;
+  margin: 18px 0 24px;
+}
+.card-6 .region-chips span {
+  padding: 6px 16px; border-radius: 4px;
+  background: rgba(180,134,11,0.06); border: 1px solid rgba(180,134,11,0.12);
+  font-size: 0.75rem; color: #5c3f20; letter-spacing: 0.06em;
+}
+.card-6 .goods-grid {
+  display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+}
+.card-6 .goods-item {
+  width: 130px; padding: 18px 10px; border-radius: 16px;
+  background: rgba(255,255,255,0.8); border: 1px solid rgba(139,115,85,0.1);
+  text-align: center;
+}
+.card-6 .goods-item .g-emoji { font-size: 2.2rem; margin-bottom: 6px; }
+.card-6 .goods-item .g-name { font-size: 0.85rem; font-weight: 600; color: #2c2016; letter-spacing: 0.04em; }
+.card-6 .goods-item .g-from { font-size: 0.65rem; color: rgba(44,32,22,0.35); margin-top: 4px; }
+.card-6 .report-bottom {
+  position: absolute; bottom: 130px; left: 80px; right: 80px;
+  text-align: center; font-size: 0.95rem; color: rgba(44,32,22,0.62);
+  letter-spacing: 0.05em; line-height: 1.7;
+}
+
+/* ══════════════════════════════════════════ */
+/* Card 7 · 归来 */
+/* ══════════════════════════════════════════ */
+.card-7 {
+  background: linear-gradient(180deg, #f0d8b0 0%, #e8c090 25%, #d4a870 50%, #faf6ed 100%);
+}
+.card-7 .gate-block {
+  position: absolute; top: 20%; left: 50%; transform: translateX(-50%);
+  width: 400px; height: 180px;
+  background: rgba(44,32,22,0.72);
+  clip-path: polygon(12% 0, 88% 0, 93% 100%, 7% 100%);
+}
+.card-7 .gate-glow {
+  position: absolute; top: 45%; left: 50%; transform: translateX(-50%);
+  width: 80px; height: 100px;
+  background: linear-gradient(180deg, rgba(255,220,150,0.7) 0%, rgba(255,200,120,0.25) 100%);
+  clip-path: polygon(38% 0, 62% 0, 72% 100%, 28% 100%);
+}
+.card-7 .two-men {
+  position: absolute; top: 48%; left: 38%;
+  display: flex; gap: 20px;
+}
+.card-7 .two-men div {
+  width: 10px; height: 42px; background: rgba(44,32,22,0.3); border-radius: 3px 3px 1px 1px;
+}
+.card-7 .two-men div.has-staff { position: relative; }
+.card-7 .two-men div.has-staff::after {
+  content: ''; position: absolute; top: -55px; left: 3px;
+  width: 2px; height: 60px; background: rgba(44,32,22,0.18);
+}
+.card-7 .stat-explosion {
+  position: absolute; top: 54%; left: 50%; transform: translateX(-50%);
+  display: flex; align-items: center; gap: 24px; z-index: 2;
+}
+.card-7 .stat-explosion .se-num {
+  font-size: 5rem; font-weight: 900; color: #b8860b;
+  font-family: "Georgia", serif; letter-spacing: -0.03em; line-height: 1;
+}
+.card-7 .stat-explosion .se-arrow {
+  font-size: 2.5rem; color: rgba(44,32,22,0.2);
+}
+.card-7 .stat-explosion .se-label {
+  font-size: 0.8rem; color: rgba(44,32,22,0.4); letter-spacing: 0.06em;
+  text-align: center; line-height: 1.4;
+}
+.card-7 .return-verdict {
+  position: absolute; bottom: 16%; left: 50%; transform: translateX(-50%);
+  font-size: 1.1rem; color: rgba(44,32,22,0.65); letter-spacing: 0.08em;
+  text-align: center; z-index: 2; line-height: 1.7;
+}
+.card-7 .return-verdict strong { color: #2c2016; font-size: 1.3rem; }
+
+/* ══════════════════════════════════════════ */
+/* Card 8 · CTA 导流 */
+/* ══════════════════════════════════════════ */
+.card-8 {
+  background: linear-gradient(180deg, #faf6ed 0%, #f5eed8 100%);
+}
+.card-8 .cta-frame {
+  position: absolute; top: 90px; left: 60px; right: 60px; bottom: 200px;
+  background: rgba(255,255,255,0.9); border: 1px solid rgba(180,134,11,0.15);
+  border-radius: 24px; display: flex; flex-direction: column; align-items: center;
+  justify-content: center; padding: 40px;
+  box-shadow: 0 12px 50px rgba(44,32,22,0.06);
+}
+.card-8 .cta-frame .cta-emoji { font-size: 3.5rem; margin-bottom: 20px; }
+.card-8 .cta-frame .cta-title {
+  font-size: 1.6rem; font-weight: 800; color: #b8860b;
+  letter-spacing: 0.08em; margin-bottom: 12px; text-align: center;
+  font-family: "Noto Serif SC", serif;
+}
+.card-8 .cta-frame .cta-desc {
+  font-size: 0.9rem; color: rgba(44,32,22,0.6);
+  letter-spacing: 0.04em; text-align: center; line-height: 1.8;
+}
+.card-8 .cta-frame .url-box {
+  margin-top: 20px; padding: 12px 24px; border-radius: 24px;
+  background: rgba(180,134,11,0.06); border: 1px solid rgba(180,134,11,0.15);
+  font-size: 0.78rem; color: #8b6914; letter-spacing: 0.04em;
+  font-family: "SF Mono", "Menlo", monospace;
+}
+.card-8 .tag-cloud {
+  position: absolute; bottom: 120px; left: 60px; right: 60px;
+  display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;
+}
+.card-8 .tag {
+  font-size: 0.72rem; padding: 5px 12px; border-radius: 12px;
+  background: rgba(255,255,255,0.75); color: rgba(44,32,22,0.6);
+  border: 1px solid rgba(139,115,85,0.08);
+}
+
+/* ── Toolbar ── */
+.toolbar {
+  position: fixed; top: 10px; left: 50%; transform: translateX(-50%);
+  z-index: 9999; display: flex; gap: 6px; flex-wrap: wrap; justify-content: center;
+  background: rgba(250,246,237,0.94); padding: 8px 14px; border-radius: 20px;
+  border: 1px solid rgba(180,134,11,0.15);
+}
+.toolbar button {
+  padding: 5px 10px; border-radius: 12px; border: 1px solid rgba(180,134,11,0.12);
+  background: rgba(255,255,255,0.88); color: #5c3f20; cursor: pointer;
+  font-size: 0.68rem; transition: all 0.2s; font-family: inherit;
+}
+.toolbar button:hover { background: rgba(180,134,11,0.1); border-color: #b8860b; color: #8b6914; }
+.toolbar button.active { background: #b8860b; color: #faf6ed; border-color: #b8860b; font-weight: 600; }
+
+@media (max-width: 700px) {
+  .card-1 .main-stat .big-num { font-size: 3.5rem; }
+  .card-3 .quote-massive { font-size: 2.2rem; }
+  .card-4 .no-turn-back .ntb-big { font-size: 2rem; }
+  .card-5 .horse-name-card .hn-big { font-size: 2rem; }
+  .card-7 .stat-explosion .se-num { font-size: 3.5rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <button onclick="scrollToCard(0)">1·封面</button>
+  <button onclick="scrollToCard(1)">2·出使</button>
+  <button onclick="scrollToCard(2)">3·十年</button>
+  <button onclick="scrollToCard(3)">4·西行</button>
+  <button onclick="scrollToCard(4)">5·天马</button>
+  <button onclick="scrollToCard(5)">6·报告</button>
+  <button onclick="scrollToCard(6)">7·归来</button>
+  <button onclick="scrollToCard(7)">8·CTA</button>
+</div>
+
+<!-- ═══ 1 · 封面 — 核心钩子：100+人 → 2人 ═══ -->
+<div class="card card-1">
+  <div class="card-num">1 / 8</div>
+  <div class="sky-stars"><span>✦</span><span>·</span><span>✦</span><span>·</span><span>✦</span></div>
+  <div class="sun-glow"></div>
+  <div class="staff-line"></div>
+  <div class="staff-tassel"></div>
+  <div class="hero-silhouette"></div>
+  <div class="dune-ridge"></div>
+  <div class="caravan-dots">
+    <div class="c-dot" style="height:8px"></div><div class="c-dot" style="height:12px"></div>
+    <div class="c-dot" style="height:6px"></div><div class="c-dot" style="height:14px"></div>
+    <div class="c-dot" style="height:10px"></div><div class="c-dot" style="height:7px"></div>
+  </div>
+  <div class="main-stat">
+    <div class="big-num">100+ <small>人</small></div>
+    <div class="stat-label">出发 → 13年后 → 归来</div>
+  </div>
+  <div class="cover-title">
+    这个人，走通了<strong>丝绸之路</strong><br>
+    🐫 张骞 · 凿空西域
+  </div>
+  <div class="card-footer">丝绸之路交互知识图谱 · 第1篇</div>
+</div>
+
+<!-- ═══ 2 · 出使 — 送死的任务 ═══ -->
+<div class="card card-2">
+  <div class="card-num">2 / 8</div>
+  <div class="danger-zone">
+    <div class="dz-emoji">⚡</div>
+    <div class="dz-title">送死的任务</div>
+    <div class="dz-sub">公元前139年 · 长安未央宫</div>
+  </div>
+  <div class="route-hint">
+    <span class="rh-city from">🏯 长安</span>
+    <span class="rh-arrow">→</span>
+    <span class="rh-danger">⚠ 匈奴地界</span>
+    <span class="rh-arrow">→</span>
+    <span class="rh-city to">？大月氏</span>
+  </div>
+  <div class="emperor-note">
+    汉武帝需要一个不怕死的人<br>
+    穿过<strong>匈奴控制区</strong>，去西方联络大月氏夹击匈奴<br>
+    这个几乎不可能完成的任务<br>
+    落在了一个年轻郎官身上——<strong>张骞</strong>
+  </div>
+  <div class="card-footer">汉武授节 · 凿空之始</div>
+</div>
+
+<!-- ═══ 3 · 十年囚徒 — 持汉节不失 ═══ -->
+<div class="card card-3">
+  <div class="card-num">3 / 8</div>
+  <div class="snow-overlay"></div>
+  <div class="yurt-frame"></div>
+  <div class="yurt-beam"></div>
+  <div class="jie-visual"></div>
+  <div class="ten-years">十年</div>
+  <div class="quote-massive">持汉节不失</div>
+  <div class="captive-detail">
+    刚过黄河就被匈奴截获。军臣单于把他扣在草原上<br>
+    给他娶了匈奴妻子。想把他变成自己人<br>
+    <strong style="color:#2c2016">那根代表汉朝使节的节杖，从未离身</strong>
+  </div>
+  <div class="card-footer">河西走廊 · 匈奴王庭 · 十年坚守</div>
+</div>
+
+<!-- ═══ 4 · 一路向西 — 没有回头 ═══ -->
+<div class="card card-4">
+  <div class="card-num">4 / 8</div>
+  <div class="peak"></div>
+  <div class="peak-snow"></div>
+  <div class="tiny-traveler">🐫 🧑 🐫</div>
+  <div class="altitude-badge">🏔️ 葱岭 · 帕米尔高原</div>
+  <div class="no-turn-back">
+    <div class="ntb-big">他没有回头</div>
+    <div class="ntb-sub">趁乱逃脱 · 继续向西</div>
+  </div>
+  <div class="west-text">
+    穿越塔克拉玛干沙漠边缘<br>
+    翻越冰雪覆盖的帕米尔<br>
+    <strong>中国人第一次</strong>用自己的脚步<br>
+    丈量这条通往西方的路
+  </div>
+  <div class="card-footer">大漠 · 雪山 · 未知之地</div>
+</div>
+
+<!-- ═══ 5 · 汗血宝马 — 大宛天马 ═══ -->
+<div class="card card-5">
+  <div class="card-num">5 / 8</div>
+  <div class="horse-display">🐎</div>
+  <div class="sunset-mountains"></div>
+  <div class="pasture-ground"></div>
+  <div class="horse-name-card">
+    <div class="hn-big">汗血宝马</div>
+    <div class="hn-sub">大宛 · 费尔干纳山谷</div>
+  </div>
+  <div class="horse-detail">
+    日行千里，汗出如血<br>
+    中原从未见过的神驹<br>
+    大宛国王早闻汉朝富庶，<strong>派向导一路护送</strong><br>
+    张骞走遍西域各国，一一记在心里
+  </div>
+  <div class="card-footer">大宛 · 康居 · 大月氏</div>
+</div>
+
+<!-- ═══ 6 · 西域报告 — 带回来的物种 ═══ -->
+<div class="card card-6">
+  <div class="card-num">6 / 8</div>
+  <div class="bamboo-scroll">
+    <div class="slip-lines">
+      <div class="slip"></div><div class="slip"></div><div class="slip"></div>
+      <div class="slip"></div><div class="slip"></div><div class="slip"></div>
+      <div class="slip"></div><div class="slip"></div><div class="slip"></div>
+    </div>
+    <div class="region-chips">
+      <span>大宛</span><span>康居</span><span>大月氏</span><span>安息</span><span>大夏</span>
+    </div>
+    <div class="goods-grid">
+      <div class="goods-item"><div class="g-emoji">🍇</div><div class="g-name">葡萄</div><div class="g-from">大宛·安息</div></div>
+      <div class="goods-item"><div class="g-emoji">🌿</div><div class="g-name">苜蓿</div><div class="g-from">大宛</div></div>
+      <div class="goods-item"><div class="g-emoji">🥜</div><div class="g-name">胡桃</div><div class="g-from">西域</div></div>
+      <div class="goods-item"><div class="g-emoji">🍎</div><div class="g-name">石榴</div><div class="g-from">安息</div></div>
+      <div class="goods-item"><div class="g-emoji">🐎</div><div class="g-name">天马</div><div class="g-from">大宛</div></div>
+    </div>
+  </div>
+  <div class="report-bottom">
+    第一张<strong style="color:#b8860b">丝路地图</strong>，在他脑海里<br>
+    这些物种，后来改变了整个中国的餐桌和马场
+  </div>
+  <div class="card-footer">竹简上的西域调查报告</div>
+</div>
+
+<!-- ═══ 7 · 归来 — 100+ → 2 ═══ -->
+<div class="card card-7">
+  <div class="card-num">7 / 8</div>
+  <div class="gate-block"></div>
+  <div class="gate-glow"></div>
+  <div class="two-men">
+    <div class="has-staff"></div>
+    <div></div>
+  </div>
+  <div class="stat-explosion">
+    <div style="text-align:center">
+      <div class="se-num">100+</div>
+      <div class="se-label">出发人数</div>
+    </div>
+    <div class="se-arrow">→</div>
+    <div style="text-align:center">
+      <div class="se-num">2</div>
+      <div class="se-label">归来人数</div>
+    </div>
+  </div>
+  <div class="return-verdict">
+    从出发到归来，<strong>整整十三年</strong><br>
+    司马迁在《史记》里用了两个字：凿空
+  </div>
+  <div class="card-footer">第一个走通丝绸之路的人</div>
+</div>
+
+<!-- ═══ 8 · CTA ═══ -->
+<div class="card card-8">
+  <div class="card-num">8 / 8</div>
+  <div class="cta-frame">
+    <div class="cta-emoji">🐫</div>
+    <div class="cta-title">张骞 · 凿空西域</div>
+    <div class="cta-desc">
+      丝路第一人，十三年走通一条路<br>
+      从长安到罗马，两千年超链接的起点<br>
+      <strong>交互故事已上线</strong>
+    </div>
+    <div class="url-box">scarlettlab2026.github.io/silk-road-2026</div>
+  </div>
+  <div class="tag-cloud">
+    <span class="tag">#丝绸之路</span><span class="tag">#张骞</span>
+    <span class="tag">#凿空西域</span><span class="tag">#冷门历史</span>
+    <span class="tag">#汉武帝</span><span class="tag">#汗血宝马</span>
+    <span class="tag">#河西走廊</span><span class="tag">#大月氏</span>
+    <span class="tag">#一人一个冷知识</span><span class="tag">#历史故事</span>
+  </div>
+  <div class="card-footer">全站 17篇故事 · 61座古城 · 免费开放</div>
+</div>
+
+<script>
+function scrollToCard(idx) {
+  const cards = document.querySelectorAll('.card');
+  if (cards[idx]) cards[idx].scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const idx = Array.from(document.querySelectorAll('.card')).indexOf(entry.target);
+      document.querySelectorAll('.toolbar button').forEach((btn, i) => {
+        btn.classList.toggle('active', i === idx);
+      });
+    }
+  });
+}, { threshold: 0.6 });
+document.querySelectorAll('.card').forEach(card => observer.observe(card));
+</script>
+</body>
+</html>
