@@ -141,6 +141,16 @@
 <script>
 const DATA_URL = 'data/silk-road.json';
 
+function loadData(url) {
+  return fetch(url).then(r => {
+    if (!r.ok) throw new Error('HTTP ' + r.status + ' ' + r.statusText + ' — ' + url);
+    return r.text().then(text => {
+      try { return JSON.parse(text); }
+      catch(e) { throw new Error('JSON解析失败 — ' + url + ' — HTTP ' + r.status + ' — 返回内容: ' + text.substring(0, 120)); }
+    });
+  });
+}
+
 const ICONS = {
   city: '🏙️', figure: '👤', goods: '📦', event: '⚡', chain: '🔗'
 };
@@ -573,7 +583,16 @@ function buildAllCards(DATA) {
   document.getElementById('app').innerHTML = html;
 }
 
-fetch(DATA_URL).then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); }).then(buildAllCards).catch(err => { document.getElementById('app').innerHTML = '<div style="text-align:center;padding:48px;color:#c75b3a"><p>⚠️ 数据加载失败</p><p style="font-size:0.8rem;color:var(--text-dim);margin-top:8px">请检查 data/silk-road.json 是否存在<br>' + err.message + '</p></div>'; });
+loadData(DATA_URL).catch(() => loadData('/silk-road-2026/data/silk-road.json')).then(buildAllCards).catch(err => {
+  document.getElementById('app').innerHTML =
+    '<div style="text-align:center;padding:48px;color:#c75b3a">' +
+    '<p style="font-size:1.5rem">⚠️ 数据加载失败</p>' +
+    '<p style="font-size:0.8rem;color:var(--text-dim);margin-top:12px;max-width:500px;margin-left:auto;margin-right:auto;line-height:1.8">' +
+    err.message.replace(/ — /g, '<br>') +
+    '</p>' +
+    '<p style="font-size:0.75rem;color:var(--text-dim);margin-top:16px">请尝试 Cmd+Shift+R 硬刷新，或等待 GitHub Pages 部署完成</p>' +
+    '</div>';
+});
 
 function toggleTheme() {
   const isLight = document.body.classList.toggle('light');
