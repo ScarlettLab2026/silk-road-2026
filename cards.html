@@ -165,7 +165,8 @@ function getRelated(nodeId, allNodes, edges) {
     if (seen.has(oid)) return; seen.add(oid);
     for (const [type, items] of Object.entries(allNodes)) {
       const n = items.find(i => i.id === oid);
-      if (n) { related.push({ name: n.name, type: type.slice(0, -1), rel: e.relation }); break; }
+      const typeMap = { cities: 'city', figures: 'figure', goods: 'goods', events: 'event' };
+      if (n) { related.push({ name: n.name, type: typeMap[type], rel: e.relation }); break; }
     }
   });
   return related.slice(0, 6);
@@ -509,8 +510,8 @@ function buildAllCards(DATA) {
   // 链11: 纸传天下（造纸术西传）
   html += buildChainCard(
     '纸传天下',
-    'Paper's Journey West',
-    '751年怛罗斯之战，被俘的唐军造纸工匠将造纸术传入撒马尔罕。此后一千年，造纸术一路向西：从撒马尔罕到巴格达智慧宫，从大马士革到开罗，从菲兹到西班牙哈提瓦——最终覆盖了整个欧洲。一张由破布和麻绳头变出的纸，托起了阿拉伯翻译运动、欧洲文艺复兴、宗教改革和科学革命。',
+    "Paper's Journey West",
+    '751年怛罗斯之战，被俘的唐军造纸工匠将造纸术传入撒马尔罕。此后一千年，造纸术一路向西：从撒马尔罕到巴格达智慧宫，从大马士革到开罗，从菲斯到西班牙哈提瓦——最终覆盖了整个欧洲。一张由破布和麻绳头变出的纸，托起了阿拉伯翻译运动、欧洲文艺复兴、宗教改革和科学革命。',
     [
       {id:'paper', name:'纸', type:'goods', icon:'📦'},
       {id:'talas', name:'怛罗斯', type:'city', icon:'🏙️'},
@@ -523,7 +524,7 @@ function buildAllCards(DATA) {
   // 链12: 王昭君出塞（和亲之路）
   html += buildChainCard(
     '王昭君出塞',
-    'Wang Zhaojun's Journey Beyond the Pass',
+    "Wang Zhaojun's Journey Beyond the Pass",
     '公元前33年，宫女王昭君自请出嫁匈奴呼韩邪单于。从长安出发，经雁门关北上，抵达匈奴龙庭，被封为宁胡阏氏（使胡人安宁的王后）。此后汉匈边境六十余年无大战，商路畅通。她不是将军、使臣或商人——却用和亲走通了丝路上最脆弱也最坚韧的一条和平走廊。',
     [
       {id:'wang-zhaojun', name:'王昭君', type:'figure', icon:'👤'},
@@ -572,7 +573,7 @@ function buildAllCards(DATA) {
   document.getElementById('app').innerHTML = html;
 }
 
-fetch(DATA_URL).then(r => r.json()).then(buildAllCards);
+fetch(DATA_URL).then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); }).then(buildAllCards).catch(err => { document.getElementById('app').innerHTML = '<div style="text-align:center;padding:48px;color:#c75b3a"><p>⚠️ 数据加载失败</p><p style="font-size:0.8rem;color:var(--text-dim);margin-top:8px">请检查 data/silk-road.json 是否存在<br>' + err.message + '</p></div>'; });
 
 function toggleTheme() {
   const isLight = document.body.classList.toggle('light');
