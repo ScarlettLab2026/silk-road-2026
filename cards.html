@@ -535,6 +535,21 @@ function buildAllCards(DATA) {
   );
 
 
+  // 链13: 甘英使大秦（西海望洋）
+  html += buildChainCard(
+    '甘英使大秦',
+    "Gan Ying's Mission to Rome",
+    '公元97年，班超派遣掾属甘英出使大秦（罗马帝国）。从龟兹出发，穿越葱岭和安息帝国，抵达波斯湾沿岸的条支——距罗马仅隔一片海。安息商人为保住丝绸贸易的中间垄断，以「航海需三年」劝阻甘英渡海。甘英望洋兴叹，折返东归。他是第一个到达波斯湾的中国人，将中国的地理认知向西推进了两千里。',
+    [
+      {id:'gan-ying', name:'甘英', type:'figure', icon:'👤'},
+      {id:'ban-chao', name:'班超', type:'figure', icon:'👤'},
+      {id:'kucha', name:'龟兹', type:'city', icon:'🏙️'},
+      {id:'merv', name:'木鹿', type:'city', icon:'🏙️'},
+      {id:'tiaozhi', name:'条支', type:'city', icon:'🏙️'},
+      {id:'rome', name:'罗马', type:'city', icon:'🏙️'},
+    ]
+  );
+
   html += '</div>';
 
   // ── Total count ──
@@ -542,12 +557,12 @@ function buildAllCards(DATA) {
   const figCount = DATA.nodes.figures.filter(f => f.significance >= 4).length;
   const goodsCount = DATA.nodes.goods.filter(g => g.significance >= 4).length;
   const eventCount = DATA.nodes.events.filter(e => e.significance >= 4).length;
-  const total = cityCount + figCount + goodsCount + eventCount + 12;
+  const total = cityCount + figCount + goodsCount + eventCount + 13;
 
   html += `<div style="text-align:center;padding:32px;color:var(--accent);font-size:0.95rem">
     ✅ ${total} 张知识卡片准备完毕<br>
     <small style="color:var(--text-dim)">
-      🏙️ ${cityCount} 城市 · 👤 ${figCount} 人物 · 📦 ${goodsCount} 物产 · ⚡ ${eventCount} 事件 · 🔗 12 关系链
+      🏙️ ${cityCount} 城市 · 👤 ${figCount} 人物 · 📦 ${goodsCount} 物产 · ⚡ ${eventCount} 事件 · 🔗 13 关系链
     </small><br>
     <small style="color:var(--text-dim);margin-top:8px;display:block">
       💡 右键每张卡片 → 复制图片/截图 → 每天发一张到小红书/知乎

@@ -2,7 +2,7 @@
   "meta": {
     "title": "丝绸之路知识图谱",
     "title_en": "Silk Road Knowledge Graph",
-    "version": "v1.15.0",
+    "version": "1.16.0",
     "last_updated": "2026-07-23",
     "description": "一个关于丝绸之路的结构化开放数据集，涵盖城市、人物、物产、事件四大类实体及其关联关系。",
     "description_en": "An open structured dataset about the Silk Road, covering cities, figures, goods, and events and their interconnections."
@@ -1343,6 +1343,26 @@
         "description": "位于大青山南麓，阴山脚下的草原丝路驿站。城郊的「青冢」是王昭君墓——相传墓上青草四季不枯，在秋季枯黄的草原上尤为显眼。两千年来，青冢成为草原丝路上的重要地标。呼和浩特后来发展为漠南蒙古的政治与商业中心，是中原通往草原和蒙古高原的必经之地。",
         "description_en": "At the southern foot of the Daqing Mountains, a grassland Silk Road post station. The 'Qingzhong' (Green Tomb) on the outskirts is Wang Zhaojun's burial site — legend says the grass atop her tomb stays green year-round, visible against the autumn-yellowed steppe. For two millennia the Qingzhong has been a landmark on the grassland Silk Road. The city later developed into the political and commercial center of southern Mongolia, a gateway from China proper to the Mongolian Plateau.",
         "significance": 4
+      },
+      {
+        "id": "tiaozhi",
+        "name": "条支",
+        "name_en": "Tiaozhi (Charax Spasinou)",
+        "modern_name": "巴士拉附近",
+        "modern_name_en": "Near Basra",
+        "country": "伊拉克",
+        "country_en": "Iraq",
+        "lat": 30.5,
+        "lng": 47.8,
+        "era": "公元前4世纪 — 公元3世纪",
+        "dynasties": [
+          "安息（帕提亚）",
+          "塞琉古"
+        ],
+        "role": "波斯湾港口、甘英西行终点",
+        "role_en": "Persian Gulf port, Gan Ying's westernmost point",
+        "description": "条支是波斯湾沿岸的贸易港口，塞琉古王朝时期建立，后被安息（帕提亚）帝国控制。公元97年，班超派遣的使节甘英抵达此处，本欲渡海前往大秦（罗马帝国），但因安息船人劝阻而折返。甘英是有史以来第一个到达波斯湾的中国人。",
+        "description_en": "Tiaozhi was a trade port on the Persian Gulf, founded during the Seleucid period and later controlled by the Parthian Empire. In 97 CE, Gan Ying, an envoy sent by Ban Chao, reached here intending to cross the sea to Rome, but turned back after warnings from Parthian sailors. Gan Ying was the first Chinese person recorded to reach the Persian Gulf."
       }
     ],
     "figures": [
@@ -4369,22 +4389,6 @@
       "description_en": ""
     },
     {
-      "source": "faxian",
-      "target": "colombo",
-      "relation": "停留抄经",
-      "relation_en": "Stayed for Sutra Copying",
-      "description": "法显在斯里兰卡（师子国）停留两年，抄写大量佛经，见到当地商人供奉汉地白绢扇而思乡落泪",
-      "description_en": ""
-    },
-    {
-      "source": "faxian",
-      "target": "palembang",
-      "relation": "归途遇险",
-      "relation_en": "Perilous Return",
-      "description": "法显在苏门答腊换船滞留五月，海上遭遇风暴九死一生，最终返回中国",
-      "description_en": ""
-    },
-    {
       "source": "du-huan",
       "target": "mecca",
       "relation": "游历记录",
@@ -4599,13 +4603,6 @@
     },
     {
       "source": "gan-ying-mission",
-      "target": "baghdad",
-      "relation": "途经",
-      "relation_en": "Passed Through",
-      "description": "甘英西行穿越安息（帕提亚帝国），途经美索不达米亚，抵达条支（波斯湾）"
-    },
-    {
-      "source": "gan-ying-mission",
       "target": "hormuz",
       "relation": "疑似抵达",
       "relation_en": "Possibly Reached",
@@ -4817,12 +4814,6 @@
     },
     {
       "source": "kumarajiva",
-      "target": "changan",
-      "relation": "圆寂地",
-      "relation_en": "Place of death"
-    },
-    {
-      "source": "kumarajiva",
       "target": "liangzhou",
       "relation": "滞留地",
       "relation_en": "Place of detention"
@@ -4830,12 +4821,6 @@
     {
       "source": "kumarajiva",
       "target": "kashgar",
-      "relation": "停留参学",
-      "relation_en": "Studied at"
-    },
-    {
-      "source": "kumarajiva",
-      "target": "taxila",
       "relation": "停留参学",
       "relation_en": "Studied at"
     },
@@ -4907,12 +4892,6 @@
     },
     {
       "source": "ibn-battuta",
-      "target": "alexandria",
-      "relation": "游历",
-      "relation_en": "visited"
-    },
-    {
-      "source": "ibn-battuta",
       "target": "damascus",
       "relation": "游历",
       "relation_en": "visited"
@@ -4934,24 +4913,6 @@
       "target": "fez",
       "relation": "口述游记",
       "relation_en": "dictated Rihla in"
-    },
-    {
-      "source": "ibn-battuta-journey",
-      "target": "ibn-battuta",
-      "relation": "主角",
-      "relation_en": "protagonist"
-    },
-    {
-      "source": "yijing",
-      "target": "guangzhou",
-      "relation": "出发地",
-      "relation_en": "Departure point"
-    },
-    {
-      "source": "yijing",
-      "target": "palembang",
-      "relation": "停留学习梵文",
-      "relation_en": "Stayed and studied Sanskrit"
     },
     {
       "source": "yijing",
@@ -4976,12 +4937,6 @@
       "target": "luoyang",
       "relation": "译经地",
       "relation_en": "Translation site"
-    },
-    {
-      "source": "yijing-journey",
-      "target": "yijing",
-      "relation": "主角",
-      "relation_en": "Protagonist"
     },
     {
       "source": "yijing-journey",
@@ -5084,12 +5039,6 @@
       "target": "yijing",
       "relation": "前后求法僧",
       "relation_en": "Fellow pilgrim monks"
-    },
-    {
-      "source": "guangzhou",
-      "target": "palembang",
-      "relation": "南海丝路航线",
-      "relation_en": "South Sea Silk Road route"
     },
     {
       "source": "talas",
@@ -5216,12 +5165,6 @@
       "target": "xativa",
       "relation": "欧洲传入地",
       "relation_en": "European entry point"
-    },
-    {
-      "source": "gao-xianzhi",
-      "target": "battle-of-talas",
-      "relation": "唐军主帅",
-      "relation_en": "Tang commander"
     },
     {
       "source": "battle-of-talas",
@@ -5464,16 +5407,116 @@
       "relation_en": "protagonist (heqin princess)"
     },
     {
-      "source": "wang-zhaojun",
-      "target": "changan",
-      "relation": "汉宫起点",
-      "relation_en": "Han palace origin point"
+      "source": "gan-ying",
+      "target": "tiaozhi",
+      "relation": "抵达最西端",
+      "relation_en": "Furthest Point Reached",
+      "description": "甘英抵达条支（波斯湾），在此被安息船人劝阻，未能渡海前往大秦"
     },
     {
-      "source": "huhanye",
-      "target": "longting",
-      "relation": "统治中心",
-      "relation_en": "seat of power"
+      "source": "gan-ying",
+      "target": "kucha",
+      "relation": "出发地",
+      "relation_en": "Departure Point",
+      "description": "甘英从班超驻节的龟兹出发，踏上西使大秦之路"
+    },
+    {
+      "source": "gan-ying",
+      "target": "kashgar",
+      "relation": "途经",
+      "relation_en": "Passed Through",
+      "description": "甘英从龟兹经疏勒进入葱岭，由此通往中亚"
+    },
+    {
+      "source": "gan-ying",
+      "target": "merv",
+      "relation": "途经安息东界",
+      "relation_en": "Passed Through",
+      "description": "甘英进入安息帝国东境，途经木鹿城——帕提亚帝国东部重镇"
+    },
+    {
+      "source": "gan-ying",
+      "target": "nisapur",
+      "relation": "途经安息腹地",
+      "relation_en": "Passed Through",
+      "description": "甘英穿越安息帝国核心区域，途经尼萨——帕提亚早期都城"
+    },
+    {
+      "source": "gan-ying",
+      "target": "baghdad",
+      "relation": "途经",
+      "relation_en": "Passed Through",
+      "description": "甘英穿越两河流域，途经斯宾（泰西封），接近条支"
+    },
+    {
+      "source": "gan-ying",
+      "target": "rome",
+      "relation": "未达目的地",
+      "relation_en": "Did Not Reach",
+      "description": "甘英此行原计划抵达大秦（罗马帝国），但在波斯湾被安息人劝阻，只差一片海未能成行"
+    },
+    {
+      "source": "gan-ying-mission",
+      "target": "kucha",
+      "relation": "始发",
+      "relation_en": "Started From",
+      "description": "班超在龟兹它乾城命甘英出使大秦"
+    },
+    {
+      "source": "gan-ying-mission",
+      "target": "kashgar",
+      "relation": "途经",
+      "relation_en": "Passed Through",
+      "description": "甘英经疏勒入葱岭，踏上中亚征程"
+    },
+    {
+      "source": "gan-ying-mission",
+      "target": "khotan",
+      "relation": "途经区域",
+      "relation_en": "Passed Through Region",
+      "description": "甘英西行路线穿越西域南道，经于阗一带进入葱岭"
+    },
+    {
+      "source": "gan-ying-mission",
+      "target": "merv",
+      "relation": "途经",
+      "relation_en": "Passed Through",
+      "description": "甘英进入安息帝国，途经东部重镇木鹿城"
+    },
+    {
+      "source": "gan-ying-mission",
+      "target": "tiaozhi",
+      "relation": "最远抵达",
+      "relation_en": "Furthest Point",
+      "description": "甘英抵达波斯湾沿岸的条支，在此望洋兴叹，折返东归"
+    },
+    {
+      "source": "gan-ying-mission",
+      "target": "rome",
+      "relation": "未达目的地",
+      "relation_en": "Did Not Reach",
+      "description": "甘英抵达距罗马帝国仅隔一片波斯湾的条支，但因安息商人的阻挠未能渡海。安息为保护丝绸中转垄断，有意阻止汉朝与罗马直接通使。"
+    },
+    {
+      "source": "gan-ying-mission",
+      "target": "ban-chao-campaign",
+      "relation": "关联事件",
+      "relation_en": "Related To",
+      "description": "甘英使大秦是班超经营西域的延伸——平定西域后试图向西建立与罗马的直接联系"
+    },
+    {
+      "source": "ban-chao",
+      "target": "tiaozhi",
+      "relation": "遣使抵达",
+      "relation_en": "Envoy Reached",
+      "description": "班超派遣的使者甘英抵达条支"
+    },
+    {
+      "source": "ban-chao",
+      "target": "gan-ying-mission",
+      "relation": "派遣",
+      "relation_en": "Dispatched",
+      "description": "班超派遣甘英出使大秦"
     }
   ],
   "routes": [

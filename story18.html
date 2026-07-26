@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>西海望洋 · 甘英使大秦</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<link rel="stylesheet" href="css/story-common.css" />
+<style>
+:root {
+  --bg: #0a1218; --card-bg: rgba(13,122,138,0.92); --accent: #0d7a8a;
+  --text: #d8e8ec; --text-dim: #7a9aa0; --border: rgba(255,255,255,0.08);
+  --accent-r: 13; --accent-g: 122; --accent-b: 138;
+}
+</style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<div id="story-nav">
+  <a href="story.html">📖 张骞</a>
+  <a href="story8.html">⚔ 班超</a>
+  <a href="story4.html">🪷 法显</a>
+  <a href="story13.html">🔥 鸠摩罗什</a>
+  <a href="story3.html">🧘 玄奘</a>
+  <a href="story15.html">🌊 义净</a>
+  <a href="story16.html">📜 纸传天下</a>
+  <a href="story17.html">🎀 王昭君</a>
+  <a href="story18.html" class="active">🧭 甘英</a>
+  <a href="story6.html">🏜 杜环</a>
+  <a href="story10.html">☯️ 丘处机</a>
+  <a href="story5.html">🏛 马可·波罗</a>
+  <a href="story9.html">✝️ 拉班·扫马</a>
+  <a href="story11.html">⛵ 亦黑迷失</a>
+  <a href="story12.html">🛕 周达观</a>
+  <a href="story7.html">⚓ 汪大渊</a>
+  <a href="story14.html">🌍 白图泰</a>
+  <a href="story2.html">🚢 郑和</a>
+</div>
+
+<div id="progress"></div>
+
+<a href="index.html" id="back">← 返回地图</a>
+<button id="theme-toggle" onclick="toggleTheme()">☀️</button>
+<a href="sponsor.html" id="sponsor-btn" title="支持项目">☕ 支持</a>
+<button id="restart" onclick="restart()">🔄 重播</button>
+
+<div id="narrative" onclick="advance()">
+  <button id="toggle-card" onclick="event.stopPropagation();toggleCard()" title="收起/展开">─</button>
+  <div class="chapter-num" id="chNum"></div>
+  <h2 id="chTitle"></h2>
+  <p id="chBody"></p>
+  <div id="badges" style="margin:8px 0 0;line-height:1.8"></div>
+  <div class="hint"><span class="arrow">→</span> 点击继续</div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+const STORY_CONFIG = {
+  accent: '#0d7a8a',
+  accentRgb: '13,122,138',
+  mapCenter: [36, 65],
+  mapZoom: 3.5,
+  startCities: ['kucha'],
+  restartEmoji: '🌊',
+  tileBg: '#0a1218'
+};
+
+const STORY = [
+  {
+    title: '受命西行',
+    subtitle: '公元97年 · 西域都护府 龟兹它乾城',
+    body: '永元九年。班超在西域已经二十二年了。他收复了鄯善、于阗、疏勒、龟兹、莎车——西域五十余国，全部臣服于大汉。东汉朝廷封他为定远侯，驻节龟兹它乾城，总领西域都护。但班超心里还有一个更大的念头：大秦——那个在万里之外的庞大帝国，听说「其人民皆长大平正，有类中国」。丝绸之路走到安息就断了——不是路断了，是信息断了。安息人站在中间，把中国的丝绸卖给罗马，把罗马的玻璃和金币留在自己手里，谁能绕过安息？「大秦常欲通使于汉，而安息欲以汉缯彩与之交市，故遮阂不得自达。」——《后汉书·西域传》写下了这句话。安息人不是不知道路，他们是不想让两端的人知道路。班超决定派一个人去。他选中了他的掾属——甘英。史书没有记载甘英的生平，没有他的家世，没有他的相貌，没有他之前做过什么。他的整个人生，只剩下那一次出使——和被一片海挡住的名字。',
+    lat: 41.7, lng: 82.9, zoom: 5,
+    route: ['kucha'],
+    marker: 'kucha',
+    showCities: ['kucha', 'kashgar', 'khotan'],
+    highlight: ['gan-ying', 'ban-chao', 'gan-ying-mission']
+  },
+  {
+    title: '穿越安息',
+    subtitle: '公元97年 · 西域 → 安息帝国',
+    body: '从龟兹出发，甘英经疏勒进入葱岭——帕米尔高原。这是丝路最艰险的路段：雪山、深谷、悬崖上的羊肠小道。过了葱岭，就是大月氏——张骞两百年前到过这里。再往西，就进入了安息帝国（帕提亚）的疆界。安息是当时世界上最大的帝国之一。它的骑兵曾经在卡莱之战中歼灭罗马军团，将克拉苏的首级和黄金熔液送上了帕提亚宫廷的舞台。但在甘英看来，安息首先是丝路的收费站——从东到西，每一座城都是一个关隘，每一个关隘都要抽税。他穿过木鹿城——安息东部的重镇，古城墙被烈日晒得发白。穿过和椟——帕提亚早期的都城，已经在风沙中半掩半露。穿过阿蛮国——埃克巴塔纳，米底人的古都。穿过斯宾——底格里斯河畔的泰西封，冬都。安息人看着他。一个东方来的使者，带着竹简和通关文书，一路向西。他们不会让他到达罗马的。但此刻，甘英还不知道他在走一条别人不想让他走完的路。',
+    lat: 35.0, lng: 58.0, zoom: 4.5,
+    route: ['kucha', 'kashgar', 'merv'],
+    marker: 'merv',
+    showCities: ['kucha', 'kashgar', 'merv', 'nisapur', 'baghdad'],
+    highlight: ['gan-ying-mission']
+  },
+  {
+    title: '条支大海',
+    subtitle: '公元97年 · 条支（波斯湾沿岸）',
+    body: '甘英走到了路的尽头。条支——今天的波斯湾北端，底格里斯河和幼发拉底河入海口附近。这里有一个繁华的港口城市，周长四十余里——《后汉书》这样描述它。码头上的船来自印度、阿拉伯、东非。水手们说着阿拉姆语、希腊语、波斯语。海风带着盐味和香料味。甘英站在码头上，面前是一片他从未见过的东西——没有对岸的海。他来自内陆。汉朝也有大湖——洞庭、彭蠡——但都不是这样。这片海望不到边，浪头一个接一个地拍在岸上，带着他不认识的力量和声音。这就是西海。他要渡过去。大秦，就在海的那一边。他问了码头上的人。安息的船人围过来：一个东方来的使节，想自己渡海去罗马？他们告诉了他一些话。这些话，被《后汉书》一字一句地记了下来。',
+    lat: 30.5, lng: 47.8, zoom: 5.5,
+    route: ['kucha', 'kashgar', 'merv', 'baghdad', 'tiaozhi'],
+    marker: 'tiaozhi',
+    showCities: ['tiaozhi', 'baghdad', 'hormuz', 'nisapur'],
+    highlight: ['gan-ying-mission', 'gan-ying']
+  },
+  {
+    title: '望洋兴叹',
+    subtitle: '公元97年 · 条支 波斯湾岸边',
+    body: '「海水广大。往来者，逢善风，三月乃得渡。若遇迟风，亦有二岁者。故入海人皆赍三岁粮。海中善使人思土恋慕，数有死亡者。」安息船人说：海太大了。顺风三个月能到，逆风要两年。出海的人都要带三年粮食。而且——海上有一种东西，会让你疯狂地想念家乡，很多人就这样死在了海上。甘英沉默了。《后汉书》只写了三个字：「英乃止。」他停下来了。我们不知道他在海边站了多久。不知道他有没有盯着海平线，想象对面的城市。不知道他有没有想起班超的话，想起未央宫的诏书，想起从龟兹出发的那个早晨。学者们后来发现了安息船人那句话里的秘密：「海中善使人思土恋慕」——这是希腊神话里的塞壬。海妖用歌声迷惑水手，让他们跳进海里。荷马在《奥德赛》里写过的故事，越过帕米尔高原、穿越安息帝国、跋涉了一万两千里，落在一个汉朝使节的耳朵里——变成了「海里有让人想家的东西」。安息人在说谎。地中海顺风只要一两周。但他们不想让甘英过去。罗马人拿到丝绸，一斤黄金一斤丝——如果汉朝和罗马直接通了使，安息就再也赚不到中间的那十倍差价了。这不是一次航海失败——这是历史上最昂贵的一次信息不对称。甘英转身了。他的身后，两片大陆仍然不知道彼此的存在。',
+    lat: 30.2, lng: 48.5, zoom: 6,
+    route: ['kucha', 'kashgar', 'merv', 'baghdad', 'tiaozhi'],
+    marker: null,
+    showCities: ['tiaozhi', 'baghdad', 'rome', 'hormuz'],
+    highlight: ['gan-ying-mission', 'gan-ying']
+  },
+  {
+    title: '西极之界',
+    subtitle: '公元97年 → 公元166年 · 从龟兹到洛阳',
+    body: '甘英回来了。没有带着罗马的国书和金币。但他带回了从龟兹到波斯湾的每一座城的名字、每一条路的走向、每一个关隘的位置。他的报告，被班固的继承者收录进《后汉书·西域传》。这份报告里，第一次出现了对罗马帝国的系统描述：国名「大秦」，又名「海西国」——因为它在西海（波斯湾）的西边。其人民「长大平正，有类中国」，所以叫「大秦」。有四百多座石头城墙的城市。驿站用白灰粉刷。松树、柏树、各种草木。国王不是世袭的——「国有灾异，辄更立贤人」。用金银铸钱，十枚银币换一枚金币。甘英把中国人的地理认知，从葱岭向西推进到了波斯湾——两千里。在此之前，中国人以为条支在大秦的西边。甘英纠正了这一点。公元100年——甘英回来后的第三年——「远国蒙奇、兜勒皆来归服，遣使贡献」。蒙奇可能是马其顿，兜勒可能是推罗。一年后，「安息王满屈复献狮子及条支大鸟」。条支大鸟——鸵鸟。这两个中亚名字来到洛阳，是因为甘英先把洛阳的名字带到了中亚。但汉朝和罗马，始终没有正式通使。直到公元166年——甘英转身的六十九年后——一个自称「大秦王安敦使者」的人到达了日南郡（今越南）。安敦，就是罗马皇帝马可·奥勒留·安东尼。两个帝国终于握手——但甘英没有等到那一天。他是第一个走到波斯湾的中国人。他是唯一一个只差一片海就能到达罗马的中国使者。《后汉书》对他没有立传，他的名字被夹在了「西域传」的安息条下。但每一个在丝路上向西走的中国人——从杜环到郑和——走的都是甘英开过的路。',
+    lat: 38.0, lng: 72.0, zoom: 3.5,
+    route: ['kucha', 'kashgar', 'merv', 'baghdad', 'tiaozhi'],
+    marker: null,
+    showCities: ['kucha', 'tiaozhi', 'rome', 'changan', 'luoyang'],
+    highlight: ['gan-ying', 'gan-ying-mission', 'ban-chao-campaign']
+  }
+];
+</script>
+<script src="js/story-engine.js"></script>
+</body>
+</html>
