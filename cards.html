@@ -561,6 +561,21 @@ function buildAllCards(DATA) {
     ]
   );
 
+  // 链14: 佛教东传（梵路东来）
+  html += buildChainCard(
+    '佛教东传',
+    "Buddhism's Eastward Journey to China",
+    '约公元前3世纪至公元7世纪，佛教从印度沿丝绸之路经中亚传入中国。从菩提伽耶的菩提树出发，经犍陀罗的希腊化佛像、巴米扬的巨佛石雕、西域的绿洲佛国，到洛阳白马寺和长安的译经场——一千年、一万里，佛教穿越了世界上最艰险的路，成为丝路最具深远影响的文化传播。',
+    [
+      {id:'bodhgaya', name:'菩提伽耶', type:'city', icon:'🏙️'},
+      {id:'taxila', name:'塔克西拉', type:'city', icon:'🏙️'},
+      {id:'bamiyan', name:'巴米扬', type:'city', icon:'🏙️'},
+      {id:'kucha', name:'龟兹', type:'city', icon:'🏙️'},
+      {id:'changan', name:'长安', type:'city', icon:'🏙️'},
+      {id:'luoyang', name:'洛阳', type:'city', icon:'🏙️'},
+    ]
+  );
+
   html += '</div>';
 
   // ── Total count ──
@@ -568,12 +583,12 @@ function buildAllCards(DATA) {
   const figCount = DATA.nodes.figures.filter(f => f.significance >= 4).length;
   const goodsCount = DATA.nodes.goods.filter(g => g.significance >= 4).length;
   const eventCount = DATA.nodes.events.filter(e => e.significance >= 4).length;
-  const total = cityCount + figCount + goodsCount + eventCount + 13;
+  const total = cityCount + figCount + goodsCount + eventCount + 14;
 
   html += `<div style="text-align:center;padding:32px;color:var(--accent);font-size:0.95rem">
     ✅ ${total} 张知识卡片准备完毕<br>
     <small style="color:var(--text-dim)">
-      🏙️ ${cityCount} 城市 · 👤 ${figCount} 人物 · 📦 ${goodsCount} 物产 · ⚡ ${eventCount} 事件 · 🔗 13 关系链
+      🏙️ ${cityCount} 城市 · 👤 ${figCount} 人物 · 📦 ${goodsCount} 物产 · ⚡ ${eventCount} 事件 · 🔗 14 关系链
     </small><br>
     <small style="color:var(--text-dim);margin-top:8px;display:block">
       💡 右键每张卡片 → 复制图片/截图 → 每天发一张到小红书/知乎

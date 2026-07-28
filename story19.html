@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>梵路东来 · 佛教的丝路之旅</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<link rel="stylesheet" href="css/story-common.css" />
+<style>
+:root {
+  --bg: #081016; --card-bg: rgba(26,107,138,0.92); --accent: #1a6b8a;
+  --text: #d8eaf0; --text-dim: #7aa8b8; --border: rgba(255,255,255,0.08);
+  --accent-r: 26; --accent-g: 107; --accent-b: 138;
+}
+</style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<div id="story-nav">
+  <a href="story.html">📖 张骞</a>
+  <a href="story8.html">⚔ 班超</a>
+  <a href="story4.html">🪷 法显</a>
+  <a href="story13.html">🔥 鸠摩罗什</a>
+  <a href="story3.html">🧘 玄奘</a>
+  <a href="story15.html">🌊 义净</a>
+  <a href="story16.html">📜 纸传天下</a>
+  <a href="story17.html">🎀 王昭君</a>
+  <a href="story18.html">🧭 甘英</a>
+  <a href="story19.html" class="active">🪷 佛路东来</a>
+  <a href="story6.html">🏜 杜环</a>
+  <a href="story10.html">☯️ 丘处机</a>
+  <a href="story5.html">🏛 马可·波罗</a>
+  <a href="story9.html">✝️ 拉班·扫马</a>
+  <a href="story11.html">⛵ 亦黑迷失</a>
+  <a href="story12.html">🛕 周达观</a>
+  <a href="story7.html">⚓ 汪大渊</a>
+  <a href="story14.html">🌍 白图泰</a>
+  <a href="story2.html">🚢 郑和</a>
+</div>
+
+<div id="progress"></div>
+
+<a href="index.html" id="back">← 返回地图</a>
+<button id="theme-toggle" onclick="toggleTheme()">☀️</button>
+<a href="sponsor.html" id="sponsor-btn" title="支持项目">☕ 支持</a>
+<button id="restart" onclick="restart()">🔄 重播</button>
+
+<div id="narrative" onclick="advance()">
+  <button id="toggle-card" onclick="event.stopPropagation();toggleCard()" title="收起/展开">─</button>
+  <div class="chapter-num" id="chNum"></div>
+  <h2 id="chTitle"></h2>
+  <p id="chBody"></p>
+  <div id="badges" style="margin:8px 0 0;line-height:1.8"></div>
+  <div class="hint"><span class="arrow">→</span> 点击继续</div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+const STORY_CONFIG = {
+  accent: '#1a6b8a',
+  accentRgb: '26,107,138',
+  mapCenter: [32, 78],
+  mapZoom: 4.0,
+  startCities: ['bodhgaya'],
+  restartEmoji: '🪷',
+  tileBg: '#081016'
+};
+
+const STORY = [
+  {
+    title: '菩提树下',
+    subtitle: '约公元前5世纪 · 印度 摩揭陀国 菩提伽耶',
+    body: '这个故事开始于一棵树。尼连禅河畔，一株毕钵罗树（后来人们叫它菩提树——觉悟之树）伸展着心形的叶子。树下坐着一个来自迦毗罗卫的王子，他已经坐了四十九天。他的名字叫悉达多·乔达摩。他放弃了王位，剃去了头发，赤脚走过摩揭陀国的每一寸土地。他在寻找一个答案：人为什么会受苦？十二月八日——后来中国人把这天叫做腊八——凌晨，启明星刚刚升起，他睁开眼睛。他找到了答案。从这一刻起，他不再是王子悉达多，他是佛陀——觉悟者。他去鹿野苑，对五个苦行者讲了他的第一堂课：四圣谛，八正道。这五个人成了最初的僧团。佛陀走了四十五年，一直走到八十岁，在拘尸那迦的娑罗双树间入涅槃。他的遗言是：「一切有为法，皆是坏灭。以不放逸而成就。」然后——故事的第一章结束了。第二章的起点，是三百年后一个满手鲜血的国王。阿育王。他在征服羯陵伽的战争中杀了十万人。战后他走过战场，看见秃鹫和苍蝇、烧焦的尸体和干涸的血——史书记载他说了一句话：「我所做的，是什么？」他皈依了佛教。阿育王不再打仗。他开凿岩石、树立石柱、刻下法敕。他把佛陀的舍利分成八万四千份，派使者送往四方。往西，去犍陀罗和巴克特里亚。往南，去斯里兰卡。往东，去缅甸。但最重要的方向——是往北。翻过兴都库什山。进入中亚。佛教，开始了它最漫长、最壮丽的一次旅行。',
+    lat: 24.70, lng: 84.99, zoom: 5.5,
+    route: ['bodhgaya'],
+    marker: 'bodhgaya',
+    showCities: ['bodhgaya', 'nalanda'],
+    highlight: ['buddhism', 'buddhism-eastward']
+  },
+  {
+    title: '犍陀罗的石佛',
+    subtitle: '约公元1—3世纪 · 犍陀罗（今巴基斯坦白沙瓦地区）',
+    body: '犍陀罗。这个名字来自梵文 Gandhāra——「芳香之地」。在今天巴基斯坦白沙瓦的河谷和山麓之间。这里曾经是亚历山大东征的最东端——公元前326年，马其顿方阵在这里打败了印度战象。亚历山大走了，但他的希腊人留下了。一百年后，孔雀王朝的阿育王在这里立下石柱。再两百年，大月氏人——被匈奴从河西走廊赶出来的游牧民族——在这里建立了贵霜帝国。贵霜第三代君主迦腻色伽王，做了一个决定。他皈依了佛教，但他不满足于印度的表达方式。在此前的几百年里，佛教艺术从来不雕刻佛陀的形象——只用菩提树、法轮、脚印来暗示他的存在。为什么？因为佛陀已经涅槃了，超越了形相。但迦腻色伽王和他的希腊工匠不这么想。希腊人自古以来就在雕刻神像——宙斯、阿波罗、雅典娜，大理石做的、完美的人体。在犍陀罗的河谷中，这两件事碰到了一起。第一尊人形的佛陀造像诞生了。仔细看：佛陀的头发是希腊式的波浪卷，额头有希腊神的比例，身上的袈裟像是阿波罗披着的古希腊长袍 himation。但他的眼睛半闭——是印度瑜伽士的内观之眼。他的手印——禅定印——来自瑜伽传统。这是一个混血儿。希腊的形体，印度的灵魂。犍陀罗的僧人还做了另一件事：他们开始用文字记录佛经。在那之前，佛经全靠口耳相传——师徒之间，代代背诵。但犍陀罗的僧人在桦树皮上写下了最早的佛经手稿，用的是佉卢文——一种从中东阿拉姆字母演化出来的文字。佛教第一次有了文本。一尊石像加一片桦树皮：从这一刻起，佛教不再是印度一隅的地方信仰。它变成了可以行走的东西。石头可以复制。文字可以抄写。道路已经铺好。',
+    lat: 33.75, lng: 72.83, zoom: 5.5,
+    route: ['bodhgaya', 'nalanda', 'taxila'],
+    marker: 'taxila',
+    showCities: ['bodhgaya', 'nalanda', 'taxila', 'bamiyan', 'khotan'],
+    highlight: ['buddhism', 'buddhism-eastward', 'taxila']
+  },
+  {
+    title: '巴米扬的巨佛',
+    subtitle: '约公元4—6世纪 · 巴米扬河谷（今阿富汗中部）',
+    body: '从犍陀罗西行，翻过开伯尔山口，进入阿富汗的崇山峻岭。在兴都库什山脉的深处，有一条狭长的河谷——巴米扬。这里海拔两千五百米。冬天风雪封山，夏天溪流淙淙。公元前，这里是丝绸之路从波斯进入印度的关卡。但让巴米扬不朽的，是两尊佛。一位不知名的国王——也许是萨珊波斯治下的本地统治者——下了一道命令：把河谷北岸的赭红色砂岩悬崖，雕成佛的像。工匠们开始动手。他们在崖壁上凿出巨大的龛，从下往上，一层一层。大的那尊——西大佛——高五十三米。小的那尊——东大佛——高三十五米。五十三米是什么概念？差不多是十二层楼。今天你去阿富汗国家博物馆，还能看到当年供奉在西大佛右腿中的金铜佛坐像残片——藏在佛像内的供养品，一千五百年后重见天日。两尊大佛的龛壁和穹顶上画满了壁画。蓝色——阿富汗巴达赫尚矿区出产的青金石研磨而成的、世界上最深沉的蓝。红色——辰砂和赭石。金色——金箔贴在佛陀的袈裟上。巴米扬成了一个国际化的佛教大学。来自印度、中国、中亚、波斯的僧侣在此学习。玄奘在公元630年经过这里——比我来早了一千三百多年。他写：「王城东北山阿，有立佛石像，高百四五十尺，金色晃曜，宝饰焕烂。」唐代的一尺约三十厘米。计算下来，玄奘的记录和现代考古测量几乎完全一致。注意他用的词——「金色晃曜，宝饰焕烂」。公元七世纪的巴米扬还是金光灿烂的，袈裟上的金箔还在反光。但我没有看到那个画面——没有人能看到那个画面了。二〇〇一年三月，塔利班用炸药和坦克炮摧毁了这两尊佛。炸了整整二十五天。现在巴米扬的悬崖上只剩下两个巨大的空龛——像两行泪痕。但佛经说：一切有为法，如梦幻泡影。色即是空——石头也是空。但空不是无。每一个经过巴米扬的旅人——法显、玄奘、阿拉伯商人、蒙古骑兵——他们都看见了那两尊佛。现在你也看见了。',
+    lat: 34.82, lng: 67.83, zoom: 6,
+    route: ['bodhgaya', 'nalanda', 'taxila', 'bamiyan'],
+    marker: 'bamiyan',
+    showCities: ['bamiyan', 'taxila', 'balkh', 'khotan'],
+    highlight: ['buddhism', 'buddhism-eastward', 'bamiyan']
+  },
+  {
+    title: '绿洲佛国',
+    subtitle: '约公元3—7世纪 · 塔里木盆地 和田、龟兹',
+    body: '翻过帕米尔高原，东行进入塔里木盆地。世界上最干燥的地方之一。塔克拉玛干——「进得去，出不来」。但在这个大沙漠的南北边缘，雪山融水滋养了一圈绿洲。佛教进入西域的第一站，是沙漠南缘的和田——古称于阗。于阗人相信他们是毘沙门天王的后代，他们的第一任国王是阿育王的儿子。东晋法显来到于阗时，这里还有十四座大伽蓝、数万僧侣。他记录了一件震撼他的事：每年四月，于阗全城出动——国王亲自清扫道路，把一辆四轮大车拉到城外，车上放着佛像。万人空巷，撒花焚香，场面比中原的春节还要盛大。从于阗沿着沙漠北缘向东，到了另一个绿洲：龟兹——今天的库车。龟兹是西域最大的佛教中心。城中寺庙几十座，城外山崖上凿满了石窟——千佛洞。龟兹的僧侣编了经目、翻译佛经、在自己的语言（吐火罗语B）中创造了佛教文学。还有一件事：龟兹的音乐。龟兹人发明了中国音乐史上最重要的乐器之一——琵琶。他们用琵琶弹唱佛经故事，用舞蹈表现天女散花。龟兹出了一个人。一个决定汉语佛教走向的人。他叫鸠摩罗什。父亲是印度贵族的后代，母亲是龟兹公主。七岁出家，九岁跟母亲翻过葱岭去罽宾（克什米尔）学经。他记忆力惊人——「日诵千偈」，三万多字。回到龟兹时，他已经是西域最著名的佛教学者。但龟兹太小了——或者说，龟兹的舞台不够大。公元384年，前秦大将吕光率七万大军攻陷龟兹，不是为了夺地，是为了夺人。吕光把鸠摩罗什带去了凉州。从凉州，他又被带去了长安。这个龟兹的僧人，即将改变一个帝国的精神世界。',
+    lat: 38.0, lng: 80.0, zoom: 5,
+    route: ['bodhgaya', 'nalanda', 'taxila', 'bamiyan', 'balkh', 'khotan', 'kucha'],
+    marker: 'kucha',
+    showCities: ['khotan', 'kucha', 'dunhuang', 'liangzhou'],
+    highlight: ['buddhism', 'buddhism-eastward', 'kucha', 'khotan', 'kumarajiva']
+  },
+  {
+    title: '经入华夏',
+    subtitle: '公元1—7世纪 · 从敦煌到长安、洛阳',
+    body: '公元六十八年——比鸠摩罗什译经早了三百多年——东汉洛阳的皇宫里，汉明帝做了一个梦。他梦见一个金人，头顶有白光，在宫殿上空飞。第二天他问大臣，有人告诉他：「西方有神，名曰佛。」汉明帝派了使者去西方寻找。他们在今天阿富汗到中亚一带遇见了两位印度僧人——摄摩腾和竺法兰。两个僧人用白马驮着佛经和佛像，沿丝绸之路一路向东，走进了洛阳的西门。汉明帝下令在洛阳城外建了一座寺庙。为了纪念那匹白马，寺名就叫「白马寺」。佛教正式踏入中国。三百多年后，在长安，鸠摩罗什坐在逍遥园的译经场正中。他的周围是八百名学问僧。鸠摩罗什拿起一本梵文经卷——《金刚般若波罗蜜经》。他先译成龟兹语，再口译为汉语，旁边的僧人笔录、润色、校勘。他一句话一句话地斟酌——「凡所出经，三百余卷」。他译的《金刚经》、《法华经》、《维摩诘经》——每一部都是汉语佛教的基石。再过两百年，玄奘从印度取经回来，在大慈恩寺和玉华寺又译了十九年、七十五部、一千三百多万字。从未有一个文明，以这种规模翻译另一个文明的经典。这不是偶然的——是丝路让印度的贝叶经能够走到长安的案头。洛阳的白马寺、长安的大兴善寺和大慈恩寺、凉州的鸠摩罗什寺、敦煌的莫高窟——一条翻译之路，从河西走廊一直铺到中原。这些译出的经文，又从中国出发，继续向东——去了朝鲜半岛，去了日本，去了越南。今天汉语佛经中保存的经典比梵文原典还多。印度的原文失传了，但一千年前鸠摩罗什和玄奘在长安翻译的每一个字，都还在。你随便走进中国任何一座寺庙——僧人念诵的每一个字，都是从丝路上走过来的。那棵菩提树下的觉悟，走了一千年、一万里，走进了每一个能读懂「色即是空」的人心里。',
+    lat: 34.3, lng: 108.9, zoom: 4.5,
+    route: ['bodhgaya', 'nalanda', 'taxila', 'bamiyan', 'balkh', 'khotan', 'kucha', 'dunhuang', 'changan'],
+    marker: null,
+    showCities: ['bodhgaya', 'changan', 'luoyang', 'dunhuang', 'liangzhou', 'kucha'],
+    highlight: ['buddhism', 'buddhism-eastward', 'changan', 'luoyang', 'dunhuang', 'kumarajiva-sutra-translation', 'xuanzang-journey']
+  }
+];
+</script>
+<script src="js/story-engine.js"></script>
+</body>
+</html>

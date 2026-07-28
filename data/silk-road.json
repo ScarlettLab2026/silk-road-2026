@@ -2,8 +2,8 @@
   "meta": {
     "title": "丝绸之路知识图谱",
     "title_en": "Silk Road Knowledge Graph",
-    "version": "1.16.0",
-    "last_updated": "2026-07-23",
+    "version": "1.17.0",
+    "last_updated": "2026-07-28",
     "description": "一个关于丝绸之路的结构化开放数据集，涵盖城市、人物、物产、事件四大类实体及其关联关系。",
     "description_en": "An open structured dataset about the Silk Road, covering cities, figures, goods, and events and their interconnections."
   },
@@ -1424,6 +1424,36 @@
         "description": "占城位于今越南中南部，是海上丝绸之路的重要停泊港和补给站。中国商船前往东南亚和印度洋，第一站多在占城停靠补给淡水、粮食和香料。宋元时期与中国贸易频繁，以出产占城稻、沉香、乌木闻名。",
         "description_en": "Champa, located in central-southern Vietnam, was a key port of call on the Maritime Silk Road. Chinese merchant ships heading to Southeast Asia and the Indian Ocean typically made their first stop here for fresh water, provisions, and spices. It traded extensively with China during the Song and Yuan periods, famous for Champa rice, agarwood, and ebony.",
         "significance": 3
+      },
+      {
+        "id": "bodhgaya",
+        "name": "菩提伽耶",
+        "name_en": "Bodh Gaya",
+        "coords": [
+          24.7,
+          84.99
+        ],
+        "era": "ancient",
+        "type": "religious",
+        "region": "india",
+        "description": "佛陀成道处，佛教四大圣地之首。公元前5世纪释迦牟尼在此菩提树下证悟，后阿育王建大菩提寺。",
+        "description_en": "Site of Buddha's enlightenment, foremost of the four holy sites of Buddhism. Ashoka built the Mahabodhi Temple here.",
+        "significance": 5
+      },
+      {
+        "id": "bamiyan",
+        "name": "巴米扬",
+        "name_en": "Bamiyan",
+        "coords": [
+          34.82,
+          67.83
+        ],
+        "era": "ancient",
+        "type": "religious",
+        "region": "central_asia",
+        "description": "兴都库什山脉中的佛教圣地，以两尊巨型石雕佛像（高53m和35m）闻名于世，丝路中亚段关键节点。2001年被毁。",
+        "description_en": "Buddhist sanctuary in the Hindu Kush mountains, famous for two colossal Buddha statues (53m & 35m). Key Silk Road junction in Central Asia. Destroyed in 2001.",
+        "significance": 5
       }
     ],
     "figures": [
@@ -2527,6 +2557,18 @@
         "description": "义净归国后，在洛阳和长安主持译经，共译出佛经56部230卷。与鸠摩罗什、真谛、玄奘并称四大译经师。玄宗皇帝亲自为他的译经作序。",
         "description_en": "After returning to China, Yijing led the translation of 56 Buddhist texts (230 fascicles) in Luoyang and Chang'an. He is honored as one of the Four Great Sutra Translators alongside Kumarajiva, Paramartha, and Xuanzang. Emperor Xuanzong personally wrote a preface for his translations.",
         "significance": 4
+      },
+      {
+        "id": "buddhism-eastward",
+        "name": "佛教东传",
+        "name_en": "Buddhism's Eastward Transmission",
+        "era": "ancient",
+        "type": "cultural",
+        "year": "约公元前3世纪—公元7世纪",
+        "year_en": "c. 3rd century BCE – 7th century CE",
+        "description": "佛教从印度沿丝绸之路经中亚传入中国，是丝路最具深远影响的文化传播。历经阿育王遣使、犍陀罗造像、西域译经、白马寺立寺、鸠摩罗什译经等阶段，彻底改变了中国的思想、艺术和语言。",
+        "description_en": "The transmission of Buddhism from India through Central Asia to China along the Silk Road — the most profound cultural diffusion along the route. From Ashoka's missions to Gandharan art to the translation academies of Chang'an, it transformed Chinese thought, art, and language.",
+        "significance": 5
       }
     ]
   },
@@ -5584,6 +5626,121 @@
       "relation": "派遣",
       "relation_en": "Dispatched",
       "description": "班超派遣甘英出使大秦"
+    },
+    {
+      "source": "bodhgaya",
+      "target": "nalanda",
+      "relation": "佛教学问传承"
+    },
+    {
+      "source": "bodhgaya",
+      "target": "buddhism",
+      "relation": "佛教起源圣地"
+    },
+    {
+      "source": "buddhism-eastward",
+      "target": "bodhgaya",
+      "relation": "佛教发源地"
+    },
+    {
+      "source": "buddhism-eastward",
+      "target": "nalanda",
+      "relation": "途经佛教学府"
+    },
+    {
+      "source": "buddhism-eastward",
+      "target": "taxila",
+      "relation": "犍陀罗造像艺术"
+    },
+    {
+      "source": "buddhism-eastward",
+      "target": "bamiyan",
+      "relation": "关键传播节点"
+    },
+    {
+      "source": "buddhism-eastward",
+      "target": "balkh",
+      "relation": "巴克特里亚佛教中心"
+    },
+    {
+      "source": "buddhism-eastward",
+      "target": "khotan",
+      "relation": "西域第一站"
+    },
+    {
+      "source": "buddhism-eastward",
+      "target": "kucha",
+      "relation": "西域译经中心"
+    },
+    {
+      "source": "buddhism-eastward",
+      "target": "dunhuang",
+      "relation": "入华门户"
+    },
+    {
+      "source": "buddhism-eastward",
+      "target": "liangzhou",
+      "relation": "河西译经桥头堡"
+    },
+    {
+      "source": "buddhism-eastward",
+      "target": "changan",
+      "relation": "译经中心"
+    },
+    {
+      "source": "buddhism-eastward",
+      "target": "luoyang",
+      "relation": "首座佛寺白马寺"
+    },
+    {
+      "source": "bamiyan",
+      "target": "balkh",
+      "relation": "兴都库什山口通道"
+    },
+    {
+      "source": "bamiyan",
+      "target": "buddhism",
+      "relation": "丝路佛教艺术巅峰"
+    },
+    {
+      "source": "taxila",
+      "target": "bamiyan",
+      "relation": "犍陀罗→巴米扬佛教通道"
+    },
+    {
+      "source": "nalanda",
+      "target": "taxila",
+      "relation": "佛教北传路线"
+    },
+    {
+      "source": "kumarajiva",
+      "target": "buddhism-eastward",
+      "relation": "译经弘法"
+    },
+    {
+      "source": "xuanzang",
+      "target": "bodhgaya",
+      "relation": "朝拜成道处"
+    },
+    {
+      "source": "xuanzang",
+      "target": "buddhism-eastward",
+      "relation": "取经东归"
+    },
+    {
+      "source": "faxian",
+      "target": "bodhgaya",
+      "relation": "朝拜成道处"
+    },
+    {
+      "source": "faxian",
+      "target": "buddhism-eastward",
+      "relation": "取经东归"
+    },
+    {
+      "source": "luoyang",
+      "target": "changan",
+      "relation": "佛教东西两京"
     }
   ],
   "routes": [
