@@ -576,6 +576,21 @@ function buildAllCards(DATA) {
     ]
   );
 
+  // 链15: 鄂多立克东游
+  html += buildChainCard(
+    '鄂多立克东游',
+    "Odoric of Pordenone's Journey to the East",
+    '1318年，意大利方济各会修士鄂多立克从威尼斯启程，赤脚步行经君士坦丁堡、波斯、印度、南海群岛，1325年抵达元大都（北京）。他在中国居留三年，亲眼见证元朝鼎盛——杭州一万两千座桥、大都金殿、纸币流通。病榻上口述的游记被后世誉为「中世纪最可信的东方行纪」。',
+    [
+      {id:'odoric', name:'鄂多立克', type:'figure', icon:'👤'},
+      {id:'venice', name:'威尼斯', type:'city', icon:'🏙️'},
+      {id:'tabriz', name:'大不里士', type:'city', icon:'🏙️'},
+      {id:'quanzhou', name:'泉州', type:'city', icon:'🏙️'},
+      {id:'hangzhou', name:'杭州', type:'city', icon:'🏙️'},
+      {id:'beijing', name:'元大都', type:'city', icon:'🏙️'},
+    ]
+  );
+
   html += '</div>';
 
   // ── Total count ──
@@ -583,7 +598,7 @@ function buildAllCards(DATA) {
   const figCount = DATA.nodes.figures.filter(f => f.significance >= 4).length;
   const goodsCount = DATA.nodes.goods.filter(g => g.significance >= 4).length;
   const eventCount = DATA.nodes.events.filter(e => e.significance >= 4).length;
-  const total = cityCount + figCount + goodsCount + eventCount + 14;
+  const total = cityCount + figCount + goodsCount + eventCount + 15;
 
   html += `<div style="text-align:center;padding:32px;color:var(--accent);font-size:0.95rem">
     ✅ ${total} 张知识卡片准备完毕<br>

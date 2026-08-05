@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>修袍东渡 · 鄂多立克的东方之旅</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<link rel="stylesheet" href="css/story-common.css" />
+<style>
+:root {
+  --bg: #14100c; --card-bg: rgba(139,105,20,0.92); --accent: #9b7b4c;
+  --text: #efe8d8; --text-dim: #a09878; --border: rgba(255,255,255,0.08);
+  --accent-r: 139; --accent-g: 105; --accent-b: 20;
+}
+</style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<div id="story-nav">
+  <a href="story.html">📖 张骞</a>
+  <a href="story8.html">⚔ 班超</a>
+  <a href="story4.html">🪷 法显</a>
+  <a href="story13.html">🔥 鸠摩罗什</a>
+  <a href="story3.html">🧘 玄奘</a>
+  <a href="story15.html">🌊 义净</a>
+  <a href="story16.html">📜 纸传天下</a>
+  <a href="story17.html">🎀 王昭君</a>
+  <a href="story18.html">🧭 甘英</a>
+  <a href="story19.html">🪷 佛路东来</a>
+  <a href="story20.html" class="active">🕊️ 鄂多立克</a>
+  <a href="story6.html">🏜 杜环</a>
+  <a href="story10.html">☯️ 丘处机</a>
+  <a href="story5.html">🏛 马可·波罗</a>
+  <a href="story9.html">✝️ 拉班·扫马</a>
+  <a href="story11.html">⛵ 亦黑迷失</a>
+  <a href="story12.html">🛕 周达观</a>
+  <a href="story7.html">⚓ 汪大渊</a>
+  <a href="story14.html">🌍 白图泰</a>
+  <a href="story2.html">🚢 郑和</a>
+</div>
+
+<div id="progress"></div>
+
+<a href="index.html" id="back">← 返回地图</a>
+<button id="theme-toggle" onclick="toggleTheme()">☀️</button>
+<a href="sponsor.html" id="sponsor-btn" title="支持项目">☕ 支持</a>
+<button id="restart" onclick="restart()">🔄 重播</button>
+
+<div id="narrative" onclick="advance()">
+  <button id="toggle-card" onclick="event.stopPropagation();toggleCard()" title="收起/展开">─</button>
+  <div class="chapter-num" id="chNum"></div>
+  <h2 id="chTitle"></h2>
+  <p id="chBody"></p>
+  <div id="badges" style="margin:8px 0 0;line-height:1.8"></div>
+  <div class="hint"><span class="arrow">→</span> 点击继续</div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+const STORY_CONFIG = {
+  accent: '#9b7b4c',
+  accentRgb: '155,123,76',
+  mapCenter: [35, 65],
+  mapZoom: 3.2,
+  startCities: ['venice'],
+  restartEmoji: '🕊️',
+  tileBg: '#14100c'
+};
+
+const STORY = [
+  {
+    title: '威尼斯方济各',
+    subtitle: '约1318年 · 意大利 波代诺内 — 威尼斯',
+    body: '他不是一个商人。这是理解鄂多立克的关键。在十三世纪的意大利东北部，弗留利地区的波代诺内小镇——靠近威尼斯的潟湖，靠近亚得里亚海的盐风——一个男孩加入了方济各会。方济各会是个年轻的修会，他们的创立者圣方济各曾对着鸟儿布道，称太阳为兄、月亮为姐。赤脚行走，身穿粗布灰袍，一无所有。这个男孩——鄂多立克——选择了一条和商人完全不同的路。商人们带着丝绸、香料、金币穿过丝绸之路。鄂多立克什么都没带。他的修会有一道命令：去东方。大汗的帝国允许所有宗教存在，方济各会已在汗八里（北京）建立了第一座天主教堂——孟高维诺总主教在那里已经工作了二十年。但他们需要更多的传教士。1318年，鄂多立克从威尼斯登船。他没有带钱——方济各会士不拥有财产。他没有带卫队。他的行李只有一件灰袍、一双草鞋、一部抄本圣经。马可·波罗是四十年前出发的，比他富裕得多——带着教皇的书信、金印、随从。拉班·扫马是四十年前出发的，从北京往西——一个景教僧侣，去见教皇和法国国王。而鄂多立克，一个赤脚的意大利修士，即将走出一条比他们任何人都更漫长、更奇异的路。没有商业目的，没有外交使命——只是一个修道士的服从：去最远的地方，对最多的人说话。',
+    lat: 45.44, lng: 12.33, zoom: 4.5,
+    route: ['pordenone', 'venice'],
+    marker: 'venice',
+    showCities: ['pordenone', 'venice', 'constantinople'],
+    highlight: ['odoric', 'odoric-journey']
+  },
+  {
+    title: '穿越伊尔汗国',
+    subtitle: '1318—1321年 · 君士坦丁堡 → 大不里士 → 霍尔木兹',
+    body: '从威尼斯到君士坦丁堡是海路——亚得里亚海、爱奥尼亚海、爱琴海、马尔马拉海。鄂多立克在君士坦丁堡下船。这座城市的圣索菲亚大教堂还在——拜占庭帝国还没有亡。他从特拉布宗登陆，沿黑海南岸进入安纳托利亚高原，到了伊尔汗国的疆界。伊尔汗国是成吉思汗孙子旭烈兀建立的蒙古王朝，统治着波斯和两河流域。它的首都大不里士——今天的伊朗西北——是当时世界上最国际化的城市之一。威尼斯和热那亚的商人在这里有商站。中国的丝绸、印度的胡椒、波斯的绿松石在这里交汇。鄂多立克穿过了整个波斯。他经过苏丹尼耶——伊尔汗国的夏都，巨大的圆顶陵墓刚刚落成。经过赖伊——「地球上最美的城市之一」，他后来这样写。经过伊斯法罕。看到波斯人用风塔给房子降温——他第一次见到这种东西，惊得目瞪口呆。然后他到了巴格达。阿拔斯王朝已经灭亡了，但巴格达仍是东西方学术的中心。鄂多立克记录了一件事：在波斯，人们把死者的尸体放在山顶上的「寂静之塔」上，让秃鹫啄食——这是琐罗亚斯德教的天葬。他对这件事没有批判，只是记录。这是他最令人惊讶的品质——一个中世纪的修士，却有一种近乎人类学家的冷静。然后他继续向南。穿过扎格罗斯山脉，下到波斯湾的霍尔木兹。波斯湾的水是蓝绿色的，热得像澡盆。码头上的单桅帆船正等着季风——印度洋的季风。鄂多立克上了船。',
+    lat: 33.0, lng: 52.0, zoom: 4,
+    route: ['venice', 'constantinople', 'tabriz', 'baghdad', 'hormuz'],
+    marker: 'tabriz',
+    showCities: ['venice', 'constantinople', 'tabriz', 'baghdad', 'hormuz'],
+    highlight: ['odoric-journey', 'tabriz', 'baghdad']
+  },
+  {
+    title: '殉道者的遗骨',
+    subtitle: '约1321—1324年 · 印度洋 → 南海群岛',
+    body: '在到达中国之前，鄂多立克在印度做了他一生中最像「方济各会士」的事。他在印度西海岸的塔纳（Thane，今孟买附近）上了岸。四年前，四位方济各会传教士在这里被当地的穆斯林总督处死——他们公开批评伊斯兰教法，被绑在柱子上，用剑和火烧死。鄂多立克来了。他找到了他们的墓。他亲手挖出遗骨——烧焦的骨头、碎布片、念珠碎片——用布包好，藏在自己的灰袍里。他要带着这些遗骨走到中国去。这件事没有任何实用意义。它甚至增加了危险——如果他被人搜查，这些遗骨足以让他也被处死。但在方济各会的精神里，殉道是最高的恩典。他们不是去「成功」的——他们去见证。带着遗骨，鄂多立克继续沿印度海岸南下。在奎隆（今喀拉拉邦），他看到了胡椒藤——「像葡萄藤一样爬在树上」。他说这里的胡椒多得「像欧洲的麦子」。他从马拉巴尔海岸上了另一条船——一条中国帆船。船上有中国水手、阿拉伯商人、马来船员。船头画着巨大的眼睛——「船没有眼睛怎么看得见路？」水手们笑着告诉他。他们穿过孟加拉湾。苏门答腊——「岛上有人吃人肉」。爪哇——香料群岛，丁香和肉豆蔻的气味在海上就能闻到。婆罗洲。然后——往北。往北就是中国。他没有直接到泉州。他在广州先上了岸。广州——「一座有三个威尼斯那么大的城市」。他看到了什么？他看到了一个他从未见过的东西，一个让他彻底安静下来的东西——他没有在任何旅行指南上读到过。',
+    lat: 15.0, lng: 76.0, zoom: 3.5,
+    route: ['hormuz', 'calicut', 'quanzhou'],
+    marker: 'calicut',
+    showCities: ['hormuz', 'calicut', 'guangzhou', 'quanzhou'],
+    highlight: ['odoric-journey', 'calicut']
+  },
+  {
+    title: '天城行在',
+    subtitle: '约1324年 · 广州 → 泉州 → 福州 → 杭州',
+    body: '在广州，鄂多立克尝到了荔枝。他把它叫做「一种比蜜还甜的果实」。他还注意到一件事：广东人吃饭用的是两根小木棍。他第一次见到筷子。从广州沿海岸北上到了泉州——刺桐港。鄂多立克来的时候，泉州是全世界最繁忙的港口。阿拉伯旅行者伊本·白图泰十多年后也会到这里——他们几乎擦肩而过。鄂多立克写道：泉州的船舶「不可胜数」，码头上堆满了准备运往西方的瓷器和丝绸。但真正让他震惊的是福州。他说福州是一座「三十英里周长的巨大城市」，闽江上的桥比威尼斯潟湖的桥还要多。他特别注意了福州城外的一座桥——万寿桥——桥头立着一对巨大的石狮。在福州，他看到了一种他无法理解的宗教仪式：人们在庙里烧纸——纸钱、纸马、纸房子——给另一个世界的亲人。一个方济各会修士，看着中国人焚纸祭祖。他再次没有批判，只是如实记录。然后他到了杭州。杭州，曾经的南宋都城。马可·波罗写过它，但没有一个人比鄂多立克写得更痴迷。他说杭州是「全世界最伟大的城市，周长一百英里」。他说城中有「一万两千座桥」——每一座桥上都有雕刻。他说西湖周围全是寺庙、园林、茶舍，湖上有画舫，船女弹着琵琶唱歌。他说这里的市场上什么都有——威尼斯商人会哭的。他把杭州叫做「行在」（Quinsai）——「天城」。他在杭州停留了很久。不是在传教，是在看。',
+    lat: 28.5, lng: 119.0, zoom: 4.5,
+    route: ['quanzhou', 'fuzhou', 'hangzhou'],
+    marker: 'hangzhou',
+    showCities: ['quanzhou', 'fuzhou', 'hangzhou', 'yangzhou'],
+    highlight: ['odoric-journey', 'hangzhou', 'fuzhou']
+  },
+  {
+    title: '汗八里的白鸽',
+    subtitle: '约1325—1330年 · 元大都 → 归途 → 帕多瓦病榻',
+    body: '从杭州沿大运河北上，经扬州——扬州有「一万座桥」，他说——鄂多立克到了元朝的心脏：汗八里，北京。大都的城墙有二十四英里长。大都的皇宫——他说——有七英里长的围墙，里面的金殿「金碧辉煌，令人目盲」。忽必烈的子孙仍然统治着这里。当时的皇帝是泰定帝也孙铁木儿。鄂多立克在大都见到了元朝的宫廷礼仪：百官跪拜、万人宴饮、白象和豹子在宫门前守卫。他还记录了一件欧洲人从未见过的事：中国人用「纸钱」——不是焚烧的那种，是桑树皮做的纸币。一张纸，盖了印，可以在整个帝国买东西。他把它叫做「大汗的点金术」。在汗八里，鄂多立克住了三年。他住在方济各会的小教堂里——孟高维诺总主教在大都建立的第一个天主教传教站。他为新信徒施洗，为垂死的旅人做临终圣事。他走在胡同里，北方冬天的风吹起他的灰袍。他的胡子白了。他老了。1328年，他决定回去。不是走不动了——他要回去报告。教皇需要知道东方发生了什么。五十个方济各会士需要派过来。归途的路线模糊不清。他可能走了西藏——他是最早描述天葬的欧洲人：藏人把尸体切碎、喂给秃鹫，灵魂随着鸟儿升天。一个方济各会修士看到这些，只是记了下来。他从波斯陆路回到意大利。1330年春天，鄂多立克走进帕多瓦的圣安东尼修道院。他脱下了那双已经磨破的草鞋——走了十二年，那双鞋上沾着亚得里亚海的盐、波斯高原的沙、印度洋的水雾、杭州西堤的桃花瓣。他的身体已经不行了。一个叫威廉的修士坐在他的床边，拿起笔。「说吧。」鄂多立克说了。他说的所有话都被记录了下来——不是一部《马可·波罗行纪》那样的传奇，是一部冷静、精确、近乎人类学的行纪。1331年1月14日，鄂多立克在乌迪内修道院去世。他的最后一句话是——准备再去东方。他的遗骨和他在印度挖出的四位殉道者的遗骨一起，至今保存在乌迪内。那双草鞋，不知道在哪条路上化成了灰。一只白鸽——方济各会的标志——从威尼斯的钟楼上飞起来，飞向东方。',
+    lat: 39.9, lng: 116.4, zoom: 4,
+    route: ['hangzhou', 'yangzhou', 'beijing', 'venice'],
+    marker: 'beijing',
+    showCities: ['beijing', 'yangzhou', 'hangzhou', 'venice', 'pordenone'],
+    highlight: ['odoric-journey', 'beijing', 'venice', 'odoric']
+  }
+];
+</script>
+<script src="js/story-engine.js"></script>
+</body>
+</html>

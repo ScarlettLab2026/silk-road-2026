@@ -2,8 +2,8 @@
   "meta": {
     "title": "丝绸之路知识图谱",
     "title_en": "Silk Road Knowledge Graph",
-    "version": "1.17.0",
-    "last_updated": "2026-07-28",
+    "version": "1.18.0",
+    "last_updated": "2026-08-05",
     "description": "一个关于丝绸之路的结构化开放数据集，涵盖城市、人物、物产、事件四大类实体及其关联关系。",
     "description_en": "An open structured dataset about the Silk Road, covering cities, figures, goods, and events and their interconnections."
   },
@@ -1454,6 +1454,51 @@
         "description": "兴都库什山脉中的佛教圣地，以两尊巨型石雕佛像（高53m和35m）闻名于世，丝路中亚段关键节点。2001年被毁。",
         "description_en": "Buddhist sanctuary in the Hindu Kush mountains, famous for two colossal Buddha statues (53m & 35m). Key Silk Road junction in Central Asia. Destroyed in 2001.",
         "significance": 5
+      },
+      {
+        "id": "fuzhou",
+        "name": "福州",
+        "name_en": "Fuzhou",
+        "coords": [
+          26.07,
+          119.3
+        ],
+        "era": "ancient",
+        "type": "port",
+        "region": "east_asia",
+        "description": "闽江入海港口，海上丝绸之路重要节点，闽国古都。元代为福建行省首府，外商云集。鄂多立克赞其「三十里大城」。",
+        "description_en": "Port city at the mouth of the Min River, key Maritime Silk Road node, ancient capital of the Min Kingdom. Fujian's provincial capital under the Yuan, thronged with foreign merchants. Odoric praised it as 'a great city thirty miles around'.",
+        "significance": 4
+      },
+      {
+        "id": "yangzhou",
+        "name": "扬州",
+        "name_en": "Yangzhou",
+        "coords": [
+          32.39,
+          119.42
+        ],
+        "era": "ancient",
+        "type": "commercial",
+        "region": "east_asia",
+        "description": "大运河与长江交汇处，隋唐至元代中国最繁华的商业都市之一。马可·波罗曾任扬州总管，鄂多立克称其「城中桥逾万座」，为元代国际商埠。",
+        "description_en": "At the junction of the Grand Canal and Yangtze River. One of China's most prosperous commercial cities from Sui-Tang through Yuan dynasties. Marco Polo served here as governor; Odoric reported 'more than 10,000 bridges' and a thriving international port.",
+        "significance": 4
+      },
+      {
+        "id": "pordenone",
+        "name": "波代诺内",
+        "name_en": "Pordenone",
+        "coords": [
+          45.96,
+          12.66
+        ],
+        "era": "medieval",
+        "type": "commercial",
+        "region": "europe",
+        "description": "意大利东北部弗留利地区古城，鄂多立克故乡。14世纪该地区属阿奎莱亚宗主教区，因靠近威尼斯而成为东西方旅人往来的前沿。",
+        "description_en": "Ancient town in the Friuli region of northeastern Italy, hometown of Odoric. In the 14th century the area belonged to the Patriarchate of Aquileia, and its proximity to Venice made it a frontier for East-West travelers.",
+        "significance": 2
       }
     ],
     "figures": [
@@ -1749,6 +1794,18 @@
         "era_range": "? — 公元前31年",
         "description": "匈奴分裂后的南单于，第一位臣服汉朝的匈奴最高统治者。公元前53年率部归汉，三次亲赴长安朝见。公元前33年求娶汉女，王昭君自请出嫁，汉元帝以「竟宁」（边境安宁）为年号送嫁。此后汉匈边境六十余年无大战，商路畅通。他的臣服和联姻开启了汉匈关系的全新时代。",
         "description_en": "The Southern Chanyu after the Xiongnu split, and the first supreme Xiongnu ruler to submit to the Han Dynasty. He led his tribe to submit in 53 BCE and visited Chang'an three times in person. In 33 BCE he sought a Han bride; Wang Zhaojun volunteered, and Emperor Yuan adopted the era name 'Jingning' (Border Pacified) to mark the marriage. The Han-Xiongnu border saw no major warfare for over sixty years thereafter, keeping trade routes open. His submission and marriage alliance inaugurated an entirely new era in Han-Xiongnu relations.",
+        "significance": 4
+      },
+      {
+        "id": "odoric",
+        "name": "鄂多立克",
+        "name_en": "Odoric of Pordenone",
+        "type": "方济各会传教士",
+        "type_en": "Franciscan Missionary",
+        "era": "元",
+        "era_range": "约1286 — 1331年",
+        "description": "意大利方济各会传教士，中世纪四大旅行家之一。1318年从威尼斯启程，经君士坦丁堡、波斯、印度、南海群岛，1325年抵达元大都（北京），居留三年。回国后于病榻口述《鄂多立克东游录》，其观察之详、描述之真，被后世誉为「中世纪最可信的东方游记」。",
+        "description_en": "Italian Franciscan missionary and one of the four great medieval travelers. Departing Venice in 1318, he traveled through Constantinople, Persia, India and the South China Sea to reach Dadu (Beijing) in 1325, where he lived for three years. On his deathbed he dictated his 'Relatio', praised by later scholars as 'the most reliable medieval account of the East'.",
         "significance": 4
       }
     ],
@@ -2568,6 +2625,18 @@
         "year_en": "c. 3rd century BCE – 7th century CE",
         "description": "佛教从印度沿丝绸之路经中亚传入中国，是丝路最具深远影响的文化传播。历经阿育王遣使、犍陀罗造像、西域译经、白马寺立寺、鸠摩罗什译经等阶段，彻底改变了中国的思想、艺术和语言。",
         "description_en": "The transmission of Buddhism from India through Central Asia to China along the Silk Road — the most profound cultural diffusion along the route. From Ashoka's missions to Gandharan art to the translation academies of Chang'an, it transformed Chinese thought, art, and language.",
+        "significance": 5
+      },
+      {
+        "id": "odoric-journey",
+        "name": "鄂多立克东游",
+        "name_en": "Odoric's Journey to the East",
+        "era": "medieval",
+        "type": "cultural",
+        "year": "1318 — 1330年",
+        "year_en": "1318 — 1330",
+        "description": "意大利方济各会士鄂多立克历时十二年的东方之旅。从威尼斯→君士坦丁堡→大不里士→霍尔木兹→印度→南海→广州→泉州→福州→杭州→扬州→元大都(北京)，是唯一亲眼见证元朝鼎盛时代的欧洲旅行家。其口述游记记录了杭州十二万座桥、大都金殿、西藏天葬等珍贵见闻。",
+        "description_en": "The twelve-year journey of the Franciscan friar Odoric from Venice through Constantinople, Tabriz, Hormuz, India, Southeast Asia, Guangzhou, Quanzhou, Fuzhou, Hangzhou, Yangzhou to Dadu (Beijing). He was the only European traveler to witness the Yuan dynasty at its zenith. His dictated account records Hangzhou's 12,000 bridges, Dadu's golden palace, Tibetan sky burials, and other priceless observations.",
         "significance": 5
       }
     ]
@@ -5741,6 +5810,191 @@
       "source": "luoyang",
       "target": "changan",
       "relation": "佛教东西两京"
+    },
+    {
+      "source": "pordenone",
+      "target": "venice",
+      "relation": "家乡→出海港"
+    },
+    {
+      "source": "venice",
+      "target": "constantinople",
+      "relation": "鄂多立克渡海东行"
+    },
+    {
+      "source": "constantinople",
+      "target": "tabriz",
+      "relation": "鄂多立克经安纳托利亚"
+    },
+    {
+      "source": "tabriz",
+      "target": "baghdad",
+      "relation": "鄂多立克经伊尔汗国"
+    },
+    {
+      "source": "baghdad",
+      "target": "hormuz",
+      "relation": "鄂多立克南下波斯湾"
+    },
+    {
+      "source": "hormuz",
+      "target": "calicut",
+      "relation": "鄂多立克渡印度洋"
+    },
+    {
+      "source": "calicut",
+      "target": "quanzhou",
+      "relation": "鄂多立克经南海群岛"
+    },
+    {
+      "source": "quanzhou",
+      "target": "fuzhou",
+      "relation": "鄂多立克经闽中"
+    },
+    {
+      "source": "fuzhou",
+      "target": "hangzhou",
+      "relation": "鄂多立克北上"
+    },
+    {
+      "source": "hangzhou",
+      "target": "yangzhou",
+      "relation": "鄂多立克沿大运河"
+    },
+    {
+      "source": "yangzhou",
+      "target": "beijing",
+      "relation": "鄂多立克北行入大都"
+    },
+    {
+      "source": "odoric",
+      "target": "odoric-journey",
+      "relation": "亲历"
+    },
+    {
+      "source": "odoric",
+      "target": "venice",
+      "relation": "出发地"
+    },
+    {
+      "source": "odoric",
+      "target": "constantinople",
+      "relation": "经行"
+    },
+    {
+      "source": "odoric",
+      "target": "tabriz",
+      "relation": "经行"
+    },
+    {
+      "source": "odoric",
+      "target": "baghdad",
+      "relation": "经行"
+    },
+    {
+      "source": "odoric",
+      "target": "hormuz",
+      "relation": "经行"
+    },
+    {
+      "source": "odoric",
+      "target": "calicut",
+      "relation": "经行"
+    },
+    {
+      "source": "odoric",
+      "target": "quanzhou",
+      "relation": "经行"
+    },
+    {
+      "source": "odoric",
+      "target": "fuzhou",
+      "relation": "经行"
+    },
+    {
+      "source": "odoric",
+      "target": "hangzhou",
+      "relation": "经行"
+    },
+    {
+      "source": "odoric",
+      "target": "yangzhou",
+      "relation": "经行"
+    },
+    {
+      "source": "odoric",
+      "target": "beijing",
+      "relation": "居留三年"
+    },
+    {
+      "source": "odoric-journey",
+      "target": "venice",
+      "relation": "起点"
+    },
+    {
+      "source": "odoric-journey",
+      "target": "constantinople",
+      "relation": "经停"
+    },
+    {
+      "source": "odoric-journey",
+      "target": "tabriz",
+      "relation": "经停"
+    },
+    {
+      "source": "odoric-journey",
+      "target": "baghdad",
+      "relation": "经停"
+    },
+    {
+      "source": "odoric-journey",
+      "target": "hormuz",
+      "relation": "经停"
+    },
+    {
+      "source": "odoric-journey",
+      "target": "calicut",
+      "relation": "经停"
+    },
+    {
+      "source": "odoric-journey",
+      "target": "quanzhou",
+      "relation": "经停"
+    },
+    {
+      "source": "odoric-journey",
+      "target": "fuzhou",
+      "relation": "经停"
+    },
+    {
+      "source": "odoric-journey",
+      "target": "hangzhou",
+      "relation": "经停"
+    },
+    {
+      "source": "odoric-journey",
+      "target": "yangzhou",
+      "relation": "经停"
+    },
+    {
+      "source": "odoric-journey",
+      "target": "beijing",
+      "relation": "终点/居留三年"
+    },
+    {
+      "source": "odoric",
+      "target": "marco-polo",
+      "relation": "马可波罗同乡，较晚30年"
+    },
+    {
+      "source": "odoric",
+      "target": "ibn-battuta",
+      "relation": "同时代东西方旅行者"
+    },
+    {
+      "source": "odoric-journey",
+      "target": "marco-polo-journey",
+      "relation": "同为欧洲人东游"
     }
   ],
   "routes": [
