@@ -591,6 +591,22 @@ function buildAllCards(DATA) {
     ]
   );
 
+  // 链16: 陈诚五使西域
+  html += buildChainCard(
+    '陈诚五使西域',
+    "Chen Cheng's Five Missions to the Western Regions",
+    '永乐年间，明朝使节陈诚五次出使西域。1414年，他率使团从嘉峪关出发，经哈密、吐鲁番、别失八里、撒马尔罕，历时250余日抵达帖木儿帝国都城哈烈（赫拉特），重开陆上丝绸之路。归国后著《西域行程记》《西域番国志》，与郑和下西洋形成明代对外交流的海陆双璧。',
+    [
+      {id:'chen-cheng', name:'陈诚', type:'figure', icon:'👤'},
+      {id:'jiayuguan', name:'嘉峪关', type:'city', icon:'🏙️'},
+      {id:'hami', name:'哈密', type:'city', icon:'🏙️'},
+      {id:'samarkand', name:'撒马尔罕', type:'city', icon:'🏙️'},
+      {id:'herat', name:'赫拉特', type:'city', icon:'🏙️'},
+      {id:'zheng-he-figure', name:'郑和', type:'figure', icon:'👤'},
+    ]
+  );
+
+
   html += '</div>';
 
   // ── Total count ──
@@ -598,12 +614,12 @@ function buildAllCards(DATA) {
   const figCount = DATA.nodes.figures.filter(f => f.significance >= 4).length;
   const goodsCount = DATA.nodes.goods.filter(g => g.significance >= 4).length;
   const eventCount = DATA.nodes.events.filter(e => e.significance >= 4).length;
-  const total = cityCount + figCount + goodsCount + eventCount + 15;
+  const total = cityCount + figCount + goodsCount + eventCount + 16;
 
   html += `<div style="text-align:center;padding:32px;color:var(--accent);font-size:0.95rem">
     ✅ ${total} 张知识卡片准备完毕<br>
     <small style="color:var(--text-dim)">
-      🏙️ ${cityCount} 城市 · 👤 ${figCount} 人物 · 📦 ${goodsCount} 物产 · ⚡ ${eventCount} 事件 · 🔗 15 关系链
+      🏙️ ${cityCount} 城市 · 👤 ${figCount} 人物 · 📦 ${goodsCount} 物产 · ⚡ ${eventCount} 事件 · 🔗 16 关系链
     </small><br>
     <small style="color:var(--text-dim);margin-top:8px;display:block">
       💡 右键每张卡片 → 复制图片/截图 → 每天发一张到小红书/知乎

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>驼铃万里 · 陈诚五使西域</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<link rel="stylesheet" href="css/story-common.css" />
+<style>
+:root {
+  --bg: #14100a; --card-bg: rgba(120,88,22,0.92); --accent: #c98a2d;
+  --text: #f2ead6; --text-dim: #b0a586; --border: rgba(255,255,255,0.08);
+  --accent-r: 201; --accent-g: 138; --accent-b: 45;
+}
+</style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<div id="story-nav">
+  <a href="story.html">📖 张骞</a>
+  <a href="story8.html">⚔ 班超</a>
+  <a href="story4.html">🪷 法显</a>
+  <a href="story13.html">🔥 鸠摩罗什</a>
+  <a href="story3.html">🧘 玄奘</a>
+  <a href="story15.html">🌊 义净</a>
+  <a href="story16.html">📜 纸传天下</a>
+  <a href="story17.html">🎀 王昭君</a>
+  <a href="story18.html">🧭 甘英</a>
+  <a href="story19.html">🪷 佛路东来</a>
+  <a href="story20.html">🕊️ 鄂多立克</a>
+  <a href="story6.html">🏜 杜环</a>
+  <a href="story10.html">☯️ 丘处机</a>
+  <a href="story5.html">🏛 马可·波罗</a>
+  <a href="story9.html">✝️ 拉班·扫马</a>
+  <a href="story11.html">⛵ 亦黑迷失</a>
+  <a href="story12.html">🛕 周达观</a>
+  <a href="story7.html">⚓ 汪大渊</a>
+  <a href="story14.html">🌍 白图泰</a>
+  <a href="story2.html">🚢 郑和</a>
+  <a href="story21.html" class="active">🐫 陈诚</a>
+</div>
+
+<div id="progress"></div>
+
+<a href="index.html" id="back">← 返回地图</a>
+<button id="theme-toggle" onclick="toggleTheme()">☀️</button>
+<a href="sponsor.html" id="sponsor-btn" title="支持项目">☕ 支持</a>
+<button id="restart" onclick="restart()">🔄 重播</button>
+
+<div id="narrative" onclick="advance()">
+  <button id="toggle-card" onclick="event.stopPropagation();toggleCard()" title="收起/展开">─</button>
+  <div class="chapter-num" id="chNum"></div>
+  <h2 id="chTitle"></h2>
+  <p id="chBody"></p>
+  <div id="badges" style="margin:8px 0 0;line-height:1.8"></div>
+  <div class="hint"><span class="arrow">→</span> 点击继续</div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+const STORY_CONFIG = {
+  accent: '#c98a2d',
+  accentRgb: '201,138,45',
+  mapCenter: [40.5, 80],
+  mapZoom: 3.4,
+  startCities: ['jiayuguan'],
+  restartEmoji: '🐫',
+  tileBg: '#14100a'
+};
+
+const STORY = [
+  {
+    title: '出关',
+    subtitle: '约1413年 · 肃州 — 嘉峪关',
+    body: '他不是一个探险家。这是理解陈诚的关键。在郑和的宝船一次次劈开印度洋的浪头时，有一个人，正骑着骆驼，走向相反的方向——向西，向沙漠。陈诚，江西吉水人，字子鲁，一个洪武年间的进士，永乐朝的一名文官。他本该在南京的衙门里整理卷宗，度过安稳的一生。但时代选中了他。1405年，一个足以震动整个东方的消息传来：那个正率领二十万大军、扬言要灭亡明朝的帖木儿，在进军途中病死了。他的继承者沙哈鲁，一改乃父之志，主动向大明遣使修好。中断多年的陆上丝路，等来了重新开启的机会。永乐帝需要一个可靠的人，带着诏书、丝绸、瓷器，穿过河西走廊，穿过沙漠，走到帖木儿帝国的宫廷去。他选了陈诚。出发那天，陈诚在肃州最后一次清点行装。与他同行的，有中官李达、户部主事李暹，六十余人的使团。前方，是嘉峪关——明长城的西端，天下第一雄关。出关，就是西域。一百六十年前，张骞从这里附近走过，凿空了西域；九百年前，班超在这里经营了三十年。如今，轮到陈诚。关门的铁闸在他身后轰然落下。骆驼脖子上的铜铃，响了起来。',
+    lat: 40.0, lng: 97.0, zoom: 4.5,
+    route: ['jiayuguan', 'hami'],
+    marker: 'jiayuguan',
+    showCities: ['jiayuguan', 'dunhuang', 'hami'],
+    highlight: ['chen-cheng', 'chen-cheng-missions']
+  },
+  {
+    title: '西域门户',
+    subtitle: '1414年正月 · 哈密 — 吐鲁番',
+    body: '出关后的世界，和关内是两个世界。第一个停靠点是哈密——明代最西端的军事据点，哈密卫。这里的城墙不高，士兵不多，却是整个帝国伸进西域的一只手臂。陈诚在这里补给了水、粮、骆驼草。从哈密开始，他做了一件后来让历史学家感激不尽的事：他每天写日记。逐日记录——天气、里程、方向、山川、城池。《西域行程记》就是这样写成的。它不是回忆录，不是传奇，而是一部精确到「某日、某风、行若干里」的行军日志。「正月十三日，晴，西行七十里，至某地。」「正月十四日，大风，行五十里。」枯燥，琐碎，却像账本一样真实。这是陈诚和所有传奇旅行者的最大区别：他不炫耀奇遇，他只如实记录。沿着天山东麓，使团到了吐鲁番——高昌故地。这里曾是丝路北道的明珠，高昌国的旧都，玄奘在这里讲经时，国王亲自捧着香炉跪在阶下。几百年过去，佛寺大多荒废了，但葡萄还是甜的，坎儿井还在。陈诚记下了这一切。驼队继续西行。',
+    lat: 42.5, lng: 92.0, zoom: 4.5,
+    route: ['hami', 'turpan'],
+    marker: 'hami',
+    showCities: ['hami', 'turpan', 'dunhuang'],
+    highlight: ['chen-cheng', 'hami', 'turpan']
+  },
+  {
+    title: '别失八里',
+    subtitle: '1414年 · 别失八里（东察合台汗国）',
+    body: '从吐鲁番往北，翻过天山，就到了别失八里。在突厥语里，这个名字的意思是「五城」。它曾是元代的北庭都护府故地，如今是东察合台汗国的都城——一个蒙古人建立的、已经突厥化了的汗国。统治这里的是马哈木王。这是一片危险而暧昧的土地：夹在大明和帖木儿帝国之间，谁的面子都要给，谁的命令都不真听。陈诚要去觐见马哈木王，换取一路西行的通行与安全。在这里，《西域行程记》记录了一个特别的细节：使团分成了南北两路。大队走北道，陈诚带一队走南路，约定日期再会合。为什么分开走？陈诚没有解释。也许是为了勘察道路，也许是为了分散风险，也许只是草原上的现实——几十个人的驼队，目标太大，不如分成两股。这个细节，让一千二百年后的人依然能感到那条路的凶险：没有官道，没有驿站，只有驼铃，和随时可能改变的天色。会合之后，使团继续向西，走进了真正的亚洲腹地。',
+    lat: 43.8, lng: 88.5, zoom: 5,
+    route: ['turpan', 'beshbaliq'],
+    marker: 'beshbaliq',
+    showCities: ['turpan', 'beshbaliq'],
+    highlight: ['chen-cheng', 'beshbaliq']
+  },
+  {
+    title: '撒马尔罕',
+    subtitle: '1414年 · 撒马尔罕（帖木儿帝国）',
+    body: '跨过一条条干涸的河床，翻过一片片盐渍的荒原，使团进入了帖木儿帝国的腹地。第一座大城，是撒马尔罕。帖木儿帝国曾经的心脏。就是这个帖木儿，差一点挥师东进、灭亡明朝；也是这个帝国的铁骑，曾经在安卡拉生擒奥斯曼苏丹。而今天，陈诚走进的，是一座安静下来的城市。撒马尔罕的蓝色穹顶在烈日下像一池池倒扣的湖。雷吉斯坦广场上，经学院、清真寺、巴扎，人声鼎沸。帖木儿死后，他的孙子兀鲁伯在这里做总督——那是一个醉心于星象的君主，后来把撒马尔罕建成了天文学的中心。陈诚以一个文官的冷静，记下了一切：这里的物产、这里的税收、这里的市场、这里的军队。他不像马可·波罗那样惊叹「到处都是金子」，他只写他看到的。《西域番国志》里，关于撒马尔罕的一章，细致到街巷的走向。他在这里稍作停留，然后转向南方。终点不远了。',
+    lat: 41.0, lng: 74.0, zoom: 4,
+    route: ['beshbaliq', 'samarkand'],
+    marker: 'samarkand',
+    showCities: ['beshbaliq', 'samarkand', 'herat'],
+    highlight: ['chen-cheng', 'samarkand']
+  },
+  {
+    title: '哈烈',
+    subtitle: '1414年闰九月初一 · 哈烈（赫拉特）',
+    body: '从撒马尔罕南下，翻过兴都库什山的余脉，陈诚到了此行的终点：哈烈——今天的赫拉特。这是沙哈鲁的都城，帖木儿帝国此时真正的政治与文化中心。一千年前的张骞到过的地方，只到葱岭以西；一千六百年后，陈诚把大明的节旄，插到了更远的呼罗珊。他见到了沙哈鲁。一个蒙古人的后裔，说着波斯语，信奉伊斯兰教，却对远方的中国皇帝保持着谨慎的敬意。陈诚递交了国书，献上了丝绸、瓷器、茶叶。这次出使成功了。帖木儿帝国的商队，随后一批批地走向东方，走向嘉峪关。中断的丝路，重新响起了驼铃。《西域番国志》里，陈诚记下了哈烈的一切——它是全书十九国中最详的一篇：城池、宫室、风俗、物产、钱币、历法。这部书，连同《西域行程记》，成了此后一百年明朝了解中亚最可靠的依据。此后的十年里，陈诚又四次出使西域。五使西域，五次穿越沙漠。他老了。当他最后一次从嘉峪关入关，驼铃终于安静下来。而此时，在更西边的海面上，郑和的宝船正停泊在阿拉伯的港口。一个向西走陆路，一个向西走海路——永乐朝的两条手臂，就这样，第一次，也是最后一次，同时伸向了世界的远方。',
+    lat: 36.5, lng: 63.0, zoom: 4.5,
+    route: ['samarkand', 'herat'],
+    marker: 'herat',
+    showCities: ['samarkand', 'herat'],
+    highlight: ['chen-cheng', 'herat', 'chen-cheng-missions']
+  }
+];
+</script>
+<script src="js/story-engine.js"></script>
+</body>
+</html>

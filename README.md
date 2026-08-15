@@ -1,6 +1,6 @@
 # 🐫 Silk Road · Interactive Knowledge Graph
 
-> **An open-source, interactive map of 2,000 years of East-West exchange.** 40 cities. 30 trade goods. 326 connections. 6 interactive stories. One JSON file drives it all.
+> **An open-source, interactive map of 2,000 years of East-West exchange.** 74 cities. 30 trade goods. 568 connections. 21 interactive stories. One JSON file drives it all.
 
 **[🌐 Live Demo](https://ScarlettLab2026.github.io/silk-road-2026)** · **[📂 Browse Data](./data/silk-road.json)** · **[🤝 Contribute](./CONTRIBUTING.md)**
 
@@ -10,15 +10,15 @@
 
 We broke down 2,000 years of Silk Road history into a structured knowledge graph. Every city, figure, trade good, and historical event is connected — and you can explore all of it interactively.
 
-**🗺️ Interactive Map** — 40 cities on real geographic coordinates across Eurasia, the Indian Ocean, and East Africa
+**🗺️ Interactive Map** — 74 cities on real geographic coordinates across Eurasia, the Indian Ocean, and East Africa
 
-**🕸️ Relationship Graph** — D3.js force-directed graph with 326 edges. Drag nodes, discover hidden connections
+**🕸️ Relationship Graph** — D3.js force-directed graph with 568 edges. Drag nodes, discover hidden connections
 
 **⏳ Dynasty Timeline** — Filter by dynasty (Han → Tang → Yuan → Ming). Map and data sync instantly
 
 **🎬 8 Animated Trade Routes** — Watch silk, paper, gunpowder, Buddhism, and tea travel across the map as golden pulse dots with voice narration
 
-**📖 6 Interactive Stories** — Follow 6 travelers chapter by chapter. The map flies to each location as the story unfolds:
+**📖 21 Interactive Stories** — Follow 21 travelers chapter by chapter. The map flies to each location as the story unfolds. A few examples:
 
 | Story | Traveler | Route | Era | Color |
 |-------|----------|-------|-----|-------|
@@ -29,7 +29,7 @@ We broke down 2,000 years of Silk Road history into a structured knowledge graph
 | 🏛 东方见闻录 | **Marco Polo** | Venice → Khanbaliq → Venice, 24 years | 1271 CE | `#c2714e` Venetian Red |
 | 🏜 万里俘踪 | **Du Huan** | Talas → Baghdad → Africa → Guangzhou, 11 years as a war captive | 751 CE | `#b08040` Desert Bronze |
 
-**🔍 Full-text Search** — Search across 116 entities in Chinese and English
+**🔍 Full-text Search** — Search across 164 entities in Chinese and English
 
 **🌓 Bilingual** — Chinese / English toggle. All data, UI, and story text in both languages
 
@@ -37,11 +37,11 @@ We broke down 2,000 years of Silk Road history into a structured knowledge graph
 
 | Type | Count | Examples |
 |------|-------|----------|
-| 🏙 Cities | **40** | Chang'an, Samarkand, Baghdad, Venice, Mombasa, Lhasa |
-| 👤 Figures | **23** | Zhang Qian, Faxian, Xuanzang, Zheng He, Marco Polo, Du Huan |
+| 🏙 Cities | **74** | Chang'an, Samarkand, Baghdad, Venice, Mombasa, Lhasa, Herat |
+| 👤 Figures | **27** | Zhang Qian, Faxian, Xuanzang, Zheng He, Marco Polo, Chen Cheng |
 | 📦 Goods | **30** | Silk, paper, porcelain, tea, lapis lazuli, black pepper, musk |
-| ⚡ Events | **23** | Zhang Qian's Mission, Battle of Talas, Islam Eastward Spread, Tea Trade Boom |
-| 🔗 Edges | **326** | Every figure→city, goods→route, event→figure connection |
+| ⚡ Events | **33** | Zhang Qian's Mission, Battle of Talas, Islam Eastward Spread, Tea Trade Boom |
+| 🔗 Edges | **568** | Every figure→city, goods→route, event→figure connection |
 | 🎬 Routes | **8** | Silk Westward, Paper to Europe, Buddhism Eastward, Tea-Horse Road |
 | 📖 Stories | **6** | 7 chapters each, interactive map flyover narration |
 

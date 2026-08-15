@@ -2,8 +2,8 @@
   "meta": {
     "title": "丝绸之路知识图谱",
     "title_en": "Silk Road Knowledge Graph",
-    "version": "1.18.0",
-    "last_updated": "2026-08-05",
+    "version": "1.19.0",
+    "last_updated": "2026-08-15",
     "description": "一个关于丝绸之路的结构化开放数据集，涵盖城市、人物、物产、事件四大类实体及其关联关系。",
     "description_en": "An open structured dataset about the Silk Road, covering cities, figures, goods, and events and their interconnections."
   },
@@ -1499,6 +1499,70 @@
         "description": "意大利东北部弗留利地区古城，鄂多立克故乡。14世纪该地区属阿奎莱亚宗主教区，因靠近威尼斯而成为东西方旅人往来的前沿。",
         "description_en": "Ancient town in the Friuli region of northeastern Italy, hometown of Odoric. In the 14th century the area belonged to the Patriarchate of Aquileia, and its proximity to Venice made it a frontier for East-West travelers.",
         "significance": 2
+      },
+      {
+        "id": "jiayuguan",
+        "name": "嘉峪关",
+        "name_en": "Jiayuguan",
+        "modern_name": "嘉峪关",
+        "modern_name_en": "Jiayuguan",
+        "country": "中国",
+        "country_en": "China",
+        "lat": 39.811,
+        "lng": 98.288,
+        "era": "明",
+        "dynasties": [
+          "明"
+        ],
+        "role": "天下第一雄关",
+        "role_en": "The First Pass Under Heaven",
+        "description": "明长城西端起点，河西走廊的咽喉关隘。明朝在此设关，凡出西域者必经此关，是陆上丝绸之路明代段的官方出关门户。",
+        "description_en": "The western terminus of the Ming Great Wall and the key pass of the Hexi Corridor. All travelers bound for the Western Regions had to pass through this gate, making it the official gateway of the Ming-era overland Silk Road.",
+        "significance": 4
+      },
+      {
+        "id": "hami",
+        "name": "哈密",
+        "name_en": "Hami",
+        "modern_name": "哈密",
+        "modern_name_en": "Hami",
+        "country": "中国",
+        "country_en": "China",
+        "lat": 42.833,
+        "lng": 93.511,
+        "era": "汉 — 明",
+        "dynasties": [
+          "汉",
+          "唐",
+          "元",
+          "明"
+        ],
+        "role": "西域门户",
+        "role_en": "Gateway to the Western Regions",
+        "description": "出嘉峪关后的第一座绿洲城市，明代设哈密卫，是中原通往西域的必经门户与补给站。",
+        "description_en": "The first oasis city west of Jiayuguan Pass. The Ming dynasty established the Hami Garrison here, making it the obligatory gateway and supply station on the road from China to the Western Regions.",
+        "significance": 4
+      },
+      {
+        "id": "beshbaliq",
+        "name": "别失八里",
+        "name_en": "Beshbaliq",
+        "modern_name": "吉木萨尔",
+        "modern_name_en": "Jimsar",
+        "country": "中国",
+        "country_en": "China",
+        "lat": 43.998,
+        "lng": 89.192,
+        "era": "元 — 明",
+        "dynasties": [
+          "元",
+          "明"
+        ],
+        "role": "东察合台汗国都城",
+        "role_en": "Capital of the Eastern Chagatai Khanate",
+        "description": "蒙古语意为「五城」，东察合台汗国（蒙兀儿斯坦）的都城。陈诚使团在此觐见马哈木王，是明代丝路进入中亚前的最后一座大城。",
+        "description_en": "Meaning 'Five Cities' in Mongolian, it was the capital of the Eastern Chagatai Khanate (Moghulistan). Chen Cheng's embassy paid respects to Muhammad Khan here, the last great city before entering Central Asia on the Ming Silk Road.",
+        "significance": 3
       }
     ],
     "figures": [
@@ -1806,6 +1870,18 @@
         "era_range": "约1286 — 1331年",
         "description": "意大利方济各会传教士，中世纪四大旅行家之一。1318年从威尼斯启程，经君士坦丁堡、波斯、印度、南海群岛，1325年抵达元大都（北京），居留三年。回国后于病榻口述《鄂多立克东游录》，其观察之详、描述之真，被后世誉为「中世纪最可信的东方游记」。",
         "description_en": "Italian Franciscan missionary and one of the four great medieval travelers. Departing Venice in 1318, he traveled through Constantinople, Persia, India and the South China Sea to reach Dadu (Beijing) in 1325, where he lived for three years. On his deathbed he dictated his 'Relatio', praised by later scholars as 'the most reliable medieval account of the East'.",
+        "significance": 4
+      },
+      {
+        "id": "chen-cheng",
+        "name": "陈诚",
+        "name_en": "Chen Cheng",
+        "type": "外交使节 / 旅行家",
+        "type_en": "Diplomat / Traveler",
+        "era": "明",
+        "era_range": "约1365 — 1458年",
+        "description": "明代外交使节，字子鲁，江西吉水人。永乐年间五次出使西域，三次抵达帖木儿帝国都城哈烈（赫拉特），穿越嘉峪关、哈密、吐鲁番、别失八里、撒马尔罕。归国后著《西域行程记》《西域番国志》，是明代陆上丝绸之路最重要的官方使者。",
+        "description_en": "Ming dynasty envoy from Jishui, Jiangxi. He went on five missions to the Western Regions during the Yongle reign, three times reaching Herat, the capital of the Timurid Empire, crossing Jiayuguan, Hami, Turpan, Beshbaliq and Samarkand. His 'Itinerary to the Western Regions' and 'Records of the Western Countries' made him the Ming dynasty's foremost overland Silk Road envoy.",
         "significance": 4
       }
     ],
@@ -2638,6 +2714,18 @@
         "description": "意大利方济各会士鄂多立克历时十二年的东方之旅。从威尼斯→君士坦丁堡→大不里士→霍尔木兹→印度→南海→广州→泉州→福州→杭州→扬州→元大都(北京)，是唯一亲眼见证元朝鼎盛时代的欧洲旅行家。其口述游记记录了杭州十二万座桥、大都金殿、西藏天葬等珍贵见闻。",
         "description_en": "The twelve-year journey of the Franciscan friar Odoric from Venice through Constantinople, Tabriz, Hormuz, India, Southeast Asia, Guangzhou, Quanzhou, Fuzhou, Hangzhou, Yangzhou to Dadu (Beijing). He was the only European traveler to witness the Yuan dynasty at its zenith. His dictated account records Hangzhou's 12,000 bridges, Dadu's golden palace, Tibetan sky burials, and other priceless observations.",
         "significance": 5
+      },
+      {
+        "id": "chen-cheng-missions",
+        "name": "陈诚五使西域",
+        "name_en": "Chen Cheng's Five Missions to the Western Regions",
+        "year": 1413,
+        "end_year": 1424,
+        "display_year": "1413 — 1424年",
+        "dynasty": "明",
+        "description": "明成祖永乐年间，陈诚奉命五次出使西域。永乐十二年（1414）与李暹、李达同行，从嘉峪关经哈密、吐鲁番、别失八里、撒马尔罕，历时250余日抵达帖木儿帝国都城哈烈（赫拉特），重开陆上丝绸之路，与郑和下西洋形成明代对外交流的海陆双璧。归国后著《西域行程记》《西域番国志》。",
+        "description_en": "During the Yongle reign, Chen Cheng was dispatched on five missions to the Western Regions. In 1414, traveling with Li Xian and Li Da, he crossed Jiayuguan, Hami, Turpan, Beshbaliq and Samarkand over 250 days to reach Herat, capital of the Timurid Empire, reopening the overland Silk Road and forming a land-and-sea pair with Zheng He's voyages. He recorded the journey in his 'Itinerary' and 'Records of the Western Countries'.",
+        "significance": 4
       }
     ]
   },
@@ -5995,6 +6083,156 @@
       "source": "odoric-journey",
       "target": "marco-polo-journey",
       "relation": "同为欧洲人东游"
+    },
+    {
+      "source": "chen-cheng",
+      "target": "chen-cheng-missions",
+      "relation": "亲历",
+      "relation_en": "Experienced"
+    },
+    {
+      "source": "chen-cheng",
+      "target": "jiayuguan",
+      "relation": "出关起点",
+      "relation_en": "Departed from the Pass"
+    },
+    {
+      "source": "chen-cheng",
+      "target": "hami",
+      "relation": "经行",
+      "relation_en": "Passed Through"
+    },
+    {
+      "source": "chen-cheng",
+      "target": "turpan",
+      "relation": "经行",
+      "relation_en": "Passed Through"
+    },
+    {
+      "source": "chen-cheng",
+      "target": "beshbaliq",
+      "relation": "觐见马哈木王",
+      "relation_en": "Paid respects to Muhammad Khan"
+    },
+    {
+      "source": "chen-cheng",
+      "target": "samarkand",
+      "relation": "经行",
+      "relation_en": "Passed Through"
+    },
+    {
+      "source": "chen-cheng",
+      "target": "herat",
+      "relation": "出使抵达",
+      "relation_en": "Reached on Mission"
+    },
+    {
+      "source": "chen-cheng",
+      "target": "zheng-he-figure",
+      "relation": "海陆双使者",
+      "relation_en": "Land-and-sea envoys"
+    },
+    {
+      "source": "chen-cheng",
+      "target": "zhang-qian",
+      "relation": "重走凿空之路",
+      "relation_en": "Retraced the pioneering road"
+    },
+    {
+      "source": "chen-cheng",
+      "target": "ban-chao",
+      "relation": "继任西域使者",
+      "relation_en": "Successive Western Regions envoys"
+    },
+    {
+      "source": "chen-cheng",
+      "target": "ma-huan",
+      "relation": "海陆两行纪作者",
+      "relation_en": "Sea-and-land chroniclers"
+    },
+    {
+      "source": "chen-cheng-missions",
+      "target": "jiayuguan",
+      "relation": "起点",
+      "relation_en": "Starting Point"
+    },
+    {
+      "source": "chen-cheng-missions",
+      "target": "hami",
+      "relation": "经停",
+      "relation_en": "Stopped At"
+    },
+    {
+      "source": "chen-cheng-missions",
+      "target": "turpan",
+      "relation": "经停",
+      "relation_en": "Stopped At"
+    },
+    {
+      "source": "chen-cheng-missions",
+      "target": "beshbaliq",
+      "relation": "经停",
+      "relation_en": "Stopped At"
+    },
+    {
+      "source": "chen-cheng-missions",
+      "target": "samarkand",
+      "relation": "经停",
+      "relation_en": "Stopped At"
+    },
+    {
+      "source": "chen-cheng-missions",
+      "target": "herat",
+      "relation": "出使终点",
+      "relation_en": "Mission Destination"
+    },
+    {
+      "source": "chen-cheng-missions",
+      "target": "zheng-he",
+      "relation": "明成祖朝海陆双璧",
+      "relation_en": "Land-and-sea twins of Yongle"
+    },
+    {
+      "source": "chen-cheng-missions",
+      "target": "zhang-qian-mission",
+      "relation": "先后出使西域",
+      "relation_en": "Successive missions"
+    },
+    {
+      "source": "jiayuguan",
+      "target": "dunhuang",
+      "relation": "河西走廊西端",
+      "relation_en": "West end of the Hexi Corridor"
+    },
+    {
+      "source": "hami",
+      "target": "dunhuang",
+      "relation": "出关门户",
+      "relation_en": "Gateway beyond the pass"
+    },
+    {
+      "source": "hami",
+      "target": "turpan",
+      "relation": "天山东麓",
+      "relation_en": "East foot of the Tianshan"
+    },
+    {
+      "source": "turpan",
+      "target": "beshbaliq",
+      "relation": "天山北麓",
+      "relation_en": "North foot of the Tianshan"
+    },
+    {
+      "source": "beshbaliq",
+      "target": "samarkand",
+      "relation": "中亚通道",
+      "relation_en": "Central Asia Corridor"
+    },
+    {
+      "source": "samarkand",
+      "target": "herat",
+      "relation": "帖木儿帝国双都",
+      "relation_en": "Twin Timurid capitals"
     }
   ],
   "routes": [
